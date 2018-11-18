@@ -4,4 +4,29 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Biggy.Core" Version="0.1.0.1" />
+    <PackageReference Include="Biggy.Data.Json" Version="0.1.0.1" />
+    <PackageReference Include="Biggy.Data.Sqlite" Version="0.1.0.1" />
+    <PackageReference Include="CoreTechs.Common" Version="21.0.1" />
+    <PackageReference Include="CsvHelper" Version="7.1.1" />
+    <PackageReference Include="dt_UtilityHelper" Version="1.2.9-alpha" />
+    <PackageReference Include="dt_UtilityInterface" Version="1.0.7" />
+    <PackageReference Include="DynamicData" Version="6.4.0.2419" />
+    <PackageReference Include="GenericParsing.Standard" Version="1.4.1" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.8.5" />
+    <PackageReference Include="LiteDB" Version="4.1.4" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
+    <PackageReference Include="SQLiteNetExtensions" Version="2.1.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+    <PackageReference Include="System.Reactive" Version="4.1.0" />
+    <PackageReference Include="System.Reactive.Interfaces" Version="4.1.0" />
+    <PackageReference Include="TeaFiles.Net" Version="1.0.0.35" />
+    <PackageReference Include="XmlSerializerHelper" Version="3.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\UtilityReactive\UtilityReactive\UtilityReactive.csproj" />
+  </ItemGroup>
+
 </Project>
