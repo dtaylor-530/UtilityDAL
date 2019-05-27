@@ -9,23 +9,20 @@ namespace UtilityDAL.Utility
     public static class JSON
     {
 
-        public static IObservable<T> DeserialiseJsonFiles<T>(IObservable<string> a)
+        public static bool TryDeserialiseJsonFile<T>(string a, out T deserialised)
         {
-            return a.Select(_ =>
+            try
             {
-                try
-                {
-                    if (!_.Contains(".json"))
-                        _ += ".json";
-                    return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(File.ReadAllText(_));
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                    return default(T);
-                }
-            }).Where(c => c != null).Publish().RefCount();
-
+                a = (!a.EndsWith(".json")) ? a += ".json" : a;
+                deserialised = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(File.ReadAllText(a));
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                deserialised = default;
+                return false;
+            }
 
         }
     }

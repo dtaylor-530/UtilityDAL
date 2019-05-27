@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UtilityDAL.Contract;
 using UtilityInterface;
 
 namespace UtilityDAL.Service
@@ -60,9 +61,11 @@ namespace UtilityDAL.Service
                 //     c = collection.FindOne(xx => xx.Country == nested.Country && xx.League == nested.League);
                 //}
 
+                var dates = c.Dates.ToList();
                 foreach (var d in nested.Dates)
-                    c.Dates.Add(d);
+                    dates.Add(d);
 
+                c.Dates = dates;
                 collection.Update(c.Id, c);
             }
 

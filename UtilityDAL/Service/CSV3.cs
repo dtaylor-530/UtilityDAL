@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Collections;
+using UtilityDAL.Contract;
 
 namespace UtilityDAL
 {
@@ -13,24 +14,34 @@ namespace UtilityDAL
     {
 
 
-        static readonly string dbName;
+      //  static readonly string dbName;
 
         static readonly string providerName = "CSV";
+        private readonly string dbName;
 
+        //static CSV3()
+        //{
+        //    dbName = DbEx.GetConnectionString(providerName, false);
+        //}
 
-
-        static CSV3()
+        public  CSV3(string name=null)
         {
-            dbName = DbEx.GetConnectionString(providerName, false);
+            if (string.IsNullOrEmpty(name))
+                dbName = DbEx.GetConnectionString(providerName, false);
+            else
+                dbName = name;
         }
-       
+
+        public CSV3()
+        {
+          
+        }
 
         public System.Collections.ICollection FromDb(string name)
         {
 
-            var text =Path.Combine(dbName, name + ".csv");
             // Using an XML Config file. 
-           return new CSV(text).FromDb(text);
+           return new CSV(dbName).FromDb(name);
         }
 
 

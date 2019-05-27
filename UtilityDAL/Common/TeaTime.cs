@@ -31,23 +31,28 @@ namespace UtilityDAL
 
         public static void ToDb<T>(IList<T> items, string id, string dbpath) where T : struct//, IComparable
         {
-
-            if (File.Exists(Path.Combine(dbpath, id + ".tea")))
+            string connection = Path.Combine(dbpath, id + ".tea");
+            if (File.Exists(connection))
                 try
                 {
-                    using (var tf = TeaFile<T>.Append(Path.Combine(dbpath, id + ".tea")))
+                    using (var tf = TeaFile<T>.Append(connection))
                     {
                         foreach (var x in items)
                             tf.Write(x);
                     }
+                    return;
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("Error writing file " + ex.Message);
+                    if (string.IsNullOrWhiteSpace(File.ReadAllText(connection)))
+                        System.IO.File.Delete(connection);
+                    else
+                        return;
                 }
-            else
+   
                 // create file and write values
-                using (var tf = TeaFile<T>.Create(Path.Combine(dbpath, id + ".tea")))
+                using (var tf = TeaFile<T>.Create(connection))
                 {
                     foreach (var x in items)
                         tf.Write(x);

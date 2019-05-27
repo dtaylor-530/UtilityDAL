@@ -1,0 +1,73 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          xmlns:local="clr-namespace:UtilityDAL.View"                          
+                    xmlns:converter="clr-namespace:UtilityDAL.Converter"
+                    xmlns:pt="http://propertytools.org/wpf"
+                       xmlns:utility="clr-namespace:UtilityWpf.View;assembly=UtilityWpf.View"
+                    xmlns:utilitywpf="clr-namespace:UtilityWpf;assembly=UtilityWpf.Common">
+
+    <!--x:Key="FileViewer"-->
+    <Style TargetType="{x:Type local:FileViewer}">
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:FileViewer }">
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="100"></RowDefinition>
+                            <RowDefinition Height="200"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.Resources>
+                            <utilitywpf:NullToBooleanConverter x:Key="ntobconverter" />
+                        </Grid.Resources>
+
+                        <pt:StackPanelEx Orientation="Horizontal">
+                            <ComboBox Width="140" ItemsSource="{TemplateBinding FileParsers}" 
+                                      SelectedValue="{Binding SelectedFileParser ,RelativeSource={RelativeSource TemplatedParent}}" 
+                                      DisplayMemberPath="Key" 
+                             
+                                      SelectedValuePath="Value" ></ComboBox>
+                            <!--<TextBox Text="{Binding Path,RelativeSource={RelativeSource TemplatedParent },UpdateSourceTrigger=PropertyChanged,Delay=500ms}"/>-->
+                     
+                                <utility:FolderOpenControl Path="{Binding Path,RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay}" Width="250">
+                                </utility:FolderOpenControl>
+                        </pt:StackPanelEx>
+      
+                        <utility:ListBoxEx   Grid.Row="1"  Grid.Column="0"   Orientation="Horizontal"
+                                         Key="FilePath"
+                                         SelectedItem="{Binding Output, RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay}"     
+                                         ItemsSource="{Binding Items, RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay}" >
+                            <!--<utility:ListBoxEx.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentPresenter HorizontalAlignment="Stretch" Content="{Binding }" ContentTemplate="{StaticResource fileviewmodeltemplate}"             />
+                                </DataTemplate>
+                            </utility:ListBoxEx.ItemTemplate>-->
+                   
+                        </utility:ListBoxEx>
+
+                        <Expander IsExpanded="True" Grid.Row="2" Grid.Column="0" >
+                            <StackPanel>
+                                <utility:PageNavigatorControl x:Name="pnc" ItemsSource="{Binding Data, RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}"></utility:PageNavigatorControl>
+                                <DataGrid ItemsSource="{Binding FilteredItems,ElementName=pnc }"></DataGrid>
+                                <!--<DataGrid 
+    
+          ItemsSource="{Binding PaginatedItems,Mode=OneWay,IsAsync=True}" 
+          CanUserAddRows="False"
+          AutoGenerateColumns="True"
+                  
+                  EnableColumnVirtualization = "True"
+EnableRowVirtualization = "True">
+
+                                </DataGrid>-->
+                            </StackPanel>
+                        </Expander>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>

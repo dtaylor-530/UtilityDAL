@@ -4,7 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UtilityDAL.Model;
 using UtilityHelper;
+using UtilityDAL.Contract;
 
 namespace UtilityDAL
 {
@@ -21,7 +23,7 @@ namespace UtilityDAL
     }
 
 
-    public  class LiteDbRepo<T,R>: UtilityDAL.IDbService<T,R>
+    public  class LiteDbRepo<T,R>: IDbService<T,R>
     {
         private readonly Func<T, R> _getkey = null;
         private readonly string _key = null;
@@ -45,6 +47,12 @@ namespace UtilityDAL
             _collection = LiteDbHelper.GetCollection<T>(directory, out IDisposable _disposable);
 
         }
+
+        public LiteDbRepo( string directory)
+        {
+            _collection = LiteDbHelper.GetCollection<T>(directory, out IDisposable _disposable);
+        }
+
         public LiteDbRepo()
         {
       
@@ -57,15 +65,18 @@ namespace UtilityDAL
 
         public IEnumerable<T> FindAll()
         {
-            return _collection.FindAll();
+            return _collection.IncludeAll().FindAll();
         }
 
         public T Find(T item)
         {
             if (_key == null)
             {
-                var key = _getkey(item);
-                _collection.FindOne(_ => _getkey(_).Equals(key));
+                if (_getkey != null)
+                {
+                    var key = _getkey(item);
+                    return _collection.FindOne(_ => _getkey(_).Equals(key));
+                }
             }
             else if (_key != null)
                 return _collection.FindOne(Query.EQ(_key, new BsonValue((object)item.GetPropValue<R>(_key))));
@@ -108,7 +119,7 @@ namespace UtilityDAL
 
         public void Dispose()
         {
-            _disposable.Dispose();
+            _disposable?.Dispose();
         }
 
         public T FindById(R item)
@@ -120,7 +131,7 @@ namespace UtilityDAL
 
 
 
-    public class LiteDbRepo : UtilityDAL.IDbService
+    public class LiteDbRepo : IDbService
     {
         string _key = null;
         //private string _directory;

@@ -1,0 +1,61 @@
+﻿<Page x:Class="UtilityDAL.DemoApp.Filex"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:qc="http://QuickConverter.CodePlex.com/"
+      xmlns:local="clr-namespace:UtilityDAL.DemoApp"
+      xmlns:view="clr-namespace:UtilityDAL.View;assembly=UtilityDAL.View"
+      xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Filex">
+    <TabControl>
+        <TabItem Header="Csv">
+
+            <DockPanel>
+                <DockPanel.Resources>
+                    <ResourceDictionary Source="/UtilityDAL.View;component/ModelView/Filex.xaml"></ResourceDictionary>
+                </DockPanel.Resources>
+
+
+                <UniformGrid Rows="1">
+
+                    <toolkit:CheckListBox x:Name="fxs" ItemsSource="{Binding Items}"></toolkit:CheckListBox>
+                    <view:FileCRUDControl Data="{Binding ElementName=fxs, Path=SelectedItems}" 
+                                  Service="{Binding DbService3,Mode=OneTime}"></view:FileCRUDControl>
+                    <view:FileCRUDControl Data="{Binding Path=Items2}" 
+                                  Service="{Binding DbService,Mode=OneTime}"></view:FileCRUDControl>
+
+
+                </UniformGrid>
+            </DockPanel>
+        </TabItem>
+        <TabItem Header="Tea">
+            <TabItem.Resources>
+               
+            <x:Array x:Key="array" Type="{x:Type local:Price}">
+                    <local:Price  Bid="100" Offer="102" ></local:Price>
+                    <local:Price  Bid="100" Offer="102" ></local:Price>
+                    <local:Price  Bid="10" Offer="162" ></local:Price>
+                    <local:Price  Bid="10" Offer="102" ></local:Price>
+                    <local:Price  Bid="180" Offer="1572" ></local:Price>
+                    <local:Price  Bid="107" Offer="1032" ></local:Price>
+                    <local:Price  Bid="104" Offer="152" ></local:Price>
+                    <local:Price  Bid="300" Offer="1302" ></local:Price>
+                    <local:Price  Bid="400" Offer="1032" ></local:Price>
+                    <local:Price  Bid="150" Offer="333" ></local:Price>
+                    <local:Price  Bid="0" Offer="102" ></local:Price>
+                    <local:Price  Bid="90" Offer="102" ></local:Price>
+                    <local:Price  Bid="1300" Offer="1302" ></local:Price>
+                    <local:Price  Bid="10" Offer="102" ></local:Price>
+                </x:Array>
+            </TabItem.Resources>
+            <DockPanel>
+                
+                <view:FileCRUDControl Data="{StaticResource array}" 
+                                  Service="{Binding DbService,Mode=OneTime}" SeriesRetrieved="FileCRUDControl_SeriesRetrieved"></view:FileCRUDControl>
+            </DockPanel>
+        </TabItem>
+    </TabControl>
+</Page>

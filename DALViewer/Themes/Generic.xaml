@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:UtilityDAL.View">
+
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/UtilityDAL.View;component/Themes/FileViewer.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/UtilityDAL.View;component/Themes/LiteDbControl.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/UtilityDAL.View;component/Themes/FileCRUDControl.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/UtilityDAL.View;component/Themes/ListBoxCriteria.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/UtilityDAL.View;component/Themes/ServerFiles.xaml"></ResourceDictionary>
+    </ResourceDictionary.MergedDictionaries>
+    
+</ResourceDictionary>

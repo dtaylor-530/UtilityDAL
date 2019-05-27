@@ -9,7 +9,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
 
-namespace UtilityDAL.Dynamic
+namespace UtilityDAL
 {
     public class HtmlDocument<T> //: IDbService<T>
     {

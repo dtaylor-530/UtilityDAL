@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using UtilityDAL.Contract;
 
 namespace UtilityDAL
 {
     public class CSV2 : IFileDbService<RecordWrap>
     {
 
-        static TextReader text;
+        //static TextReader text;
 
 
 

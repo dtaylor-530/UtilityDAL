@@ -9,6 +9,7 @@ using System.Reactive.Subjects;
 using System.Text;
 using System.Threading.Tasks;
 using UtilityDAL;
+using UtilityDAL.Contract;
 using UtilityReactive;
 
 namespace UtilityDAL

@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using Biggy.Core;
 using Biggy.Data.Json;
+using UtilityDAL.Contract;
 using UtilityHelper;
 
 namespace UtilityDAL
 {
     public class BiggyRepo<T,R> : MyDisposable, IDbService<T, R> where T : new()
     {
-        private readonly string _key = "Id";
+        private readonly string _key;
         private readonly Func<T, R> _getkey;
         private readonly JsonStore<T> _store;
         private readonly BiggyList<T> _list;
@@ -19,7 +20,8 @@ namespace UtilityDAL
         public BiggyRepo(string key)
         {
             _key = key;
-            _store = new Biggy.Data.Json.JsonStore<T>(typeof(T).Name);
+
+            _store = new Biggy.Data.Json.JsonStore<T>();
             _list = new Biggy.Core.BiggyList<T>(_store);
 
         }
@@ -27,7 +29,8 @@ namespace UtilityDAL
         public BiggyRepo(Func<T,R> getkey)
         {
             _getkey = getkey;
-            _store = new Biggy.Data.Json.JsonStore<T>(typeof(T).Name);
+            _store = new Biggy.Data.Json.JsonStore<T>();
+      
             _list = new Biggy.Core.BiggyList<T>(_store);
 
 
@@ -35,7 +38,7 @@ namespace UtilityDAL
         public BiggyRepo()
         {
             //_key = key;
-            _store = new Biggy.Data.Json.JsonStore<T>(typeof(T).Name);
+            _store = new Biggy.Data.Json.JsonStore<T>();
             _list = new Biggy.Core.BiggyList<T>(_store);
 
         }
@@ -129,6 +132,11 @@ namespace UtilityDAL
 
         }
         public BiggyRepo(Func<T, IConvertible> getkey):base(getkey)
+        {
+
+        }
+
+        public BiggyRepo() : base()
         {
 
         }

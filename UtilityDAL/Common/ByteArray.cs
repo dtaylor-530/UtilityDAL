@@ -6,7 +6,7 @@ using System.Text;
 
 namespace UtilityDAL
 {
-    public class ByteArray
+    public class ByteArrayHelper
     {
 
         // Convert an object to a byte array

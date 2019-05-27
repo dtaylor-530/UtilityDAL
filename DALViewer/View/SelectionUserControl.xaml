@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="DALViewer.MVVM.SelectionUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+
+                xmlns:utility="clr-namespace:UtilityWpf.View;assembly=UtilityWpf.View"
+             xmlns:converter="clr-namespace:DALViewer.Converter"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <converter:NullToFalseConverter x:Key="ntobconverter" />
+    </UserControl.Resources>
+    <DockPanel>
+
+        <utility:FolderUserControl  DockPanel.Dock="Top"  Directory="{Binding FolderPickerVM.Folder,Mode=TwoWay}"/>
+
+        <ItemsControl Width="70" DockPanel.Dock="Right" ItemsSource="{Binding SelectedItems,Mode=OneWay}"/>
+        <GroupBox >
+            <DockPanel>
+                <utility:ListBoxEx Name="lbx"  Height="50" DockPanel.Dock="Top" 
+                                   ItemsSource="{Binding Items,Mode=OneWay}" 
+                                   DoubleClickedItem="{Binding Output.Value,Mode=OneWayToSource}" />
+
+                                  
+                <Expander>
+                    <StackPanel>
+                        <Button Width="50" Content="Select" 
+                                Command="{Binding SelectCommand,Mode=OneWay}"
+                                IsEnabled="{Binding ElementName='lbx', Path='SelectedItem' ,Converter={StaticResource ntobconverter}}" 
+                                CommandParameter="{Binding ElementName='lbx', Path='SelectedItem'}" />
+                        <utility:FilteredPaginatedUserControl Name="db" DataContext="{Binding Output.Value}" Items="{Binding Items}"/>
+                    </StackPanel>
+                </Expander>
+            </DockPanel>
+        </GroupBox>
+    </DockPanel>
+
+</UserControl>

@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:model="clr-namespace:UtilityDAL.Model;assembly=UtilityDAL.Model">
+    
+    
+    <DataTemplate DataType="{x:Type model:DataFile}">
+
+
+        <UniformGrid Columns="1" Background="Transparent" MinWidth="50">
+            <TextBlock Text="{Binding Key}"></TextBlock>
+            <TextBlock Text="{Binding Items.Count}"></TextBlock>
+        </UniformGrid>
+    </DataTemplate>
+    
+    
+</ResourceDictionary>
