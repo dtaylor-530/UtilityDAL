@@ -12,7 +12,7 @@ using Unity.Resolution;
 using UtilityWpf.ViewModel;
 using UtilityDAL.Model;
 using UtilityDAL.ViewModel;
-using UtilityInterface;
+
 
 namespace UtilityDAL.DemoApp
 {
@@ -36,7 +36,10 @@ namespace UtilityDAL.DemoApp
 
             Container.RegisterType<UtilityWpf.IDispatcherService, UtilityWpf.DispatcherService>(injectionConstructor);
 
-            Container.RegisterType<IRepoChangeService<DummyDbObject>, RepoChangeService >(new ContainerControlledLifetimeManager());
+
+            //Container.RegisterType<IRepoChangeService<DummyDbObject>, RepoChangeService >();
+
+
 
               //Container.RegisterType<MainViewModel>(new ContainerControlledLifetimeManager());
 

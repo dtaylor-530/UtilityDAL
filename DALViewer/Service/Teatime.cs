@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reactive.Linq;
+using UtilityInterface.Generic;
 
 namespace UtilityDAL.View
 {

@@ -12,6 +12,7 @@ using DynamicData;
 using System.Collections.ObjectModel;
 using Reactive.Bindings;
 using UtilityInterface;
+using UtilityInterface.Generic;
 
 namespace UtilityDAL.ViewModel
 {

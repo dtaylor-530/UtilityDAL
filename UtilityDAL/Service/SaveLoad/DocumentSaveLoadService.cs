@@ -4,6 +4,7 @@ using System.Text;
 using UtilityInterface;
 using System.Linq;
 using UtilityDAL.Contract;
+using UtilityInterface.Generic;
 
 namespace UtilityDAL
 {

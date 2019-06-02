@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using UtilityDAL;
 using UtilityDAL.Model;
+using UtilityInterface.Generic.Database;
+using UtilityInterface.NonGeneric.Database;
 
 namespace UtilityDAL.Sqlite
 {
@@ -33,7 +35,7 @@ namespace UtilityDAL.Sqlite
 
 
 
-        public bool TransferToDB<T, R>(IEnumerable<T> items, bool check, params string[] children) where T : IEquatable<T>, UtilityInterface.Database.IId, new() where R : UtilityInterface.Database.IChildRow
+        public bool TransferToDB<T, R>(IEnumerable<T> items, bool check, params string[] children) where T : IEquatable<T>, IId, new() where R : IChildRow
         {
             _conn.CreateTable<T>();
             var service = TryGetAdd<T>();
@@ -86,7 +88,7 @@ namespace UtilityDAL.Sqlite
         }
 
 
-        public bool TransferToDB2<T, R>(IEnumerable<T> items, bool check, params string[] children) where T : DbRow, IEquatable<T>, new() where R : UtilityInterface.Database.IChildRow<DbRow>
+        public bool TransferToDB2<T, R>(IEnumerable<T> items, bool check, params string[] children) where T : DbRow, IEquatable<T>, new() where R : IChildRow<DbRow>
         {
             _conn.CreateTable<T>();
             var accessors = children.Select(child =>
@@ -197,7 +199,7 @@ namespace UtilityDAL.Sqlite
             return (TableList<T>)container[typeof(T)];
         }
 
-        public bool TransferToDB<T>(IEnumerable<T> items, bool check) where T : IEquatable<T>, UtilityInterface.Database.IId, new()
+        public bool TransferToDB<T>(IEnumerable<T> items, bool check) where T : IEquatable<T>, IId, new()
         {
             _conn.CreateTable<T>();
             var xx = TryGetAdd<T>().GetList();

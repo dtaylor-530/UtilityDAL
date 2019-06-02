@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
 using UtilityDAL.Contract;
+using UtilityDAL.Contract.Generic;
 
 namespace UtilityDAL
 {

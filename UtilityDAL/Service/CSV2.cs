@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using UtilityDAL.Contract;
+using UtilityDAL.Contract.Generic;
 
 namespace UtilityDAL
 {

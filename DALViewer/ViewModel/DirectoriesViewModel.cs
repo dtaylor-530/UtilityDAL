@@ -18,13 +18,13 @@ using UtilityWpf.ViewModel;
 using UtilityDAL;
 using System.Reactive.Linq;
 using UtilityWpf;
-
+using UtilityInterface.Generic;
 
 namespace UtilityDAL.ViewModel
 {
 
 
-    public class DirectoriesViewModel : UtilityWpf.NPC
+    public class DirectoriesViewModel : NPC
     {
         private object _output;
 

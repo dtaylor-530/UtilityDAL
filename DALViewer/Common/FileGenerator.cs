@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using UtilityDAL;
 using UtilityInterface;
 using UtilityDAL.Contract;
+using UtilityDAL.Contract.Generic;
+using UtilityInterface.Generic;
 
 namespace UtilityDAL.View
 {

@@ -4,9 +4,9 @@ using System.Text;
 
 namespace UtilityDAL.Contract
 {
-    public interface IId2
-    {
-         long IId2 {get;set;}
+    //public interface IId2
+    //{
+    //     long IId2 {get;set;}
 
-    }
+    //}
 }

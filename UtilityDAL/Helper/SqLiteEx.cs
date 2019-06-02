@@ -10,9 +10,9 @@ using System.Reactive.Threading.Tasks;
 using System.Text;
 using System.Threading.Tasks;
 using UtilityDAL.Model;
-using UtilityInterface.Database;
 using UtilityDAL.Contract;
-
+using UtilityInterface.NonGeneric.Database;
+using UtilityInterface.Generic.Database;
 
 namespace UtilityDAL
 {
@@ -61,7 +61,7 @@ namespace UtilityDAL
 
 
 
-        public static IList<T> FromDB<T>() where T : IEquatable<T>, UtilityInterface.Database.IChildRow, new() => MakeConnection().Table<T>().ToList();
+        public static IList<T> FromDB<T>() where T : IEquatable<T>, IChildRow, new() => MakeConnection().Table<T>().ToList();
 
 
         public static async Task<IObservable<T>> FromDbAsync<T>(this SQLiteAsyncConnection db, long? id = null) where T : IChildRow, new()
@@ -79,7 +79,7 @@ namespace UtilityDAL
 
 
 
-        public static long? FindId<T>(this T hash, List<T> ts) where T : IEquatable<T>, UtilityInterface.Database.IId, new()
+        public static long? FindId<T>(this T hash, IEnumerable<T> ts) where T : IEquatable<T>, IId, new()
         {
             var seasons = from s in ts
                           where s.Equals(hash)
@@ -96,12 +96,12 @@ namespace UtilityDAL
 
 
 
-        public static long? FindId<T>(this T hash, SQLiteConnection db) where T : IEquatable<T>, UtilityInterface.Database.IId, new()
+        public static long? FindId<T>(this T hash, SQLiteConnection db) where T : IEquatable<T>, IId, new()
         {
             return FindId(hash, db.Table<T>().ToList());
         }
 
-        public static async Task<long?> FindId<T>(this T hash, SQLiteAsyncConnection db) where T : IEquatable<T>, UtilityInterface.Database.IId, new()
+        public static async Task<long?> FindId<T>(this T hash, SQLiteAsyncConnection db) where T : IEquatable<T>,IId, new()
         {
 
             var seasons = from s in await db.Table<T>().ToListAsync()
@@ -158,7 +158,7 @@ namespace UtilityDAL
 
         }
 
-        internal static long GetMaxId<T>(SQLiteConnection db) where T : UtilityInterface.Database.IChildRow, new()
+        internal static long GetMaxId<T>(SQLiteConnection db) where T : IChildRow, new()
         {
             long maxid = 0;
             try
@@ -175,7 +175,7 @@ namespace UtilityDAL
 
 
 
-        public static DateTime GetLastDate<T>(string path = null) where T : IDbTimeValue, new() => new DateTime(MakeConnection().Table<T>().Max(x => x.Time));
+        public static DateTime GetLastDate<T>(string path = null) where T : ITimeValue, new() => new DateTime(MakeConnection().Table<T>().Max(x => x.Time));
 
 
 
@@ -184,7 +184,7 @@ namespace UtilityDAL
 
 
 
-        public static long? FindId<T>(this T hash, List<T> ts, SQLiteAsyncConnection db) where T : IEquatable<T>, UtilityInterface.Database.IId, new()
+        public static long? FindId<T>(this T hash, List<T> ts, SQLiteAsyncConnection db) where T : IEquatable<T>, IId, new()
         {
             var seasons = from s in ts
                           where s.Equals(hash)
@@ -205,7 +205,7 @@ namespace UtilityDAL
 
 
 
-        public static bool ToDB<T>(T match, List<T> lst, SQLiteConnection db) where T : IEquatable<T>, UtilityInterface.Database.IId, new()
+        public static bool ToDB<T>(T match, List<T> lst, SQLiteConnection db) where T : IEquatable<T>, IId, new()
 
                   => (match == null) ? false : ToDB(FindId(match, lst), match, db, lst);
 
@@ -216,7 +216,7 @@ namespace UtilityDAL
         //    =>  ToDB(matches, db, lst);
 
 
-        public static async Task<bool> ToDB<T>(T match, List<T> lst, SQLiteAsyncConnection db) where T : IEquatable<T>, UtilityInterface.Database.IId, new()
+        public static async Task<bool> ToDB<T>(T match, List<T> lst, SQLiteAsyncConnection db) where T : IEquatable<T>, IId, new()
 
                => (match == null) ? false : await ToDB(FindId(match, lst), match, db);
 

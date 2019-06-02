@@ -2,10 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using UtilityInterface.NonGeneric.Database;
 
 namespace UtilityDAL.Model
 {
-    public class DbRow : UtilityInterface.Database.IId
+    public class DbRow : IId
     {
         long id;
         //long parentId;

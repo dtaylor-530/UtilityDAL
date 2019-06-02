@@ -10,6 +10,7 @@ using System.Windows;
 using UtilityDAL;
 using UtilityDAL.Contract;
 using UtilityInterface;
+using UtilityInterface.Generic;
 using UtilityWpf.View;
 using UtilityWpf.ViewModel;
 
@@ -56,7 +57,7 @@ namespace UtilityDAL.View
 
             //});
 
-            base.Changes.WithLatestFrom(IsStoreSubject.StartWith(isStore).DistinctUntilChanged(), (a, b) => b ? a : default(KeyValuePair<IContainer<object>, ChangeReason>))
+            base.Changes.WithLatestFrom(IsStoreSubject.StartWith(isStore).DistinctUntilChanged(), (a, b) => b ? a : default)
                 //.Where(_ => !_.Equals(default(KeyValuePair<IContainer<object>, ChangeReason>)))
                 .Subscribe(_ =>
                 {
@@ -151,8 +152,8 @@ namespace UtilityDAL.View
             var all = _docstore.FindAll();
             this.ItemsSource = all;
             var isStore = (bool)this.GetValue(IsStoreProperty);
-            base.Changes.WithLatestFrom(IsStoreSubject.StartWith(isStore), (a, b) => b ? a : default(KeyValuePair<IContainer<object>, ChangeReason>))
-                .Where(_ => !_.Equals(default(KeyValuePair<IContainer<object>, ChangeReason>)))
+            base.Changes.WithLatestFrom(IsStoreSubject.StartWith(isStore), (a, b) => b ? a : default(KeyValuePair<IContain<object>, ChangeReason>))
+                .Where(_ => !_.Equals(default(KeyValuePair<IContain<object>, ChangeReason>)))
                 .Subscribe(_ =>
                 {
                     var key = (SHDObject<object>)_.Key;
@@ -188,8 +189,8 @@ namespace UtilityDAL.View
             var all = _docstore.FindAll();
             this.ItemsSource = all;
             var isStore= (bool)this.GetValue(IsStoreProperty);
-            base.Changes.WithLatestFrom(IsStoreSubject.StartWith(isStore), (a, b) => b ? a : default(KeyValuePair<IContainer<object>, ChangeReason>))
-                .Where(_ => !_.Equals(default(KeyValuePair<IContainer<object>, ChangeReason>)))
+            base.Changes.WithLatestFrom(IsStoreSubject.StartWith(isStore), (a, b) => b ? a : default(KeyValuePair<IContain<object>, ChangeReason>))
+                .Where(_ => !_.Equals(default(KeyValuePair<IContain<object>, ChangeReason>)))
                 .Subscribe(_ =>
                 {
                 var key = (SHDObject<object>)_.Key;

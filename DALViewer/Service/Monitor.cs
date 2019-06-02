@@ -8,7 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using UtilityDAL;
 using UtilityDAL.Contract;
+using UtilityDAL.Contract.Generic;
 using UtilityInterface;
+using UtilityInterface.Generic;
+using UtilityInterface.NonGeneric.Database;
 
 namespace UtilityDAL.View
 {
@@ -65,7 +68,7 @@ namespace UtilityDAL.View
 
 
 
-    public class Monitor2<T> : IService<IChangeSet<T, long>> where T : UtilityInterface.Database.IChildRow, IEquatable<T>
+    public class Monitor2<T> : IService<IChangeSet<T, long>> where T : IChildRow, IEquatable<T>
     {
 
         public IObservable<IChangeSet<T, long>> Resource { get; }

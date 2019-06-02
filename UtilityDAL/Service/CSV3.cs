@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using UtilityDAL.Contract;
+using UtilityDAL.Contract.NonGeneric;
 
 namespace UtilityDAL
 {

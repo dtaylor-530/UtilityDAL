@@ -11,7 +11,7 @@ using UtilityInterface;
 using UtilityWpf;
 using UtilityWpf.View;
 using UtilityWpf.ViewModel;
-
+using UtilityInterface.Generic;
 namespace UtilityDAL.View
 {
 

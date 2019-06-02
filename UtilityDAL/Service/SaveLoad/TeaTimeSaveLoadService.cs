@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using UtilityInterface;
+using UtilityInterface.Generic;
 
 namespace UtilityDAL
 {

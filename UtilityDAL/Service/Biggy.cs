@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Disposables;
 using System.Text;
 using Biggy.Core;
 using Biggy.Data.Json;
@@ -10,7 +11,7 @@ using UtilityHelper;
 
 namespace UtilityDAL
 {
-    public class BiggyRepo<T,R> : MyDisposable, IDbService<T, R> where T : new()
+    public class BiggyRepo<T,R> : UtilityModel.Disposable, IDbService<T, R> where T : new()
     {
         private readonly string _key;
         private readonly Func<T, R> _getkey;

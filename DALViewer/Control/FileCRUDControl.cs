@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using UtilityDAL.Contract;
+using UtilityDAL.Contract.Generic;
+using UtilityDAL.Contract.NonGeneric;
 
 namespace UtilityDAL.View
 {

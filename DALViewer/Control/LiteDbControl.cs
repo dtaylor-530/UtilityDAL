@@ -22,6 +22,7 @@ using UtilityWpf;
 using LiteDB;
 using UtilityDAL;
 using UtilityWpf.ViewModel;
+using UtilityInterface.Generic;
 
 namespace UtilityDAL.View
 {
@@ -33,7 +34,7 @@ namespace UtilityDAL.View
 
     public class LiteDbControl : DocumentStoreControl //where T : new()
     {
-        public LiteDbControl(Func<object, IConvertible> getKey, string directory = null, string key = null) : base(new UtilityDAL.LiteDbRepo<SHDOObject, IConvertible>(getKey, UtilityDAL.DbEx.GetDirectory(directory, UtilityDAL.Constants.LiteDbExtension, typeof(UtilityInterface.IContainer<object>))), getKey)
+        public LiteDbControl(Func<object, IConvertible> getKey, string directory = null, string key = null) : base(new UtilityDAL.LiteDbRepo<SHDOObject, IConvertible>(getKey, UtilityDAL.DbEx.GetDirectory(directory, UtilityDAL.Constants.LiteDbExtension, typeof(IContain<object>))), getKey)
         {
             try
             {

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UtilityDAL.Contract;
 using UtilityInterface;
+using UtilityInterface.NonGeneric;
 
 namespace UtilityDAL.Service
 {
@@ -21,11 +22,11 @@ namespace UtilityDAL.Service
             {
                 var customers = db.GetCollection<T>();
 
-                customers.EnsureIndex(x => x.Dates);
+                customers.EnsureIndex(x => x.DateTimes);
 
                 DateTime dtn = periodmatch(DateTime.Now);
 
-                return customers.Find(_ => periodmatch(_.Dates.Last()) == dtn).Cast<T>().ToList();
+                return customers.Find(_ => periodmatch(_.DateTimes.Last()) == dtn).Cast<T>().ToList();
 
             }
         }
@@ -61,11 +62,11 @@ namespace UtilityDAL.Service
                 //     c = collection.FindOne(xx => xx.Country == nested.Country && xx.League == nested.League);
                 //}
 
-                var dates = c.Dates.ToList();
-                foreach (var d in nested.Dates)
+                var dates = c.DateTimes.ToList();
+                foreach (var d in nested.DateTimes)
                     dates.Add(d);
 
-                c.Dates = dates;
+                c.DateTimes = dates;
                 collection.Update(c.Id, c);
             }
 

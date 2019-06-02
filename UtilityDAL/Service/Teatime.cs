@@ -10,6 +10,8 @@ using System.Reactive.Linq;
 using UtilityInterface;
 using System.Collections;
 using UtilityDAL.Contract;
+using UtilityDAL.Contract.Generic;
+using UtilityDAL.Contract.NonGeneric;
 
 namespace UtilityDAL
 {

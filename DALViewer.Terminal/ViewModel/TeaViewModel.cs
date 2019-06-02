@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UtilityInterface;
 using UtilityWpf.ViewModel;
 
 //namespace UtilityDAL.DemoApp

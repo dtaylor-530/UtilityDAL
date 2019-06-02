@@ -10,6 +10,7 @@ using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UtilityDAL.Contract;
+using UtilityDAL.Contract.NonGeneric;
 
 namespace UtilityDAL
 {

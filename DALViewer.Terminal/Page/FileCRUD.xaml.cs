@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UtilityDAL.Model;
 using UtilityDAL.Contract;
+using UtilityDAL.Contract.NonGeneric;
 
 namespace UtilityDAL.DemoApp
 {
