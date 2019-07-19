@@ -1,13 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Authors>Declan Taylor</Authors>
-    <Company />
-    <Version>2.0.3</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>2.0.3.0</AssemblyVersion>
-    <FileVersion>2.0.4.0</FileVersion>
+    <Authors>Declan Taylor</Authors>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -23,8 +20,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="sqlite-net-base" Version="1.5.231" />
-    <PackageReference Include="UtilityInterface" Version="2.0.1-alpha" />
+    <PackageReference Include="UtilityHelper" Version="2.1.0-alpha" />
+    <PackageReference Include="UtilityStruct" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UtilityDAL.Model\UtilityDAL.Model.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,4 +48,3 @@
         <Copy SourceFiles="@(MySourceFiles)" DestinationFolder="$(DestinationFolder)" />
     </Target>
 </Project>
-

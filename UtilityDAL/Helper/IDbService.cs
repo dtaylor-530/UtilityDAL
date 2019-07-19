@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UtilityDAL.Contract;
+using UtilityInterface.Generic.Database;
 
 namespace UtilityDAL
 {
@@ -16,7 +17,7 @@ namespace UtilityDAL
             object result = null;
             try
             {
-                result = store.Find(_b);
+                result = store.Select(_b);
             }
             catch
             {
@@ -47,14 +48,14 @@ namespace UtilityDAL
             return true;
         }
 
-        public static bool Upsert(this IDbService store, object _b, string key)
+        public static bool Upsert(this UtilityInterface.NonGeneric.Database.IDbService store, object _b, string key)
         {
             //var collection = store.GetCollection(out IDisposable disposable);
 
             object result = null;
             try
             {
-                result = store.Find(_b);
+                result = store.Select(_b);
             }
             catch
             {

@@ -11,8 +11,11 @@ namespace UtilityDAL.Contract.NonGeneric
 
     public interface IFileDbService
     {
-        System.Collections.ICollection FromDb(string name);
-        bool ToDb(System.Collections.ICollection lst, string name);
+        System.Collections.ICollection From(string name);
+        bool To(System.Collections.ICollection lst, string name);
+
+        bool Clear(string name);
+
         List<string> SelectIds();
     }
 

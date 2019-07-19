@@ -1,13 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Authors>Declan Taylor</Authors>
-    <Company />
-    <Version>2.0.3</Version>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>2.0.3.0</AssemblyVersion>
-    <FileVersion>2.0.4.0</FileVersion>
+    <Version>1.0.5</Version>
+    <AssemblyVersion>1.0.5.0</AssemblyVersion>
+    <FileVersion>1.0.5.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -23,15 +20,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="sqlite-net-base" Version="1.5.231" />
-    <PackageReference Include="UtilityInterface" Version="2.0.1-alpha" />
+    <PackageReference Include="TeaFiles.Net" Version="1.0.0.35" />
+    <PackageReference Include="UtilityHelper" Version="2.1.1-alpha" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="System.Configuration">
-      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\System.Configuration.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\UtilityDAL.Model\UtilityDAL.Model.csproj" />
   </ItemGroup>
+
  <ItemGroup>
         <MySourceFiles Include="$(ProjectDir)\bin\debug\$(ProjectName)*nupkg" />
     </ItemGroup>
@@ -47,4 +43,3 @@
         <Copy SourceFiles="@(MySourceFiles)" DestinationFolder="$(DestinationFolder)" />
     </Target>
 </Project>
-

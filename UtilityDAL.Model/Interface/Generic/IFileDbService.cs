@@ -8,18 +8,21 @@ namespace UtilityDAL.Contract.Generic
 
     // For mulit file based storage like CSV TeaTime
 
-    public interface IFileDbService<T>
+    public interface IFileDatabase<T>
     {
-        IList<T> FromDb(string name);
-        bool ToDb(IList<T> lst, string name);
+        IList<T> From(string name);
+        bool To(IList<T> lst, string name);
+
+        bool Clear(string name);
+
         List<string> SelectIds();
     }
 
   
     public interface IFileDbAsyncService<T>
     {
-        IObservable<T> FromDb(string name);
-        bool ToDb(List<T> lst, string name);
+        IObservable<T> From(string name);
+        bool To(List<T> lst, string name);
 
 
     }
