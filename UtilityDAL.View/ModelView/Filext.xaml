@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:dal="clr-namespace:UtilityDAL;assembly=UtilityDAL.TeaTime">
+                   >
 
 
-    <DataTemplate DataType="{x:Type dal:Filext}">
+    <!--<DataTemplate DataType="{x:Type dal:Filext}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"></ColumnDefinition>
@@ -14,5 +14,5 @@
             <TextBlock Grid.Column="1" Text="{Binding FileInfo.FullName}"></TextBlock>
             <TextBlock Grid.Column="2" Text="{Binding Date}"></TextBlock>
         </Grid>
-    </DataTemplate>
+    </DataTemplate>-->
 </ResourceDictionary>

@@ -9,7 +9,7 @@ using TeaTime;
 using UtilityDAL.Common;
 using UtilityInterface;
 
-namespace UtilityDAL.TeaTime
+namespace UtilityDAL.Teatime
 {
 
 

@@ -392,9 +392,9 @@
       <Project>{CEF231D6-FF3D-41CD-A207-146FD68B50CD}</Project>
       <Name>UtilityDAL.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UtilityDAL.TeaTime\UtilityDAL.TeaTime.csproj">
+    <ProjectReference Include="..\UtilityDAL.TeaTime\UtilityDAL.Teatime.csproj">
       <Project>{88b7bbff-f3d3-4c98-aae2-7f1c7c6ad0a9}</Project>
-      <Name>UtilityDAL.TeaTime</Name>
+      <Name>UtilityDAL.Teatime</Name>
     </ProjectReference>
     <ProjectReference Include="..\UtilityDAL\UtilityDAL.csproj">
       <Project>{E4D7B86A-3B26-4FBE-BA37-BF1D935F6EE9}</Project>

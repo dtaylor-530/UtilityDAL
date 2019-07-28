@@ -34,24 +34,30 @@ namespace UtilityDAL.DemoApp
         }
 
         class FilexViewModel
-        {  
-                private static readonly System.IO.DirectoryInfo directory = System.IO.Directory.CreateDirectory(directoryPath);
-             //    private ReadOnlyObservableCollection<UtilityDAL.Entity.KeyValueDate> database;
-                const string directoryPath = "/FilextData";
+        {
+            private static readonly System.IO.DirectoryInfo directory = System.IO.Directory.CreateDirectory(directoryPath);
+            //    private ReadOnlyObservableCollection<UtilityDAL.Entity.KeyValueDate> database;
+            const string directoryPath = "/FilextData";
 
 
-            public IFileDbService DbService { get; } = new UtilityDAL.TeatimeFileService<Filext>(@"../../Data");
+            //public IFileDbService DbService { get; } = new UtilityDAL.Teatime.FileService<Filext>(@"../../Data");
             public IFileDbService DbService3 { get; } = new UtilityDAL.CSV(@"../../Data");
 
-            public ObservableCollection<Model.Filex> Items { get; }=Observable.Interval(TimeSpan.FromSeconds(3))
+            public ObservableCollection<Model.Filex> Items { get; } = Observable.Interval(TimeSpan.FromSeconds(3))
                 .StartWith(0)
                 .Select(_ => UtilityDAL.Factory.Filex.Create(System.IO.Path.Combine(directory.FullName, UtilityHelper.RandomHelper.NextWord())))
                 .ToReactiveCollection();
 
-            public ObservableCollection<Filext> Items2 { get; } = Observable.Interval(TimeSpan.FromSeconds(3))
-    .StartWith(0)
-    .Select(_ => UtilityDAL.FilextFactory.Create(System.IO.Path.Combine(directory.FullName, UtilityHelper.RandomHelper.NextWord())))
-    .ToReactiveCollection();
+            //        public ObservableCollection<Filext> Items2 { get; } = Observable.Interval(TimeSpan.FromSeconds(3))
+            //.StartWith(0)
+            //.Select(_ => UtilityDAL.FilextFactory.Create(System.IO.Path.Combine(directory.FullName, UtilityHelper.RandomHelper.NextWord())))
+            //.ToReactiveCollection();
+            //    }
+
+            private void FileCRUDControl_SeriesRetrieved(object sender, RoutedEventArgs e)
+            {
+
+            }
         }
 
         private void FileCRUDControl_SeriesRetrieved(object sender, RoutedEventArgs e)
@@ -59,7 +65,4 @@ namespace UtilityDAL.DemoApp
 
         }
     }
-
-
-
 }

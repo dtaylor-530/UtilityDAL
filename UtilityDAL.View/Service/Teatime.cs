@@ -21,7 +21,7 @@ namespace UtilityDAL.View
 
         public TeaDataDummyService(string path = null)
         {
-            Resource = FileGenerator.GenerateDataFilesDefault(new Teatime<T>(path), "tea");
+            Resource = FileGenerator.GenerateDataFilesDefault(new Teatime.Repository<T>(path), "tea");
 
         }
 
@@ -34,7 +34,7 @@ namespace UtilityDAL.View
            Resource=Observable.Create<IObservable<DataFile>>(observer =>
            paths.Subscribe(path =>
            {
-               observer.OnNext(FileGenerator.GenerateDataFilesDefault(new Teatime<T>(path), "tea"));
+               observer.OnNext(FileGenerator.GenerateDataFilesDefault(new Teatime.Repository<T>(path), "tea"));
            })).Switch();
         }
 

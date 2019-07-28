@@ -6,7 +6,7 @@ using UtilityDAL.Contract.Generic;
 using UtilityDAL.Contract.NonGeneric;
 using UtilityDAL.Common;
 
-namespace UtilityDAL.TeaTime
+namespace UtilityDAL.Teatime
 {
 
     public class Repository<T> : IFileDatabase<T> where T : struct //,IChildRow
@@ -50,7 +50,7 @@ namespace UtilityDAL.TeaTime
 
         public bool Clear(string name)
         {
-            throw new NotImplementedException();
+            return UtilityDAL.Teatime.TeatimeHelper.Clear(name, dbName);
         }
     }
 
@@ -92,13 +92,13 @@ namespace UtilityDAL.TeaTime
         public bool To(ICollection lst, string name)
         {
             IList<T> op = lst.Cast<T>().ToList();
-            UtilityDAL.TeaTime.TeatimeHelper.ToDb(op, name, dbName);
+            UtilityDAL.Teatime.TeatimeHelper.ToDb(op, name, dbName);
             return true;
         }
 
         public bool Clear(string name)
         {
-            return UtilityDAL.TeaTime.TeatimeHelper.Clear(name, dbName);
+            return UtilityDAL.Teatime.TeatimeHelper.Clear(name, dbName);
         }
     }
 

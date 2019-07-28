@@ -5,7 +5,7 @@ using UtilityDAL.Common;
 using UtilityInterface;
 using UtilityInterface.Generic;
 
-namespace UtilityDAL.TeaTime
+namespace UtilityDAL.Teatime
 
 {
     //public struct UrlHtml

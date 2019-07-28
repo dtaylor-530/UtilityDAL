@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TeaTime;
 
-namespace UtilityDAL.TeaTime
+namespace UtilityDAL.Teatime
 {
 
     //public struct Filext

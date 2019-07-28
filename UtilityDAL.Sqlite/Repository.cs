@@ -50,19 +50,6 @@ namespace UtilityDAL.Sqlite
             return true;
         }
 
-        //public IEnumerable<T> FindAll()
-        //{
-        //    return _connection.Table<T>().ToList();
-        //}
-
-        //public T Find(T item)
-        //{
-
-        //}
-        //public T FindById(R item)
-        //{
-        //  
-        //}
         public bool Insert(T item)
         {
             _connection.Insert(item);

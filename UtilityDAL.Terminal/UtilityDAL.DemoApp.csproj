@@ -468,9 +468,9 @@
       <Project>{e85bc833-4906-4497-9d02-80498c63a137}</Project>
       <Name>UtilityDAL.Sqlite</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UtilityDAL.TeaTime\UtilityDAL.TeaTime.csproj">
+    <ProjectReference Include="..\UtilityDAL.TeaTime\UtilityDAL.Teatime.csproj">
       <Project>{88b7bbff-f3d3-4c98-aae2-7f1c7c6ad0a9}</Project>
-      <Name>UtilityDAL.TeaTime</Name>
+      <Name>UtilityDAL.Teatime</Name>
     </ProjectReference>
     <ProjectReference Include="..\UtilityDAL.View\UtilityDAL.View.csproj">
       <Project>{ad51a125-e97b-4ae8-aee7-0ef4268fbd30}</Project>
