@@ -20,71 +20,62 @@ namespace UtilityDAL.Sqlite
 
     public class Repository<T, R> : IDbService<T, R> where T : new()
     {
-
-
-        //static readonly string _dbName;
-        private static SQLite.SQLiteConnection _connection;
+        private SQLite.SQLiteConnection connection;
         private Func<T, R> getId;
         static readonly string providerName = "SQLite";
 
-        static Repository()
-        {
-            System.IO.Directory.CreateDirectory("../../Data");
-            var dbName = DbEx.GetConnectionString(providerName, false);
-            _connection = new SQLite.SQLiteConnection(dbName == string.Empty ? @"../../Data/" + typeof(T).Name + "." + Constants.SqliteDbExtension : dbName);
-            _connection.CreateTable<T>();
-        }
-
+  
         public Repository(Func<T, R> getId, string dbname = null)
         {
+            System.IO.Directory.CreateDirectory("../../Data");
+            dbname = dbname ?? DbEx.GetConnectionString(providerName, false);
             this.getId = getId;
-            if (dbname != null)
-            {
-                _connection = new SQLite.SQLiteConnection(@"../../Data/" + dbname);
-            }
+            this.connection = new SQLite.SQLiteConnection(string.IsNullOrEmpty(dbname) || string.IsNullOrWhiteSpace(dbname) ? "../../Data/" + typeof(T).Name + "." + Constants.SqliteDbExtension : dbname);
+            connection.CreateTable<T>();
+
         }
 
         public bool Delete(T item)
         {
-            _connection.Delete(item);
+            connection.Delete(item);
             return true;
         }
 
         public bool Insert(T item)
         {
-            _connection.Insert(item);
+            connection.Insert(item);
             return true;
         }
 
         public int InsertBulk(IList<T> items)
         {
-            return _connection.Insert(items);
+            return connection.Insert(items);
         }
 
         public bool Update(T item)
         {
-            _connection.Update(item);
+            connection.Update(item);
             return true;
         }
 
         public void Dispose()
         {
-            _connection.Dispose();
+            connection.Dispose();
         }
 
         public IEnumerable<T> SelectAll()
         {
-            return _connection.Table<T>().ToList();
+            return connection.Table<T>().ToList();
         }
 
         public T Select(T item)
         {
-            return _connection.Table<T>().SingleOrDefault(_ => _.Equals(item));
+            return connection.Table<T>().SingleOrDefault(_ => _.Equals(item));
         }
 
         public T SelectById(R id)
         {
-            return _connection.Table<T>().SingleOrDefault(_ => getId(_).Equals(id));
+            return connection.Table<T>().SingleOrDefault(_ => getId(_).Equals(id));
         }
 
         public int InsertBulk(IEnumerable<T> item)
@@ -104,7 +95,7 @@ namespace UtilityDAL.Sqlite
 
         public bool DeleteById(R id)
         {
-            return _connection.Delete(_connection.Table<T>().SingleOrDefault(_ => getId(_).Equals(id))) >0;
+            return connection.Delete(connection.Table<T>().SingleOrDefault(_ => getId(_).Equals(id))) > 0;
         }
 
 
@@ -140,7 +131,7 @@ namespace UtilityDAL.Sqlite
 
     //    //static readonly string _dbName;
     //    private static SQLite.SQLiteConnection _connection;
-   
+
     //    static readonly string providerName = "SQLite";
 
     //    static Sqlite2()
@@ -175,7 +166,7 @@ namespace UtilityDAL.Sqlite
     //    {
     //        return _connection.Table<T>().SingleOrDefault(_ => _.Equals(item));
     //    }
-     
+
 
     //    public bool Insert(T item)
     //    {

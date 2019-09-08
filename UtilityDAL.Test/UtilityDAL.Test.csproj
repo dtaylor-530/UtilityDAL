@@ -1,16 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
 
     <IsPackable>false</IsPackable>
 
-    <AssemblyVersion>1.0.5.0</AssemblyVersion>
+    <AssemblyVersion>1.0.33.0</AssemblyVersion>
 
-    <FileVersion>1.0.5.0</FileVersion>
+    <FileVersion>1.0.33.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Bogus" Version="28.0.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
     <PackageReference Include="xunit" Version="2.4.0" />
@@ -18,7 +19,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\UtilityDAL.Csv\UtilityDAL.CSV.csproj" />
     <ProjectReference Include="..\UtilityDAL.Sqlite\UtilityDAL.Sqlite.csproj" />
+    <ProjectReference Include="..\UtilityDAL.TeaTime\UtilityDAL.Teatime.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

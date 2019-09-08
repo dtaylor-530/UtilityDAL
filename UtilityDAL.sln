@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UtilityDAL.Teatime", "Utili
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UtilityDAL.Test", "UtilityDAL.Test\UtilityDAL.Test.csproj", "{60AD7422-A33C-48D9-AED5-5C98C18A92D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilityDAL.CSV", "UtilityDAL.Csv\UtilityDAL.CSV.csproj", "{EEB54A0E-BB43-4655-A07C-1DDF2264D5A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{60AD7422-A33C-48D9-AED5-5C98C18A92D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60AD7422-A33C-48D9-AED5-5C98C18A92D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60AD7422-A33C-48D9-AED5-5C98C18A92D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEB54A0E-BB43-4655-A07C-1DDF2264D5A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEB54A0E-BB43-4655-A07C-1DDF2264D5A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEB54A0E-BB43-4655-A07C-1DDF2264D5A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEB54A0E-BB43-4655-A07C-1DDF2264D5A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

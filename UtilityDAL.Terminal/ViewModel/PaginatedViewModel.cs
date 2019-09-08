@@ -23,7 +23,7 @@ namespace UtilityDAL.DemoApp
 
         public PaginatedViewModel(UtilityWpf.IDispatcherService ds)
         {
-            Items = new ReactiveProperty<IEnumerable<dynamic>>(File.Select(file => new UtilityDAL.CSV().From(file).Cast<dynamic>()));
+            Items = new ReactiveProperty<IEnumerable<dynamic>>(File.Select(file => new UtilityDAL.CSV.CSV().From(file).Cast<dynamic>()));
 
         }
     }

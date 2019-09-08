@@ -52,8 +52,7 @@ namespace UtilityDAL.View
 
         public FileCRUDControl()
         {
-            System.IO.Directory.CreateDirectory("../../Data");
-
+          //  System.IO.Directory.CreateDirectory("../../Data");
         }
 
 
@@ -145,7 +144,7 @@ namespace UtilityDAL.View
                 var data = Data.Cast<object>().ToList();
                 object service = Service;
 
-                if (Service is IFileDbService dbservice)
+                if (service is IFileDbService dbservice)
                 {
                     string databaseName = DatabaseName == string.Empty ? "one" : DatabaseName;
                     await this.Dispatcher.InvokeAsync(async () => Execution.Text = await TimedAction(async () =>await this.Dispatcher.InvokeAsync(()=>Data= dbservice.From(databaseName))));

@@ -21,7 +21,7 @@ namespace UtilityDAL.View
 
         public CsvDummyDataService(string path = null)
         {
-            Resource = csvHelper.GenerateDataFilesDefault(new CSV(path), "csv");
+            Resource = csvHelper.GenerateDataFilesDefault(new UtilityDAL.CSV.CSV(path), "csv");
 
         }
 
@@ -32,7 +32,7 @@ namespace UtilityDAL.View
             Resource = Observable.Create<IObservable<DataFile>>(observer =>
             paths.Subscribe(path =>
             {
-                observer.OnNext(csvHelper.GenerateDataFilesDefault(new CSV<T>(path), "csv"));
+                observer.OnNext(csvHelper.GenerateDataFilesDefault(new UtilityDAL.CSV.CSV<T>(path), "csv"));
             })).Switch();
         }
     }
@@ -43,13 +43,13 @@ namespace UtilityDAL.View
 
         public CsvDataService(string path = null,int? i=null)
         {
-            Resource = csvHelper.GenerateDataFilesDefault(new CSV(path), "csv" ,i);
+            Resource = csvHelper.GenerateDataFilesDefault(new UtilityDAL.CSV.CSV(path), "csv" ,i);
 
         }
 
         public CsvDataService(TimeSpan ts,string path = null)
         {
-            Resource = csvHelper.GenerateDataFilesDefault(new CSV(path),ts, "csv");
+            Resource = csvHelper.GenerateDataFilesDefault(new UtilityDAL.CSV.CSV(path),ts, "csv");
 
         }
 
@@ -58,7 +58,7 @@ namespace UtilityDAL.View
             Resource = Observable.Create<IObservable<DataFile>>(observer =>
             paths.Subscribe(path =>
             {
-                observer.OnNext(csvHelper.GenerateDataFilesDefault(new CSV(path), "csv",i));
+                observer.OnNext(csvHelper.GenerateDataFilesDefault(new UtilityDAL.CSV.CSV(path), "csv",i));
             })).Switch();
         }
     }

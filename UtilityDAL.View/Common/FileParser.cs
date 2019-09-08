@@ -22,7 +22,7 @@ namespace UtilityDAL.View
         public abstract ICollection Parse(string path);
 
 
-        public abstract string Map(string value);
+        public virtual string Map(string value) => System.IO.Path.GetFileNameWithoutExtension(value);
 
     }
 

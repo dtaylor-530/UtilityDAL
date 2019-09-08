@@ -9,16 +9,16 @@ using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CsvHelper;
+using System.Reactive.Threading.Tasks;
 
-
-namespace UtilityDAL
+namespace UtilityDAL.CSV
 {
 
 
     public static class CsvHelper
     {
 
-        public static System.Collections.ICollection Parse(String name, string path = "")
+        public static System.Collections.ICollection Parse(string name, string path = "")
         {
             var text = System.IO.Path.Combine(path, name.Replace(".csv", "") + ".csv");
             // Using an XML Config file. 
@@ -38,53 +38,58 @@ namespace UtilityDAL
 
         }
 
+        public static IObservable<T> ParseAsObservable<T>(string path) => ParseAsync<T>(path).ToObservable().SelectMany(a => a);
+
 
         public static async Task<IObservable<T>> ParseAsync<T>(string path)
         {
 
-            //TextReader text = System.IO.File.OpenText(path);
-            var csv = await CSVReaderFactory.BuildAsync(path);
+            object lck = new object();
 
+            var observable = new System.Reactive.Subjects.Subject<T>();
+
+            var csv = CSVReaderFactory.Build(path);
             csv.Read();
-
             var xx = csv.ReadHeader();
-            return await Task.Run(() =>
+            bool b = true;
+            while (b)
             {
-                var obs = Observable.Create<T>(async observer =>
+                try
                 {
+                    var x = await csv.ReadAsync();
 
-                    while (true)
-
+                    if (x == false)
                     {
-                        var x = await csv.ReadAsync();
-                        if (x == false) { /*text.Dispose(); */break; }
-                        await Task.Run(() =>
-                        {
-                            try
-                            {
-                                var record = csv.GetRecord<T>();
-                                observer.OnNext(record);
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine(ex);
-                            }
-                        });
+                        b = false;
+                        observable.OnCompleted();
+                        break;
+                    }
+                    try
+                    {
+                        var record = csv.GetRecord<T>();
+                        observable.OnNext(record);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
                     }
 
-                    return Disposable.Empty;
-                });
+                }
+                catch (Exception ex)
+                {
 
-                return obs;
+                }
 
-            });
+            }
+
+            return observable;
         }
     }
 
 
 
 
- 
+
 
 }
 //using System;

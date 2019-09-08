@@ -189,12 +189,6 @@
     <Reference Include="System.Reactive, Version=4.1.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Reactive.4.1.0\lib\net46\System.Reactive.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.Core, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Reactive.Core.4.1.0\lib\net46\System.Reactive.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.Interfaces, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\..\Bet365\packages\System.Reactive.Interfaces.4.1.0\lib\net46\System.Reactive.Interfaces.dll</HintPath>
-    </Reference>
     <Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
       <Private>True</Private>
@@ -270,6 +264,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IItemsSource.cs" />
     <Compile Include="Attached\AttachedDocumentStore.cs" />
     <Compile Include="Attached\TreeViewDocumentStore.cs" />
     <Compile Include="Attached\ItemsControlDocumentStore.cs" />
@@ -285,7 +280,9 @@
     <Compile Include="Control\CsvDataGrid.cs" />
     <Compile Include="Control\FileViewer.cs" />
     <Compile Include="Control\InputOutputControl.cs" />
+    <Compile Include="Control\NavigatorView.cs" />
     <Compile Include="Control\ServerFilesControl.cs" />
+    <Compile Include="Converter\Converter.cs" />
     <Compile Include="Deprecated\DocumentStoreControl.cs" />
     <Compile Include="Control\DocumentStoreControl.cs" />
     <Compile Include="Control\LiteDbControl.cs" />
@@ -366,6 +363,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\NavigatorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\ServerFiles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -388,6 +389,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UtilityDAL.Csv\UtilityDAL.CSV.csproj">
+      <Project>{eeb54a0e-bb43-4655-a07c-1ddf2264d5a9}</Project>
+      <Name>UtilityDAL.CSV</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UtilityDAL.Model\UtilityDAL.Model.csproj">
       <Project>{CEF231D6-FF3D-41CD-A207-146FD68B50CD}</Project>
       <Name>UtilityDAL.Model</Name>

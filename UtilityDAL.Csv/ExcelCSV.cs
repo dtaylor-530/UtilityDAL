@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using System.IO;
-using System.Data.SqlClient;
 using System.Reflection;
 
-namespace UtilityDAL
+namespace UtilityDAL.CSV
 {
     //using LumenWorks.Framework.IO.Csv;
     //using ExcelDataReader;

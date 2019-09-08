@@ -10,12 +10,21 @@
 >
 
     <TabControl>
-        <!--<TabItem Header="Tea">
-            <view:TeaSelectionUserControl Directory='../../'   />
+        <TabItem Header="Primary">
+            <view:FileViewer x:Name="FileViewer" Path="../../Data"></view:FileViewer>
         </TabItem>
-        <TabItem Header="Csv">
-            <view:CsvSelectionUserControl Directory='../../'    />
-        </TabItem>-->
-        <view:FileViewer Path="../../"></view:FileViewer>
+        <TabItem Header="Secondary">
+            <view:FileViewer x:Name="FileViewer2" Path="../../Data">
+                <view:FileViewer.OutputView>
+                    <ItemsControl>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Ellipse Fill="Red" Width="3" Height="3"></Ellipse>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </view:FileViewer.OutputView>
+            </view:FileViewer>
+        </TabItem>
     </TabControl>
 </Page>

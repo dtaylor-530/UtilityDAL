@@ -19,9 +19,6 @@ namespace UtilityDAL.DemoApp
                 return tf.Items.ToList();
             }
         }
-
-        public override string Map(string value) => value;
-
     }
 
 }

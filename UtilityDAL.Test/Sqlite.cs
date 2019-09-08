@@ -39,10 +39,29 @@ namespace UtilityDAL.Test
             }
         }
 
+        [Fact]
+        public void Test3()
+        {
+
+            using (var conn = new SQLite.SQLiteConnection("Test.sqlite"))
+            {
+                conn.CreateTable<xx>();
+                conn.DeleteAll<xx>();
+                conn.InsertAll(Factory.GetTicks(100));
+                var result = conn.Take<xx>(100);
+
+                Assert.True(result.Count() == 100);
+            }
+        }
+
+
+
+
         class xx
         {
             public long Ticks { get; set; }
         }
+
 
         class Factory
         {

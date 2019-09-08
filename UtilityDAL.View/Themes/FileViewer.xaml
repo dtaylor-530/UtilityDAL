@@ -4,7 +4,8 @@
                     xmlns:converter="clr-namespace:UtilityDAL.Converter"
                     xmlns:pt="http://propertytools.org/wpf"
                        xmlns:utility="clr-namespace:UtilityWpf.View;assembly=UtilityWpf.View"
-                    xmlns:utilitywpf="clr-namespace:UtilityWpf;assembly=UtilityWpf.Common">
+                    xmlns:utilitywpf="clr-namespace:UtilityWpf;assembly=UtilityWpf.Common"
+                        xmlns:viewmodel="clr-namespace:UtilityWpf.ViewModel;assembly=UtilityWpf.View">
 
     <!--x:Key="FileViewer"-->
     <Style TargetType="{x:Type local:FileViewer}">
@@ -12,58 +13,99 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:FileViewer }">
-
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"></RowDefinition>
-                            <RowDefinition Height="100"></RowDefinition>
-                            <RowDefinition Height="200"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.Resources>
+                    <ControlTemplate.Resources>
+                        <!--<DataTemplate  DataType="{x:Type viewmodel:PathViewModel}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Source="/folder.png" Margin="0 0 4 0"/>
+                                <TextBlock Grid.Column="1" Text="{Binding Directory}"/>
+                            </Grid>
+                        </DataTemplate>-->
+                        <local:Converter x:Key="Converter"></local:Converter>
+                    </ControlTemplate.Resources>
+                    <DockPanel x:Name="DockPanel">
+                        <DockPanel.Resources>
+                            <CollectionViewSource x:Key="GroupedItems" Source="{Binding Items, RelativeSource={RelativeSource TemplatedParent}}" >
+                                <CollectionViewSource.GroupDescriptions>
+                                <!--<PropertyGroupDescription PropertyName="Directory"/>-->
+                            </CollectionViewSource.GroupDescriptions>
+                            </CollectionViewSource>
                             <utilitywpf:NullToBooleanConverter x:Key="ntobconverter" />
-                        </Grid.Resources>
+                        </DockPanel.Resources>
 
-                        <pt:StackPanelEx Orientation="Horizontal">
-                            <ComboBox Width="140" ItemsSource="{TemplateBinding FileParsers}" 
-                                      SelectedValue="{Binding SelectedFileParser ,RelativeSource={RelativeSource TemplatedParent}}" 
+                        <WrapPanel   DockPanel.Dock="Top"  Margin="20">
+                            <ComboBox Width="140"   
+                                      SelectedIndex="0"
+                                      ItemsSource="{Binding FileParsers ,RelativeSource={RelativeSource TemplatedParent}}" 
+                                      SelectedItem="{Binding SelectedFileParser ,RelativeSource={RelativeSource TemplatedParent}}" 
                                       DisplayMemberPath="Key" 
-                             
-                                      SelectedValuePath="Value" ></ComboBox>
-                            <!--<TextBox Text="{Binding Path,RelativeSource={RelativeSource TemplatedParent },UpdateSourceTrigger=PropertyChanged,Delay=500ms}"/>-->
-                     
-                                <utility:FolderOpenControl Path="{Binding Path,RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay}" Width="250">
-                                </utility:FolderOpenControl>
-                        </pt:StackPanelEx>
-      
-                        <utility:ListBoxEx   Grid.Row="1"  Grid.Column="0"   Orientation="Horizontal"
-                                         Key="FilePath"
-                                         SelectedItem="{Binding Output, RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay}"     
-                                         ItemsSource="{Binding Items, RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay}" >
-                            <!--<utility:ListBoxEx.ItemTemplate>
-                                <DataTemplate>
-                                    <ContentPresenter HorizontalAlignment="Stretch" Content="{Binding }" ContentTemplate="{StaticResource fileviewmodeltemplate}"             />
-                                </DataTemplate>
-                            </utility:ListBoxEx.ItemTemplate>-->
-                   
-                        </utility:ListBoxEx>
+                                      Margin="30,0,0,0"
+                                      />
 
-                        <Expander IsExpanded="True" Grid.Row="2" Grid.Column="0" >
-                            <StackPanel>
-                                <utility:PageNavigatorControl x:Name="pnc" ItemsSource="{Binding Data, RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}"></utility:PageNavigatorControl>
-                                <DataGrid ItemsSource="{Binding FilteredItems,ElementName=pnc }"></DataGrid>
-                                <!--<DataGrid 
-    
-          ItemsSource="{Binding PaginatedItems,Mode=OneWay,IsAsync=True}" 
-          CanUserAddRows="False"
-          AutoGenerateColumns="True"
-                  
-                  EnableColumnVirtualization = "True"
-EnableRowVirtualization = "True">
+                            <utility:FolderOpenControl Path="{Binding Path,RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay}"
+                                                       Width="250"          
+                                                        Margin="30,0,0,0"
+                                                       />
+                        </WrapPanel>
 
-                                </DataGrid>-->
-                            </StackPanel>
-                        </Expander>
-                    </Grid>
+                        <ListView   DockPanel.Dock="Top"
+                            SelectedItem="{Binding Output, RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay}"    
+                                   ItemsSource="{Binding Source={StaticResource GroupedItems}}">
+                                   <!--ItemsSource="{Binding Items, RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}"-->
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"></StackPanel>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.GroupStyle>
+                                <GroupStyle>
+                                    <GroupStyle.HeaderTemplate>
+                                        <DataTemplate>
+                                            <!--<TextBlock FontWeight="Bold" FontSize="14" Text="{Binding .,Converter={StaticResource Converter}}"/>-->
+                                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </GroupStyle.HeaderTemplate>
+                                    <!--<GroupStyle.ContainerStyle>
+                                        <Style TargetType="{x:Type GroupItem}">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate>
+                                                        <Expander
+                                            BorderThickness="0"
+                                            DataContext="{Binding Items}"
+                                            IsExpanded="True">
+                                                            <Expander.Header>
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock
+                                                                        VerticalAlignment="Top"
+                                                                        FontSize="22"
+                                                                        FontWeight="Bold"
+                                                                        Foreground="Gray"
+                                                                        Text="{Binding .,Converter={StaticResource Converter}}" />
+                                         
+                                                                </StackPanel>
+                                                            </Expander.Header>
+                                                            <ItemsPresenter />
+                                                        </Expander>
+  
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </GroupStyle.ContainerStyle>-->
+                                </GroupStyle>
+                            </ListView.GroupStyle>
+                        </ListView>
+                        <ContentPresenter Content="{Binding OutputView,RelativeSource={RelativeSource TemplatedParent}}">
+                        </ContentPresenter>
+
+                        <ContentControl Content="{Binding OutputView,RelativeSource={RelativeSource TemplatedParent}}">
+                        </ContentControl>
+
+                    </DockPanel>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

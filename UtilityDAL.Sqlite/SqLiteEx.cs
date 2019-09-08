@@ -16,6 +16,9 @@ namespace UtilityDAL
 {
     public static class SqliteEx
     {
+        public static string GetName(this Type type) => ((SQLite.TableAttribute[])type.GetCustomAttributes(typeof(SQLite.TableAttribute), false)).FirstOrDefault()?.Name ?? type.Name;
+
+
         private static string _dbName;
 
         static SqliteEx()

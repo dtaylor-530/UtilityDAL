@@ -9,6 +9,7 @@
         <ResourceDictionary Source="/UtilityDAL.View;component/Themes/FileCRUDControl.xaml"></ResourceDictionary>
         <ResourceDictionary Source="/UtilityDAL.View;component/Themes/ListBoxCriteria.xaml"></ResourceDictionary>
         <ResourceDictionary Source="/UtilityDAL.View;component/Themes/ServerFiles.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/UtilityDAL.View;component/Themes/NavigatorView.xaml"></ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>

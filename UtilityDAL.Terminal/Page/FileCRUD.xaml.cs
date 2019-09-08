@@ -41,7 +41,7 @@ namespace UtilityDAL.DemoApp
 
 
             //public IFileDbService DbService { get; } = new UtilityDAL.Teatime.FileService<Filext>(@"../../Data");
-            public IFileDbService DbService3 { get; } = new UtilityDAL.CSV(@"../../Data");
+            public IFileDbService DbService3 { get; } = new UtilityDAL.CSV.CSV(@"../../Data");
 
             public ObservableCollection<Model.Filex> Items { get; } = Observable.Interval(TimeSpan.FromSeconds(3))
                 .StartWith(0)
