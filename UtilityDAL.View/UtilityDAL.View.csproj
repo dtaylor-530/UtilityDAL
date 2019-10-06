@@ -282,6 +282,8 @@
     <Compile Include="Control\InputOutputControl.cs" />
     <Compile Include="Control\NavigatorView.cs" />
     <Compile Include="Control\ServerFilesControl.cs" />
+    <Compile Include="Control\TypeControl.cs" />
+    <Compile Include="Converter\BooleanVisibilityConverter.cs" />
     <Compile Include="Converter\Converter.cs" />
     <Compile Include="Deprecated\DocumentStoreControl.cs" />
     <Compile Include="Control\DocumentStoreControl.cs" />
@@ -292,6 +294,9 @@
     <Compile Include="ViewModel\LiteDbViewModel.cs" />
     <Compile Include="ViewModel\ProviderViewModel.cs" />
     <Compile Include="Control\FileDbControl.cs" />
+    <Compile Include="View\CollectionUserControl.xaml.cs">
+      <DependentUpon>CollectionUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CsvSelectionUserControl.xaml.cs">
       <DependentUpon>CsvSelectionUserControl.xaml</DependentUpon>
     </Compile>
@@ -309,6 +314,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Service\Teatime.cs" />
+    <Compile Include="View\LogUserControl.xaml.cs">
+      <DependentUpon>LogUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TeaSelectionUserControl.xaml.cs">
       <DependentUpon>TeaSelectionUserControl.xaml</DependentUpon>
     </Compile>
@@ -371,6 +379,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\TypeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CollectionUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CsvSelectionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -378,6 +394,10 @@
     <Page Include="ModelView\DataFileDataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\LogUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SelectionContentControl.xaml">
       <SubType>Designer</SubType>

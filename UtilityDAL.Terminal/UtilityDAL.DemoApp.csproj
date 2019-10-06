@@ -49,6 +49,9 @@
     <Reference Include="Biggy.Data.Sqlite, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Biggy.Data.Sqlite.0.1.0.1\lib\net40\Biggy.Data.Sqlite.dll</HintPath>
     </Reference>
+    <Reference Include="Bogus, Version=28.3.2.0, Culture=neutral, PublicKeyToken=fa1bb3f3f218129a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bogus.28.3.2\lib\net40\Bogus.dll</HintPath>
+    </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.5.8.6\lib\net46\CommonServiceLocator.dll</HintPath>
     </Reference>
@@ -313,6 +316,9 @@
     <Compile Include="Page\GuidStringPage.xaml.cs">
       <DependentUpon>GuidStringPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Page\LogPage.xaml.cs">
+      <DependentUpon>LogPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Page\ServerFilePage.xaml.cs">
       <DependentUpon>ServerFilePage.xaml</DependentUpon>
     </Compile>
@@ -368,6 +374,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Page\GuidStringPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page\LogPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

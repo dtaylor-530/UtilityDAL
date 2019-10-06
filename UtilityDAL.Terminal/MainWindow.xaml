@@ -18,6 +18,7 @@
         <XmlDataProvider x:Key="Pages">
             <x:XData>
                 <Pages xmlns="">
+                    <Page Uri="\Page\LogPage.xaml"         Title="Log" />
                     <Page Uri="\Page\TeaCsvDbPage.xaml"         Title="Tea/Csv" />
                     <Page Uri="\Page\ServerFilePage.xaml"              Title="Server Page" />
                     <Page Uri="\Page\PaginatedPage.xaml"              Title="Paginated" />

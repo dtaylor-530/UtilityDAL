@@ -8,8 +8,6 @@ namespace UtilityDAL.Sqlite
 {
     internal class KeyObject : IEquatable<KeyObject>
     {
-
-
         [PrimaryKey]
         public string Key { get; set; }
 
