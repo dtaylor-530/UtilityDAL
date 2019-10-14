@@ -9,20 +9,18 @@
 
             <ResourceDictionary.MergedDictionaries>
 
-                <ResourceDictionary Source="/UtilityWpf.View;component/Themes/DefaultListBoxItemStyle.xaml"/>
-                <ResourceDictionary Source="/UtilityDAL.View;component/ModelView/DataFileDataTemplate.xaml"/>
-                <ResourceDictionary Source="/UtilityDAL.DemoApp;component/ModelView/PriceDataTemplate.xaml"/>
+                <ResourceDictionary Source="/UtilityWpf.View;component/Themes/DefaultListBoxItemStyle.xaml" />
+                <ResourceDictionary Source="/UtilityDAL.View;component/ModelView/DataFileDataTemplate.xaml" />
+                <ResourceDictionary Source="/UtilityDAL.DemoApp;component/ModelView/PriceDataTemplate.xaml" />
 
-                <ResourceDictionary Source="/ModelView/DummyLiteDbObjectDataTemplate.xaml"/>
+                <ResourceDictionary Source="/ModelView/DummyLiteDbObjectDataTemplate.xaml" />
 
-                <ResourceDictionary Source="/UtilityWpf.View;component/DataTemplate/PathDataTemplate.xaml"/>
-
+                <ResourceDictionary Source="/UtilityWpf.View;component/DataTemplate/PathDataTemplate.xaml" />
 
                 <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Teal.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Cyan.xaml" />-->
-
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

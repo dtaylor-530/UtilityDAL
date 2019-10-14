@@ -5,13 +5,12 @@
                        xmlns:utility="clr-namespace:UtilityWpf.View;assembly=UtilityWpf.View"
                     xmlns:local="clr-namespace:UtilityDAL">
 
-  <!--  <ResourceDictionary.MergedDictionaries>
+    <!--  <ResourceDictionary.MergedDictionaries>
 
-        <ResourceDictionary Source="/UtilityWpf.View;component/Themes/ListBoxEx.xaml"/>
-        <ResourceDictionary  Source="/UtilityWpf.View;component/Themes/ListBoxItemStyle.xaml"/>
+        <ResourceDictionary Source="/UtilityWpf.View;component/Themes/ListBoxEx.xaml" />
+        <ResourceDictionary  Source="/UtilityWpf.View;component/Themes/ListBoxItemStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
-    
+
     <ContentControl x:Key="SelectionTemplate">
         <ContentControl.Template>
             <ControlTemplate>
@@ -23,64 +22,62 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="200"></RowDefinition>
                         <RowDefinition></RowDefinition>
-             
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <utility:MultiSelectTreeView Name="x" ChildrenPath="SubDirectories" Key="Name"  ItemsSource="{Binding RootDirectories.Value}" SelectedItem="{Binding SelectedItem.Value,Mode=OneWayToSource}"/>
+                    <utility:MultiSelectTreeView Name="x" ChildrenPath="SubDirectories" Key="Name"  ItemsSource="{Binding RootDirectories.Value}" SelectedItem="{Binding SelectedItem.Value,Mode=OneWayToSource}" />
 
-      
-                    --><!--<ListBox   Grid.Row="0"  Grid.Column="1" ItemsSource="{Binding Files.Value,Mode=OneWay}" 
+                    -->
+    <!--<ListBox   Grid.Row="0"  Grid.Column="1" ItemsSource="{Binding Files.Value,Mode=OneWay}"
                                    SelectedItem="{Binding Output,Mode=OneWayToSource}"
-                             Style="{StaticResource ListBoxStyle}"
-                         >
+                             Style="{StaticResource ListBoxStyle}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <ContentPresenter HorizontalAlignment="Stretch" Content="{Binding }" ContentTemplate="{StaticResource fileviewmodeltemplate}"             />
+                                <ContentPresenter HorizontalAlignment="Stretch" Content="{Binding }" ContentTemplate="{StaticResource fileviewmodeltemplate}" />
                             </DataTemplate>
                         </ListBox.ItemTemplate>
-                    </ListBox>--><!--
+                    </ListBox>-->
+    <!--
 
-
-                    <utility:ListBoxEx   Grid.Row="0"  Grid.Column="1"   
+                    <utility:ListBoxEx   Grid.Row="0"  Grid.Column="1"
                                          Key="FilePath"
-                                         SelectedItem="{Binding Output,Mode=OneWayToSource}"     
-                                         ItemsSource="{Binding Files.Value,Mode=OneWay}" >
+                                         SelectedItem="{Binding Output,Mode=OneWayToSource}"
+                                         ItemsSource="{Binding Files.Value,Mode=OneWay}">
                         <utility:ListBoxEx.ItemTemplate>
                             <DataTemplate>
-                                <ContentPresenter HorizontalAlignment="Stretch" Content="{Binding }" ContentTemplate="{StaticResource fileviewmodeltemplate}"             />
+                                <ContentPresenter HorizontalAlignment="Stretch" Content="{Binding }" ContentTemplate="{StaticResource fileviewmodeltemplate}" />
                             </DataTemplate>
                         </utility:ListBoxEx.ItemTemplate>
                         <utility:ListBoxEx.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel/>
+                                <StackPanel />
                             </ItemsPanelTemplate>
                         </utility:ListBoxEx.ItemsPanel>
                     </utility:ListBoxEx>
-                    --><!--<utility:ListBoxEx.ItemTemplate>
-                            
+                    -->
+    <!--<utility:ListBoxEx.ItemTemplate>
                         </utility:ListBoxEx.ItemTemplate>-->
 
-
-                    <!--<utility:MultiSelectTreeView   ItemsSource="{Binding RootDirectories}" SelectedItems="{Binding SelectedItems.Value}"/>--><!--
+    <!--<utility:MultiSelectTreeView   ItemsSource="{Binding RootDirectories}" SelectedItems="{Binding SelectedItems.Value}" />-->
+    <!--
                     <Expander IsExpanded="True" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                             <StackPanel>
-                                <Button Width="50" Content="Select" 
+                                <Button Width="50" Content="Select"
                                 Command="{Binding SelectCommand,Mode=OneWay}"
-                                IsEnabled="{Binding ElementName=lbx, Path=SelectedItem,Converter={StaticResource ntobconverter}}" 
+                                IsEnabled="{Binding ElementName=lbx, Path=SelectedItem,Converter={StaticResource ntobconverter}}"
                                 CommandParameter="{Binding ElementName=lbx, Path=SelectedItem}" />
-                            --><!--<utility:FilteredPaginatedUserControl Name="db" DataContext="{Binding ElementName='lbx', Path='SelectedItem'}" Items="{Binding Items}"/>-->
-                            <!--<utility:FilteredPaginatedUserControl Name="db"  Items="{Binding Items.Value}"/>--><!--
+                            -->
+    <!--<utility:FilteredPaginatedUserControl Name="db" DataContext="{Binding ElementName='lbx', Path='SelectedItem'}" Items="{Binding Items}" />-->
+    <!--<utility:FilteredPaginatedUserControl Name="db"  Items="{Binding Items.Value}" />-->
+    <!--
                            <DataGrid ItemsSource="{Binding Items.Value}"></DataGrid>
                         </StackPanel>
                         </Expander>
-                
                 </Grid>
             </ControlTemplate>
         </ContentControl.Template>
-
     </ContentControl>-->
 </ResourceDictionary>

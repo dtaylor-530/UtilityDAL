@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UtilityHelper;
-using UtilityInterface;
 using UtilityInterface.Generic;
 
 namespace UtilityDAL
 {
-
     public class XmlSaveLoadService<T> : IPermanent<IList<T>>
     {
         private readonly string _directory;
@@ -29,7 +25,6 @@ namespace UtilityDAL
 
         public bool Save(IList<T> @object)
         {
-    
             foreach (var x in @object)
             {
                 xmldb.Write<T>(x, FileNameCleaner.MakeValid(x.GetPropertyValue<string>(_key)));
@@ -45,7 +40,5 @@ namespace UtilityDAL
             else
                 return default(T);
         }
-
     }
-
 }

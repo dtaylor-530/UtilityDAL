@@ -1,19 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace UtilityDAL.View
 {
@@ -27,8 +14,6 @@ namespace UtilityDAL.View
             InitializeComponent();
         }
 
-
-
         public IEnumerable Items
         {
             get { return (IEnumerable)GetValue(ItemsProperty); }
@@ -37,7 +22,7 @@ namespace UtilityDAL.View
 
         // Using a DependencyProperty as the backing store for Items.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemsProperty =
-            DependencyProperty.Register("Items", typeof(IEnumerable), typeof(LogUserControl), new PropertyMetadata(null,fds));
+            DependencyProperty.Register("Items", typeof(IEnumerable), typeof(LogUserControl), new PropertyMetadata(null, fds));
 
         private static void fds(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

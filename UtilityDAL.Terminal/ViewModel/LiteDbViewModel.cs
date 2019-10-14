@@ -1,21 +1,9 @@
-﻿using UtilityDAL.ViewModel;
-using DynamicData;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Reactive.Concurrency;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UtilityWpf.ViewModel;
-using UtilityDAL;
-using Reactive.Bindings;
 
 namespace UtilityDAL.DemoApp
 {
-
-
-
     public class LiteDbDummyViewModel : UtilityWpf.NPC
     {
         private LiteDB.BsonMapper mapper;
@@ -45,21 +33,14 @@ namespace UtilityDAL.DemoApp
                     OnPropertyChanged(nameof(NewItem));
                 });
 
-
             DocumentStore = new LiteDbRepo("Object", UtilityDAL.Common.DbEx.GetDirectory(System.IO.Directory.GetCurrentDirectory(), "lite"));
-
         }
-
     }
-
-
-
 
     public class RandomHelper
     {
-
-        static string[] consonants = { "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z" };
-        static string[] vowels = { "a", "e", "i", "o", "u" };
+        private static string[] consonants = { "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z" };
+        private static string[] vowels = { "a", "e", "i", "o", "u" };
 
         public static string NextWord(int length = 4, Random rand = null)
         {

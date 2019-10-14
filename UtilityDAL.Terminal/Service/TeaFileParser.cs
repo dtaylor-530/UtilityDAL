@@ -9,7 +9,7 @@ using UtilityDAL.View;
 
 namespace UtilityDAL.DemoApp
 {
-    [DescriptionAttribute("tea")]
+    [Description("tea")]
     public class TeaFileParser : FileParser
     {
         public override ICollection Parse(string path)
@@ -20,5 +20,4 @@ namespace UtilityDAL.DemoApp
             }
         }
     }
-
 }

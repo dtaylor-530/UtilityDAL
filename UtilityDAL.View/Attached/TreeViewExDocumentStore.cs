@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using UtilityDAL.Contract;
+﻿using System.Windows;
 using UtilityInterface.Generic.Database;
 using UtilityWpf.View;
 using UtilityWpf.ViewModel;
@@ -23,7 +17,6 @@ namespace UtilityDAL.View.Attached
             obj.SetValue(StoreProperty, value);
         }
 
-        public static readonly DependencyProperty StoreProperty = DependencyProperty.RegisterAttached("Store", typeof(IDbService<SHDOObject, object>), typeof(TreeViewExDocumentStore), new PropertyMetadata(null, null,AttachedDocumentStore.StoreCoerce));
-
+        public static readonly DependencyProperty StoreProperty = DependencyProperty.RegisterAttached("Store", typeof(IDbService<SHDOObject, object>), typeof(TreeViewExDocumentStore), new PropertyMetadata(null, null, AttachedDocumentStore.StoreCoerce));
     }
 }

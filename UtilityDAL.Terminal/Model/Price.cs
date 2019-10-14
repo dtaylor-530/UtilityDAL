@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UtilityDAL.DemoApp
 {
@@ -18,7 +14,6 @@ namespace UtilityDAL.DemoApp
         }
     }
 
-
     public struct Pricecsv : IEquatable<Pricecsv>
     {
         public DateTime Date { get; set; }
@@ -30,5 +25,4 @@ namespace UtilityDAL.DemoApp
             return Date == other.Date;
         }
     }
-
 }

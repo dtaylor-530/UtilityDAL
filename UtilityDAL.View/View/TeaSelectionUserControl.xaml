@@ -1,23 +1,21 @@
 ﻿<UserControl x:Class="UtilityDAL.View.TeaSelectionUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d" 
-            >
-    
-    <StackPanel Name="sp" >
+             mc:Ignorable="d">
+
+    <StackPanel Name="sp">
         <!--<StackPanel.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="/UtilityDAL;component/View/SelectionContentControl.xaml"/>
+                    <ResourceDictionary Source="/UtilityDAL;component/View/SelectionContentControl.xaml" />
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </StackPanel.Resources>
-        <utility:DirectorySelectionControl   Name="folder" DockPanel.Dock="Top"  Directory="{Binding Directory,Mode=OneWayToSource}"/>
-        --><!--<ContentControl Grid.Row="1" Name="maincontent"  DataContext="{Binding }"  Content="{StaticResource  SelectionTemplate }"/>--><!--
+        <utility:DirectorySelectionControl   Name="folder" DockPanel.Dock="Top"  Directory="{Binding Directory,Mode=OneWayToSource}" />
+        --><!--<ContentControl Grid.Row="1" Name="maincontent"  DataContext="{Binding }"  Content="{StaticResource  SelectionTemplate }" />--><!--
         <local:TeaTimeDbControl x:Name="tea" ></local:TeaTimeDbControl>-->
         <!--Directory="{Binding Directory,Mode=OneWay}"-->
     </StackPanel>
-
 </UserControl>

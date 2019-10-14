@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using UtilityDAL.Model;
@@ -11,8 +7,7 @@ using UtilityWpf.View;
 
 namespace UtilityDAL.View
 {
-
-    public class ServerFilesControl:Control
+    public class ServerFilesControl : Control
     {
         public IEnumerable ItemsSource
         {
@@ -20,22 +15,19 @@ namespace UtilityDAL.View
             set { SetValue(ItemsSourceProperty, value); }
         }
 
-
         public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(ServerFilesControl), new PropertyMetadata(null,ItemsSourceChanged));
+            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(ServerFilesControl), new PropertyMetadata(null, ItemsSourceChanged));
 
-        
         private static void ItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if ((d as ServerFilesControl).listboxCriteria != null)
                 (d as ServerFilesControl).ItemsSource = (IEnumerable)(e.NewValue);
         }
 
-        ListBoxCriteria listboxCriteria = null;
+        private ListBoxCriteria listboxCriteria = null;
         private ComboBox comboBox;
         private ServerFile[] files;
         private Button update;
-
 
         static ServerFilesControl()
         {
@@ -44,7 +36,7 @@ namespace UtilityDAL.View
 
         public override void OnApplyTemplate()
         {
-             listboxCriteria = this.GetTemplateChild("listboxCriteria") as ListBoxCriteria;
+            listboxCriteria = this.GetTemplateChild("listboxCriteria") as ListBoxCriteria;
             comboBox = this.GetTemplateChild("ComboBox") as ComboBox;
             listboxCriteria.ItemsSource = ItemsSource;
             update = this.GetTemplateChild("Update") as Button;
@@ -65,11 +57,8 @@ namespace UtilityDAL.View
                 .Select((_, i) => new { _, i })
                 .Where(_ => args.Indices.Contains(_.i)).Select(_ => _._).ToArray();
 
-            comboBox.ItemsSource = files.Where(_=>_.Link!=null).ToList();
-
+            comboBox.ItemsSource = files.Where(_ => _.Link != null).ToList();
         }
-
-
 
         public static readonly RoutedEvent FilesToDownloadEvent = EventManager.RegisterRoutedEvent("FilesToDownload", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(CriteriaItem));
 
@@ -86,6 +75,5 @@ namespace UtilityDAL.View
             public FilesToDownloadEventArgs(RoutedEvent @event) : base(@event)
             { }
         }
-
     }
 }

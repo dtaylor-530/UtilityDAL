@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace UtilityDAL.Helper
 {
     public class Linq
     {
-
         public static IEnumerable<(T left, T right)> FullOuterJoin<T, R>(
             IEnumerable<T> left,
             IEnumerable<T> right,
@@ -20,6 +18,5 @@ namespace UtilityDAL.Helper
                                                               from l in g.DefaultIfEmpty()
                                                               where l == null
                                                               select (l, r));
-
     }
 }

@@ -8,10 +8,6 @@
 
 //namespace UtilityDAL
 //{
-
-
-
-
 //    public class Teatime<T> : IFileDbService<T> where T : struct //,IChildRow
 //    {
 //        static readonly string providerName = "TeaTime";
@@ -34,28 +30,21 @@
 //            return System.IO.Directory.GetFiles(dbName).Select(_ => System.IO.Path.GetFileNameWithoutExtension(_)).ToList();
 //        }
 
-
 //        public bool ToDb(IList<T> prices, string id) //, IComparable
 //        {
-
 //            Teatime.ToDb(prices, id, dbName);
 //            return true;
 //        }
 
-
-
 //        public IList<T> FromDb(string id)   //, IComparable
 //        {
-
 //            return Teatime.FromDb<T>(id, dbName);
 
 //        }
 
 //    }
 
-
-
-//    public class TeatimeFileService<T> : IFileDbService where T : struct 
+//    public class TeatimeFileService<T> : IFileDbService where T : struct
 //    {
 //        static readonly string providerName = "TeaTime";
 
@@ -77,10 +66,8 @@
 //            return System.IO.Directory.GetFiles(dbName).Select(_ => System.IO.Path.GetFileNameWithoutExtension(_)).ToList();
 //        }
 
-
 //        public ICollection FromDb(string name)
 //        {
-            
 //            var x= (Teatime.FromDb<T>(dbName));
 //            if (x.ContainsKey(name))
 //                return x[name];
@@ -96,6 +83,4 @@
 //        }
 //    }
 
-
 //}
-

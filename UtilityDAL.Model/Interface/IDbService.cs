@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UtilityDAL.Contract
+﻿namespace UtilityDAL.Contract
 {
     //public interface IDbService<T,R>:IDbService<T>
     //{
-
     //     T FindById(R item);
 
     //}
@@ -30,7 +22,6 @@ namespace UtilityDAL.Contract
 
     //    bool Delete(T item);
 
-
     //}
     //public interface IDbService:IDisposable
     //{
@@ -50,7 +41,5 @@ namespace UtilityDAL.Contract
 
     //    bool Delete(/*object items,*/ object item);
 
-
     //}
-
 }

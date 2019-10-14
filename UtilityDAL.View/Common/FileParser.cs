@@ -1,11 +1,6 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UtilityDAL.Contract;
 
 namespace UtilityDAL.View
@@ -21,18 +16,15 @@ namespace UtilityDAL.View
 
         public abstract ICollection Parse(string path);
 
-
         public virtual string Map(string value) => System.IO.Path.GetFileNameWithoutExtension(value);
-
     }
-
 
     public static class AttributeHelper
     {
         public static string GetDescription(this Type value)
         {
             DescriptionAttribute attribute = Attribute.GetCustomAttribute(value, typeof(DescriptionAttribute)) as DescriptionAttribute;
-            return  attribute.Description;
+            return attribute.Description;
         }
     }
 }

@@ -1,28 +1,19 @@
-﻿using UtilityDAL.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UtilityDAL;
-using UtilityInterface;
-using UtilityDAL.Contract;
 using UtilityDAL.Contract.Generic;
+using UtilityDAL.Model;
 using UtilityInterface.Generic;
 
 namespace UtilityDAL.View
 {
-
     public static class FileGenerator
     {
-
         internal static IObservable<DataFile> GenerateDataFilesDefault<T>(IFileDatabase<T> service, IService<IEnumerable<T>> gs, string extension)
         {
-
-
-            return gs.Resource.Take(5).Select((_,i) =>
+            return gs.Resource.Take(5).Select((_, i) =>
             {
                 string name = i.ToString();
                 var items = service.From(name);
@@ -34,9 +25,7 @@ namespace UtilityDAL.View
                 }
                 return (new DataFile { Key = name, Items = items.ToList() });
             });
-
         }
-
 
         internal static IObservable<DataFile> GenerateDataFilesDefault<T>(IFileDatabase<T> service, string extension)
         {
@@ -48,19 +37,9 @@ namespace UtilityDAL.View
                     var items = service.From(id);
                     if (items != null)
                         observer.OnNext(new DataFile { Key = id, Items = items.ToList() });
-
                 }
                 return Disposable.Empty;
             });
         }
-
-
-
-
-
-
     }
-
-
-
 }

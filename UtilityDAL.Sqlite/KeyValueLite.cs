@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace UtilityDAL.Sqlite
 {
@@ -39,17 +38,16 @@ namespace UtilityDAL.Sqlite
         public string Value { get; set; }
     }
 
-
-
     public class KeyValueLite
     {
-        string directory;
+        private string directory;
 
         public KeyValueLite(string directory)
         {
             this.directory = directory;
             System.IO.Directory.CreateDirectory(directory);
         }
+
         public KeyValueLite() : this("../../Data")
         {
         }
@@ -78,7 +76,6 @@ namespace UtilityDAL.Sqlite
             return i;
         }
 
-
         public string FindString(string key)
         {
             using (var x = new SQLite.SQLiteConnection(directory + "/KeyValueStore.sqlite"))
@@ -97,7 +94,6 @@ namespace UtilityDAL.Sqlite
                 var xx = x.Find<KeyValueNumeric>(key); ;
                 return xx?.Value ?? 0;
             }
-
         }
     }
 }

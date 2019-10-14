@@ -1,12 +1,8 @@
 ﻿using GenericParsing;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,32 +10,25 @@ namespace UtilityDAL.View
 {
     public class CsvDataGrid : DataGrid
     {
-
         public string Path
         {
             get { return (string)GetValue(PathProperty); }
             set { SetValue(PathProperty, value); }
         }
 
-
-        public static readonly DependencyProperty PathProperty =            DependencyProperty.Register("Path", typeof(string), typeof(CsvDataGrid), new PropertyMetadata(null, PathChanged));
+        public static readonly DependencyProperty PathProperty = DependencyProperty.Register("Path", typeof(string), typeof(CsvDataGrid), new PropertyMetadata(null, PathChanged));
 
         private static void PathChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-
             (d as CsvDataGrid).PathChangeSubject.OnNext((string)e.NewValue);
         }
 
-
-        ISubject<string> PathChangeSubject = new Subject<string>();
-
+        private ISubject<string> PathChangeSubject = new Subject<string>();
 
         static CsvDataGrid()
         {
             //DefaultStyleKeyProperty.OverrideMetadata(typeof(CsvDataGrid), new FrameworkPropertyMetadata(typeof(CsvDataGrid)));
         }
-
-
 
         //public IEnumerable ItemsSink
         //{
@@ -51,12 +40,8 @@ namespace UtilityDAL.View
         //public static readonly DependencyProperty ItemsSinkProperty =
         //    DependencyProperty.Register("ItemsSink", typeof(IEnumerable), typeof(CsvDataGrid), new PropertyMetadata(null));
 
-
-
         public CsvDataGrid()
         {
-
-
             //Uri resourceLocater = new Uri("/UtilityWpf.View;component/Themes/CsvDataGrid.xaml", System.UriKind.Relative);
             //ResourceDictionary resourceDictionary = (ResourceDictionary)Application.LoadComponent(resourceLocater);
             //Style = resourceDictionary["CsvDataGridStyle"] as Style;
@@ -66,17 +51,14 @@ namespace UtilityDAL.View
             {
                 this.Dispatcher.InvokeAsync(() => this.SetValue(ItemsSourceProperty, CsvHelper.FromCsv(_)), System.Windows.Threading.DispatcherPriority.Background, default(System.Threading.CancellationToken));
             });
-
-
         }
 
-        static class CsvHelper
+        private static class CsvHelper
         {
-
             public static ICollection FromCsv(String name, string path = "")
             {
                 var text = System.IO.Path.Combine(path, name.Replace(".csv", "") + ".csv");
-                // Using an XML Config file. 
+                // Using an XML Config file.
                 using (GenericParserAdapter parser = new GenericParserAdapter(text))
                 {
                     parser.ColumnDelimiter = ',';
@@ -90,7 +72,6 @@ namespace UtilityDAL.View
                     var yt = parser.GetDataTable().DefaultView;
                     return yt;
                 }
-
             }
         }
     }

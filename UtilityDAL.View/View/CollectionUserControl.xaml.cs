@@ -1,14 +1,13 @@
 ﻿using System;
+using System.Collections;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.ComponentModel;
-using System.Reflection;
-using System.Collections.Generic;
-using System.Collections;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 
 namespace UtilityDAL.View
 {
@@ -25,17 +24,13 @@ namespace UtilityDAL.View
         {
             InitializeComponent();
             //var items = ModelFactory.Build();
-        
-           // this.DeveloperList = items.Select(t => t.Developer).Distinct().ToArray();
+
+            // this.DeveloperList = items.Select(t => t.Developer).Distinct().ToArray();
             grdMain.DataContext = this;
 
             //this.lvItems.DataContext = source;
             ItemsControl = new DataGrid { IsSynchronizedWithCurrentItem = true };
-
-            
         }
-
-
 
         public Selector ItemsControl
         {
@@ -47,8 +42,7 @@ namespace UtilityDAL.View
         public static readonly DependencyProperty ItemsControlProperty =
             DependencyProperty.Register("ItemsControl", typeof(Selector), typeof(CollectionUserControl), new PropertyMetadata(null));
 
-
-      //  private static Selector itemsControl = ;
+        //  private static Selector itemsControl = ;
 
         public Type Type
         {
@@ -59,8 +53,6 @@ namespace UtilityDAL.View
         // Using a DependencyProperty as the backing store for Type.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TypeProperty =
             DependencyProperty.Register("Type", typeof(Type), typeof(CollectionUserControl), new PropertyMetadata(null));
-
-
 
         public IEnumerable Items
         {
@@ -75,8 +67,8 @@ namespace UtilityDAL.View
         private static void ItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             (d as CollectionUserControl).type = (e.NewValue as IEnumerable).Cast<object>().First().GetType();
-    
-            (d as CollectionUserControl).source= CollectionViewSource.GetDefaultView((e.NewValue as IEnumerable));
+
+            (d as CollectionUserControl).source = CollectionViewSource.GetDefaultView((e.NewValue as IEnumerable));
             (d as CollectionUserControl).ItemsControl.ItemsSource = (d as CollectionUserControl).source;
             //var items = (d as CollectionUserControl).lvItems.Items;
         }
@@ -93,7 +85,6 @@ namespace UtilityDAL.View
                     {
                         SortDescription currentSortDescription = this.source.SortDescriptions.First(lamda);
                         ListSortDirection sortDescription = currentSortDescription.Direction == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
-
 
                         currentHeader.Column.HeaderTemplate = currentSortDescription.Direction == ListSortDirection.Ascending ?
                             this.Resources["HeaderTemplateArrowDown"] as DataTemplate : this.Resources["HeaderTemplateArrowUp"] as DataTemplate;
@@ -131,7 +122,6 @@ namespace UtilityDAL.View
             PropertyInfo pinfo = type.GetProperty(GroupControl.Property);
             if (pinfo != null)
                 this.source.GroupDescriptions.Add(new PropertyGroupDescription(pinfo.Name));
-
         }
 
         private void btnClearGr_Click(object sender, RoutedEventArgs e)
@@ -148,21 +138,22 @@ namespace UtilityDAL.View
                 case "0":
                     this.source.MoveCurrentToFirst();
                     break;
+
                 case "1":
                     this.source.MoveCurrentToPrevious();
                     break;
+
                 case "2":
                     this.source.MoveCurrentToNext();
                     break;
+
                 case "3":
                     this.source.MoveCurrentToLast();
                     break;
             }
-
         }
 
         private void btnEvaluate_Click(object sender, RoutedEventArgs e) =>
-
 
             MessageBox.Show(this.ItemsControl.SelectedItem.GetType()
                 .GetProperties()
@@ -172,8 +163,7 @@ namespace UtilityDAL.View
 
         private void LvlItems_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            ListView_Click(null, null)                ;
+            ListView_Click(null, null);
         }
     }
-
 }

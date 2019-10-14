@@ -24,14 +24,12 @@
 
 //        static readonly string providerName = "CSV";
 
-
 //        //static CSV(string path = null)
 //        //{
 //        //    if (path == null)
 //        //        dbName = Helper.GetConnectionString(providerName, false);
 //        //    else
 //        //        dbName = path;
-
 
 //        //}
 //        public CSV(string path = null)
@@ -49,7 +47,6 @@
 //            return System.IO.Directory.GetFiles(dbName).Select(_ => System.IO.Path.GetFileNameWithoutExtension(_)).ToList();
 //        }
 
-
 //        public ICollection From(string name)
 //        {
 //            var text = Path.Combine(dbName, name.Replace(".csv", "") + ".csv");
@@ -58,7 +55,7 @@
 //                return new object[] { };
 //            }
 //            else
-//                // Using an XML Config file. 
+//                // Using an XML Config file.
 //                using (GenericParserAdapter parser = new GenericParserAdapter(text))
 //                {
 //                    parser.ColumnDelimiter = ',';
@@ -81,14 +78,10 @@
 //            return true;
 //        }
 
-
-
-
 //        //public IObservable<dynamic> FromDbAsync(string name)
 //        //{
 //        //    return Observable.FromAsync(_ =>
 //        //  new CSV().FromDbAsync(dbName, name + ".csv")).Switch();
-
 
 //        //}
 //        public async Task<IObservable<T>> FromDbAsync<T>(string basepath, string file)
@@ -104,7 +97,6 @@
 //            //{
 //            //    var obs = Observable.Create<T>(async observer =>
 //            //    {
-
 //            //        while (true)
 
 //            //        {
@@ -164,11 +156,9 @@
 
 //    //public class CSV //:IDbService
 //    //{
-
 //    //    static readonly string dbName;
 
 //    //    static readonly string providerName = "CSV";
-
 
 //    //    static CSV()
 //    //    {
@@ -180,7 +170,6 @@
 //    //    {
 //    //        return System.IO.Directory.GetFiles(dbName).Select(_ => System.IO.Path.GetFileNameWithoutExtension(_)).ToList();
 //    //    }
-
 
 //    //    public static List<T> FromDb<T>(string name)
 //    //    {
@@ -199,23 +188,16 @@
 //    //        return true;
 //    //    }
 
-
-
 //    //    public static IObservable<T> FromDbAsync<T>(string file)
 //    //    {
 //    //        return Observable.FromAsync(_ =>
 //    //         FromDbAsync<T>(dbName, file + ".csv")).Switch();
 //    //    }
 
-
-
 //    //    public static System.Collections.ICollection FromDb(string path)
 //    //    {
-
 //    //        return CsvHelper.Parse(path);
 //    //    }
-
-
 
 //    //    public static async Task<IObservable<T>> FromDbAsync<T>(string basepath, string file)
 //    //    {
@@ -230,7 +212,6 @@
 //    //        //{
 //    //        //    var obs = Observable.Create<T>(async observer =>
 //    //        //    {
-
 //    //        //        while (true)
 
 //    //        //        {
@@ -258,10 +239,6 @@
 //    //        //});
 //    //    }
 
-
 //    //}
-
-
-
 
 //}

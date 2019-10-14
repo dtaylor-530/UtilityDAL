@@ -19,17 +19,15 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="200"></RowDefinition>
                             <RowDefinition></RowDefinition>
-
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
-                        <utility:MultiSelectTreeView Name="x" ChildrenPath="SubDirectories" Key="Name"  ItemsSource="{TemplateBinding RootDirectories}" SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        <utility:MultiSelectTreeView Name="x" ChildrenPath="SubDirectories" Key="Name"  ItemsSource="{TemplateBinding RootDirectories}" SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}}" />
 
-
-                        <!--<ListBox  ItemsSource="{TemplateBinding RootDirectories,Mode=OneWay}"                          >
+                        <!--<ListBox  ItemsSource="{TemplateBinding RootDirectories,Mode=OneWay}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBox Text="{Binding}"></TextBox>
@@ -37,47 +35,39 @@
                             </ListBox.ItemTemplate>
                     </ListBox>-->
 
-
-                        <utility:ListBoxEx   Grid.Row="0"  Grid.Column="1"   
+                        <utility:ListBoxEx   Grid.Row="0"  Grid.Column="1"
                                          Key="FilePath"
-                                         SelectedItem="{Binding Output, RelativeSource={RelativeSource TemplatedParent}}"     
-                                         ItemsSource="{Binding Items, RelativeSource={RelativeSource TemplatedParent}}" >
+                                         SelectedItem="{Binding Output, RelativeSource={RelativeSource TemplatedParent}}"
+                                         ItemsSource="{Binding Items, RelativeSource={RelativeSource TemplatedParent}}">
                             <utility:ListBoxEx.ItemTemplate>
                                 <DataTemplate>
-                                    <ContentPresenter HorizontalAlignment="Stretch" Content="{Binding }" ContentTemplate="{StaticResource fileviewmodeltemplate}"             />
+                                    <ContentPresenter HorizontalAlignment="Stretch" Content="{Binding }" ContentTemplate="{StaticResource fileviewmodeltemplate}" />
                                 </DataTemplate>
                             </utility:ListBoxEx.ItemTemplate>
                             <utility:ListBoxEx.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <StackPanel/>
+                                    <StackPanel />
                                 </ItemsPanelTemplate>
                             </utility:ListBoxEx.ItemsPanel>
                         </utility:ListBoxEx>
                         <!--<utility:ListBoxEx.ItemTemplate>
-                            
                         </utility:ListBoxEx.ItemTemplate>-->
 
-
-                        <!--<utility:MultiSelectTreeView   ItemsSource="{Binding RootDirectories}" SelectedItems="{Binding SelectedItems.Value}"/>-->
+                        <!--<utility:MultiSelectTreeView   ItemsSource="{Binding RootDirectories}" SelectedItems="{Binding SelectedItems.Value}" />-->
                         <Expander IsExpanded="True" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                             <StackPanel>
-                                <Button Width="50" Content="Select" 
+                                <Button Width="50" Content="Select"
                                 Command="{Binding SelectCommand,Mode=OneWay}"
-                                IsEnabled="{Binding ElementName=lbx, Path=SelectedItem,Converter={StaticResource ntobconverter}}" 
+                                IsEnabled="{Binding ElementName=lbx, Path=SelectedItem,Converter={StaticResource ntobconverter}}"
                                 CommandParameter="{Binding ElementName=lbx, Path=SelectedItem}" />
-                                <!--<utility:FilteredPaginatedUserControl Name="db" DataContext="{Binding ElementName='lbx', Path='SelectedItem'}" Items="{Binding Items}"/>-->
-                                <!--<utility:FilteredPaginatedUserControl Name="db"  Items="{Binding Items.Value}"/>-->
+                                <!--<utility:FilteredPaginatedUserControl Name="db" DataContext="{Binding ElementName='lbx', Path='SelectedItem'}" Items="{Binding Items}" />-->
+                                <!--<utility:FilteredPaginatedUserControl Name="db"  Items="{Binding Items.Value}" />-->
                                 <DataGrid ItemsSource="{Binding Items, RelativeSource={RelativeSource TemplatedParent}}"></DataGrid>
                             </StackPanel>
                         </Expander>
-
                     </Grid>
-
-
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
-
 </ResourceDictionary>

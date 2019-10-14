@@ -1,15 +1,10 @@
 ﻿using SQLite;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace UtilityDAL.Model
 {
-
-
-    public class DbChildRow : DbRow,UtilityInterface.Generic.Database.IChildRow<DbRow>,IEquatable<DbChildRow>
+    public class DbChildRow : DbRow, UtilityInterface.Generic.Database.IChildRow<DbRow>, IEquatable<DbChildRow>
     {
-
         [Indexed]
         //[SQLiteNetExtensions.Attributes.ForeignKey(typeof(DbRow))]
         public Int64 ParentId
@@ -18,7 +13,6 @@ namespace UtilityDAL.Model
             set
             {
                 Parent = Parent ?? new DbRow(value);
-
             }
         }
 
@@ -31,11 +25,8 @@ namespace UtilityDAL.Model
 
         public bool Equals(DbChildRow y) => this.Parent == y.Parent;
 
-        public override bool Equals(object y) =>  this.Equals(y as DbChildRow);
-     
+        public override bool Equals(object y) => this.Equals(y as DbChildRow);
+
         public override int GetHashCode() => (int)this.Parent.Id;
- 
     }
-
-
 }

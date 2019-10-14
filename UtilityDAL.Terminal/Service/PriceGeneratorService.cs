@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UtilityDAL.Contract;
-
-
-namespace UtilityDAL.DemoApp
+﻿namespace UtilityDAL.DemoApp
 {
     //public class PriceGeneratorService : IService<IEnumerable<Price>>
     //{
-
     //    public IObservable<IEnumerable<Price>> Resource => Resource;
     //    IObservable<IEnumerable<Price>> resource;
 
@@ -25,12 +16,10 @@ namespace UtilityDAL.DemoApp
     //        var r = new Random();
     //        for (int i = 0; i < count; i++)
     //        {
-
     //            var price = r.NextDouble() + i;
     //            yield return new Price { Date = nw.AddDays(i), Bid = r.NextDouble() + price, Offer = price };
 
     //        }
-
 
     //    }
     //    //private static IEnumerable<Pricecsv> Generate(int count)
@@ -43,7 +32,6 @@ namespace UtilityDAL.DemoApp
     //    //        yield return new Pricecsv { Date = nw.AddDays(i), Bid = r.NextDouble() + price, Offer = price };
 
     //    //    }
-
 
     //    //}
     //}

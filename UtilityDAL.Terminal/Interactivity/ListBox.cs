@@ -1,12 +1,5 @@
 ﻿using Microsoft.Xaml.Behaviors;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
@@ -19,11 +12,13 @@ namespace UtilityDAL.DemoApp
             base.OnAttached();
             AssociatedObject.SelectionChanged += AssociatedObject_SelectionChanged;
         }
+
         protected override void OnDetaching()
         {
             base.OnDetaching();
             AssociatedObject.SelectionChanged -= AssociatedObject_SelectionChanged;
         }
+
         private static void AssociatedObject_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var listBox = sender as ListBox;
@@ -38,8 +33,4 @@ namespace UtilityDAL.DemoApp
             listBox.Dispatcher.BeginInvoke(action, DispatcherPriority.ContextIdle);
         }
     }
-
-
-
-
 }

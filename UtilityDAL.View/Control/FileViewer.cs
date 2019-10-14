@@ -17,9 +17,11 @@ namespace UtilityDAL.View
 {
     public class FileViewer : Control
     {
-        static DependencyHelper<string> PathObserver = new DependencyHelper<string>();
+        private static DependencyHelper<string> PathObserver = new DependencyHelper<string>();
+
         // static DependencyHelper<IFileParser> SelectedFileParserObserver = new DependencyHelper<IFileParser>();
         public ISubject<IFileParser> fileParserChanges { get; } = new Subject<IFileParser>();
+
         public ISubject<PropertyGroupDescription> PropertyGroupDescriptionChanges { get; } = new Subject<PropertyGroupDescription>();
 
         public static readonly DependencyProperty PathProperty = DependencyProperty.Register("Path", typeof(string), typeof(FileViewer), new PropertyMetadata(null, PathObserver.Changed));
@@ -47,14 +49,11 @@ namespace UtilityDAL.View
 
         //public static readonly DependencyProperty DataProperty = DependencyProperty.Register("Data", typeof(IEnumerable), typeof(FileViewer));
 
-
-
         public IValueConverter DataConverter
         {
             get { return (IValueConverter)GetValue(DataConverterProperty); }
             set { SetValue(DataConverterProperty, value); }
         }
-
 
         public static readonly DependencyProperty DataConverterProperty = DependencyProperty.Register("DataConverter", typeof(IValueConverter), typeof(FileViewer), new PropertyMetadata(null, DataCoverterChanged));
 
@@ -71,11 +70,9 @@ namespace UtilityDAL.View
 
         public static readonly DependencyProperty OutputViewProperty = DependencyProperty.Register("OutputView", typeof(Control), typeof(FileViewer), new PropertyMetadata(null));
 
-
         public override void OnApplyTemplate()
         {
             this.DockPanelChanges.OnNext(this.GetTemplateChild("DockPanel") as DockPanel);
-
         }
 
         public PropertyGroupDescription PropertyGroupDescription
@@ -83,7 +80,6 @@ namespace UtilityDAL.View
             get { return (PropertyGroupDescription)GetValue(PropertyGroupDescriptionProperty); }
             set { SetValue(PropertyGroupDescriptionProperty, value); }
         }
-
 
         public static readonly DependencyProperty PropertyGroupDescriptionProperty = DependencyProperty.Register("PropertyGroupDescription", typeof(PropertyGroupDescription), typeof(FileViewer), new PropertyMetadata(null, PropertyGroupDescriptionChanged));
 
@@ -110,11 +106,11 @@ namespace UtilityDAL.View
             set { SetValue(OutputProperty, value); }
         }
 
-
         private static void OutputChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             (d as FileViewer).OutputChanges.OnNext(e.NewValue);
         }
+
         protected ISubject<object> OutputChanges = new Subject<object>();
         private ISubject<DockPanel> DockPanelChanges = new Subject<DockPanel>();
         private ISubject<IValueConverter> DataConverterChanges = new Subject<IValueConverter>();
@@ -123,8 +119,6 @@ namespace UtilityDAL.View
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(FileViewer), new FrameworkPropertyMetadata(typeof(FileViewer)));
         }
-
-
 
         public FileViewer()
         {
@@ -145,7 +139,6 @@ namespace UtilityDAL.View
            .ObserveOnDispatcher()
           .Subscribe(_ => this.Dispatcher.InvokeAsync(() => Items = _, System.Windows.Threading.DispatcherPriority.Render));
 
-
             OutputChanges.Where(_ => _ != null).WithLatestFrom(fileParserChanges, (a, b) =>
                 (b as IFileParser).Parse((a as PathViewModel).FullName))
             .CombineLatest(DataConverterChanges.StartWith(default(IValueConverter)), (a, b) => (a, b))
@@ -163,8 +156,7 @@ namespace UtilityDAL.View
              (OutputView as ItemsControl).ItemsSource = _.b.Convert(_.a, null, null, null) as IEnumerable,
              System.Windows.Threading.DispatcherPriority.Normal));
 
-
-            PropertyGroupDescriptionChanges.WithLatestFrom(DockPanelChanges, (pgd, DockPanel) => (pgd, DockPanel)).Subscribe(_ =>
+            PropertyGroupDescriptionChanges.CombineLatest(DockPanelChanges.Take(1), (pgd, DockPanel) => (pgd, DockPanel)).Subscribe(_ =>
               {
                   var collectionViewSource = _.DockPanel?.FindResource("GroupedItems") as CollectionViewSource;
                   if (collectionViewSource != null)
@@ -184,7 +176,4 @@ namespace UtilityDAL.View
             (Changes as ISubject<T>).OnNext((T)e.NewValue);
         }
     }
-
-
-
 }

@@ -1,28 +1,19 @@
-﻿using CsvHelper;
-using GenericParsing;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reactive.Linq;
-using System.Text;
 using UtilityDAL.Common;
 
 namespace UtilityDAL
 {
     public class HtmlDocument<T> //: IDbService<T>
     {
+        private readonly string dbName;
 
-        readonly string dbName;
-
-        static readonly string providerName = "HtmlDocument";
+        private static readonly string providerName = "HtmlDocument";
         private Func<HtmlDocument, T> _parse;
 
-
         //}
-        public HtmlDocument(Func<HtmlDocument, T> parse,string path = null)
+        public HtmlDocument(Func<HtmlDocument, T> parse, string path = null)
         {
             _parse = parse;
 
@@ -42,7 +33,6 @@ namespace UtilityDAL
             throw new Exception();
         }
 
-
         public T FromDb()
         {
             return HtmlDocumentEx.Deserialise(dbName, _parse);
@@ -50,11 +40,8 @@ namespace UtilityDAL
 
         public bool ToDb(HtmlDocument blob, string name)
         {
-
-            blob.Save(System.IO.Path.Combine(dbName,name+ ".html"));
+            blob.Save(System.IO.Path.Combine(dbName, name + ".html"));
             return true;
         }
-    
     }
-    
 }

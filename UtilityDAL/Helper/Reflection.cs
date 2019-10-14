@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace UtilityDAL
 {
@@ -9,7 +6,6 @@ namespace UtilityDAL
     {
         public static Type[] ImplementsInterface(Type myType, Type intface)
         {
-
             // this conditional is necessary if myType can be an interface,
             // because an interface doesn't implement itself: for example,
             // typeof (IList<int>).GetInterfaces () does not contain IList<int>!
@@ -28,18 +24,12 @@ namespace UtilityDAL
         {
             System.Reflection.Assembly asm = typeof(T).Assembly;
             return asm.GetTypes();
-
-
         }
 
         public static Type[] GetTypesByAssembly(Type t)
         {
             System.Reflection.Assembly asm = t.Assembly;
             return asm.GetTypes();
-
-
         }
     }
-
-
 }

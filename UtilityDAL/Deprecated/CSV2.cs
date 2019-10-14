@@ -1,5 +1,4 @@
-﻿
-//using System;
+﻿//using System;
 //using System.Collections.Generic;
 //using System.IO;
 //using System.Linq;
@@ -12,16 +11,11 @@
 //{
 //    public class CSV2 : IFileDbService<RecordWrap>
 //    {
-
 //        //static TextReader text;
-
-
 
 //        static readonly string dbName;
 
 //        static readonly string providerName = "CSV";
-
-
 
 //        static CSV2()
 //        {
@@ -29,16 +23,12 @@
 
 //        }
 
-
 //        public IList<RecordWrap> FromDb(string name)
 //        {
-
 //            var text = File.OpenText(Path.Combine(dbName, name+".csv"));
 //            return CoreTechs.Common.Text.CsvParsingExtensions.ReadCsvWithHeader(text).ToList().Select(_=>new RecordWrap(_)).ToList();
-    
 
 //        }
-
 
 //        public bool ToDb(IList<RecordWrap> lst, string name)
 //        {
@@ -49,16 +39,12 @@
 //            return true;
 //        }
 
-
 //        public List<string> SelectIds()
 //        {
 //            return System.IO.Directory.GetFiles(dbName).Select(_ => System.IO.Path.GetFileNameWithoutExtension(_)).ToList();
 //        }
 
-      
 //    }
-
-
 
 //    public class  RecordWrap : CoreTechs.Common.Text.ICsvWritable
 //    {
@@ -68,8 +54,6 @@
 //        {
 //            Record = record;
 //        }
-
-
 
 //        public IEnumerable<object> GetCsvHeadings()
 //        {
@@ -82,8 +66,4 @@
 //        }
 //    }
 
-
-    
 //}
-
-

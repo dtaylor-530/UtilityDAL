@@ -2,26 +2,21 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:UtilityDAL">
 
-
-    <DataTemplate x:Key="BsonTemplate" >
-        <UniformGrid >
+    <DataTemplate x:Key="BsonTemplate">
+        <UniformGrid>
             <Ellipse Height="10" Width="10" Fill="Beige" ></Ellipse>
 
-        <ListBox>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <UniformGrid Rows="1">
-                        
-      
-                    <TextBlock Text="{Binding Key}"></TextBlock>
-                    <TextBlock Text="{Binding Value}"></TextBlock>
+            <ListBox>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <UniformGrid Rows="1">
 
-                    </UniformGrid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-
-        </ListBox>
+                            <TextBlock Text="{Binding Key}"></TextBlock>
+                            <TextBlock Text="{Binding Value}"></TextBlock>
+                        </UniformGrid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </UniformGrid>
     </DataTemplate>
-    
 </ResourceDictionary>

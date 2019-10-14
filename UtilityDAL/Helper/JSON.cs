@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Reactive.Linq;
-using System.IO;
-
-namespace UtilityDAL.Utility
+﻿namespace UtilityDAL.Utility
 {
     public static class JSON
     {
-
         //public static bool TryDeserialiseJsonFile<T>(string a, out T deserialised)
         //{
         //    try
@@ -26,9 +19,7 @@ namespace UtilityDAL.Utility
 
         //}
     }
-
 }
-
 
 //using Newtonsoft.Json;
 //using Newtonsoft.Json.Linq;
@@ -103,7 +94,6 @@ namespace UtilityDAL.Utility
 //            }
 //            catch (Exception ex)
 //            {
-
 //                Console.WriteLine("Update Error : " + ex.Message.ToString());
 //            }
 //        }
@@ -136,7 +126,6 @@ namespace UtilityDAL.Utility
 //            }
 //            catch (Exception)
 //            {
-
 //                throw;
 //            }
 //        }
@@ -174,7 +163,6 @@ namespace UtilityDAL.Utility
 //            }
 //            catch (Exception)
 //            {
-
 //                throw;
 //            }
 //        }

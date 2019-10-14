@@ -10,7 +10,6 @@
 //using UtilityHelper;
 //using UtilityInterface.Generic.Database;
 
-
 //namespace UtilityDAL
 //{
 //    public class BiggyRepo<T,R> : UtilityModel.Disposable, IDbService<T, R> where T : new()
@@ -33,9 +32,8 @@
 //        {
 //            _getkey = getkey;
 //            _store = new Biggy.Data.Json.JsonStore<T>();
-      
-//            _list = new Biggy.Core.BiggyList<T>(_store);
 
+//            _list = new Biggy.Core.BiggyList<T>(_store);
 
 //        }
 //        public BiggyRepo()
@@ -47,7 +45,7 @@
 //        }
 //        //public object GetCollection(out IDisposable disposable)
 //        //{
-//        //    var 
+//        //    var
 //        //    disposable = new MyDisposable();
 //        //    return store;
 //        //}
@@ -56,7 +54,6 @@
 //        {
 //            return _list;/*new Biggy.Core.BiggyList<T>(_store).ToList()*/;
 //        }
-
 
 //        public T Find(T item)
 //        {
@@ -162,21 +159,15 @@
 
 //    public class BiggyRepo<T> : BiggyRepo<T, IConvertible> where T : new()
 //    {
-
-
 //        public BiggyRepo(string key) : base(key)
 //        {
-
-
 //        }
 //        public BiggyRepo(Func<T, IConvertible> getkey):base(getkey)
 //        {
-
 //        }
 
 //        public BiggyRepo() : base()
 //        {
-
 //        }
 //    }
 //}

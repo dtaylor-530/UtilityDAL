@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace UtilityDAL.Entity
+﻿namespace UtilityDAL.Entity
 {
     //public class KeyValueDate
     //{
     //    public KeyValueDate()
     //    {
-
     //    }
     //    [SQLite.PrimaryKey]
     //    public string Key { get; set; }

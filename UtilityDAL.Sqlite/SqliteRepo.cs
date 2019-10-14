@@ -1,37 +1,23 @@
-﻿
-using SQLite;
+﻿using SQLite;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UtilityDAL;
 using UtilityDAL.Model;
 using UtilityInterface.Generic.Database;
 using UtilityInterface.NonGeneric.Database;
 
 namespace UtilityDAL.Sqlite
 {
-
-
-
     public class NestedStore
     {
-        Dictionary<Type, object> container = new Dictionary<Type, object>();
+        private Dictionary<Type, object> container = new Dictionary<Type, object>();
         private SQLiteConnection _conn;
 
         public NestedStore(SQLiteConnection _conn)
         {
-
             this._conn = _conn;
         }
-
-
-
-
-
 
         public bool TransferToDB<T, R>(IEnumerable<T> items, bool check, params string[] children) where T : IEquatable<T>, IId, new() where R : IChildRow
         {
@@ -72,7 +58,6 @@ namespace UtilityDAL.Sqlite
                     accessor.set.Invoke(xtt, new object[] { g });
                 }
 
-
                 insertItems.Add(xtt?.Equals(default(T)) ?? true ? x.Key : xtt);
             }
 
@@ -82,9 +67,7 @@ namespace UtilityDAL.Sqlite
             Debug.Assert(ty.All(_ => _.Id != 0));
 
             return xx;
-
         }
-
 
         public bool TransferToDB2<T, R>(IEnumerable<T> items, bool check, params string[] children) where T : DbRow, IEquatable<T>, new() where R : IChildRow<DbRow>
         {
@@ -141,7 +124,6 @@ namespace UtilityDAL.Sqlite
                     if (item.Id != tdy.Id)
                         item.Id = tdy.Id;
                 }
-
             }
 
             var xx = UtilityDAL.SqliteEx.ToDB(inn, ref ty, _conn, check);
@@ -149,9 +131,7 @@ namespace UtilityDAL.Sqlite
             Debug.Assert(ty.All(_ => _.Id != 0));
 
             return xx;
-
         }
-
 
         public bool TransferToDB2<T>(IEnumerable<T> items, bool check) where T : DbRow, IEquatable<T>, new()
         {
@@ -186,9 +166,7 @@ namespace UtilityDAL.Sqlite
             Debug.Assert(ty.All(_ => _.Id != 0));
 
             return xx;
-
         }
-
 
         private TableList<T> TryGetAdd<T>() where T : IEquatable<T>, new()
         {
@@ -202,9 +180,7 @@ namespace UtilityDAL.Sqlite
             _conn.CreateTable<T>();
             var xx = TryGetAdd<T>().GetList();
             return UtilityDAL.SqliteEx.ToDB(items.GroupBy(_ => _).Select(_ => _.Key).ToList(), ref xx, _conn, check);
-
         }
-
 
         //public bool TransferToDB2<T, R>(IEnumerable<T> items, Func<T, IEnumerable<R>> children, Action<IEnumerable<R>, T> setchildren) where T : DbRow, IEquatable<T>, new() where R : UtilityInterface.Database.IChildRow<DbRow>
         //{
@@ -230,7 +206,6 @@ namespace UtilityDAL.Sqlite
         //{
         //    _conn.CreateTable<T>();
         //    var service = TryGetAdd<T>();
-
 
         //    var newItems = items.GroupBy(_ => _).ToList();
         //    var xx = UtilityDAL.SqliteEx.ToDB(newItems.Select(_=>_.Key).ToList(), service.GetList(), _conn);

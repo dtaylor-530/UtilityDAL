@@ -1,24 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using UtilityInterface;
 using System.Linq;
-using UtilityDAL.Contract;
 using UtilityInterface.Generic;
 using UtilityInterface.Generic.Database;
 
 namespace UtilityDAL
 {
-
-
     public class DocumentSaveLoadService<T> : IPermanent<IList<T>>
     {
-
-        protected IDbService<T,IConvertible> Service; /*{ get; }*/
+        protected IDbService<T, IConvertible> Service; /*{ get; }*/
 
         public bool Save(IList<T> documents)
         {
-
             Service.InsertBulk(documents as IList<T>);
 
             return true;
@@ -41,20 +34,15 @@ namespace UtilityDAL
             {
                 disposable?.Dispose();
             }
-
         }
-
     }
 
-
-    public class DocumentSaveLoadService<T,R> : IPermanent<IList<T>>
+    public class DocumentSaveLoadService<T, R> : IPermanent<IList<T>>
     {
-
-        protected IDbService<T,R> Service; /*{ get; }*/
+        protected IDbService<T, R> Service; /*{ get; }*/
 
         public bool Save(IList<T> documents)
         {
-            
             Service.InsertBulk(documents as IList<T>);
 
             return true;
@@ -77,17 +65,11 @@ namespace UtilityDAL
             {
                 disposable?.Dispose();
             }
-
         }
-
-
     }
-
-
 
     //public sealed class LiteDbSaveLoadService<T> : IPermanent<IList<T>>
     // {
-
     //     static LiteDbSaveLoadService()
     //     {
     //     }

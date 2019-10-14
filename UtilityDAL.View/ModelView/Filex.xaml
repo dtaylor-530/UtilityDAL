@@ -2,7 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:dal="clr-namespace:UtilityDAL.Model;assembly=UtilityDAL.Model">
 
-
     <DataTemplate DataType="{x:Type dal:Filex}">
         <Grid>
             <Grid.ColumnDefinitions>

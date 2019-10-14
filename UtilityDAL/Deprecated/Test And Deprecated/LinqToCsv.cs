@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace UtilityDAL
+﻿namespace UtilityDAL
 {
-    class LinqToCsv
+    internal class LinqToCsv
     {
     }
 }
+
 //using System;
 //using System.Collections.Generic;
 //using System.Linq;
@@ -19,10 +16,8 @@ namespace UtilityDAL
 //    using LINQtoCSV;
 //    using System.IO;
 
-
 //    public sealed class MatchesStore
 //    {
-
 //        public static List<FootballDataMatch> defaultMatches { get; private set; }
 //        private static List<FootballDataMatch> matches;
 
@@ -36,7 +31,6 @@ namespace UtilityDAL
 
 //        public static List<FootballDataMatch> Matches
 //        {
-
 //            get { return matches ?? defaultMatches; }
 
 //            set { matches = value; }
@@ -52,18 +46,14 @@ namespace UtilityDAL
 
 //            if (!File.Exists(filePath))
 //            {
-
 //                throw new Exception("file does not exist");
 //            }
-
-
 
 //            if (new FileInfo(filePath).IsFileLocked())
 //            {
 //                throw new Exception("file being used by some other process");
 
 //            }
-
 
 //            // Check Resource can be accessed
 
@@ -76,7 +66,6 @@ namespace UtilityDAL
 //            {
 //                throw new Exception("Trouble Opening CSV - it could be open in another program or moved from its original folder");
 //            }
-
 
 //            // use external DLL LINQTOCSV to read file into list;
 //            CsvFileDescription inputFileDescription = new CsvFileDescription
@@ -94,14 +83,10 @@ namespace UtilityDAL
 
 //            //if (season != null) matches.ForEach(x => x.Season = (int)season);
 
-
 //            return matches;
 
 //        }
 
-
-
 //    }
-
 
 //}

@@ -1,37 +1,49 @@
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Xunit;
 using UtilityDAL.Sqlite;
+using Xunit;
 
 namespace UtilityDAL.Test
 {
     public class UnitTest1
     {
+        public UnitTest1()
+        {
+            System.IO.Directory.CreateDirectory("../../../Data");
+        }
+
         [Fact]
         public void Test1()
         {
-
-            using (var conn = new SQLite.SQLiteConnection("Test.sqlite"))
+            var directory = System.IO.Directory.CreateDirectory("../../../Data");
+            using (var conn = new SQLiteConnection(System.IO.Path.Combine(directory.FullName, "Test2.sqlite")))
             {
                 conn.CreateTable<xx>();
                 conn.DeleteAll<xx>();
                 conn.InsertAll(Factory.GetTicks(100));
                 var result = conn.WhereEqual<xx>(DayOfWeek.Monday);
                 foreach (var r in result)
-                    Assert.True(new DateTime(r.Ticks).DayOfWeek == DayOfWeek.Monday);
+                    Assert.True(r.Ticks.DayOfWeek == DayOfWeek.Monday);
             }
         }
-
 
         [Fact]
         public void Test2()
         {
-
-            using (var conn = new SQLite.SQLiteConnection("Test.sqlite"))
+            //var directory = System.IO.Directory.CreateDirectory("../../../Data");
+            using (var conn = new SQLiteConnection("Test2.sqlite"))
             {
-                conn.CreateTable<xx>();
-                conn.DeleteAll<xx>();
+                 conn.CreateTable<xx>();
+                var t = conn.Table<xx>();
+                try
+                {
+                    conn.DeleteAll<xx>();
+                }
+                catch (Exception ex)
+                {
+                }
                 conn.InsertAll(Factory.GetTicks(100));
                 var result = conn.WhereBetween<xx>(default(DateTime).AddDays(1 * 100), default(DateTime).AddDays(4 * 100));
 
@@ -42,8 +54,8 @@ namespace UtilityDAL.Test
         [Fact]
         public void Test3()
         {
-
-            using (var conn = new SQLite.SQLiteConnection("Test.sqlite"))
+            var directory = System.IO.Directory.CreateDirectory("../../../Data");
+            using (var conn = new SQLiteConnection(System.IO.Path.Combine(directory.FullName, "Test2.sqlite")))
             {
                 conn.CreateTable<xx>();
                 conn.DeleteAll<xx>();
@@ -54,19 +66,16 @@ namespace UtilityDAL.Test
             }
         }
 
-
-
-
-        class xx
+        private class xx
         {
-            public long Ticks { get; set; }
+            public int Id { get; set; }
+
+            public DateTime Ticks { get; set; }
         }
 
-
-        class Factory
+        private class Factory
         {
-            public static IEnumerable<xx> GetTicks(int number) => Enumerable.Range(0, number).Select((_, i) => new xx { Ticks = default(DateTime).AddDays(i * 100).Ticks });
-
+            public static IEnumerable<xx> GetTicks(int number) => Enumerable.Range(0, number).Select((_, i) => new xx { Ticks = default(DateTime).AddDays(i * 100) });
         }
     }
 }

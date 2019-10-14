@@ -1,25 +1,12 @@
-﻿
+﻿using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UtilityWpf.ViewModel;
 using UtilityDAL.Model;
-using DynamicData.Binding;
-using DynamicData;
-using System.Collections.ObjectModel;
-using Reactive.Bindings;
-using UtilityInterface;
 using UtilityInterface.Generic;
 
 namespace UtilityDAL.ViewModel
 {
-
-
-
-
     //public class TeaProviderViewModel<T> : ProviderViewModel where T : struct
     //{
     //    private const string folder = "";
@@ -36,7 +23,6 @@ namespace UtilityDAL.ViewModel
 
     //}
 
-
     //public class CsvProviderViewModel<T> : ProviderViewModel where T : struct
     //{
     //    private const string folder = "";
@@ -47,7 +33,6 @@ namespace UtilityDAL.ViewModel
 
     //}
 
-
     //public class CsvProviderDescendingSizeViewModel<T>: ProviderViewModel<int> where T : struct
     //{
     //    private const string folder = "";
@@ -57,16 +42,13 @@ namespace UtilityDAL.ViewModel
 
     //}
 
-
-
-
     public class ProviderViewModel
     {
         public ICollection<DataFile> Items { get; protected set; }
 
-
         //public  ServiceViewModel<DataFile> ServiceVM { get; }
         public ReactiveProperty<DataFile> Output { get; } = new ReactiveProperty<DataFile>();
+
         public ICollection<DataFile> SelectedItems { get; }
         public ReactiveCommand<DataFile> SelectCommand { get; } = new ReactiveCommand<DataFile>();
 
@@ -74,24 +56,18 @@ namespace UtilityDAL.ViewModel
         {
             //ServiceVM = new ServiceViewModel<DataFile>(service);
             Items = service;
-            Output=Output.Merge(SelectCommand).ToReactiveProperty();
+            Output = Output.Merge(SelectCommand).ToReactiveProperty();
             SelectedItems = Output.ToReactiveCollection();
         }
-
-
     }
 
-
-    public class ProviderViewModel<T> :ProviderViewModel where T:IComparable 
+    public class ProviderViewModel<T> : ProviderViewModel where T : IComparable
     {
         public ProviderViewModel(IService<DataFile> service, Func<DataFile, T> sort, bool byDescending = true)
-            :base(/*new ServiceViewModel<DataFile, T>(service, sort, byDescending).Items*/null)
+            : base(/*new ServiceViewModel<DataFile, T>(service, sort, byDescending).Items*/null)
         {
-
         }
-
     }
-
 
     //public class CsvProviderViewModel<T> : INPCBase, IOutputViewModel<DataFile>
     //{
@@ -101,14 +77,12 @@ namespace UtilityDAL.ViewModel
 
     //    public CsvProviderViewModel(IDispatcherService ds)
     //    {
-
     //        var x = new CsvDataService<T>(null);
 
     //        OutputVM = new FileSelectionViewModel(x, ds);
     //        Output = OutputVM.Output;
 
     //    }
-
 
     //    public CsvProviderViewModel(string s, IDispatcherService ds)
     //    {
@@ -118,7 +92,6 @@ namespace UtilityDAL.ViewModel
 
     //        var xx = InputVM.Output.Subscribe(_ =>
     //        {
-
     //            var x = new CsvDataService<T>(s);
 
     //            OutputVM = new FileSelectionViewModel(x, ds);
@@ -130,9 +103,7 @@ namespace UtilityDAL.ViewModel
     //            NotifyChanged(nameof(OutputVM));
     //        });
 
-
     //        Output = new System.Reactive.Subjects.Subject<DataFile>();
-
 
     //        //this.WhenPropertyChanged(_=>_.OutputVM).Subscribe(_=>;
     //    }
@@ -141,11 +112,9 @@ namespace UtilityDAL.ViewModel
     //    //{
     //    //    if (e.PropertyName == nameof(OutputVM))
     //    //    {
-
     //    //    }
     //    //}
     //}
-
 
     //public class CsvProviderViewModel : INPCBase, IOutputViewModel<DataFile>
     //{
@@ -155,11 +124,9 @@ namespace UtilityDAL.ViewModel
 
     //    public CsvProviderViewModel(IDispatcherService ds)
     //    {
-
     //        var x = new CsvDataService(null);
 
     //        OutputVM = new FileSelectionViewModel(x, ds);
-
 
     //    }
 
@@ -187,14 +154,11 @@ namespace UtilityDAL.ViewModel
     //    //{
     //    //    if (e.PropertyName == nameof(OutputVM))
     //    //    {
-
     //    //    }
     //    //}
 
-
     //    public CsvProviderViewModel(string s, TimeSpan t, IDispatcherService ds)
     //    {
-
     //        var x = new CsvDataService(t, s);
 
     //        OutputVM = new FileSelectionViewModel(x, ds);
@@ -203,6 +167,4 @@ namespace UtilityDAL.ViewModel
     //    }
 
     //}
-
-
 }

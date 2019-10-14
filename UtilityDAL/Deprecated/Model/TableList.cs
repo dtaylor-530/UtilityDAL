@@ -4,16 +4,14 @@
 //using System.Text;
 
 //namespace UtilityDAL.Model
-//{ 
-
+//{
 //    public class TableList<T> where T : IEquatable<T>, new()
 //    {
 //        List<T> list;
-     
 
 //        public TableList(SQLite.SQLiteConnection _conn)
 //        {
-//            list= _conn.Table<T>().ToList(); 
+//            list= _conn.Table<T>().ToList();
 
 //        }
 

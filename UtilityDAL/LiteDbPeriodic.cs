@@ -2,20 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using UtilityDAL.Contract;
-using UtilityInterface;
 using UtilityInterface.NonGeneric;
 
 namespace UtilityDAL.Service
 {
-
-
     public static class LitedbPeriodic
     {
-
-
         public static IList<T> ByUpToDate<T>(Func<DateTime, DateTime> periodmatch, string dbName = @"MyData.db") where T : IPeriodic
         {
             using (var db = new LiteDatabase(dbName))
@@ -27,13 +21,11 @@ namespace UtilityDAL.Service
                 DateTime dtn = periodmatch(DateTime.Now);
 
                 return customers.Find(_ => periodmatch(_.DateTimes.Last()) == dtn).Cast<T>().ToList();
-
             }
         }
 
         public static Task Update<T>(IList<T> nested, string dbName = @"MyData.db") where T : IBSONRow, IPeriodic => Task.Run(() =>
         {
-
             using (var db = new LiteDatabase(dbName))
             {
                 foreach (var ix in nested)
@@ -41,10 +33,8 @@ namespace UtilityDAL.Service
             }
         });
 
-
         public static Task Update<T>(this LiteDatabase db, T nested) where T : IBSONRow, IPeriodic => Task.Run(() =>
         {
-
             var collection = db.GetCollection<T>();
 
             if (collection.Count() == 0)
@@ -69,11 +59,6 @@ namespace UtilityDAL.Service
                 c.DateTimes = dates;
                 collection.Update(c.Id, c);
             }
-
-
         });
-
-
-
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xunit;
 
 namespace UtilityDAL.Test
@@ -22,7 +21,6 @@ namespace UtilityDAL.Test
             public string Location { get; set; }
         }
 
-
         [Fact]
         public void Test1()
         {
@@ -42,7 +40,6 @@ namespace UtilityDAL.Test
 
             Assert.Equal(25, rdata.Length);
         }
-
 
         [Fact]
         public void Test2()
@@ -75,16 +72,14 @@ namespace UtilityDAL.Test
 
             xx.Insert(data);
             List<User> users = new List<User>();
-            var rdata =(UtilityDAL.CSV.CsvHelper.ParseAsObservable<User>("../../../Data/database.csv")).Subscribe(a =>
-            {
-                users.Add(a);
-            }, () => { Assert.Equal(users.Count, data.Count); return; });
+            var rdata = (UtilityDAL.CSV.CsvHelper.ParseAsObservable<User>("../../../Data/database.csv")).Subscribe(a =>
+             {
+                 users.Add(a);
+             }, () => { Assert.Equal(users.Count, data.Count); return; });
 
-            while(true)
+            while (true)
             { }
         }
-
-
 
         private static string GetName(int i = 0)
         {

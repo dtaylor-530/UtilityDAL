@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UtilityHelper;
-using UtilityInterface;
 using UtilityInterface.Generic;
 
 namespace UtilityDAL
 {
-
     public class TextSaveLoadService : IPermanent<string>
     {
         private readonly string _directory;
@@ -21,7 +17,6 @@ namespace UtilityDAL
         public string Load()
         {
             return System.IO.File.ReadAllText(_directory);
-
         }
 
         public bool Save(string text)
@@ -45,7 +40,7 @@ namespace UtilityDAL
             return System.IO.Directory.GetFiles(_directory).ToDictionary(_ => System.IO.Path.GetFileNameWithoutExtension(_), _ => System.IO.File.ReadAllText(_));
         }
 
-        public bool Save(IDictionary<string, string>  @object)
+        public bool Save(IDictionary<string, string> @object)
         {
             IDictionary<string, string> xx = @object as IDictionary<string, string>;
             foreach (var x in xx)
@@ -53,8 +48,4 @@ namespace UtilityDAL
             return true;
         }
     }
-
-
-
-
 }

@@ -11,13 +11,10 @@
 
 //namespace FDataGPNet.DAL
 //{
-
 //    public static class Access
 //    {
-
 //        public static System.Data.OleDb.OleDbConnection OpenConnection(string directory = null)
 //        {
-
 //            System.Data.OleDb.OleDbConnection conn = new System.Data.OleDb.OleDbConnection();
 
 //            conn.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" +
@@ -33,7 +30,6 @@
 //            return conn;
 
 //        }
-
 
 //        public static IEnumerable<string> GetLeagueCodes(OleDbConnection conn)
 //        {
@@ -71,14 +67,10 @@
 
 //            return items;
 
-
 //        }
-
-
 
 //        public static int GetId(string competitionCode, OleDbConnection conn)
 //        {
-
 //            var cmd = new OleDbCommand();
 //            cmd.Connection = conn;//?? OpenConnection();
 //            cmd.CommandText = $"SELECT betfairId FROM Competitions Where competitionCode=@competitionCode";
@@ -90,12 +82,8 @@
 //            return (int)id;
 //        }
 
-
-
-
 //        ////public static int GetCompetitionByField(string field, object value, OleDbConnection conn=null)
 //        ////{
-
 //        ////    var cmd = new OleDbCommand();
 //        ////    cmd.Connection = conn?? OpenConnection();
 //        ////    cmd.CommandText = $"SELECT betfairId FROM Competitions Where competitionCode=@competitionCode";
@@ -107,11 +95,8 @@
 //        ////    return (int)id;
 //        ////}
 
-
-
 //        public static void Upsert(this List<FootballDataMatch> matches, int div, int? season = null, System.Data.OleDb.OleDbConnection conn = null)
 //        {
-
 //            string sql = "SELECT homeTeam From Events WHERE eventDate = @eventDate AND homeTeam = @homeTeam"; //System.IO.File.ReadAllText("SelectWhereQuery.txt");
 //            string sqlI = System.IO.File.ReadAllText("InsertQuery.txt");
 //            sqlI = sqlI.RemoveLineEndings().ReduceWhitespace();
@@ -129,14 +114,10 @@
 //            DateTime minDate = DateTime.MinValue;
 //            if (season == null)
 //            {
-
 //                if (matches.Select(x => x.Div).Distinct().Count() < 2)
 //                    minDate = matches.Min(x => x.Date);
 
 //            }
-
-
-
 
 //            //cmd1.Parameters.Add(new OleDbParameter("@competitionId", OleDbType.Integer));
 //            foreach (var match in matches)
@@ -154,7 +135,6 @@
 
 //                System.Diagnostics.Debug.Assert(DateTimeHelpers.IsYear(match.Season.ToString()));
 
-
 //                string sqlB = $"SELECT betfairName from Teams Where FDName=@FDName";
 //                OleDbCommand cmd3 = new OleDbCommand(sqlB, conn);
 //                cmd3.Parameters.AddWithValue("@FDName", match.HomeTeam);
@@ -169,8 +149,6 @@
 
 //                System.Diagnostics.Debug.Assert(cx2 != null);
 
-
-
 //                OleDbCommand cmd1 = new OleDbCommand(sql, conn);
 //                //    cmd1.Parameters.AddWithValue("@competitionId",div);
 //                //    cmd1.Parameters.AddWithValue("@season", season);
@@ -183,8 +161,6 @@
 //                var cx3 = cmd1.ExecuteScalar();
 
 //                int clash = 0;
-
-
 
 //                if (cx3 == null)
 //                {
@@ -237,8 +213,6 @@
 //                    cmd2.Parameters.AddWithValue("@HReds", match.HR);
 //                    cmd2.Parameters.AddWithValue("@AReds", match.AR);
 
-
-
 //                    if (cmd2.ExecuteNonQuery() != 1)
 //                        throw new InvalidProgramException();
 //                }
@@ -247,21 +221,12 @@
 
 //            }
 
-
 //        }
-
-
-
-
-
 
 //    }
 
-
 //    class HelperClass
 //    {
-
-
 //        public static int GetYear(DateTime date, DateTime minDate)
 //        {
 //            //DateTime minDate = new DateTime(1970, 7, 1);
@@ -275,7 +240,6 @@
 //            return year;
 //            //    var x = date.AddDays(diffDays);
 
-
 //        }
 //    }
 
@@ -286,7 +250,6 @@
 
 ////    using (SqlTransaction transaction = conn.BeginTransaction())
 ////    {
-
 ////        // original - this caused an error to be thrown.
 ////        //SqlCommand cmd = new SqlCommand("dbo.UpsertRatings", conn, transaction);
 ////        //cmd.CommandType = CommandType.StoredProcedure;
@@ -294,7 +257,6 @@
 ////        //string sql = System.IO.File.ReadAllText(@"C:\Users\rolyat4\Documents\Visual Studio 2015\Projects\Wpf Football\MasterApp\FootballDataApi\SportingLife\bin\Debug\sqlUpsertQuery.txt");
 ////        string sql = System.IO.File.ReadAllText("sqlUpsertQuery.txt");
 ////        SqlCommand cmd = new SqlCommand(sql, conn, transaction);
-
 
 ////        cmd.Parameters.Add(new SqlParameter("@competitionId", SqlDbType.Int));
 ////        cmd.Parameters.Add(new SqlParameter("@date", SqlDbType.DateTime));
@@ -306,7 +268,6 @@
 
 ////        try
 ////        {
-
 ////            foreach (Match match in matches)
 ////            {
 ////                cmd.Parameters[0].Value = match.CompetitionId;
@@ -323,7 +284,6 @@
 ////                    throw new InvalidProgramException();
 ////                }
 
-
 ////            }
 
 ////            transaction.Commit();
@@ -335,18 +295,8 @@
 ////            throw;
 ////        }
 
-
-
 ////        conn.Close();
 ////    }
 
-
-
-
 ////public string[] FindPossibleMatches(string team, string competitionId,System.Data.OleDb.OleDbConnection conn = null)
 ////{
-
-
-
-
-

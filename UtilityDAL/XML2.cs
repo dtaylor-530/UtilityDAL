@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Xml.Serialization;	 // For serialization of an object to an XML Document file.
-using System.Runtime.Serialization.Formatters.Binary; // For serialization of an object to an XML Binary file.
 using System.IO;				 // For reading/writing data to an XML file.
 using System.IO.IsolatedStorage; // For accessing user isolated data.
-using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary; // For serialization of an object to an XML Binary file.
+using System.Xml.Serialization;	 // For serialization of an object to an XML Document file.
 
 namespace UtilityDAL
 {
@@ -25,7 +24,7 @@ namespace UtilityDAL
 
     /// <summary>
     /// Facade to XML serialization and deserialization of strongly typed objects to/from an XML file.
-    /// 
+    ///
     /// References: XML Serialization at http://samples.gotdotnet.com/:
     /// http://samples.gotdotnet.com/QuickStart/howto/default.aspx?url=/quickstart/howto/doc/xmlserialization/rwobjfromxml.aspx
     /// </summary>
@@ -56,7 +55,7 @@ namespace UtilityDAL
         /// <code>
         /// serializableObject = ObjectXMLSerializer&lt;SerializableObject&gt;.Load(@"C:\XMLObjects.xml", SerializedFormat.Binary);
         /// </code>
-        /// </example>		
+        /// </example>
         /// <param name="path">Path of the file to load the object from.</param>
         /// <param name="serializedFormat">XML serialized format used to load the object.</param>
         /// <returns>Object loaded from an XML file using the specified serialized format.</returns>
@@ -120,10 +119,10 @@ namespace UtilityDAL
         /// <code>
         /// serializableObject = ObjectXMLSerializer&lt;SerializableObject&gt;.Load("XMLObjects.xml", IsolatedStorageFile.GetUserStoreForAssembly(), SerializedFormat.Binary);
         /// </code>
-        /// </example>		
+        /// </example>
         /// <param name="fileName">Name of the file in the isolated storage area to load the object from.</param>
         /// <param name="isolatedStorageDirectory">Isolated storage area directory containing the XML file to load the object from.</param>
-        /// <param name="serializedFormat">XML serialized format used to load the object.</param>        
+        /// <param name="serializedFormat">XML serialized format used to load the object.</param>
         /// <returns>Object loaded from an XML file located in a specified isolated storage area, using a specified serialized format.</returns>
         public static T Load(string fileName, IsolatedStorageFile isolatedStorageDirectory, SerializedFormat serializedFormat)
         {
@@ -151,7 +150,7 @@ namespace UtilityDAL
         /// <code>
         /// serializableObject = ObjectXMLSerializer&lt;SerializableObject&gt;.Load("XMLObjects.xml", IsolatedStorageFile.GetUserStoreForAssembly(), new Type[] { typeof(MyCustomType) });
         /// </code>
-        /// </example>		
+        /// </example>
         /// <param name="fileName">Name of the file in the isolated storage area to load the object from.</param>
         /// <param name="isolatedStorageDirectory">Isolated storage area directory containing the XML file to load the object from.</param>
         /// <param name="extraTypes">Extra data types to enable deserialization of custom types within the object.</param>
@@ -162,7 +161,7 @@ namespace UtilityDAL
             return serializableObject;
         }
 
-        #endregion
+        #endregion Load methods
 
         #region Save methods
 
@@ -170,9 +169,9 @@ namespace UtilityDAL
         /// Saves an object to an XML file in Document format.
         /// </summary>
         /// <example>
-        /// <code>        
+        /// <code>
         /// SerializableObject serializableObject = new SerializableObject();
-        /// 
+        ///
         /// ObjectXMLSerializer&lt;SerializableObject&gt;.Save(serializableObject, @"C:\XMLObjects.xml");
         /// </code>
         /// </example>
@@ -189,7 +188,7 @@ namespace UtilityDAL
         /// <example>
         /// <code>
         /// SerializableObject serializableObject = new SerializableObject();
-        /// 
+        ///
         /// ObjectXMLSerializer&lt;SerializableObject&gt;.Save(serializableObject, @"C:\XMLObjects.xml", SerializedFormat.Binary);
         /// </code>
         /// </example>
@@ -215,9 +214,9 @@ namespace UtilityDAL
         /// Saves an object to an XML file in Document format, supplying extra data types to enable serialization of custom types within the object.
         /// </summary>
         /// <example>
-        /// <code>        
+        /// <code>
         /// SerializableObject serializableObject = new SerializableObject();
-        /// 
+        ///
         /// ObjectXMLSerializer&lt;SerializableObject&gt;.Save(serializableObject, @"C:\XMLObjects.xml", new Type[] { typeof(MyCustomType) });
         /// </code>
         /// </example>
@@ -233,9 +232,9 @@ namespace UtilityDAL
         /// Saves an object to an XML file in Document format, located in a specified isolated storage area.
         /// </summary>
         /// <example>
-        /// <code>        
+        /// <code>
         /// SerializableObject serializableObject = new SerializableObject();
-        /// 
+        ///
         /// ObjectXMLSerializer&lt;SerializableObject&gt;.Save(serializableObject, "XMLObjects.xml", IsolatedStorageFile.GetUserStoreForAssembly());
         /// </code>
         /// </example>
@@ -251,16 +250,16 @@ namespace UtilityDAL
         /// Saves an object to an XML file located in a specified isolated storage area, using a specified serialized format.
         /// </summary>
         /// <example>
-        /// <code>        
+        /// <code>
         /// SerializableObject serializableObject = new SerializableObject();
-        /// 
+        ///
         /// ObjectXMLSerializer&lt;SerializableObject&gt;.Save(serializableObject, "XMLObjects.xml", IsolatedStorageFile.GetUserStoreForAssembly(), SerializedFormat.Binary);
         /// </code>
         /// </example>
         /// <param name="serializableObject">Serializable object to be saved to file.</param>
         /// <param name="fileName">Name of the file in the isolated storage area to save the object to.</param>
         /// <param name="isolatedStorageDirectory">Isolated storage area directory containing the XML file to save the object to.</param>
-        /// <param name="serializedFormat">XML serialized format used to save the object.</param>        
+        /// <param name="serializedFormat">XML serialized format used to save the object.</param>
         public static void Save(T serializableObject, string fileName, IsolatedStorageFile isolatedStorageDirectory, SerializedFormat serializedFormat)
         {
             switch (serializedFormat)
@@ -282,10 +281,10 @@ namespace UtilityDAL
         /// <example>
         /// <code>
         /// SerializableObject serializableObject = new SerializableObject();
-        /// 
+        ///
         /// ObjectXMLSerializer&lt;SerializableObject&gt;.Save(serializableObject, "XMLObjects.xml", IsolatedStorageFile.GetUserStoreForAssembly(), new Type[] { typeof(MyCustomType) });
         /// </code>
-        /// </example>		
+        /// </example>
         /// <param name="serializableObject">Serializable object to be saved to file.</param>
         /// <param name="fileName">Name of the file in the isolated storage area to save the object to.</param>
         /// <param name="isolatedStorageDirectory">Isolated storage area directory containing the XML file to save the object to.</param>
@@ -295,7 +294,7 @@ namespace UtilityDAL
             SaveToDocumentFormat(serializableObject, null, fileName, isolatedStorageDirectory);
         }
 
-        #endregion
+        #endregion Save methods
 
         #region Private
 
@@ -332,7 +331,6 @@ namespace UtilityDAL
             {
                 XmlSerializer xmlSerializer = CreateXmlSerializer(extraTypes);
                 serializableObject = xmlSerializer.Deserialize(textReader) as T;
-
             }
 
             return serializableObject;
@@ -394,6 +392,6 @@ namespace UtilityDAL
             }
         }
 
-        #endregion
+        #endregion Private
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using UtilityDAL.Common;
-using UtilityInterface;
 using UtilityInterface.Generic;
 
 namespace UtilityDAL.Teatime
@@ -16,9 +14,10 @@ namespace UtilityDAL.Teatime
 
     public class SaveLoad<T> : IPermanent<IList<T>> where T : struct //,IChildRow
     {
-        static readonly string providerName = "TeaTime";
+        private static readonly string providerName = "TeaTime";
 
-        readonly string dbName;
+        private readonly string dbName;
+
         //readonly string _key;
         public SaveLoad(/*string key,*/ string path = null)
         {
@@ -29,10 +28,9 @@ namespace UtilityDAL.Teatime
                 dbName = System.IO.Directory.GetCurrentDirectory();
             else
                 dbName = path;
-
         }
 
-        public bool Save(IList<T>  o)
+        public bool Save(IList<T> o)
         {
             var xx = (IList<T>)o;
             TeatimeHelper.ToDb(xx, typeof(T).Name, dbName);
@@ -41,8 +39,7 @@ namespace UtilityDAL.Teatime
 
         public IList<T> Load()
         {
-            return TeatimeHelper.FromDb<T>(typeof(T).Name,dbName);
-
+            return TeatimeHelper.FromDb<T>(typeof(T).Name, dbName);
         }
     }
 }

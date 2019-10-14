@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UtilityDAL.DemoApp
 {
-
-    public class DummyDbObject :  IEquatable<DummyDbObject>
+    public class DummyDbObject : IEquatable<DummyDbObject>
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -20,15 +15,8 @@ namespace UtilityDAL.DemoApp
         public DummyDbObject()
         {
             var r = new Random();
-            Id = r.Next(1,10);
+            Id = r.Next(1, 10);
             Name = RandomHelper.NextWord(4 + Id, r);
-
-
         }
-
     }
-
-
-
-
 }

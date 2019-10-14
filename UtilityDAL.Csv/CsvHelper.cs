@@ -1,27 +1,18 @@
-﻿
+﻿using GenericParsing;
 using System;
-using GenericParsing;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CsvHelper;
 using System.Reactive.Threading.Tasks;
+using System.Threading.Tasks;
 
 namespace UtilityDAL.CSV
 {
-
-
     public static class CsvHelper
     {
-
         public static System.Collections.ICollection Parse(string name, string path = "")
         {
             var text = System.IO.Path.Combine(path, name.Replace(".csv", "") + ".csv");
-            // Using an XML Config file. 
+            // Using an XML Config file.
             using (GenericParserAdapter parser = new GenericParserAdapter(text))
             {
                 parser.ColumnDelimiter = ',';
@@ -35,15 +26,12 @@ namespace UtilityDAL.CSV
                 var yt = parser.GetDataTable().DefaultView;
                 return yt;
             }
-
         }
 
         public static IObservable<T> ParseAsObservable<T>(string path) => ParseAsync<T>(path).ToObservable().SelectMany(a => a);
 
-
         public static async Task<IObservable<T>> ParseAsync<T>(string path)
         {
-
             object lck = new object();
 
             var observable = new System.Reactive.Subjects.Subject<T>();
@@ -73,25 +61,17 @@ namespace UtilityDAL.CSV
                     {
                         Console.WriteLine(ex);
                     }
-
                 }
                 catch (Exception ex)
                 {
-
                 }
-
             }
 
             return observable;
         }
     }
-
-
-
-
-
-
 }
+
 //using System;
 //using System.Collections.Generic;
 //using System.IO;
@@ -108,7 +88,7 @@ namespace UtilityDAL.CSV
 //        /// <param name="delimiter">The character that separates fields of data.</param>
 //        /// <param name="textQualifier">The character that surrounds field text that may contain the delimiter or the text qualifier itself. For literal occurrences of this character within the field data, the character should be doubled.</param>
 //        /// <returns>An enumerable of string arrays.</returns>
-//        /// <remarks> 
+//        /// <remarks>
 //        /// This implementation is simple and performs reasonably well.
 //        /// For more features or better performance, CsvHelper is recommended:
 //        /// https://www.nuget.org/packages/CsvHelper/
@@ -165,7 +145,7 @@ namespace UtilityDAL.CSV
 //                // reached any character with text qualified field?
 //                else if (inTxt)
 //                {
-//                    // treat as a literal field character 
+//                    // treat as a literal field character
 //                    data.Add(c);
 //                }
 
@@ -179,7 +159,7 @@ namespace UtilityDAL.CSV
 //                else
 //                {
 //                    // character is part of current field
-//                    // character is negated as a way of 
+//                    // character is negated as a way of
 //                    // encoding a non-text-qualified character
 //                    data.Add(-c);
 //                }
@@ -198,7 +178,7 @@ namespace UtilityDAL.CSV
 //        /// <param name="delimiter">The character that separates fields of data.</param>
 //        /// <param name="textQualifier">The character that surrounds field text that may contain the delimiter or the text qualifier itself. For literal occurrences of this character within the field data, the character should be doubled.</param>
 //        /// <returns>An enumerable of <see cref="Record"/> objects.</returns>
-//        /// <remarks> 
+//        /// <remarks>
 //        /// This implementation is simple and performs reasonably well.
 //        /// For more features or better performance, CsvHelper is recommended:
 //        /// https://www.nuget.org/packages/CsvHelper/

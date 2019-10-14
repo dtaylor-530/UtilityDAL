@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace UtilityDAL
+﻿namespace UtilityDAL
 {
-    class Conversion
+    internal class Conversion
     {
-
         //public static MutableDataTable ConvertToGPdotNetFormat(string path)
         //{
         //    MutableDataTable dt = DataTable.New.ReadCsv(path);
@@ -21,7 +16,6 @@ namespace UtilityDAL
         //        try { dt.DeleteColumns(s); } catch { }
 
         //    return dt;
-
 
         //}
     }

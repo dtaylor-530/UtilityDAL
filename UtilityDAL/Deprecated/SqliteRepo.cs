@@ -1,5 +1,4 @@
-﻿
-//using KingAOP.Aspects;
+﻿//using KingAOP.Aspects;
 //using SQLite;
 //using SQLiteNetExtensions.Extensions;
 //using System;
@@ -16,9 +15,6 @@
 
 //namespace UtilityDAL.Sqlite
 //{
-
-
-
 //    public class NestedStore
 //    {
 //        Dictionary<Type, object> container = new Dictionary<Type, object>();
@@ -26,14 +22,8 @@
 
 //        public NestedStore(SQLiteConnection _conn)
 //        {
-
 //            this._conn = _conn;
 //        }
-
-
-
-
-
 
 //        public bool TransferToDB<T, R>(IEnumerable<T> items, bool check, params string[] children) where T : IEquatable<T>, IId, new() where R : IChildRow
 //        {
@@ -74,7 +64,6 @@
 //                    accessor.set.Invoke(xtt, new object[] { g });
 //                }
 
-
 //                insertItems.Add(xtt?.Equals(default(T)) ?? true ? x.Key : xtt);
 //            }
 
@@ -86,7 +75,6 @@
 //            return xx;
 
 //        }
-
 
 //        public bool TransferToDB2<T, R>(IEnumerable<T> items, bool check, params string[] children) where T : DbRow, IEquatable<T>, new() where R : IChildRow<DbRow>
 //        {
@@ -154,7 +142,6 @@
 
 //        }
 
-
 //        public bool TransferToDB2<T>(IEnumerable<T> items, bool check) where T : DbRow, IEquatable<T>, new()
 //        {
 //            _conn.CreateTable<T>();
@@ -191,7 +178,6 @@
 
 //        }
 
-
 //        private TableList<T> TryGetAdd<T>() where T : IEquatable<T>, new()
 //        {
 //            container[typeof(T)] = container.TryGetValue(typeof(T), out object value) ? (TableList<T>)value : new TableList<T>(_conn);
@@ -206,7 +192,6 @@
 //            return UtilityDAL.SqliteEx.ToDB(items.GroupBy(_ => _).Select(_ => _.Key).ToList(), ref xx, _conn, check);
 
 //        }
-
 
 //        //public bool TransferToDB2<T, R>(IEnumerable<T> items, Func<T, IEnumerable<R>> children, Action<IEnumerable<R>, T> setchildren) where T : DbRow, IEquatable<T>, new() where R : UtilityInterface.Database.IChildRow<DbRow>
 //        //{
@@ -232,7 +217,6 @@
 //        //{
 //        //    _conn.CreateTable<T>();
 //        //    var service = TryGetAdd<T>();
-
 
 //        //    var newItems = items.GroupBy(_ => _).ToList();
 //        //    var xx = UtilityDAL.SqliteEx.ToDB(newItems.Select(_=>_.Key).ToList(), service.GetList(), _conn);

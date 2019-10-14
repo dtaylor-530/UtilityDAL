@@ -1,18 +1,6 @@
-﻿using DynamicData;
-using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Reactive.Linq;
-using System.Reactive.Subjects;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using UtilityDAL.Contract;
-using UtilityHelper;
 using UtilityInterface.Generic.Database;
-using UtilityWpf.View;
 using UtilityWpf.ViewModel;
 
 namespace UtilityDAL.View
@@ -32,12 +20,6 @@ namespace UtilityDAL.View
             obj.SetValue(StoreProperty, value);
         }
 
-
-        public static readonly DependencyProperty StoreProperty = DependencyProperty.RegisterAttached("Store", typeof(IDbService<SHDOObject,object>), typeof(TreeViewDocumentStore), new PropertyMetadata(null, null, AttachedDocumentStore.StoreCoerce2));
-
-      
-
-    
+        public static readonly DependencyProperty StoreProperty = DependencyProperty.RegisterAttached("Store", typeof(IDbService<SHDOObject, object>), typeof(TreeViewDocumentStore), new PropertyMetadata(null, null, AttachedDocumentStore.StoreCoerce2));
     }
-
 }

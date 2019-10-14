@@ -1,14 +1,9 @@
 ﻿using DynamicData;
 using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using UtilityDAL;
-using UtilityDAL.Contract;
 using UtilityHelper;
 using UtilityInterface.Generic.Database;
 using UtilityInterface.NonGeneric.Database;
@@ -20,14 +15,11 @@ namespace UtilityDAL.View
 {
     public static class AttachedDocumentStore //: MultiSelectTreeView//where T : new()
     {
-
         public static void SHDStoreChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var _docstore = (IDbService<SHDOObject, object>)e.NewValue;
             ReflectChanges(d as ListBoxEx, _docstore);
-
         }
-
 
         internal static object StoreCoerce(DependencyObject d, object baseValue)
         {
@@ -42,8 +34,6 @@ namespace UtilityDAL.View
             ReflectChanges(d as ItemsControl, _docstore);
             return baseValue;
         }
-
-
 
         public static void ReflectChanges(ListBoxEx lbx, IDbService<SHDOObject, object> _docstore)
         {
@@ -80,7 +70,6 @@ namespace UtilityDAL.View
 
         public static void ReflectChanges(ItemsControl itemscontrol, IDbService _docstore)
         {
-
             var key = (string)itemscontrol.GetValue(Ex.KeyProperty);
             var lst = itemscontrol.ItemsSource?.Cast<object>()?.ToList();
             IDisposable disposable = null;
@@ -90,7 +79,7 @@ namespace UtilityDAL.View
                 itemscontrol.ItemsSource = lst;
                 disposable.Dispose();
             }
-            
+
             (itemscontrol.ItemsSource as System.Collections.ObjectModel.ObservableCollection<object>)?
               .GetCollectionChanges()
                .Subscribe(_ =>
@@ -110,7 +99,6 @@ namespace UtilityDAL.View
                        }
                        else if (reason == NotifyCollectionChangedAction.Remove)
                        {
-
                            _docstore.Delete(item);
                        }
                        //else if (reason == ChangeReason.Update)
@@ -126,11 +114,8 @@ namespace UtilityDAL.View
 
         public static void StoreChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-
-
         }
 
         //public ISubject<IDbService<SHDOObject,object>> StoreSubject = new Subject<IDbService<SHDOObject,object>>();
-
     }
 }

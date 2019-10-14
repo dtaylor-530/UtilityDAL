@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using System.IO;
 
 namespace UtilityDAL.Common
 {
     //http://www.csharp-examples.net
     public static class Text
     {
-
-
-
         public static void ReadWriteFile()
         {
             using (var fileStream = new FileStream(@"c:\file.txt", FileMode.Open))
@@ -19,17 +13,15 @@ namespace UtilityDAL.Common
             }
         }
 
-
-
         //Open existing file for reading
         public static void ReadFromFile()
         {
-
             using (var fileStream = new FileStream(@"c:\file.txt", FileMode.Open, FileAccess.Read))
             {
                 // read from file
             }
         }
+
         //Open existing file for writing
         public static void WriteToFile()
         {
@@ -39,16 +31,15 @@ namespace UtilityDAL.Common
             }
         }
 
-
         //Open file for writing(with seek to end), if the file doesn't exist create it
         public static void OpenWriteFile()
         {
-
             using (var fileStream = new FileStream(@"c:\file.txt", FileMode.Append))
             {
                 // append to file
             }
         }
+
         //Create new file and open it for read and write, if the file exists overwrite it
 
         public static void CreateNewFile()
@@ -78,8 +69,6 @@ namespace UtilityDAL.Common
         // Read file using FileStream
 
         //First create FileStream to open a file for reading.Then call FileStream.Read in a loop until the whole file is read.Finally close the stream.
-
-
 
         public static byte[] ReadFileToBytes(string filePath)
         {
@@ -112,7 +101,6 @@ namespace UtilityDAL.Common
             // and then closes the file.  You do NOT need to call Flush() or Close().
             System.IO.File.WriteAllLines(@"C:\Users\Public\TestFolder\WriteLines.txt", lines);
 
-
             // Example #2: Write one string to a text file.
             string text = "A class is the most powerful data type in C#. Like a structure, " +
                            "a class defines the data and behavior of the data type. ";
@@ -121,7 +109,7 @@ namespace UtilityDAL.Common
             System.IO.File.WriteAllText(@"C:\Users\Public\TestFolder\WriteText.txt", text);
 
             // Example #3: Write only some strings in an array to a file.
-            // The using statement automatically flushes AND CLOSES the stream and calls 
+            // The using statement automatically flushes AND CLOSES the stream and calls
             // IDisposable.Dispose on the stream object.
             // NOTE: do not use FileStream for text files because it writes bytes, but StreamWriter
             // encodes the output as text.
@@ -139,7 +127,7 @@ namespace UtilityDAL.Common
             }
 
             // Example #4: Append new text to an existing file.
-            // The using statement automatically flushes AND CLOSES the stream and calls 
+            // The using statement automatically flushes AND CLOSES the stream and calls
             // IDisposable.Dispose on the stream object.
             using (System.IO.StreamWriter file =
                 new System.IO.StreamWriter(@"C:\Users\Public\TestFolder\WriteLines2.txt", true))

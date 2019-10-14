@@ -2,11 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using UtilityDAL.Contract;
 using UtilityDAL.Contract.Generic;
 using UtilityDAL.Contract.NonGeneric;
 
@@ -14,7 +12,6 @@ namespace UtilityDAL.View
 {
     public class FileCRUDControl : Control
     {
-
         static FileCRUDControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(FileCRUDControl), new FrameworkPropertyMetadata(typeof(FileCRUDControl)));
@@ -22,11 +19,11 @@ namespace UtilityDAL.View
 
         private const string ConnectionString = "../../Data/1";
 
-        TextBlock Execution;
-        Button AddButton;
-        Button ClearButton;
-        Button RefreshButton;
-        DataGrid DataGrid;
+        private TextBlock Execution;
+        private Button AddButton;
+        private Button ClearButton;
+        private Button RefreshButton;
+        private DataGrid DataGrid;
 
         public override void OnApplyTemplate()
         {
@@ -48,14 +45,10 @@ namespace UtilityDAL.View
             }, System.Windows.Threading.DispatcherPriority.Background);
         }
 
-
-
         public FileCRUDControl()
         {
-          //  System.IO.Directory.CreateDirectory("../../Data");
+            //  System.IO.Directory.CreateDirectory("../../Data");
         }
-
-
 
         public string DatabaseName
         {
@@ -67,8 +60,6 @@ namespace UtilityDAL.View
         public static readonly DependencyProperty DatabaseNameProperty =
             DependencyProperty.Register("DatabaseName", typeof(string), typeof(FileCRUDControl), new PropertyMetadata(string.Empty));
 
-
-
         public object Service
         {
             get { return (object)GetValue(ServiceProperty); }
@@ -78,27 +69,22 @@ namespace UtilityDAL.View
         // Using a DependencyProperty as the backing store for Service.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ServiceProperty = DependencyProperty.Register("Service", typeof(object), typeof(FileCRUDControl), new PropertyMetadata(null));
 
-
-
-
         public IEnumerable Data
         {
             get { return (IEnumerable)GetValue(DataProperty); }
             set { SetValue(DataProperty, value); }
         }
 
-
         public static readonly DependencyProperty DataProperty = DependencyProperty.Register("Data", typeof(IEnumerable), typeof(FileCRUDControl), new PropertyMetadata(null));
 
         private async void Clear()
         {
-
             try
             {
                 string databaseName = DatabaseName == string.Empty ? "one" : DatabaseName;
                 if (Service is IFileDbService dbservice)
                 {
-                    await this.Dispatcher.InvokeAsync(async ()=> Execution.Text = await TimedAction(() => dbservice.Clear(databaseName)));
+                    await this.Dispatcher.InvokeAsync(async () => Execution.Text = await TimedAction(() => dbservice.Clear(databaseName)));
                 }
                 else
                 {
@@ -114,14 +100,13 @@ namespace UtilityDAL.View
 
         private async void Add()
         {
-
             try
             {
                 var data = Data.Cast<object>().ToList();
                 string databaseName = DatabaseName == string.Empty ? "one" : DatabaseName;
                 if (Service is IFileDbService dbservice)
                 {
-                    await this.Dispatcher.InvokeAsync(async () => Execution.Text = await TimedAction(() => dbservice.To(data,databaseName)));
+                    await this.Dispatcher.InvokeAsync(async () => Execution.Text = await TimedAction(() => dbservice.To(data, databaseName)));
                 }
                 else
                 {
@@ -135,10 +120,8 @@ namespace UtilityDAL.View
             }
         }
 
-
         private async void Get()
         {
-
             try
             {
                 var data = Data.Cast<object>().ToList();
@@ -147,7 +130,7 @@ namespace UtilityDAL.View
                 if (service is IFileDbService dbservice)
                 {
                     string databaseName = DatabaseName == string.Empty ? "one" : DatabaseName;
-                    await this.Dispatcher.InvokeAsync(async () => Execution.Text = await TimedAction(async () =>await this.Dispatcher.InvokeAsync(()=>Data= dbservice.From(databaseName))));
+                    await this.Dispatcher.InvokeAsync(async () => Execution.Text = await TimedAction(async () => await this.Dispatcher.InvokeAsync(() => Data = dbservice.From(databaseName))));
                 }
                 else
                 {
@@ -160,7 +143,7 @@ namespace UtilityDAL.View
             }
         }
 
-        private static Action GetToDbAction(object service,string databaseName,List<object> data)
+        private static Action GetToDbAction(object service, string databaseName, List<object> data)
         {
             Type type = service.GetType();
             var @interface = type.GetInterfaces().FirstOrDefault(interfaceType => interfaceType.GetGenericTypeDefinition() == typeof(IFileDatabase<>));
@@ -184,12 +167,11 @@ namespace UtilityDAL.View
                 var t2 = @interface.GetGenericArguments()?.First();
                 var method = type.GetMethod(nameof(IFileDatabase<object>.To));
                 Func<object> a = () => method.Invoke(service, new object[] { GetDatabaseName(t2, databaseName) });
-            
+
                 return a;
             }
             return null;
         }
-
 
         private static Action GetClearAction(object service, string databaseName)
         {
@@ -216,10 +198,8 @@ namespace UtilityDAL.View
             }).ContinueWith(async sw => (await sw).ElapsedMilliseconds.ToString());
         }
 
-
         public static object ConvertList(IList<object> items, Type type, bool performConversion = false)
         {
-
             var enumerableType = typeof(System.Linq.Enumerable);
             var castMethod = enumerableType.GetMethod(nameof(System.Linq.Enumerable.Cast)).MakeGenericMethod(type);
             var toListMethod = enumerableType.GetMethod(nameof(System.Linq.Enumerable.ToList)).MakeGenericMethod(type);
@@ -239,7 +219,6 @@ namespace UtilityDAL.View
 
             return toListMethod.Invoke(null, new[] { castedItems });
         }
-
 
         //private IEnumerable Refresh()
         //{
@@ -270,15 +249,12 @@ namespace UtilityDAL.View
         //    return null;
         //}
 
-
         private static string GetDatabaseName(Type type, string databaseName)
         {
-            return databaseName == string.Empty ? type.Name :  databaseName;
-
+            return databaseName == string.Empty ? type.Name : databaseName;
         }
 
         public static readonly RoutedEvent SeriesRetrievedEvent = EventManager.RegisterRoutedEvent("SeriesRetrieved", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(FileCRUDControl));
-
 
         public event RoutedEventHandler SeriesRetrieved
         {
@@ -286,12 +262,11 @@ namespace UtilityDAL.View
             remove { RemoveHandler(SeriesRetrievedEvent, value); }
         }
 
-        void RaiseSeriesRetrievedEvent(IEnumerable series)
+        private void RaiseSeriesRetrievedEvent(IEnumerable series)
         {
             SeriesRoutedEventArgs newEventArgs = new SeriesRoutedEventArgs(FileCRUDControl.SeriesRetrievedEvent) { Series = series };
             RaiseEvent(newEventArgs);
         }
-
 
         public class SeriesRoutedEventArgs : RoutedEventArgs
         {
@@ -299,15 +274,10 @@ namespace UtilityDAL.View
 
             public SeriesRoutedEventArgs(RoutedEvent @event) : base(@event)
             {
-
             }
-
         }
     }
 }
-
-
-
 
 //private void Add()
 //{
@@ -346,14 +316,10 @@ namespace UtilityDAL.View
 //    }
 //}
 
-
-
 //private Action GetAction(Action action, string methodName)
 //{
-
 //    try
 //    {
-
 //        var data = Data.Cast<object>().ToList();
 
 //        object service = Service;

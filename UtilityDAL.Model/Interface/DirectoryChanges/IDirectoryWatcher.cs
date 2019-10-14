@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace UtilityDAL.Contract
 {
@@ -8,5 +6,4 @@ namespace UtilityDAL.Contract
     {
         IObservable<System.IO.FileSystemEventArgs> Changes { get; }
     }
-
 }

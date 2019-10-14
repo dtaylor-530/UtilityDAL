@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace UtilityDAL
 {
     public static class IdHelper
     {
-        static readonly string[] idnames = { "id", "key", "name", "identification" };
+        private static readonly string[] idnames = { "id", "key", "name", "identification" };
 
         public static string GetIdProperty<T>() => GetIdProperty(typeof(T));
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace UtilityDAL.Contract
+﻿namespace UtilityDAL.Contract
 {
     //public interface IId2
     //{

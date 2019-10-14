@@ -1,25 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
 
-
 namespace UtilityDAL
 {
-
-
-
-
     //https://stackoverflow.com/questions/620605/how-to-make-a-valid-windows-filename-from-an-arbitrary-string
     //    answered Aug 9 '14 at 22:56 Qwertie
     public static class FileNameCleaner
     {
-        static char[] _invalids;
+        private static char[] _invalids;
 
-        /// <summary>Replaces characters in <c>text</c> that are not allowed in 
+        /// <summary>Replaces characters in <c>text</c> that are not allowed in
         /// file names with the specified replacement character.</summary>
         /// <param name="text">Text to make into a valid filename. The same string is returned if it is valid already.</param>
         /// <param name="replacement">Replacement character, or null to simply remove bad characters.</param>
@@ -54,7 +46,4 @@ namespace UtilityDAL
             return changed ? sb.ToString() : text;
         }
     }
-
-
-
 }

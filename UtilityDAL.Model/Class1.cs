@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace UtilityDAL.Model
+﻿namespace UtilityDAL.Model
 {
     public class Class1
     {

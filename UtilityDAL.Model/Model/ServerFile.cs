@@ -9,12 +9,11 @@ namespace UtilityDAL.Model
 
         public string Link { get; set; }
 
-        public FileInfo File {get;set;}
+        public FileInfo File { get; set; }
 
         public DateTime Download { get; set; }
 
         public DateTime Upload { get; set; }
-
 
         public bool OutOfDate => Download < Upload;
     }

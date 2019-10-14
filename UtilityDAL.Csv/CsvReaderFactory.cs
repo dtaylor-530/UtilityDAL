@@ -1,34 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CsvHelper;
-using System.IO;
-using System.Threading.Tasks;
+﻿using CsvHelper;
 using CsvHelper.Configuration;
+using System;
+using System.IO;
 
 namespace UtilityDAL.CSV
 {
-
     public class CSVReaderFactory
     {
-
         public static CsvReader Build(string basepath, string file)
         {
             return Build(Path.Combine(basepath, (file)));
-
         }
 
         public static CsvReader BuildFromText(string text)
         {
-
             var reader = new StringReader(text);
 
             var csv = new CsvReader(reader);
 
             Build(csv.Configuration);
             return csv;
-
-
         }
 
         public static CsvReader Build(string path)
@@ -38,20 +29,16 @@ namespace UtilityDAL.CSV
 
             Build(csv.Configuration);
             return csv;
-
         }
 
         private static IReaderConfiguration Build(IReaderConfiguration configuration)
         {
             configuration.MissingFieldFound = (a, b, c) =>
             {
-
-
             };
 
             configuration.BadDataFound = (a) =>
             {
-
             };
 
             configuration.ReadingExceptionOccurred =
@@ -61,7 +48,6 @@ namespace UtilityDAL.CSV
             //csv.Configuration.BadDataFound = null;
             configuration.HeaderValidated = (a, b, c, d) =>
             {
-
                 if (!a)
                     Console.WriteLine(b[c] + " not validated");
             };
@@ -78,6 +64,5 @@ namespace UtilityDAL.CSV
 
             return configuration;
         }
-
     }
 }

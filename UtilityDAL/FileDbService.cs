@@ -1,22 +1,15 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using UtilityDAL.Common;
-using UtilityDAL.Contract;
 using UtilityDAL.Contract.Generic;
 
 namespace UtilityDAL
 {
-
-    public abstract class FileDbService<T>:IFileDatabase<T>
+    public abstract class FileDbService<T> : IFileDatabase<T>
     {
-   
-
-
-        public FileDbService(string providerName=null, string path = null, bool ignoremissing=true)
+        public FileDbService(string providerName = null, string path = null, bool ignoremissing = true)
         {
-            if (!System.IO.Directory.Exists(path)& ignoremissing)
+            if (!System.IO.Directory.Exists(path) & ignoremissing)
                 dbName = path;
             else if (System.IO.Directory.Exists(path))
                 dbName = path;
@@ -34,7 +27,6 @@ namespace UtilityDAL
 
         public abstract bool To(IList<T> lst, string name);
 
-
         public abstract List<string> SelectIds();
 
         public bool Clear(string name)
@@ -48,7 +40,6 @@ namespace UtilityDAL
         //        dbName = Helper.GetConnectionString(providerName, false);
         //    else
         //        dbName = path;
-
 
         //}
     }

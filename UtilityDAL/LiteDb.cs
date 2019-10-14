@@ -2,44 +2,34 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UtilityDAL.Model;
 using UtilityHelper;
-using UtilityDAL.Contract;
-using UtilityInterface.NonGeneric.Database;
 using UtilityInterface.Generic.Database;
+using UtilityInterface.NonGeneric.Database;
 
 namespace UtilityDAL
 {
-
     public class LiteDbRepo<T> : LiteDbRepo<T, IConvertible> where T : new()
     {
-
-
-        public LiteDbRepo(Func<T, IConvertible> getkey, string directory):base(getkey,directory)
+        public LiteDbRepo(Func<T, IConvertible> getkey, string directory) : base(getkey, directory)
         {
-
         }
-
     }
 
-
-    public  class LiteDbRepo<T,R>: IDbService<T,R>
+    public class LiteDbRepo<T, R> : IDbService<T, R>
     {
         private readonly Func<T, R> _getkey = null;
         private readonly string _key = null;
+
         //private readonly string _directory;
         private readonly LiteCollection<T> _collection;
+
         private readonly IDisposable _disposable;
 
-
-        public LiteDbRepo(Func<T,R> getkey, string directory)
+        public LiteDbRepo(Func<T, R> getkey, string directory)
         {
             _getkey = getkey;
             //_directory = directory;
             _collection = LiteDbHelper.GetCollection<T>(directory, out IDisposable _disposable);
-
         }
 
         public LiteDbRepo(string key, string directory)
@@ -47,17 +37,15 @@ namespace UtilityDAL
             _key = key;
             //_directory = directory;
             _collection = LiteDbHelper.GetCollection<T>(directory, out IDisposable _disposable);
-
         }
 
-        public LiteDbRepo( string directory)
+        public LiteDbRepo(string directory)
         {
             _collection = LiteDbHelper.GetCollection<T>(directory, out IDisposable _disposable);
         }
 
         public LiteDbRepo()
         {
-      
         }
 
         //public IConvertible GetKey(object trade)
@@ -87,20 +75,19 @@ namespace UtilityDAL
             //    return _collection.FindById(new LiteDB.BsonValue(_getkey(item)));
         }
 
-        public bool Insert( T item)
+        public bool Insert(T item)
         {
             _collection.Insert(item);
             return true;
         }
 
-        public bool Update( T item)
+        public bool Update(T item)
         {
             _collection.Update(item);
             return true;
         }
 
-
-        public bool Delete( T item)
+        public bool Delete(T item)
         {
             if (_key == null)
             {
@@ -127,7 +114,7 @@ namespace UtilityDAL
         public T FindById(R item)
         {
             return _collection.FindById(item.ToString());
-           // return _collection.FindById(new BsonValue(item.ToString()));
+            // return _collection.FindById(new BsonValue(item.ToString()));
         }
 
         public IEnumerable<T> SelectAll()
@@ -166,23 +153,22 @@ namespace UtilityDAL
         }
     }
 
-
-
     public class LiteDbRepo : IDbService
     {
-        string _key = null;
+        private string _key = null;
+
         //private string _directory;
         private LiteCollection<object> _collection;
-        IDisposable _disposable;
 
+        private IDisposable _disposable;
 
         public LiteDbRepo(string key, string directory)
         {
             _key = key;
             //_directory = directory;
-            _collection = LiteDbHelper.GetCollection(directory,out _disposable);
-
+            _collection = LiteDbHelper.GetCollection(directory, out _disposable);
         }
+
         public LiteDbRepo()
         {
         }
@@ -208,12 +194,11 @@ namespace UtilityDAL
             return true;
         }
 
-        public bool Update( object item)
+        public bool Update(object item)
         {
             (_collection).Update(item);
             return true;
         }
-
 
         public bool Delete(object item)
         {

@@ -1,30 +1,17 @@
 ﻿//using Biggy.Core;
 //using Biggy.Data.Json;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reactive.Linq;
-using System.Text;
-
-
 namespace UtilityDAL
 {
-
-
     //public class BiggyDirectory
     //{
-
     //    //private JsonStore<Filex> store;
     //    //private string _folderpath;
     //    //private string _filter;
     //    //public ReadOnlyObservableCollection<FilexVM> Files { get; private set; }
     //    //private ObservableCollection<FilexVM> Files { get; private set; }
 
-
-
     //    public IObservable<Filex> Changes { get; }
-
 
     //    public BiggyDirectory(IObservable<KeyValuePair<DateTime, System.IO.FileSystemEventArgs>> eventargs, string folderpath, string filter)
     //    {
@@ -38,7 +25,6 @@ namespace UtilityDAL
     //        }
     //        catch
     //        {
-
     //        }
 
     //        if (comps != null)
@@ -46,7 +32,6 @@ namespace UtilityDAL
     //                  .Where(_ => System.IO.Path.GetFullPath(System.IO.Path.GetDirectoryName(_.Value.FullPath)) == System.IO.Path.GetFullPath(folderpath))
     //                  .Select(_ =>
     //                  {
-
     //                      Filex xl = null;
     //                      try
     //                      {
@@ -67,20 +52,15 @@ namespace UtilityDAL
     //                          comps.Add(filex);
     //                      }
 
-
     //                      return comps;
     //                  })
     //                  .SelectMany(_ => _);
 
-
     //    }
     //}
 
-
-
-    //public class BiggyDirectory 
+    //public class BiggyDirectory
     //{
-
     //    private JsonStore<Filex> store;
     //    //private string _folderpath;
     //    //private string _filter;
@@ -102,11 +82,10 @@ namespace UtilityDAL
     //                x.Changes.Add(_);
 
     //            comps.Update(x);
-                
+
     //            Files = comps;
     //        });
     //    }
-
 
     //    //private ICollection<Filex> GetCurrentFiles()
     //    //{
@@ -124,13 +103,9 @@ namespace UtilityDAL
     //    //    //    }
     //    //    //}
 
-
     //    //    return comps;
 
     //    //}
-
-
-
 
     //    //public List<System.IO.FileSystemEventArgs> GetNewOrChangedFiles()
     //    //{
@@ -146,8 +121,6 @@ namespace UtilityDAL
 
     //    //}
 
-
-
     //    //public void UpdateCurrentFiles(IObservable<KeyValuePair<string, bool>> observable)
     //    //{
     //    //    var comps = new BiggyList<Filex>(store);
@@ -161,7 +134,6 @@ namespace UtilityDAL
     //    //        }
     //    //        else
     //    //        {
-
     //    //        }
     //    //    });
     //    //}

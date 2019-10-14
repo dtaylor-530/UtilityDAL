@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Data;
+﻿using System.Data;
 using System.IO;
-using System.Reflection;
 
 namespace UtilityDAL.CSV
 {
@@ -21,14 +17,12 @@ namespace UtilityDAL.CSV
                 //{
                 //    DataSet = reader.AsDataSet(new ExcelDataSetConfiguration()
                 //    {
-
-                //        // Gets or sets a value indicating whether to set the DataColumn.DataType 
+                //        // Gets or sets a value indicating whether to set the DataColumn.DataType
                 //        // property in a second pass.
                 //        UseColumnDataType = false,
                 //        // probably would have been easier to set this to false but it works as true
 
-
-                //        // Gets or sets a callback to obtain configuration options for a DataTable. 
+                //        // Gets or sets a callback to obtain configuration options for a DataTable.
                 //        ConfigureDataTable = (tableReader) => new ExcelDataTableConfiguration() { UseHeaderRow = true }
                 //    });
 
@@ -38,7 +32,6 @@ namespace UtilityDAL.CSV
             //return DataSet;
             return null;
         }
-
 
         public static DataTable ReadFromCsv(string databasefile)
         {
@@ -51,7 +44,5 @@ namespace UtilityDAL.CSV
             //return csvTable;
             return null;
         }
-
     }
-
 }

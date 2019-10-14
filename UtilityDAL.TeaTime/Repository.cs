@@ -1,19 +1,18 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Collections;
+using UtilityDAL.Common;
 using UtilityDAL.Contract.Generic;
 using UtilityDAL.Contract.NonGeneric;
-using UtilityDAL.Common;
 
 namespace UtilityDAL.Teatime
 {
-
     public class Repository<T> : IFileDatabase<T> where T : struct //,IChildRow
     {
-        static readonly string providerName = "TeaTime";
+        private static readonly string providerName = "TeaTime";
 
-        readonly string dbName;
+        private readonly string dbName;
 
         public Repository(string path = null)
         {
@@ -23,7 +22,6 @@ namespace UtilityDAL.Teatime
                 dbName = System.IO.Directory.GetCurrentDirectory();
             else
                 dbName = path;
-
         }
 
         public List<String> SelectIds()
@@ -31,21 +29,15 @@ namespace UtilityDAL.Teatime
             return System.IO.Directory.GetFiles(dbName).Select(_ => System.IO.Path.GetFileNameWithoutExtension(_)).ToList();
         }
 
-
         public bool To(IList<T> prices, string id) //, IComparable
         {
-
             TeatimeHelper.ToDb(prices, id, dbName);
             return true;
         }
 
-
-
         public IList<T> From(string id)   //, IComparable
         {
-
             return TeatimeHelper.FromDb<T>(id, dbName);
-
         }
 
         public bool Clear(string name)
@@ -54,13 +46,11 @@ namespace UtilityDAL.Teatime
         }
     }
 
-
-
     public class TeatimeFileService<T> : IFileDbService where T : struct
     {
-        static readonly string providerName = "TeaTime";
+        private static readonly string providerName = "TeaTime";
 
-        readonly string dbName;
+        private readonly string dbName;
 
         public TeatimeFileService(string path = null)
         {
@@ -70,7 +60,6 @@ namespace UtilityDAL.Teatime
                 dbName = System.IO.Directory.GetCurrentDirectory();
             else
                 dbName = path;
-
         }
 
         public List<String> SelectIds()
@@ -78,10 +67,8 @@ namespace UtilityDAL.Teatime
             return System.IO.Directory.GetFiles(dbName).Select(_ => System.IO.Path.GetFileNameWithoutExtension(_)).ToList();
         }
 
-
         public ICollection From(string name)
         {
-
             var x = (TeatimeHelper.FromDb<T>(dbName));
             if (x.ContainsKey(name))
                 return x[name];
@@ -101,7 +88,4 @@ namespace UtilityDAL.Teatime
             return UtilityDAL.Teatime.TeatimeHelper.Clear(name, dbName);
         }
     }
-
-
 }
-

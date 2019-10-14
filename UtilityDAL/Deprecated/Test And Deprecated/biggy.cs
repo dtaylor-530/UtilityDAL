@@ -1,9 +1,5 @@
 ﻿//using Biggy.Core;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 
 namespace UtilityDAL
 {
@@ -13,6 +9,7 @@ namespace UtilityDAL
         {
             this.Albums = new List<Album>();
         }
+
         public int ArtistDocumentId { get; set; }
         public string Name { get; set; }
         public List<Album> Albums;
@@ -24,6 +21,7 @@ namespace UtilityDAL
         {
             //this.Tracks = new HashSet<Track>();
         }
+
         public int AlbumId { get; set; }
         public string Title { get; set; }
         public int ArtistId { get; set; }
@@ -38,10 +36,8 @@ namespace UtilityDAL
     //https://github.com/xivSolutions/biggy
     //public class biggy
     //{
-
     //    public void AddExample()
     //    {
-
     //        var store = new Biggy.Data.Json.JsonStore<Artist>("TestDb");
     //        var artists = new BiggyList<Artist>(store);
 
@@ -52,13 +48,11 @@ namespace UtilityDAL
     //        {
     //            Console.WriteLine("Id: {0} Name: {1}", artist.ArtistId, artist.Name);
     //        }
-
 
     //    }
 
     //    public void JsonAddExample()
     //    {
-
     //        var store = new Biggy.Data.Json.JsonStore<Artist>("TestDb");
     //        var artists = new BiggyList<Artist>(store);
 
@@ -70,12 +64,10 @@ namespace UtilityDAL
     //            Console.WriteLine("Id: {0} Name: {1}", artist.ArtistId, artist.Name);
     //        }
 
-
     //    }
 
     //    public void SqliteAddExample()
     //    {
-
     //        var store = new Biggy.Data.Sqlite.SqliteDocumentStore<ArtistDocument>("TestDb");
 
     //        // This will create a table named artistdocuments in TestDb if one doesn't already exist:
@@ -89,10 +81,6 @@ namespace UtilityDAL
     //        artistDocs.Add(newArtist);
 
     //    }
-
-
-
-
 
     //    public void UpdateExample()
     //    {

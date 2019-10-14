@@ -1,8 +1,5 @@
-﻿using GenericParsing;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
@@ -10,7 +7,6 @@ namespace UtilityDAL
 {
     public class XMLDb
     {
-  
         private string _dbName;
         private static readonly XmlSerializerHelper xmlSerializerHelper;
 
@@ -22,7 +18,6 @@ namespace UtilityDAL
         public XMLDb(string dbName)
         {
             _dbName = dbName;
-
         }
 
         public void Write<T>(T obj, string id)
@@ -30,9 +25,8 @@ namespace UtilityDAL
             // Act
             string serializedString = xmlSerializerHelper.SerializeToXml(obj);
 
-            System.IO.File.WriteAllText(Path.Combine(_dbName, id) + ".xml",serializedString);
+            System.IO.File.WriteAllText(Path.Combine(_dbName, id) + ".xml", serializedString);
         }
-
 
         public T Read<T>(string id)
         {
@@ -41,7 +35,6 @@ namespace UtilityDAL
 
         public Task<T> ReadAsync<T>(string id)
         {
-
             return Deserialize.DeSerializeFile<T>(File.ReadAllText(Path.Combine(_dbName, id)) + ".xml");
 
             //using (GenericParserAdapter parser = new GenericParserAdapter("MyData.txt"))
@@ -51,15 +44,12 @@ namespace UtilityDAL
 
             //}
         }
-
     }
 
     public static class Deserialize
     {
         public async static Task<T> DeSerializeFile<T>(string path, XmlSerializer serializer = null)
         {
-
-
             serializer = serializer ?? new XmlSerializer(typeof(T));
 
             return await Task.Run(() =>
@@ -73,16 +63,10 @@ namespace UtilityDAL
                     GC.Collect();
 
                     return objects;
-
                 }
             });
-
-
-
         }
-
     }
-
 
     //private List<Transaction> ParseData()
     //{
@@ -97,7 +81,6 @@ namespace UtilityDAL
     //            XDocument doc = XDocument.Load(reader);
     //            var q = from item in doc.Descendants("tr") select item;
 
-
     //            foreach (var x in q)
     //                try
     //                {
@@ -105,8 +88,6 @@ namespace UtilityDAL
     //                }
     //                catch (Exception e)
     //                {
-
-
     //                    switch (e.GetType().Name)
     //                    {
     //                        case (nameof(IndexOutOfRangeException)):

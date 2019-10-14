@@ -7,19 +7,15 @@
 
         mc:Ignorable="d"
         Title="MainWindow" Height="750" Width="925"
-      d:DesignHeight="600" d:DesignWidth="800"
-        >
-
+      d:DesignHeight="600" d:DesignWidth="800">
 
     <FrameworkElement.Resources>
-
-
 
         <XmlDataProvider x:Key="Pages">
             <x:XData>
                 <Pages xmlns="">
                     <Page Uri="\Page\LogPage.xaml"         Title="Log" />
-                    <Page Uri="\Page\TeaCsvDbPage.xaml"         Title="Tea/Csv" />
+                    <Page Uri="\Page\FileViewerPage.xaml"         Title="FileViewer" />
                     <Page Uri="\Page\ServerFilePage.xaml"              Title="Server Page" />
                     <Page Uri="\Page\PaginatedPage.xaml"              Title="Paginated" />
                     <Page Uri="\Page\FileCRUD.xaml"              Title="File CRUD" />
@@ -31,8 +27,6 @@
             </x:XData>
         </XmlDataProvider>
     </FrameworkElement.Resources>
-
-
 
   <DockPanel>
 
@@ -46,9 +40,7 @@
                 <MenuItem Header="_Options" Command="{Binding ShowAppSettingsCmd}" Height="26" />
             </MenuItem>
             <MenuItem Header="_Help" Command="{Binding ShowHelpCmd}" />-->
-
     </Menu>
-
 
     <Grid SnapsToDevicePixels="True">
         <Grid.ColumnDefinitions>
@@ -70,8 +62,6 @@
              BorderThickness="0"
              Background="Transparent"
              ItemContainerStyle="{StaticResource ColorItemContainerStyle}">
-
-
             </ListBox>
         </Border>
 
@@ -82,8 +72,6 @@
            Source="{Binding ElementName=PageList, Path=SelectedValue}"
            NavigationUIVisibility="Hidden" />
         </Border>
-
     </Grid>
-
     </DockPanel>
 </Window>

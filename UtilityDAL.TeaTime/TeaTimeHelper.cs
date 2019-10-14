@@ -1,21 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TeaTime;
-using UtilityDAL.Common;
-using UtilityInterface;
 
 namespace UtilityDAL.Teatime
 {
-
-
-    internal  class TeatimeHelper
+    internal class TeatimeHelper
     {
-
         public static void ToDb<T>(IList<T> items, string id, string dbpath) where T : struct//, IComparable
         {
             string connection = Path.Combine(dbpath, id + ".tea");
@@ -37,26 +29,23 @@ namespace UtilityDAL.Teatime
                     else
                         return;
                 }
-   
-                // create file and write values
-                using (var tf = TeaFile<T>.Create(connection))
-                {
-                    foreach (var x in items)
-                        tf.Write(x);
 
-                }
+            // create file and write values
+            using (var tf = TeaFile<T>.Create(connection))
+            {
+                foreach (var x in items)
+                    tf.Write(x);
+            }
         }
-
 
         public static void ToDb<T>(T item, string id, string dbpath) where T : struct//, IComparable
         {
-
             if (File.Exists(Path.Combine(dbpath, id + ".tea")))
                 try
                 {
                     using (var tf = TeaFile<T>.Append(Path.Combine(dbpath, id + ".tea")))
                     {
-                            tf.Write(item);
+                        tf.Write(item);
                     }
                 }
                 catch (Exception ex)
@@ -67,22 +56,17 @@ namespace UtilityDAL.Teatime
                 // create file and write values
                 using (var tf = TeaFile<T>.Create(Path.Combine(dbpath, id + ".tea")))
                 {
-                        tf.Write(item);
-
+                    tf.Write(item);
                 }
         }
 
-
-
         public static List<T> FromDb<T>(string id, string dbpath) where T : struct //, IChildRow //IComparable
         {
-
             if (File.Exists(Path.Combine(dbpath, id + ".tea")))
                 try
                 {
                     using (var tf = TeaFile<T>.OpenRead(Path.Combine(dbpath, id + ".tea")))
                     {
-
                         return tf.Items.ToList();
                     }
                 }
@@ -93,7 +77,6 @@ namespace UtilityDAL.Teatime
                 }
             else
                 return null;
-
         }
 
         public static bool Clear(string id, string dbpath)
@@ -123,9 +106,7 @@ namespace UtilityDAL.Teatime
                     return null;
                 }
             }).Where(_ => _ != null).ToDictionary(_ => _.k, _ => _.v);
-
         }
-
 
         //public static async System.Threading.Tasks.Task<IObservable<T>> FromDbAsync<T>(string id, string dbpath) where T : struct //, IChildRow//, IComparable
         //{
@@ -136,7 +117,6 @@ namespace UtilityDAL.Teatime
         //            {
         //                using (var tf = TeaFile<T>.OpenRead(Path.Combine(dbpath, id + ".tea")))
         //                {
-
         //                    return tf.Items.ToList();
         //                }
         //            }
@@ -150,7 +130,5 @@ namespace UtilityDAL.Teatime
         //    }));
 
         //}
-
-        
     }
 }

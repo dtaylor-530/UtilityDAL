@@ -1,5 +1,4 @@
-﻿
-//using GenericParsing;
+﻿//using GenericParsing;
 //using System;
 //using System.Collections.Generic;
 //using System.IO;
@@ -13,8 +12,6 @@
 //{
 //    public class CSV3 : IFileDbService
 //    {
-
-
 //      //  static readonly string dbName;
 
 //        static readonly string providerName = "CSV";
@@ -35,21 +32,17 @@
 
 //        public CSV3()
 //        {
-          
 //        }
 
 //        public System.Collections.ICollection FromDb(string name)
 //        {
-
-//            // Using an XML Config file. 
+//            // Using an XML Config file.
 //           return new CSV(dbName).FromDb(name);
 //        }
 
-
-
 //        public bool ToDb(ICollection lst, string name)
 //        {
-//            var lst2 = lst.Cast<object>().Select(_ => new RecordWrap2(UtilityHelper.ObjectToDictionaryMapper.ToDictionary(_))); 
+//            var lst2 = lst.Cast<object>().Select(_ => new RecordWrap2(UtilityHelper.ObjectToDictionaryMapper.ToDictionary(_)));
 
 //            using (StreamWriter writer = File.CreateText(Path.Combine(dbName, name + ".csv")))
 //            {
@@ -58,20 +51,12 @@
 //            return true;
 //        }
 
-
-
 //        public List<string> SelectIds()
 //        {
 //            return System.IO.Directory.GetFiles(dbName).Select(_ => System.IO.Path.GetFileNameWithoutExtension(_)).ToList();
 //        }
 
-
 //    }
-
-
-
-
-
 
 //    public class RecordWrap2 : CoreTechs.Common.Text.ICsvWritable
 //    {
@@ -81,7 +66,6 @@
 //        {
 //            Record = record;
 //        }
-
 
 //        public IEnumerable<object> GetCsvHeadings()
 //        {
@@ -94,14 +78,10 @@
 //        }
 //    }
 
-
 //    public class CSVParserFactory
 //    {
-
-
 //        //public static void Build(ref GenericParser parser)
 //        //{
- 
 //        //        //parser.SetDataSource("MyData.txt");
 
 //        //    parser.ColumnDelimiter = "\t".ToCharArray();
@@ -114,13 +94,7 @@
 //        //    return csv;
 //        //}
 
-
-   
 //    }
-
-
-
-
 
 //    //public class XML<T> : IDbService<T>
 //    //{
@@ -135,18 +109,16 @@
 //    //}
 //}
 
-
-
 ////https://www.codeproject.com/Articles/11698/A-Portable-and-Efficient-Generic-Parser-for-Flat-F
 
-////// Using an XML Config file. 
+////// Using an XML Config file.
 ////using (GenericParserAdapter parser = new GenericParserAdapter("MyData.txt"))
 ////{
 ////    parser.Load("MyData.xml");
 ////    dsResult = parser.GetDataSet();
 ////}
 
-////// Or... programmatically setting up the parser for TSV. 
+////// Or... programmatically setting up the parser for TSV.
 ////string strID, strName, strStatus;
 ////using (GenericParser parser = new GenericParser())
 ////{
@@ -169,7 +141,7 @@
 ////    }
 ////}
 
-////// Or... programmatically setting up the parser for Fixed-width. 
+////// Or... programmatically setting up the parser for Fixed-width.
 ////  using (GenericParser parser = new GenericParser())
 ////  {
 ////    parser.SetDataSource("MyData.txt");

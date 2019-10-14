@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace UtilityDAL.Contract
 {
-
-
-
     public interface IFileEventsRepository
     {
         List<System.IO.FileSystemEventArgs> GetNewOrChangedFiles();
-
     }
-
-
 }
-

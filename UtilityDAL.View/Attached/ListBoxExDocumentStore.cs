@@ -1,14 +1,11 @@
-﻿
-using System.Windows;
+﻿using System.Windows;
+using UtilityInterface.Generic.Database;
 using UtilityWpf.View;
 using UtilityWpf.ViewModel;
-using UtilityDAL.Contract;
-using UtilityInterface.Generic.Database;
 
 namespace UtilityDAL.View
 {
-
-    public class ListBoxExDocumentStore: ListBoxEx
+    public class ListBoxExDocumentStore : ListBoxEx
     {
         public static string GetStore(DependencyObject obj)
         {
@@ -20,9 +17,6 @@ namespace UtilityDAL.View
             obj.SetValue(StoreProperty, value);
         }
 
-        public static readonly DependencyProperty StoreProperty = DependencyProperty.RegisterAttached("Store", typeof(IDbService<SHDOObject, object>), typeof(ListBoxExDocumentStore), new PropertyMetadata(null,null, AttachedDocumentStore.StoreCoerce));
-
+        public static readonly DependencyProperty StoreProperty = DependencyProperty.RegisterAttached("Store", typeof(IDbService<SHDOObject, object>), typeof(ListBoxExDocumentStore), new PropertyMetadata(null, null, AttachedDocumentStore.StoreCoerce));
     }
-
-
 }

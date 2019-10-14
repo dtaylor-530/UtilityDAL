@@ -8,7 +8,6 @@
 //{
 //    public static class FilexToKeyValueDate
 //    {
-
 //        public static KeyValueDate ToKeyValueDate(this Filex fx)
 //        {
 //            return new KeyValueDate
@@ -21,12 +20,10 @@
 //        }
 //    }
 
-
 //    public static class KeyValueDateToFilex
 //    {
 //        public static Filex ToFileWrite(this KeyValueDate kvd)
 //        {
-
 //            return new Filex
 //            {
 //                Date = new DateTime(kvd.Date),

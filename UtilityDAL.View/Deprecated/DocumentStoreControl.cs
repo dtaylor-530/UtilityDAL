@@ -15,21 +15,17 @@
 //{
 //    //public abstract class DocumentStoreControl<T> : DocumentStoreControl
 //    //{
-
 //    //    public DocumentStoreControl(IDocumentStore<T> docstore, Func<object, IConvertible> getKey):base(docstore,getKey)
 //    //    {
-
 //    //    }
 
 //    //}
 //    public abstract class DocumentStoreControl : UtilityWpf.View.CollectionEditor
 //    {
-
 //        //public static readonly DependencyProperty DirectoryProperty = DependencyProperty.Register("Directory", typeof(string), typeof(DocumentStoreControl<T>));
 
 //        ////public static readonly DependencyProperty OutputProperty = DependencyProperty.Register("Output", typeof(object), typeof(DocumentStoreControl<T>));
 //        //static void DatabaseCommandChange(DependencyObject d, DependencyPropertyChangedEventArgs e) => (d as DocumentStoreControl<T>).DatabaseCommandsSubject.OnNext((UtilityWpf.View.DatabaseCommand)e.NewValue);
-
 
 //        protected IDocumentStore _docstore;
 //        Func<object, IConvertible> _getKey = null;
@@ -45,7 +41,7 @@
 //                /*   this.Dispatcher.InvokeAsync(() =>*/
 //                ItemsSourceSubject.OnNext(clxnitems);/*, System.Windows.Threading.DispatcherPriority.Background, default(System.Threading.CancellationToken));*/
 
-//                //ItemsSource = items; 
+//                //ItemsSource = items;
 //            }
 //            disposable.Dispose();
 //            //NewItemsSubject.Subscribe(_ =>
@@ -71,7 +67,6 @@
 //            });
 //        }
 
-
 //        protected void React(IEnumerable _b, string key)
 //        {
 //            foreach (var _c in _b)
@@ -89,9 +84,7 @@
 //            disposable.Dispose();
 //        }
 
-
 //        public override object GetKey(object trade) => _getKey(trade);
-
 
 //        //private object GetCollection(out IDisposable disposable)
 //        //{
@@ -123,17 +116,14 @@
 //        //    return _docstore.Delete(items, item, key);
 //        //}
 
-
 //    }
 
 //    public abstract class DocumentStoreControl<T> : UtilityWpf.View.CollectionEditor
 //    {
-
 //        //public static readonly DependencyProperty DirectoryProperty = DependencyProperty.Register("Directory", typeof(string), typeof(DocumentStoreControl<T>));
 
 //        ////public static readonly DependencyProperty OutputProperty = DependencyProperty.Register("Output", typeof(object), typeof(DocumentStoreControl<T>));
 //        //static void DatabaseCommandChange(DependencyObject d, DependencyPropertyChangedEventArgs e) => (d as DocumentStoreControl<T>).DatabaseCommandsSubject.OnNext((UtilityWpf.View.DatabaseCommand)e.NewValue);
-
 
 //        protected IDocumentStore<T> _docstore;
 //        Func<T, object> _getKey = null;
@@ -149,7 +139,7 @@
 //                /*   this.Dispatcher.InvokeAsync(() =>*/
 //                ItemsSourceSubject.OnNext(clxnitems);/*, System.Windows.Threading.DispatcherPriority.Background, default(System.Threading.CancellationToken));*/
 
-//                //ItemsSource = items; 
+//                //ItemsSource = items;
 //            }
 //            disposable.Dispose();
 //            //NewItemsSubject.Subscribe(_ =>
@@ -175,7 +165,6 @@
 //            });
 //        }
 
-
 //        //protected override void React(object _b, string key)
 //        //{
 //        //    _docstore.Upsert((T)_b, key);
@@ -195,8 +184,6 @@
 //            return _getKey((T)trade);
 //        }
 
-
 //    }
-
 
 //}

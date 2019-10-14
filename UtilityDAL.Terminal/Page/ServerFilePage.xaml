@@ -1,18 +1,16 @@
 ﻿<Page x:Class="UtilityDAL.DemoApp.ServerFilePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
- 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+
       xmlns:view="clr-namespace:UtilityDAL.View;assembly=UtilityDAL.View"
       xmlns:util="clr-namespace:UtilityDAL.Model;assembly=UtilityDAL"
       xmlns:qc="http://QuickConverter.CodePlex.com/"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Server File Page">
 
     <view:ServerFilesControl  x:Name="serverFilesControl"></view:ServerFilesControl>
-  
-
 </Page>

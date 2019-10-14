@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:local="clr-namespace:UtilityDAL.View">
-    
+
     <Style TargetType="{x:Type local:FileCRUDControl}">
         <Setter Property="FontFamily" Value="{DynamicResource MaterialDesignFont}"></Setter>
         <Setter Property="Template">
@@ -15,13 +15,12 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        Background="{DynamicResource MaterialDesignPaper}"
-        >
+        Background="{DynamicResource MaterialDesignPaper}">
 
                         <ToolBarTray DockPanel.Dock="Top" Panel.ZIndex="1" Background="{DynamicResource MaterialDesignPaper}">
-                            <ToolBar Background="{x:Null}" Style="{DynamicResource MaterialDesignToolBar}" >
+                            <ToolBar Background="{x:Null}" Style="{DynamicResource MaterialDesignToolBar}">
                                 <ToolBar.Resources>
-                                    <Style x:Key="ButtonStyle" TargetType="Button" >
+                                    <Style x:Key="ButtonStyle" TargetType="Button">
                                         <Style.Setters>
                                             <Setter Property="Width" Value="50"></Setter>
                                             <Setter Property="Height" Value="50"></Setter>
@@ -33,23 +32,21 @@
                                 <Button Style="{StaticResource ButtonStyle}" x:Name="Refresh">
                                     <materialDesign:PackIcon Kind="Refresh"  Height="30" Width="30" />
                                 </Button>
-                                <Button Style="{StaticResource ButtonStyle}" x:Name="Add"  >
+                                <Button Style="{StaticResource ButtonStyle}" x:Name="Add">
                                     <materialDesign:PackIcon Kind="DatabasePlus" Height="30" Width="30" />
                                 </Button>
-                                <Button Style="{StaticResource ButtonStyle}" x:Name="Clear"  >
+                                <Button Style="{StaticResource ButtonStyle}" x:Name="Clear">
                                     <materialDesign:PackIcon Kind="DeleteForever" Height="30" Width="30" />
                                 </Button>
-                                <Label VerticalAlignment="Center" 
-                       Style="{DynamicResource MaterialDesignLabel}" 
+                                <Label VerticalAlignment="Center"
+                       Style="{DynamicResource MaterialDesignLabel}"
                        Content="Execution Time (ms)"></Label>
 
                                 <TextBlock x:Name="ExecutionTextBlock"
                            Margin="5,5,0,5"
                            Style="{DynamicResource MaterialDesignCaptionTextBlock}"
                            VerticalAlignment="Center"
-                           TextAlignment="Center"
-                   
-                        >
+                           TextAlignment="Center">
                                 </TextBlock>
                             </ToolBar>
                         </ToolBarTray>

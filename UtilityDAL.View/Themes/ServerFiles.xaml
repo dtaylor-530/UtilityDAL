@@ -24,15 +24,15 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                         </ToolBar>
-                        <view:ListBoxCriteria x:Name="listboxCriteria" ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}}" >
+                        <view:ListBoxCriteria x:Name="listboxCriteria" ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}}">
                             <ListBox.ItemContainerStyle>
                                 <Style>
-                                    <Setter Property="view:CriteriaItem.MeetsCriteria" Value="{Binding OutOfDate}"/>
+                                    <Setter Property="view:CriteriaItem.MeetsCriteria" Value="{Binding OutOfDate}" />
                                 </Style>
                             </ListBox.ItemContainerStyle>
                             <view:ListBoxCriteria.ItemTemplate>
 
-                                <DataTemplate >
+                                <DataTemplate>
                                     <materialDesign:TransitioningContent Width="200" OpeningEffectsOffset="{materialDesign:IndexedItemOffsetMultiplierExtension 0:0:0.1}"
                                                                  Opacity="0"
                                                                  RunHint="Loaded">
@@ -46,15 +46,14 @@
                                             <TextBlock Text="{Binding Link}" FontSize="10"   HorizontalAlignment="Left" Margin="8" VerticalAlignment="Center" />
                                             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Margin="4">
                                                 <TextBlock VerticalAlignment="Center" Margin="2" FontSize="8">
-                                       <Run Text="Down" FontWeight="Light"   />
-                                                <Run Text="{Binding Download, Mode=OneWay}"  />
+                                       <Run Text="Down" FontWeight="Light" />
+                                                <Run Text="{Binding Download, Mode=OneWay}" />
                                                 </TextBlock>
                                                 <TextBlock VerticalAlignment="Center" Margin="2"  FontSize="8">
-                                                  <Run Text="Up" FontWeight="Light"   />
-                                                <Run Text="{Binding Upload, Mode=OneWay}"  />
+                                                  <Run Text="Up" FontWeight="Light" />
+                                                <Run Text="{Binding Upload, Mode=OneWay}" />
                                                 </TextBlock>
                                             </StackPanel>
-
                                         </StackPanel>
                                     </materialDesign:TransitioningContent>
                                 </DataTemplate>

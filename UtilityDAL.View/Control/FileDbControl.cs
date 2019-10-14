@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using UtilityWpf.ViewModel;
@@ -25,9 +23,6 @@ namespace UtilityDAL.View
         public static readonly DependencyProperty OutputProperty = DependencyProperty.Register("Output", typeof(object), typeof(FileDbControl), new PropertyMetadata(null, OutputChanged));
 
         public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register("SelectedItem", typeof(object), typeof(FileDbControl), new PropertyMetadata(null, SelectedItemChanged));
-
-
-
 
         public string Directory
         {
@@ -65,8 +60,6 @@ namespace UtilityDAL.View
             set { SetValue(ItemsProperty, value); }
         }
 
-
-
         private static void DirectoryChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             (d as FileDbControl).DirectoryChanges.OnNext((string)e.NewValue);
@@ -92,13 +85,10 @@ namespace UtilityDAL.View
             (d as FileDbControl).SelectedItemChanges.OnNext(e.NewValue);
         }
 
-
         private static void ItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             (d as FileDbControl).ItemsChanges.OnNext((IEnumerable)e.NewValue);
         }
-
-
 
         protected ISubject<string> DirectoryChanges = new Subject<string>();
 
@@ -112,15 +102,10 @@ namespace UtilityDAL.View
 
         protected ISubject<IEnumerable> ItemsChanges = new Subject<IEnumerable>();
 
-
-
         static FileDbControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(FileDbControl), new FrameworkPropertyMetadata(typeof(FileDbControl)));
         }
-
-
-
 
         public FileDbControl(string extension, Func<string, System.Collections.IEnumerable> outputfunc, Func<string, string> filemap = null)
         {
@@ -128,26 +113,20 @@ namespace UtilityDAL.View
             ResourceDictionary resourceDictionary = (ResourceDictionary)Application.LoadComponent(resourceLocater);
             Style = resourceDictionary["FileDbStyle"] as Style;
 
-
             //Observable.FromEventPattern<EventHandler, EventArgs>(_ => this.Initialized += _, _ => this.Initialized -= _)
             //    .Take(1).Subscribe(_ =>    Init(DirectoryChanges, extension, outputfunc, filemap));
-
         }
-
 
         private void Init(IObservable<string> directories, string extension, Func<string, System.Collections.IEnumerable> outputfunc, Func<string, string> filemap = null)
         {
-
             directories
                 .Where(_ => _ != "")
                 .Select(_ => GetDirectoryViewModels(_))
                 .Subscribe(_ => this.Dispatcher.InvokeAsync(() => RootDirectories = _, System.Windows.Threading.DispatcherPriority.Background, default(System.Threading.CancellationToken)));
 
-
             OutputChanges.Where(_ => _ != null)
                 .Select(_ => outputfunc(((PathViewModel)_).FilePath))
                 .Subscribe(_ => this.Dispatcher.InvokeAsync(() => { Items = _; }, System.Windows.Threading.DispatcherPriority.Background, default(System.Threading.CancellationToken)));
-
 
             SelectedItemChanges.Where(_ => _ != null)
                 .Subscribe(_ =>
@@ -167,7 +146,5 @@ namespace UtilityDAL.View
                   catch { return null; }
               })
               .Where(v => v != null);
-
     }
-
 }

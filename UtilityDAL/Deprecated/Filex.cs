@@ -7,7 +7,6 @@
 //{
 //    public static class Filex
 //    {
-
 //        public static Model.Filex Create(string path,string name=null) => new Model.Filex
 //        //var parent = System.IO.Path.GetDirectoryName(path);
 //        {
@@ -16,9 +15,6 @@
 //            Name = name??System.IO.Path.GetFileNameWithoutExtension(path),
 //            FileInfo = new System.IO.FileInfo(path),
 //        };
-
-
-
 
 //        public static IEnumerable<Model.Filex> CreateByDirectory(string dir)
 //        {
@@ -30,7 +26,6 @@
 
 //    public static class FilextFactory
 //    {
-
 //        public static Filext Create(string path, string name = null) => new Filext
 //        //var parent = System.IO.Path.GetDirectoryName(path);
 //        {
@@ -39,9 +34,6 @@
 //            //Key = name ?? System.IO.Path.GetFileNameWithoutExtension(path),
 //            //Path = BitConverter.ToInt64(SimpleBase.Base32.Crockford.Decode(path).ToArray(),0),
 //        };
-
-
-
 
 //        public static IEnumerable<Filext> CreateByDirectory(string dir)
 //        {

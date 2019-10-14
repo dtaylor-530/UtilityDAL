@@ -6,12 +6,11 @@ using System.Reflection;
 
 namespace UtilityDAL.CSV
 {
-
     public class Dictionary<T>
     {
-        const string database = @"database.csv";
+        private const string database = @"database.csv";
         string databaseFullName => System.IO.Path.Combine(directoryName, database);
-        string directoryName;
+        private string directoryName;
         private string key;
         private IDictionary<string, string> predicates;
         private PropertyCache<T> yu;
@@ -36,12 +35,15 @@ namespace UtilityDAL.CSV
                 writer.Close();
             }
         }
+
         public Dictionary(string key, IDictionary<string, string> predicates) : this(key, "../../../Data", predicates)
         {
         }
+
         public Dictionary(string key) : this(key, "../../../Data", null)
         {
         }
+
         public Dictionary(string key, string directoryName) : this(key, directoryName, null)
         {
         }
@@ -95,7 +97,7 @@ namespace UtilityDAL.CSV
                                                                     .ToDictionary(c => c.a, c => (object)c.b));
     }
 
-    static class Helper
+    internal static class Helper
     {
         public static T Map<T>(this Dictionary<string, object> dict)
         {
@@ -112,8 +114,9 @@ namespace UtilityDAL.CSV
 
     public class PropertyCache<R>
     {
-        Type type;
-        Dictionary<string, PropertyInfo> dictionary = new Dictionary<string, PropertyInfo>();
+        private Type type;
+        private Dictionary<string, PropertyInfo> dictionary = new Dictionary<string, PropertyInfo>();
+
         public PropertyCache()
         {
             type = typeof(R);
@@ -121,6 +124,7 @@ namespace UtilityDAL.CSV
         }
 
         public T GetPropertyValue<T>(R obj, string name) => UtilityHelper.PropertyHelper.GetPropertyValue<T>(obj, dictionary[name]);
+
         public IEnumerable<string> GetValues<T>(R obj) => dictionary.Select(a => a.Value.GetValue(obj).ToString());
 
         public IEnumerable<T> GetPropertyValues<T>(IEnumerable<R> obj, string name) => obj.Select(r => GetPropertyValue<T>(r, name));

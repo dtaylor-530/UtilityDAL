@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Data;
 using System.Windows;
+using System.Windows.Data;
 
 namespace UtilityDAL.View
 {
@@ -17,7 +14,6 @@ namespace UtilityDAL.View
             bool selected = (bool)value;
 
             return convParameter == selected ? Visibility.Visible : Visibility.Collapsed;
-
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -25,7 +21,7 @@ namespace UtilityDAL.View
             throw new NotSupportedException("Not Implemented");
         }
 
-        #endregion
+        #endregion IValueConverter Members
 
         private bool GetConverterParameter(object parameter)
         {

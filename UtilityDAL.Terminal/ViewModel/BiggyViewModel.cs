@@ -1,20 +1,5 @@
-﻿using UtilityDAL.ViewModel;
-using DynamicData;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reactive.Concurrency;
-using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UtilityWpf.ViewModel;
-using UtilityDAL;
-using Reactive.Bindings;
-
-namespace UtilityDAL.DemoApp
+﻿namespace UtilityDAL.DemoApp
 {
-
-
     //public class BiggyViewModel : LiteDbViewModel<DummyDbObject>
     //{
     //    public LiteDbDummyViewModel(Interface.IRepoChangeService<DummyDbObject> repo, UtilityWpf.IDispatcherService scheduler) : base(repo.Resource, EnableAll<DummyDbObject>(), scheduler)
@@ -24,8 +9,6 @@ namespace UtilityDAL.DemoApp
     //    }
     //    private static IObservable<Func<T, bool>> EnableAll<T>() => Observable.Repeat<Func<T, bool>>(_ => true, 1);
     //}
-
-
 
     //public class BiggyViewModel
     //{
@@ -40,16 +23,10 @@ namespace UtilityDAL.DemoApp
     //        .Select((_, i) =>
     //        new Pricecsv { Date = new DateTime((i + 1), (i) % 11 + 1, (i) % 30 + 1), Bid = r.NextDouble(), Offer = r.NextDouble() }));
 
-
-
     //    public BiggyViewModel()
     //    {
     //        DocumentStore = new BiggyRepo<SHDOObject, object>();
     //    }
 
     //}
-
-
-
-
 }

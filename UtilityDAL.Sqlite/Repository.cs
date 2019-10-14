@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 //using System.Data.SQLite;
-using System.Text;
 using UtilityDAL.Common;
-using UtilityDAL.Contract;
 using UtilityInterface.Generic.Database;
 
 namespace UtilityDAL.Sqlite
@@ -13,18 +12,15 @@ namespace UtilityDAL.Sqlite
     {
         public Repository(Func<T, IConvertible> getkey, string dbname = null) : base(getkey, dbname)
         {
-
         }
     }
-
 
     public class Repository<T, R> : IDbService<T, R> where T : new()
     {
         private SQLite.SQLiteConnection connection;
         private Func<T, R> getId;
-        static readonly string providerName = "SQLite";
+        private static readonly string providerName = "SQLite";
 
-  
         public Repository(Func<T, R> getId, string dbname = null)
         {
             System.IO.Directory.CreateDirectory("../../Data");
@@ -32,7 +28,6 @@ namespace UtilityDAL.Sqlite
             this.getId = getId;
             this.connection = new SQLite.SQLiteConnection(string.IsNullOrEmpty(dbname) || string.IsNullOrWhiteSpace(dbname) ? "../../Data/" + typeof(T).Name + "." + Constants.SqliteDbExtension : dbname);
             connection.CreateTable<T>();
-
         }
 
         public bool Delete(T item)
@@ -98,37 +93,25 @@ namespace UtilityDAL.Sqlite
             return connection.Delete(connection.Table<T>().SingleOrDefault(_ => getId(_).Equals(id))) > 0;
         }
 
-
-
-
         //public ICollection<T> FromDb<T>(string name) where T: IChildRow, new()
         //{
         //    return UtilityDAL.SqliteEx.FromDb<T>();
 
         //}
 
-
-
         //public bool ToDb<T>(ICollection<T> lst, string name) where T : IChildRow, new()
         //{
         //    return UtilityDAL.SqliteEx.ToDb<T>(lst);
         //}
 
-
-
         //public List<string> SelectIds()
         //{
         //    return System.IO.Directory.GetFiles(dbName).Select(_ => System.IO.Path.GetFileNameWithoutExtension(_)).ToList();
         //}
-
-
     }
-
 
     //public class Sqlite2<T> : UtilityInterface.Generic.Database.IDbService<T> where T : new()
     //{
-
-
     //    //static readonly string _dbName;
     //    private static SQLite.SQLiteConnection _connection;
 
@@ -144,7 +127,6 @@ namespace UtilityDAL.Sqlite
 
     //    public Sqlite2( string dbname = null)
     //    {
-
     //        if (dbname != null)
     //        {
     //            _connection = new SQLite.SQLiteConnection(@"Data/" + dbname);
@@ -166,7 +148,6 @@ namespace UtilityDAL.Sqlite
     //    {
     //        return _connection.Table<T>().SingleOrDefault(_ => _.Equals(item));
     //    }
-
 
     //    public bool Insert(T item)
     //    {
@@ -190,29 +171,21 @@ namespace UtilityDAL.Sqlite
     //        _connection.Dispose();
     //    }
 
-
-
-
     //    //public ICollection<T> FromDb<T>(string name) where T: IChildRow, new()
     //    //{
     //    //    return UtilityDAL.SqliteEx.FromDb<T>();
 
     //    //}
 
-
-
     //    //public bool ToDb<T>(ICollection<T> lst, string name) where T : IChildRow, new()
     //    //{
     //    //    return UtilityDAL.SqliteEx.ToDb<T>(lst);
     //    //}
 
-
-
     //    //public List<string> SelectIds()
     //    //{
     //    //    return System.IO.Directory.GetFiles(dbName).Select(_ => System.IO.Path.GetFileNameWithoutExtension(_)).ToList();
     //    //}
-
 
     //}
 }

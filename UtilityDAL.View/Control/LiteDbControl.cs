@@ -1,29 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using LiteDB;
+using System;
 using System.Reactive.Subjects;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using UtilityWpf.View;
-using CH.Bson;
-using LazyData;
-
-using LazyData.Json;
-using LazyData.Mappings.Mappers;
-using LazyData.Mappings.Types;
-using LazyData.Registries;
-using System.Reflection;
-using System.Collections;
-using System.Reactive.Linq;
-using DynamicData;
-using UtilityWpf;
-using LiteDB;
-using UtilityDAL;
-using UtilityWpf.ViewModel;
-using UtilityInterface.Generic;
 using UtilityDAL.Common;
+using UtilityInterface.Generic;
+using UtilityWpf.ViewModel;
 
 namespace UtilityDAL.View
 {
@@ -31,7 +12,6 @@ namespace UtilityDAL.View
     //{
     //    public LiteDbControl(Func<object, IConvertible> gk) : base(gk) { }
     //}
-
 
     public class LiteDbControl : DocumentStoreControl //where T : new()
     {
@@ -42,39 +22,29 @@ namespace UtilityDAL.View
                 var mapper = BsonMapper.Global;
 
                 mapper.Entity<SHDOObject>()
-                    .Id(x => x.Id) 
+                    .Id(x => x.Id)
                     //.DbRef(x => x.Object, "objects")
                     // set your document ID
                     .Ignore(x => x.Deletions) // ignore this property (do not store)
                       .Ignore(x => x.DeleteCommand);
 
-
                 mapper.Entity<SHDObject<object>>()
     .Id(x => x.Object, true) // set your document ID
     .Ignore(x => x.Deletions) // ignore this property (do not store)
       .Ignore(x => x.DeleteCommand);
-
             }
             catch
             {
-
             }
-
         }
 
         public LiteDbControl() : base(new UtilityDAL.LiteDbRepo<SHDOObject, IConvertible>(GetDirectory))
         {
-
         }
-
 
         private static string GetDirectory =>
             UtilityDAL.Common.DbEx.GetDirectory("../../data", UtilityDAL.Constants.LiteDbExtension, typeof(SHDOObject));
-
     }
-
-
-
 
     public class LiteDbControl<T> : DocumentStoreControl where T : new()
     {
@@ -90,15 +60,14 @@ namespace UtilityDAL.View
         {
             (d as LiteDbControl<T>).MapperSubject.OnNext((BsonMapper)e.NewValue);
         }
-        protected ISubject<BsonMapper> MapperSubject = new Subject<BsonMapper>();
 
+        protected ISubject<BsonMapper> MapperSubject = new Subject<BsonMapper>();
 
         //static LiteDbControl()
         //{
         //    UtilityWpf.View.CollectionEditor.InputProperty.OverrideMetadata(typeof(LiteDbControl<T>), new PropertyMetadata(default(DatabaseCommand), DatabaseCommandChange));
         //    DefaultStyleKeyProperty.OverrideMetadata(typeof(LiteDbControl<T>), new FrameworkPropertyMetadata(typeof(LiteDbControl<T>)));
         //}
-
 
         public LiteDbControl(Func<object, object> getKey, string directory = null, string key = null) : base(GetRepo(_ => (IConvertible)getKey(((SHDOObject)_).Object), directory), getKey)
         {
@@ -112,14 +81,5 @@ namespace UtilityDAL.View
 
         private static LiteDbRepo<SHDOObject, IConvertible> GetRepo(Func<object, object> getKey, string directory)
         => new LiteDbRepo<SHDOObject, IConvertible>(_ => (IConvertible)getKey(_), UtilityDAL.Common.DbEx.GetDirectory<T>(directory, UtilityDAL.Constants.LiteDbExtension));
-
-
     }
-
-
-
-
-
 }
-
-

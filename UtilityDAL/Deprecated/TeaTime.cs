@@ -10,12 +10,8 @@
 
 //namespace UtilityDAL
 //{
-
-
 //    public  class Teatime
 //    {
-
-
 //        //static readonly string dbName;
 
 //        //static readonly string providerName = "TeaTime";
@@ -25,9 +21,6 @@
 //        //    dbName = Helper.GetConnectionString(providerName, false);
 
 //        //}
-
-
-
 
 //        public static void ToDb<T>(IList<T> items, string id, string dbpath) where T : struct//, IComparable
 //        {
@@ -50,7 +43,7 @@
 //                    else
 //                        return;
 //                }
-   
+
 //                // create file and write values
 //                using (var tf = TeaFile<T>.Create(connection))
 //                {
@@ -60,10 +53,8 @@
 //                }
 //        }
 
-
 //        public static void ToDb<T>(T item, string id, string dbpath) where T : struct//, IComparable
 //        {
-
 //            if (File.Exists(Path.Combine(dbpath, id + ".tea")))
 //                try
 //                {
@@ -85,17 +76,13 @@
 //                }
 //        }
 
-
-
 //        public static List<T> FromDb<T>(string id, string dbpath) where T : struct //, IChildRow //IComparable
 //        {
-
 //            if (File.Exists(Path.Combine(dbpath, id + ".tea")))
 //                try
 //                {
 //                    using (var tf = TeaFile<T>.OpenRead(Path.Combine(dbpath, id + ".tea")))
 //                    {
-
 //                        return tf.Items.ToList();
 //                    }
 //                }
@@ -129,7 +116,6 @@
 
 //        }
 
-
 //        public static async System.Threading.Tasks.Task<IObservable<T>> FromDbAsync<T>(string id, string dbpath) where T : struct //, IChildRow//, IComparable
 //        {
 //          return await DbEx.FromDbAsync(  System.Threading.Tasks.Task.Run(() =>
@@ -139,7 +125,6 @@
 //                    {
 //                        using (var tf = TeaFile<T>.OpenRead(Path.Combine(dbpath, id + ".tea")))
 //                        {
-
 //                            return tf.Items.ToList();
 //                        }
 //                    }
@@ -154,6 +139,5 @@
 
 //        }
 
-        
 //    }
 //}

@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace UtilityDAL.Model
 {
-
-
-
     public class Log
     {
         public string Key { get; set; }
@@ -27,5 +22,4 @@ namespace UtilityDAL.Model
         Warning,
         Error
     }
-
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -16,14 +11,12 @@ namespace UtilityDAL.View
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NavigatorView), new FrameworkPropertyMetadata(typeof(NavigatorView)));
         }
 
-
         public IEnumerable ItemsSource
         {
             get { return (IEnumerable)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
 
-        public static readonly DependencyProperty ItemsSourceProperty =  DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(NavigatorView), new PropertyMetadata(null));
-
+        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(NavigatorView), new PropertyMetadata(null));
     }
 }

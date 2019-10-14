@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using UtilityDAL.Contract;
 using UtilityInterface.Generic.Database;
 
 namespace UtilityDAL
 {
     public static class IDbServiceHelper
     {
-
         public static bool Upsert<T, R>(this IDbService<T, R> store, T _b)
         {
             //var collection = store.GetCollection(out IDisposable disposable);
@@ -30,7 +26,6 @@ namespace UtilityDAL
                 {
                     Console.WriteLine(e.Message + "/n/r" + "unable to insert item " + _b.ToString());
                 }
-
             }
 
             if (result == null)

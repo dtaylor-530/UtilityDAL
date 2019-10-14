@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
-
 namespace UtilityDAL.View
 {
-
     public class TypeControl : HeaderedContentControl
     {
         static TypeControl()
@@ -19,7 +14,6 @@ namespace UtilityDAL.View
 
         public TypeControl()
         {
-
         }
 
         public override void OnApplyTemplate()
@@ -52,8 +46,6 @@ namespace UtilityDAL.View
             RaiseApplyEvent();
         }
 
-
-
         public bool ShowValue
         {
             get { return (bool)GetValue(ShowValueProperty); }
@@ -63,8 +55,6 @@ namespace UtilityDAL.View
         // Using a DependencyProperty as the backing store for ShowValue.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ShowValueProperty =
             DependencyProperty.Register("ShowValue", typeof(bool), typeof(TypeControl), new PropertyMetadata(true));
-
-
 
         public string Property
         {
@@ -76,7 +66,6 @@ namespace UtilityDAL.View
         public static readonly DependencyProperty PropertyProperty =
             DependencyProperty.Register("Property", typeof(string), typeof(TypeControl), new PropertyMetadata(null));
 
-
         public string Value
         {
             get { return (string)GetValue(ValueProperty); }
@@ -87,8 +76,6 @@ namespace UtilityDAL.View
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register("Value", typeof(string), typeof(TypeControl), new PropertyMetadata(null));
 
-
-
         public Type Type
         {
             get { return (Type)GetValue(TypeProperty); }
@@ -97,10 +84,6 @@ namespace UtilityDAL.View
 
         // Using a DependencyProperty as the backing store for Type.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TypeProperty = DependencyProperty.Register("Type", typeof(Type), typeof(TypeControl), new PropertyMetadata(null));
-
-
-
-
 
         // Create a custom routed event by first registering a RoutedEventID
         // This event uses the bubbling routing strategy
@@ -115,17 +98,17 @@ namespace UtilityDAL.View
         }
 
         // This method raises the Apply event
-        void RaiseApplyEvent()
+        private void RaiseApplyEvent()
         {
             RoutedEventArgs newEventArgs = new RoutedEventArgs(TypeControl.ApplyEvent);
             RaiseEvent(newEventArgs);
         }
 
-
         // Create a custom routed event by first registering a RoutedEventID
         // This event uses the bubbling routing strategy
         public static readonly RoutedEvent ClearEvent = EventManager.RegisterRoutedEvent(
             "Clear", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TypeControl));
+
         private ComboBox comboBox;
         private Button buttonFilter;
         private Button buttonClear;
@@ -138,13 +121,10 @@ namespace UtilityDAL.View
         }
 
         // This method raises the Clear event
-        void RaiseClearEvent()
+        private void RaiseClearEvent()
         {
             RoutedEventArgs newEventArgs = new RoutedEventArgs(TypeControl.ClearEvent);
             RaiseEvent(newEventArgs);
         }
-
     }
-
-
 }

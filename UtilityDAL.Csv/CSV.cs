@@ -5,10 +5,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using UtilityDAL.Common;
-using UtilityDAL.Contract;
 using UtilityDAL.Contract.Generic;
 using UtilityDAL.Contract.NonGeneric;
 
@@ -18,10 +16,9 @@ namespace UtilityDAL.CSV
     {
         //static TextReader text;
 
-        readonly string dbName;
+        private readonly string dbName;
 
-        static readonly string providerName = "CSV";
-
+        private static readonly string providerName = "CSV";
 
         //static CSV(string path = null)
         //{
@@ -29,7 +26,6 @@ namespace UtilityDAL.CSV
         //        dbName = Helper.GetConnectionString(providerName, false);
         //    else
         //        dbName = path;
-
 
         //}
         public CSV(string path = null)
@@ -49,7 +45,6 @@ namespace UtilityDAL.CSV
         {
             return System.IO.Directory.GetFiles(dbName).Select(_ => System.IO.Path.GetFileNameWithoutExtension(_)).ToList();
         }
-
 
         public IList<T> From(string name)
         {
@@ -76,8 +71,6 @@ namespace UtilityDAL.CSV
             return true;
         }
 
-
-
         public IObservable<T> FromDbAsync(string name)
         {
             throw new NotImplementedException();
@@ -91,15 +84,13 @@ namespace UtilityDAL.CSV
         }
     }
 
-
     public class CSV : IFileDbService
     {
         //static TextReader text;
 
-        readonly string dbName;
+        private readonly string dbName;
 
-        static readonly string providerName = "CSV";
-
+        private static readonly string providerName = "CSV";
 
         //static CSV(string path = null)
         //{
@@ -107,7 +98,6 @@ namespace UtilityDAL.CSV
         //        dbName = Helper.GetConnectionString(providerName, false);
         //    else
         //        dbName = path;
-
 
         //}
         public CSV(string path = null)
@@ -125,7 +115,6 @@ namespace UtilityDAL.CSV
             return System.IO.Directory.GetFiles(dbName).Select(_ => System.IO.Path.GetFileNameWithoutExtension(_)).ToList();
         }
 
-
         public ICollection From(string name)
         {
             var text = Path.Combine(dbName, name.Replace(".csv", "") + ".csv");
@@ -134,7 +123,7 @@ namespace UtilityDAL.CSV
                 return new object[] { };
             }
             else
-                // Using an XML Config file. 
+                // Using an XML Config file.
                 using (GenericParserAdapter parser = new GenericParserAdapter(text))
                 {
                     parser.ColumnDelimiter = ',';
@@ -157,14 +146,10 @@ namespace UtilityDAL.CSV
             return true;
         }
 
-
-
-
         //public IObservable<dynamic> FromDbAsync(string name)
         //{
         //    return Observable.FromAsync(_ =>
         //  new CSV().FromDbAsync(dbName, name + ".csv")).Switch();
-
 
         //}
         public async Task<IObservable<T>> FromDbAsync<T>(string basepath, string file)
@@ -180,7 +165,6 @@ namespace UtilityDAL.CSV
             //{
             //    var obs = Observable.Create<T>(async observer =>
             //    {
-
             //        while (true)
 
             //        {
@@ -235,16 +219,13 @@ namespace UtilityDAL.CSV
                 }
             }
         }
-
     }
 
     //public class CSV //:IDbService
     //{
-
     //    static readonly string dbName;
 
     //    static readonly string providerName = "CSV";
-
 
     //    static CSV()
     //    {
@@ -256,7 +237,6 @@ namespace UtilityDAL.CSV
     //    {
     //        return System.IO.Directory.GetFiles(dbName).Select(_ => System.IO.Path.GetFileNameWithoutExtension(_)).ToList();
     //    }
-
 
     //    public static List<T> FromDb<T>(string name)
     //    {
@@ -275,23 +255,16 @@ namespace UtilityDAL.CSV
     //        return true;
     //    }
 
-
-
     //    public static IObservable<T> FromDbAsync<T>(string file)
     //    {
     //        return Observable.FromAsync(_ =>
     //         FromDbAsync<T>(dbName, file + ".csv")).Switch();
     //    }
 
-
-
     //    public static System.Collections.ICollection FromDb(string path)
     //    {
-
     //        return CsvHelper.Parse(path);
     //    }
-
-
 
     //    public static async Task<IObservable<T>> FromDbAsync<T>(string basepath, string file)
     //    {
@@ -306,7 +279,6 @@ namespace UtilityDAL.CSV
     //        //{
     //        //    var obs = Observable.Create<T>(async observer =>
     //        //    {
-
     //        //        while (true)
 
     //        //        {
@@ -334,11 +306,5 @@ namespace UtilityDAL.CSV
     //        //});
     //    }
 
-
     //}
-
-
-
-
 }
-
