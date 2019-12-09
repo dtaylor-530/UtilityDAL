@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
  xmlns:local="clr-namespace:UtilityDAL.DemoApp"
       xmlns:dv="clr-namespace:UtilityDAL.View;assembly=UtilityDAL.View"
-      xmlns:utility="clr-namespace:UtilityWpf.View;assembly=UtilityWpf.View"
+      xmlns:utility="clr-namespace:UtilityWpf.View;assembly=UtilityWpf.ViewCore"
       mc:Ignorable="d"
       d:DesignHeight="300" d:DesignWidth="300"
       Title="MainPage">

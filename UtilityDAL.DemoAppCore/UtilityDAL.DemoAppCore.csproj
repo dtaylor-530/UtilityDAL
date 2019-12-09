@@ -1,0 +1,134 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Json\DALViewer.DemoApp\**" />
+    <Compile Remove="Data\Json\UtilityDAL.DemoApp\**" />
+    <EmbeddedResource Remove="Data\Json\DALViewer.DemoApp\**" />
+    <EmbeddedResource Remove="Data\Json\UtilityDAL.DemoApp\**" />
+    <None Remove="Data\Json\DALViewer.DemoApp\**" />
+    <None Remove="Data\Json\UtilityDAL.DemoApp\**" />
+    <Page Remove="Data\Json\DALViewer.DemoApp\**" />
+    <Page Remove="Data\Json\UtilityDAL.DemoApp\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="License.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Data\Json\DALViewer.Terminal\Filex.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoBogus" Version="2.7.3" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="3.7.0" />
+    <PackageReference Include="QuickConverter" Version="1.2.5" />
+    <PackageReference Include="Unity" Version="5.11.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UtilityDAL.ViewCore\UtilityDAL.ViewCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="License.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="App.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="MainWindow.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Page\BiggyPage.xaml.cs">
+      <DependentUpon>BiggyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Page\CsvDataGridPage.xaml.cs">
+      <DependentUpon>CsvDataGridPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Page\FileCRUD.xaml.cs">
+      <DependentUpon>FileCRUD.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Page\FileViewerPage.xaml.cs">
+      <DependentUpon>FileViewerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Page\GuidStringPage.xaml.cs">
+      <DependentUpon>GuidStringPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Page\LiteDbPage.xaml.cs">
+      <DependentUpon>LiteDbPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Page\LogPage.xaml.cs">
+      <DependentUpon>LogPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Page\PaginatedPage.xaml.cs">
+      <DependentUpon>PaginatedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Page\ServerFilePage.xaml.cs">
+      <DependentUpon>ServerFilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Page\ToolKitPage.xaml.cs">
+      <DependentUpon>ToolKitPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="ModelView\DummyLiteDbObjectDataTemplate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ModelView\PriceDataTemplate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Page\BiggyPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Page\CsvDataGridPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Page\FileCRUD.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Page\FileViewerPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Page\GuidStringPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Page\LiteDbPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Page\LogPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Page\PaginatedPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Page\ServerFilePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Page\ToolKitPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,41 @@
+﻿<Page x:Class="UtilityDAL.DemoApp.GuidStringPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+xmlns:local="clr-namespace:UtilityDAL.DemoApp"
+    mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="GuidStringPage">
+
+    <UniformGrid>
+
+        <Grid Width="250" Height="150" Background="Gainsboro">
+            <TextBox x:Name="A" Width="100" Height="30"  Background="White">
+                <TextBox.Text>
+                    <Binding Path="AText"
+                 Mode="TwoWay"
+                 UpdateSourceTrigger="PropertyChanged"
+                 ConverterParameter="Int32"
+                 ValidatesOnNotifyDataErrors="True"
+                 ValidatesOnDataErrors="True"
+                 NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <local:LengthValidationRule       ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </Grid>
+
+        <Grid Width="350" Height="150" Background="Gainsboro">
+            <TextBlock x:Name="B" Width="300" Height="30" Background="White" ></TextBlock>
+        </Grid>
+        <Grid Width="250" Height="150" Background="Gainsboro">
+            <TextBlock x:Name="C" Width="100" Height="30"  Background="White"> </TextBlock>
+        </Grid>
+        <Grid Width="350" Height="150" Background="Gainsboro">
+            <Button Content="Convert Back" Click="Button_Click"></Button>
+        </Grid>
+    </UniformGrid>
+</Page>

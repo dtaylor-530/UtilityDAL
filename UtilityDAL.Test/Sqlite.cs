@@ -66,11 +66,43 @@ namespace UtilityDAL.Test
             }
         }
 
-        private class xx
+        [Fact]
+        public void TestRemoveDuplicates()
+        {
+            var directory = System.IO.Directory.CreateDirectory("../../../Data");
+            using (var conn = new SQLiteConnection(System.IO.Path.Combine(directory.FullName, "Test2.sqlite")))
+            {
+                conn.CreateTable<xx>();
+                conn.DeleteAll<xx>();
+                conn.InsertAll(Factory.GetTicks(100));
+                conn.InsertAll(Factory.GetTicks(100));
+                var result = conn.Take<xx>(200);
+                Assert.True(result.Count() == 200);
+                conn.RemoveDuplicates<xx>();
+                Assert.True(conn.Table<xx>().Count() == 100);
+            }
+        }
+
+        private class xx : IEquatable<xx>
         {
             public int Id { get; set; }
 
             public DateTime Ticks { get; set; }
+
+            public bool Equals(xx other)
+            {
+                return this.Id == other.Id && this.Ticks == other.Ticks;
+            }
+
+            public override bool Equals(object obj)
+            {
+                return base.Equals(obj as xx);
+            }
+
+            public override int GetHashCode()
+            {
+                return Id;
+            }
         }
 
         private class Factory

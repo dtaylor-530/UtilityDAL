@@ -1,0 +1,50 @@
+﻿<Page x:Class="UtilityDAL.DemoApp.BiggyPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:UtilityDAL.DemoApp"
+      xmlns:mvvm="clr-namespace:UtilityWpf.View;assembly=UtilityWpf.ViewCore"
+xmlns:utility="clr-namespace:UtilityWpf.View;assembly=UtilityWpf.ViewCore"
+
+      Title="BiggyPage"
+
+      mc:Ignorable="d">
+
+        <Page.Resources>
+            <local:MainViewModelLocator x:Key="MainViewModelLocatorDataSource" d:IsDataSource="True" />
+        </Page.Resources>
+
+    <TabControl>
+        <!--<TabItem Header="Control">
+            <Grid>
+                <Grid.DataContext>
+                    <Binding Mode="OneWay" Path="BiggyVM" Source="{StaticResource MainViewModelLocatorDataSource}" />
+                </Grid.DataContext>
+                --><!--<view:LiteDbControl NewItem="{Binding NewItem.Value,TargetNullValue={x:Static system:String.Empty}}" Key="Id" Mapper="{Binding Mapper,Mode=OneWay}" ></view:LiteDbControl>--><!--
+                <local:BiggyControl utility:ItemsControlEx.NewItem="{Binding NewItem.Value,Mode=OneWay}"  ></local:BiggyControl>
+            </Grid>
+        </TabItem>-->
+        <TabItem Header="Custom">
+            <Grid>
+                <Grid.DataContext>
+                    <Binding Mode="OneWay" Path="BiggyVM" Source="{StaticResource MainViewModelLocatorDataSource}" />
+                </Grid.DataContext>
+                <!--<view:LiteDbControl NewItem="{Binding NewItem.Value,TargetNullValue={x:Static system:String.Empty}}" Key="Id" Mapper="{Binding Mapper,Mode=OneWay}" ></view:LiteDbControl>-->
+                <!--<local:BiggyControl utility:ItemsControlEx.NewItem="{Binding NewItem.Value,Mode=OneWay}"  ></local:BiggyControl>-->
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Attached property Control">
+            <Grid>
+                <Grid.DataContext>
+                    <Binding Mode="OneWay" Path="BiggyVM" Source="{StaticResource MainViewModelLocatorDataSource}" />
+                </Grid.DataContext>
+                <!--<view:LiteDbControl NewItem="{Binding NewItem.Value,TargetNullValue={x:Static system:String.Empty}}" Key="Id" Mapper="{Binding Mapper,Mode=OneWay}" ></view:LiteDbControl>-->
+                <!--<utility:ListBoxEx  utility:NewItemAttached.NewItem="{Binding NewItem.Value}" Key="Id" ></utility:ListBoxEx>-->
+                <utility:ListBoxEx utility:ItemsControlEx.NewItem="{Binding NewItem.Value,Mode=OneWay}"   utility:Ex.SecurityId="1"></utility:ListBoxEx>
+                <!--mvvm:ListBoxExDocumentStore.Store="{Binding DocumentStore,Mode=OneTime}"-->
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Page>

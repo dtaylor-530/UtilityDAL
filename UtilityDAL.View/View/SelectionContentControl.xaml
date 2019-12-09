@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                              xmlns:converter="clr-namespace:UtilityDAL.Converter"
                     xmlns:pt="http://propertytools.org/wpf"
-                       xmlns:utility="clr-namespace:UtilityWpf.View;assembly=UtilityWpf.View"
+                       xmlns:utility="clr-namespace:UtilityWpf.View;assembly=UtilityWpf.ViewCore"
                     xmlns:local="clr-namespace:UtilityDAL">
 
     <!--  <ResourceDictionary.MergedDictionaries>

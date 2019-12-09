@@ -5,7 +5,7 @@ using UtilityStruct;
 
 namespace UtilityDAL.Sqlite
 {
-    public static class Filter
+    public static class DateTimeFilter
     {
         public static List<T> Take<T>(this SQLite.SQLiteConnection conn, int number) where T : new() => conn.Query<T>($"select * from {typeof(T).GetName()} limit {number}");
 

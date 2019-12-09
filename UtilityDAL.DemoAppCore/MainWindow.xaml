@@ -1,0 +1,77 @@
+﻿<Window x:Class="UtilityDAL.DemoApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UtilityDAL.DemoApp"
+
+        mc:Ignorable="d"
+        Title="MainWindow" Height="750" Width="925"
+      d:DesignHeight="600" d:DesignWidth="800">
+
+    <FrameworkElement.Resources>
+
+        <XmlDataProvider x:Key="Pages">
+            <x:XData>
+                <Pages xmlns="">
+                    <Page Uri="\Page\LogPage.xaml"         Title="Log" />
+                    <Page Uri="\Page\FileViewerPage.xaml"         Title="FileViewer" />
+                    <Page Uri="\Page\ServerFilePage.xaml"              Title="Server Page" />
+                    <Page Uri="\Page\PaginatedPage.xaml"              Title="Paginated" />
+                    <Page Uri="\Page\FileCRUD.xaml"              Title="File CRUD" />
+                    <Page Uri="\Page\BiggyPage.xaml"              Title="Biggy" />
+                    <Page Uri="\Page\LiteDbPage.xaml"              Title="LiteDb" />
+                    <Page Uri="\Page\ToolKitPage.xaml"              Title="ToolKit" />
+                    <Page Uri="\Page\GuidStringPage.xaml"              Title="Guid" />
+                </Pages>
+            </x:XData>
+        </XmlDataProvider>
+    </FrameworkElement.Resources>
+
+  <DockPanel>
+
+    <!-- MENU BAR -->
+    <Menu DockPanel.Dock="Top" IsMainMenu="True" Grid.Row="0" Grid.Column="0" Margin="0" Padding="5,0" Height="26" Background="White">
+        <MenuItem Header="_File" Height="26">
+            <MenuItem Header="Minimize to _Tray" Command="{Binding MinimizeToTrayCmd}" CommandParameter="{Binding ElementName=MainWindowView}" />
+            <MenuItem Header="_Exit" Command="{Binding ExitAppCmd}" />
+        </MenuItem>
+        <!--<MenuItem Header="_Tools" Height="26">
+                <MenuItem Header="_Options" Command="{Binding ShowAppSettingsCmd}" Height="26" />
+            </MenuItem>
+            <MenuItem Header="_Help" Command="{Binding ShowHelpCmd}" />-->
+    </Menu>
+
+    <Grid SnapsToDevicePixels="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Border>
+            <!--<FrameworkElement.Resources>
+                <ResourceDictionary Source="/AvalonLibrary;component/themes/avalon.xaml" />
+            </FrameworkElement.Resources>-->
+            <ListBox Name="PageList"
+             SelectedIndex="0"
+             ItemsSource="{Binding Source={StaticResource Pages}, XPath=Pages/Page}"
+             VerticalAlignment="Top"
+             SelectedValuePath="@Uri"
+             DisplayMemberPath="@Title"
+             Margin="10,10,20,10"
+             BorderThickness="0"
+             Background="Transparent"
+             ItemContainerStyle="{StaticResource ColorItemContainerStyle}">
+            </ListBox>
+        </Border>
+
+        <Border Grid.Column="1"
+          Background="White"
+          Padding="0,10,10,10">
+            <Frame Name="ContentFrame"
+           Source="{Binding ElementName=PageList, Path=SelectedValue}"
+           NavigationUIVisibility="Hidden" />
+        </Border>
+    </Grid>
+    </DockPanel>
+</Window>

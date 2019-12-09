@@ -23,6 +23,30 @@ namespace UtilityDAL
 
         public static SQLite.SQLiteConnection MakeConnection() => new SQLite.SQLiteConnection(_dbName);
 
+
+        public static bool RemoveDuplicates<T>(this SQLiteConnection connection, bool createBackup = true)
+            where T : IEquatable<T>,
+            new()
+        {
+            var dir = System.IO.Directory.GetParent(connection.DatabasePath);
+
+            connection.Backup(dir.FullName+"\\Backup");
+            var table = connection.Table<T>().ToList().Distinct();
+
+            connection.DropTable<T>();
+
+            if (connection.CreateTable<T>() == CreateTableResult.Created)
+            {
+                connection.InsertAll(table);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
         public static void Create<T>(string path)
         {
             using (SQLiteConnection db = new SQLiteConnection(path))

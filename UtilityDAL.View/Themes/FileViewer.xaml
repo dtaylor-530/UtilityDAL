@@ -3,7 +3,7 @@
           xmlns:local="clr-namespace:UtilityDAL.View"
                     xmlns:converter="clr-namespace:UtilityDAL.Converter"
                     xmlns:pt="http://propertytools.org/wpf"
-                       xmlns:utility="clr-namespace:UtilityWpf.View;assembly=UtilityWpf.View"
+                       xmlns:utility="clr-namespace:UtilityWpf.View;assembly=UtilityWpf.ViewCore"
                     xmlns:utilitywpf="clr-namespace:UtilityWpf;assembly=UtilityWpf.Common"
                         xmlns:viewmodel="clr-namespace:UtilityWpf.ViewModel;assembly=UtilityWpf.View">
 

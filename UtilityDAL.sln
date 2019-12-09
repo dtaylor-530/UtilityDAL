@@ -5,10 +5,6 @@ VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UtilityDAL", "UtilityDAL\UtilityDAL.csproj", "{E4D7B86A-3B26-4FBE-BA37-BF1D935F6EE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilityDAL.View", "UtilityDAL.View\UtilityDAL.View.csproj", "{AD51A125-E97B-4AE8-AEE7-0EF4268FBD30}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilityDAL.DemoApp", "UtilityDAL.Terminal\UtilityDAL.DemoApp.csproj", "{E92D854F-F57F-4546-AF3D-3D1EB148EC94}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UtilityDAL.Model", "UtilityDAL.Model\UtilityDAL.Model.csproj", "{CEF231D6-FF3D-41CD-A207-146FD68B50CD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UtilityDAL.Sqlite", "UtilityDAL.Sqlite\UtilityDAL.Sqlite.csproj", "{E85BC833-4906-4497-9D02-80498C63A137}"
@@ -17,7 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UtilityDAL.Teatime", "Utili
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UtilityDAL.Test", "UtilityDAL.Test\UtilityDAL.Test.csproj", "{60AD7422-A33C-48D9-AED5-5C98C18A92D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilityDAL.CSV", "UtilityDAL.Csv\UtilityDAL.CSV.csproj", "{EEB54A0E-BB43-4655-A07C-1DDF2264D5A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UtilityDAL.CSV", "UtilityDAL.Csv\UtilityDAL.CSV.csproj", "{EEB54A0E-BB43-4655-A07C-1DDF2264D5A9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UtilityDAL.ViewCore", "UtilityDAL.ViewCore\UtilityDAL.ViewCore.csproj", "{F6D8F136-1913-4CE0-AF8D-8634CDC3048B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{AFEBAF7B-1B4F-4F9C-9DC8-88149BF1B9AA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UtilityDAL.DemoAppCore", "UtilityDAL.DemoAppCore\UtilityDAL.DemoAppCore.csproj", "{688BCC61-39AC-4DA5-A7A2-49B040184798}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,14 +31,6 @@ Global
 		{E4D7B86A-3B26-4FBE-BA37-BF1D935F6EE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4D7B86A-3B26-4FBE-BA37-BF1D935F6EE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4D7B86A-3B26-4FBE-BA37-BF1D935F6EE9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AD51A125-E97B-4AE8-AEE7-0EF4268FBD30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD51A125-E97B-4AE8-AEE7-0EF4268FBD30}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD51A125-E97B-4AE8-AEE7-0EF4268FBD30}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AD51A125-E97B-4AE8-AEE7-0EF4268FBD30}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E92D854F-F57F-4546-AF3D-3D1EB148EC94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E92D854F-F57F-4546-AF3D-3D1EB148EC94}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E92D854F-F57F-4546-AF3D-3D1EB148EC94}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E92D854F-F57F-4546-AF3D-3D1EB148EC94}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CEF231D6-FF3D-41CD-A207-146FD68B50CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CEF231D6-FF3D-41CD-A207-146FD68B50CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEF231D6-FF3D-41CD-A207-146FD68B50CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,9 +51,20 @@ Global
 		{EEB54A0E-BB43-4655-A07C-1DDF2264D5A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEB54A0E-BB43-4655-A07C-1DDF2264D5A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEB54A0E-BB43-4655-A07C-1DDF2264D5A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6D8F136-1913-4CE0-AF8D-8634CDC3048B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6D8F136-1913-4CE0-AF8D-8634CDC3048B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6D8F136-1913-4CE0-AF8D-8634CDC3048B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6D8F136-1913-4CE0-AF8D-8634CDC3048B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{688BCC61-39AC-4DA5-A7A2-49B040184798}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{688BCC61-39AC-4DA5-A7A2-49B040184798}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{688BCC61-39AC-4DA5-A7A2-49B040184798}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{688BCC61-39AC-4DA5-A7A2-49B040184798}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{688BCC61-39AC-4DA5-A7A2-49B040184798} = {AFEBAF7B-1B4F-4F9C-9DC8-88149BF1B9AA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C6487952-3B54-44E8-9311-3CCD917F5DC5}

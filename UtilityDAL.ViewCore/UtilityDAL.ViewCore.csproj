@@ -1,0 +1,90 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="UtilityWpf.ViewCore" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UtilityDAL.Csv\UtilityDAL.CSV.csproj" />
+    <ProjectReference Include="..\UtilityDAL.Model\UtilityDAL.Model.csproj" />
+    <ProjectReference Include="..\UtilityDAL.Sqlite\UtilityDAL.Sqlite.csproj" />
+    <ProjectReference Include="..\UtilityDAL.TeaTime\UtilityDAL.Teatime.csproj" />
+    <ProjectReference Include="..\UtilityDAL\UtilityDAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="View\CollectionUserControl.xaml.cs">
+      <DependentUpon>CollectionUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\CsvSelectionUserControl.xaml.cs">
+      <DependentUpon>CsvSelectionUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\LogUserControl.xaml.cs">
+      <DependentUpon>LogUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\TeaSelectionUserControl.xaml.cs">
+      <DependentUpon>TeaSelectionUserControl.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="ModelView\BSonDataTemplate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ModelView\DataFileDataTemplate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ModelView\Filex.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ModelView\Filext.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\FileCRUDControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\FileDbControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\FileViewer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Themes\ListBoxCriteria.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\LiteDbControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\NavigatorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\ServerFiles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\TypeControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CollectionUserControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CsvSelectionUserControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\LogUserControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\TeaSelectionUserControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>
