@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
           xmlns:local="clr-namespace:UtilityDAL.View"
-                    xmlns:converter="clr-namespace:UtilityDAL.Converter"
+                  
                     xmlns:pt="http://propertytools.org/wpf"
                        xmlns:utility="clr-namespace:UtilityWpf.View;assembly=UtilityWpf.ViewCore"
                     xmlns:utilitywpf="clr-namespace:UtilityWpf;assembly=UtilityWpf.CommonCore"
@@ -49,9 +49,12 @@
                                                         Margin="30,0,0,0" />
                         </WrapPanel>
 
-                        <ListView   DockPanel.Dock="Top" MaxHeight="100" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        <ListView 
+                            DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                            DockPanel.Dock="Top" MaxHeight="100" ScrollViewer.VerticalScrollBarVisibility="Auto"
                             SelectedItem="{Binding Output, RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay}"
                                    ItemsSource="{Binding Source={StaticResource GroupedItems}}">
+
                             <!--ItemsSource="{Binding Items, RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}"-->
                             <ListView.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -63,7 +66,7 @@
                                     <GroupStyle.HeaderTemplate>
                                         <DataTemplate>
                                             <!--<TextBlock FontWeight="Bold" FontSize="14" Text="{Binding .,Converter={StaticResource Converter}}" />-->
-                                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}" />
+                                            <Button FontWeight="Bold" Background="Transparent" FontSize="14" Content="{Binding Name}" BorderThickness="0" HorizontalContentAlignment="Left" Command="{Binding Path=DataContext.GroupClick, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding Name}"/>
                                         </DataTemplate>
                                     </GroupStyle.HeaderTemplate>
                                     <!--<GroupStyle.ContainerStyle>
@@ -95,9 +98,34 @@
                                 </GroupStyle>
                             </ListView.GroupStyle>
                         </ListView>
-                        <ContentPresenter Content="{Binding OutputView,RelativeSource={RelativeSource TemplatedParent}}">
-                        </ContentPresenter>
+                        <!--<ContentPresenter Content="{Binding OutputView,RelativeSource={RelativeSource TemplatedParent}}">
+                        </ContentPresenter>-->
 
+                        <!--<ContentControl DockPanel.Dock="Top" Width="100" Height="100"  x:Name="ContentControl1">
+                            <ContentControl.ContentTemplate>
+                                <DataTemplate>-->
+                        <!--<Grid  Height="100" Width="100">-->
+                            <!---->
+
+                        <TextBlock Foreground="DarkCyan" DockPanel.Dock="Top" x:Name="TextBlock1"  Visibility="Collapsed" Height="20" Width="50">
+                            <TextBlock.Style>
+                                <Style  TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="True">
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" BeginTime="0:0:0" Duration="0:0:2"/>
+                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0.0" BeginTime="0:0:2" Duration="0:0:1"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.EnterActions>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        
                         <ContentControl Content="{Binding OutputView,RelativeSource={RelativeSource TemplatedParent}}">
                         </ContentControl>
                     </DockPanel>

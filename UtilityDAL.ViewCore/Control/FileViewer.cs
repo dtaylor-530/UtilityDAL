@@ -5,25 +5,18 @@ using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using UtilityWpf.ViewModel;
 using UtilityDAL.Contract;
 using System.Windows.Data;
+using System.Windows.Threading;
+using System.Windows.Input;
 
 namespace UtilityDAL.View
 {
     public class FileViewer : Control
     {
-        private static DependencyHelper<string> PathObserver = new DependencyHelper<string>();
-
-        // static DependencyHelper<IFileParser> SelectedFileParserObserver = new DependencyHelper<IFileParser>();
-        public ISubject<IFileParser> fileParserChanges { get; } = new Subject<IFileParser>();
-
-        public ISubject<PropertyGroupDescription> PropertyGroupDescriptionChanges { get; } = new Subject<PropertyGroupDescription>();
-
         public static readonly DependencyProperty PathProperty = DependencyProperty.Register("Path", typeof(string), typeof(FileViewer), new PropertyMetadata(null, PathObserver.Changed));
 
         public static readonly DependencyProperty FileParsersProperty = DependencyProperty.Register("FileParsers", typeof(Dictionary<string, IFileParser>), typeof(FileViewer), new PropertyMetadata(null));
@@ -47,7 +40,6 @@ namespace UtilityDAL.View
 
         public static readonly DependencyProperty OutputProperty = DependencyProperty.Register("Output", typeof(object), typeof(FileViewer), new PropertyMetadata(null, OutputChanged));
 
-        //public static readonly DependencyProperty DataProperty = DependencyProperty.Register("Data", typeof(IEnumerable), typeof(FileViewer));
 
         public IValueConverter DataConverter
         {
@@ -69,11 +61,6 @@ namespace UtilityDAL.View
         }
 
         public static readonly DependencyProperty OutputViewProperty = DependencyProperty.Register("OutputView", typeof(Control), typeof(FileViewer), new PropertyMetadata(null));
-
-        public override void OnApplyTemplate()
-        {
-            this.DockPanelChanges.OnNext(this.GetTemplateChild("DockPanel") as DockPanel);
-        }
 
         public PropertyGroupDescription PropertyGroupDescription
         {
@@ -111,9 +98,20 @@ namespace UtilityDAL.View
             (d as FileViewer).OutputChanges.OnNext(e.NewValue);
         }
 
+        private static DependencyHelper<string> PathObserver = new DependencyHelper<string>();
         protected ISubject<object> OutputChanges = new Subject<object>();
-        private ISubject<DockPanel> DockPanelChanges = new Subject<DockPanel>();
-        private ISubject<IValueConverter> DataConverterChanges = new Subject<IValueConverter>();
+        protected ISubject<FrameworkElement> ControlChanges = new Subject<FrameworkElement>();
+        protected ISubject<IValueConverter> DataConverterChanges = new Subject<IValueConverter>();
+        protected ISubject<string> GroupNameChanges = new Subject<string>();
+        protected ISubject<string> NameChanges = new Subject<string>();
+        protected ISubject<IFileParser> fileParserChanges { get; } = new Subject<IFileParser>();
+        protected ISubject<PropertyGroupDescription> PropertyGroupDescriptionChanges { get; } = new Subject<PropertyGroupDescription>();
+
+        public override void OnApplyTemplate()
+        {
+            this.ControlChanges.OnNext(this.GetTemplateChild("DockPanel") as DockPanel);
+            this.ControlChanges.OnNext(this.GetTemplateChild("TextBlock1") as TextBlock);
+        }
 
         static FileViewer()
         {
@@ -130,41 +128,112 @@ namespace UtilityDAL.View
 
             this.SetValue(FileParsersProperty, types);
 
-            PathObserver.Changes.Where(_ => _ != null)
-                     .CombineLatest(fileParserChanges, (a, b) =>
-                     new { Files = System.IO.Directory.GetFiles(a, b.Filter(), System.IO.SearchOption.AllDirectories), b })
+            PathObserver.Changes
+                        .Where(a => a != null)
+                        .CombineLatest(fileParserChanges, (a, b) =>
+                        new { Files = System.IO.Directory.GetFiles(a, b.Filter(), System.IO.SearchOption.AllDirectories), b })
+                        .Select(a => a.Files.Select(__ => new PathViewModel(__, a.b.Map)))
+                        .ObserveOnDispatcher()
+                        .Subscribe(items => this.Dispatcher.InvokeAsync(() => Items = items, System.Windows.Threading.DispatcherPriority.Render));
 
-           .Select(_ => _.Files.Select(__ => new PathViewModel(__, _.b.Map)))
-           //.CombineLatest(PropertyGroupDescriptionChanges,(a,b)=>a)
-           .ObserveOnDispatcher()
-          .Subscribe(_ => this.Dispatcher.InvokeAsync(() => Items = _, System.Windows.Threading.DispatcherPriority.Render));
+            var viewModelChanges = OutputChanges.Where(obj => obj != null)
+                                                .Select(p => p as PathViewModel);
 
-            OutputChanges.Where(_ => _ != null).WithLatestFrom(fileParserChanges, (a, b) =>
-                (b as IFileParser).Parse((a as PathViewModel).FullName))
-            .CombineLatest(DataConverterChanges.StartWith(default(IValueConverter)), (a, b) => (a, b))
-            .SubscribeOn(TaskPoolScheduler.Default)
-            .ObserveOnDispatcher()
-             .Subscribe(_ => this.Dispatcher.InvokeAsync(() =>
+            viewModelChanges.Select(vm => vm.Name).Subscribe(NameChanges);
 
-              (OutputView is IItemsSource oview) ?
-                 _.b == default(IValueConverter) ?
-                 oview.ItemsSource = _.a :
-                 oview.ItemsSource = _.b.Convert(_.a, null, null, null) as IEnumerable :
+            viewModelChanges
+                          .WithLatestFrom(fileParserChanges, (p, parser) => (parsed: (parser as IFileParser).Parse(p.FullName), name: p.Name))
+                        .CombineLatest(DataConverterChanges.StartWith(default(IValueConverter)), (a, b) => (a, b))
+                        .SubscribeOn(TaskPoolScheduler.Default)
+                        .ObserveOnDispatcher()
+                        .Subscribe(collConv => this.Dispatcher.InvokeAsync(() =>
+                        {
+                            (IEnumerable itemsSource, string nnn) = collConv.a;
+                            //fsd(itemsSource, collConv.b);
+                            Convert(itemsSource, collConv.b, (items, conv) => conv.Convert(items, null, null, null) as IEnumerable);
+                        }, DispatcherPriority.Normal));
 
-                _.b == default(IValueConverter) ?
-             (OutputView as ItemsControl).ItemsSource = _.a :
-             (OutputView as ItemsControl).ItemsSource = _.b.Convert(_.a, null, null, null) as IEnumerable,
-             System.Windows.Threading.DispatcherPriority.Normal));
-
-            PropertyGroupDescriptionChanges.CombineLatest(DockPanelChanges.Take(1), (pgd, DockPanel) => (pgd, DockPanel)).Subscribe(_ =>
+            PropertyGroupDescriptionChanges.CombineLatest(ControlChanges.Where(c => c.GetType() == typeof(DockPanel)).Take(1), (pgd, DockPanel) => (pgd, DockPanel))
+                .Subscribe(xx =>
               {
-                  var collectionViewSource = _.DockPanel?.FindResource("GroupedItems") as CollectionViewSource;
+                  var collectionViewSource = xx.DockPanel?.FindResource("GroupedItems") as CollectionViewSource;
                   if (collectionViewSource != null)
-                      collectionViewSource.GroupDescriptions.Add(_.pgd);
+                      collectionViewSource.GroupDescriptions.Add(xx.pgd);
               });
 
             OutputView = OutputView ?? new NavigatorView();
+
+
+            GroupClick = new UtilityWpf.Commmand.RelayCommand<string>(a => GroupNameChanges.OnNext(a));
+
+                    NameChanges
+                .Merge(GroupNameChanges)
+                .CombineLatest(ControlChanges.Select(c => c as TextBlock).Where(c => c != null),
+                        (text, textBlock) => (text, textBlock))
+                        .Subscribe(input =>
+                        {
+                            input.textBlock.Text = input.text;
+                            input.textBlock.Visibility = Visibility.Visible;
+                            input.textBlock.IsEnabled = true;
+                            input.textBlock.IsEnabled = false;
+                        });
+
+            GroupNameChanges.CombineLatest(
+                PropertyGroupDescriptionChanges.StartWith(default(PropertyGroupDescription)),
+                DataConverterChanges.StartWith(default(IValueConverter)),
+                          fileParserChanges,
+                (text, pg, conv, parser) => (text, pg, conv, parser))
+                .Subscribe(async input =>
+                {
+                    await this.Dispatcher.InvokeAsync(() =>
+                             {
+
+                                 var paths = Items.Cast<PathViewModel>().ToArray();
+                                 var prop = typeof(PathViewModel).GetProperty(input.pg.PropertyName);
+
+                                 // property-group-converter
+                                 var converter = input.pg.Converter;
+
+                                 var group = paths.Where(ad =>
+                                 
+                                      converter != default ?
+                                       input.text
+                                               .Equals(converter.Convert(prop.GetValue(ad), null, null, null)) :
+                                       input.text
+                                               .Equals(prop.GetValue(ad))
+                                 ).Select(viewmodel => 
+                                 new Model.KeyCollection(viewmodel.Name, input.parser.Parse(viewmodel.FullName)));
+
+                                 Convert(group, input.conv, (items, conv) => items.Cast<object>().Select(ka => conv.Convert(ka, null, null, null) as IEnumerable).ToArray());
+
+                             }, DispatcherPriority.Background);
+                });
         }
+
+        private void Convert(IEnumerable items, IValueConverter conv, Func<IEnumerable, IValueConverter, IEnumerable> func)
+        {
+            if (OutputView is IItemsSource oview)
+            {
+                oview.ItemsSource = convert(conv, func, items);
+            }
+            else if (OutputView is ItemsControl itemsControl)
+            {
+                itemsControl.ItemsSource = convert(conv, func, items);
+            }
+            else
+                throw new Exception(nameof(OutputView) + " needs to have property OutputView");
+
+            static IEnumerable convert(IValueConverter conv, Func<IEnumerable, IValueConverter, IEnumerable> func, IEnumerable items)
+            {
+                return
+                      conv == default ?
+                      items :
+                      func(items, conv);
+            }
+        }
+
+        public ICommand GroupClick { get; }
+
     }
 
     public class DependencyHelper<T>
