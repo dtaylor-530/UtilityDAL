@@ -14,8 +14,8 @@
         <XmlDataProvider x:Key="Pages">
             <x:XData>
                 <Pages xmlns="">
-                    <Page Uri="\Page\LogPage.xaml"         Title="Log" />
                     <Page Uri="\Page\FileViewerPage.xaml"         Title="FileViewer" />
+                    <Page Uri="\Page\LogPage.xaml"         Title="Log" />
                     <Page Uri="\Page\ServerFilePage.xaml"              Title="Server Page" />
                     <Page Uri="\Page\PaginatedPage.xaml"              Title="Paginated" />
                     <Page Uri="\Page\FileCRUD.xaml"              Title="File CRUD" />

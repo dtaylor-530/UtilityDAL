@@ -33,7 +33,7 @@
     <PackageReference Include="UtilityEnum" Version="1.1.3" />
     <PackageReference Include="UtilityHelper" Version="2.1.1-alpha" />
     <PackageReference Include="UtilityInterface" Version="2.0.1-alpha" />
-    <PackageReference Include="UtilityReactive" Version="1.1.0" />
+    <PackageReference Include="UtilityReactive" Version="1.1.11" />
     <PackageReference Include="XmlSerializerHelper" Version="4.0.19096.1" />
   </ItemGroup>
 

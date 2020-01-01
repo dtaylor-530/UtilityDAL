@@ -8,9 +8,9 @@ namespace UtilityDAL.DemoApp
     /// <summary>
     /// Interaction logic for DbUserControl.xaml
     /// </summary>
-    public partial class DbPage : Page
+    public partial class FileViewerPage : Page
     {
-        public DbPage()
+        public FileViewerPage()
         {
             InitializeComponent();
             this.FileViewer.PropertyGroupDescription = new PropertyGroupDescription(nameof(UtilityWpf.ViewModel.PathViewModel.Directory)) { Converter = new NameConverter() };

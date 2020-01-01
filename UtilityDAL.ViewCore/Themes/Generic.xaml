@@ -8,7 +8,7 @@
         <ResourceDictionary Source="/UtilityDAL.ViewCore;component/Themes/FileCRUDControl.xaml"></ResourceDictionary>
         <ResourceDictionary Source="/UtilityDAL.ViewCore;component/Themes/ListBoxCriteria.xaml"></ResourceDictionary>
         <ResourceDictionary Source="/UtilityDAL.ViewCore;component/Themes/ServerFiles.xaml"></ResourceDictionary>
-        <ResourceDictionary Source="/UtilityDAL.ViewCore;component/Themes/NavigatorView.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/UtilityDAL.ViewCore;component/Themes/PageView.xaml"></ResourceDictionary>
         <ResourceDictionary Source="/UtilityDAL.ViewCore;component/Themes/TypeControl.xaml"></ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

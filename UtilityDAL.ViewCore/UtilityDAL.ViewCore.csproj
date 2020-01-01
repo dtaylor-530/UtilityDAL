@@ -9,7 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="UtilityWpf.ViewCore" Version="1.0.0" />
+    <PackageReference Include="HandyControl" Version="2.3.0" />
+    <PackageReference Include="UtilityWpf.ViewCore" Version="1.1.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -67,7 +68,7 @@
     <Page Update="Themes\LiteDbControl.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Themes\NavigatorView.xaml">
+    <Page Update="Themes\PageView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Themes\ServerFiles.xaml">

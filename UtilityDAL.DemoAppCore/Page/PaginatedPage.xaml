@@ -18,17 +18,7 @@
         <Binding Mode="OneWay" Path="MainVM" Source="{StaticResource MainViewModelLocatorDataSource}" />
     </Page.DataContext>
 
-    <!--<StackPanel>
-        --><!--<Label>UserControl</Label>
-        <utility:FilteredPaginatedUserControl Items="{Binding Items.Value}" />--><!--
-        <Label>Control</Label>
-        <utility:PageNavigatorControl x:Name="pnc" ItemsSource="{Binding Items.Value}" />
-
-        <DataGrid ItemsSource="{Binding FilteredItems,ElementName=pnc }"></DataGrid>
-    </StackPanel>-->
-    <dv:FileViewer Path="../../Data">
-        <dv:FileViewer.Resources>
-            <ResourceDictionary Source="/UtilityWpf.View;component/DataTemplate/PathDataTemplate.xaml" />
-        </dv:FileViewer.Resources>
+       <dv:FileViewer Path="../../../Data" >
+    
     </dv:FileViewer>
 </Page>

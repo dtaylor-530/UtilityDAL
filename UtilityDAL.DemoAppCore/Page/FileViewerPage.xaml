@@ -1,4 +1,4 @@
-﻿<Page x:Class="UtilityDAL.DemoApp.DbPage"
+﻿<Page x:Class="UtilityDAL.DemoApp.FileViewerPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -6,43 +6,8 @@
       xmlns:local="clr-namespace:UtilityDAL.DemoApp"
       xmlns:view="clr-namespace:UtilityDAL.View;assembly=UtilityDAL.ViewCore"
       mc:Ignorable="d"
-      d:DesignHeight="300" d:DesignWidth="300"
->
+      d:DesignHeight="300" d:DesignWidth="300">
 
-    <TabControl>
-        <TabItem Header="Primary">
-            <view:FileViewer x:Name="FileViewer" Path="../../../Data"></view:FileViewer>
-        </TabItem>
-        <TabItem Header="Secondary">
-            <view:FileViewer x:Name="FileViewer2" Path="../../../Data">
-                <view:FileViewer.Resources>
-                    <!--<DataTemplate DataType="util:PathViewModel">
-                        <Ellipse Width="10" Height="10" Fill="Black"></Ellipse>
-                    </DataTemplate>-->
-                </view:FileViewer.Resources>
-                <view:FileViewer.OutputView>
-                    <!--<ScrollViewer VerticalScrollBarVisibility="Auto">-->
-                    <ItemsControl VerticalAlignment="Center">
-                        <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-
-                                <Grid Margin="4"  VerticalAlignment="Bottom">
-
-                                        <Rectangle Fill="Blue"  Width="25" Height="{Binding Bid}"></Rectangle>
-
-                                    <Rectangle Fill="Red"  Width="15" Height="{Binding Offer}"></Rectangle>
-                                        </Grid>
-                                </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"></StackPanel>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                    <!--</ScrollViewer>-->
-                </view:FileViewer.OutputView>
-            </view:FileViewer>
-        </TabItem>
-    </TabControl>
+    <view:FileViewer x:Name="FileViewer" Path="../../../Data"></view:FileViewer>
+  
 </Page>

@@ -27,15 +27,7 @@
                         <local:Converter x:Key="Converter"></local:Converter>
                     </ControlTemplate.Resources>
                     <DockPanel x:Name="DockPanel">
-                        <DockPanel.Resources>
-                            <CollectionViewSource x:Key="GroupedItems" Source="{Binding Items, RelativeSource={RelativeSource TemplatedParent}}">
-                                <!--<CollectionViewSource.GroupDescriptions>
-                               <PropertyGroupDescription PropertyName="Directory" />
-                            </CollectionViewSource.GroupDescriptions>-->
-                            </CollectionViewSource>
-                            <utilitywpf:NullToBooleanConverter x:Key="ntobconverter" />
-                        </DockPanel.Resources>
-
+    
                         <WrapPanel   DockPanel.Dock="Top"  Margin="20">
                             <ComboBox Width="140"
                                       SelectedIndex="0"
@@ -49,88 +41,23 @@
                                                         Margin="30,0,0,0" />
                         </WrapPanel>
 
-                        <ListView 
-                            DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                            DockPanel.Dock="Top" MaxHeight="100" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                            SelectedItem="{Binding Output, RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay}"
-                                   ItemsSource="{Binding Source={StaticResource GroupedItems}}">
 
-                            <!--ItemsSource="{Binding Items, RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}"-->
-                            <ListView.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"></StackPanel>
-                                </ItemsPanelTemplate>
-                            </ListView.ItemsPanel>
-                            <ListView.GroupStyle>
-                                <GroupStyle>
-                                    <GroupStyle.HeaderTemplate>
-                                        <DataTemplate>
-                                            <!--<TextBlock FontWeight="Bold" FontSize="14" Text="{Binding .,Converter={StaticResource Converter}}" />-->
-                                            <Button FontWeight="Bold" Background="Transparent" FontSize="14" Content="{Binding Name}" BorderThickness="0" HorizontalContentAlignment="Left" Command="{Binding Path=DataContext.GroupClick, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding Name}"/>
-                                        </DataTemplate>
-                                    </GroupStyle.HeaderTemplate>
-                                    <!--<GroupStyle.ContainerStyle>
-                                        <Style TargetType="{x:Type GroupItem}">
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate>
-                                                        <Expander
-                                            BorderThickness="0"
-                                            DataContext="{Binding Items}"
-                                            IsExpanded="True">
-                                                            <Expander.Header>
-                                                                <StackPanel Orientation="Horizontal">
-                                                                    <TextBlock
-                                                                        VerticalAlignment="Top"
-                                                                        FontSize="22"
-                                                                        FontWeight="Bold"
-                                                                        Foreground="Gray"
-                                                                        Text="{Binding .,Converter={StaticResource Converter}}" />
-                                                                </StackPanel>
-                                                            </Expander.Header>
-                                                            <ItemsPresenter />
-                                                        </Expander>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </GroupStyle.ContainerStyle>-->
-                                </GroupStyle>
-                            </ListView.GroupStyle>
-                        </ListView>
-                        <!--<ContentPresenter Content="{Binding OutputView,RelativeSource={RelativeSource TemplatedParent}}">
-                        </ContentPresenter>-->
-
-                        <!--<ContentControl DockPanel.Dock="Top" Width="100" Height="100"  x:Name="ContentControl1">
-                            <ContentControl.ContentTemplate>
-                                <DataTemplate>-->
-                        <!--<Grid  Height="100" Width="100">-->
-                            <!---->
-
-                        <TextBlock Foreground="DarkCyan" DockPanel.Dock="Top" x:Name="TextBlock1"  Visibility="Collapsed" Height="20" Width="50">
-                            <TextBlock.Style>
-                                <Style  TargetType="TextBlock">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsEnabled" Value="True">
-                                            <Trigger.EnterActions>
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" BeginTime="0:0:0" Duration="0:0:2"/>
-                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0.0" BeginTime="0:0:2" Duration="0:0:1"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </Trigger.EnterActions>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                        
-                        <ContentControl Content="{Binding OutputView,RelativeSource={RelativeSource TemplatedParent}}">
-                        </ContentControl>
+                        <utility:MasterDetailView x:Name="MasterDetailView1" Items="{Binding Items,RelativeSource={RelativeSource TemplatedParent}}" 
+                                                   Id="FilePath" 
+                                                   >
+                            <utility:MasterDetailView.PropertyGroupDescription>
+                                <PropertyGroupDescription PropertyName="Directory"></PropertyGroupDescription>
+                            </utility:MasterDetailView.PropertyGroupDescription>
+                            <utility:MasterDetailView.DetailView>
+                                <local:PageView></local:PageView>
+                            </utility:MasterDetailView.DetailView>
+                        </utility:MasterDetailView>
                     </DockPanel>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 </ResourceDictionary>
+
+
+
