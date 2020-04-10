@@ -21,12 +21,12 @@ namespace UtilityDAL.Test
             var directory = System.IO.Directory.CreateDirectory("../../../Data");
             using (var conn = new SQLiteConnection(System.IO.Path.Combine(directory.FullName, "Test2.sqlite")))
             {
-                conn.CreateTable<xx>();
-                conn.DeleteAll<xx>();
-                conn.InsertAll(Factory.SelectByTicks(100));
-                var result = conn.WhereEqual<xx>(DayOfWeek.Monday);
+                conn.CreateTable<TestClass>();
+                conn.DeleteAll<TestClass>();
+                conn.InsertAll(Factory.SelectByDate(100));
+                var result = conn.WhereEqual<TestClass>(DayOfWeek.Monday);
                 foreach (var r in result)
-                    Assert.True(r.Ticks.DayOfWeek == DayOfWeek.Monday);
+                    Assert.True(r.Date.DayOfWeek == DayOfWeek.Monday);
             }
         }
 
@@ -36,24 +36,51 @@ namespace UtilityDAL.Test
             var directory = System.IO.Directory.CreateDirectory("../../../Data");
             using (var conn = new SQLiteConnection(System.IO.Path.Combine(directory.FullName, "Test2.sqlite")))
             {
-                conn.CreateTable<xx>();
-                var t = conn.Table<xx>();
+                conn.CreateTable<TestClass>();
+                var t = conn.Table<TestClass>();
                 try
                 {
-                    conn.DeleteAll<xx>();
+                    conn.DeleteAll<TestClass>();
                 }
                 catch (Exception ex)
                 {
                 }
-                var ticks = Factory.SelectByTicks(100).ToArray();
+                var ticks = Factory.SelectByDate(100).ToArray();
 
                 conn.InsertAll(ticks);
 
-                var xx = ticks.Where(td => td.Ticks > default(DateTime).AddDays(1 * 100) && td.Ticks < default(DateTime).AddDays(4 * 100));
+                var xx = ticks.Where(td => td.Date > default(DateTime).AddDays(1 * 100) && td.Date < default(DateTime).AddDays(4 * 100));
 
-                var result = conn.WhereBetween<xx>(default(DateTime).AddDays(1 * 100), default(DateTime).AddDays(4 * 100));
+                var result = conn.WhereBetween<TestClass>(default(DateTime).AddDays(1 * 100), default(DateTime).AddDays(4 * 100));
 
                 Assert.True(result.Count() == 3);
+            }
+        }
+
+        [Fact]
+        public void Test_WhereCompare()
+        {
+            var directory = System.IO.Directory.CreateDirectory("../../../Data");
+            using (var conn = new SQLiteConnection(System.IO.Path.Combine(directory.FullName, "Test2.sqlite")))
+            {
+                conn.CreateTable<TestClass>();
+                var t = conn.Table<TestClass>();
+                try
+                {
+                    conn.DeleteAll<TestClass>();
+                }
+                catch (Exception ex)
+                {
+                }
+                var ticks = Factory.SelectByDate(100).ToArray();
+
+                conn.InsertAll(ticks);
+
+                var xx = ticks.Where(td => td.Date > default(DateTime).AddDays(10 * 100)).ToArray();
+
+                var result = conn.WhereCompare<TestClass>(default(DateTime).AddDays(10 * 100),">").ToArray();
+
+                Assert.True(result.Length == xx.Length);
             }
         }
 
@@ -64,11 +91,11 @@ namespace UtilityDAL.Test
             var directory = System.IO.Directory.CreateDirectory("../../../Data");
             using (var conn = new SQLiteConnection(System.IO.Path.Combine(directory.FullName, "Test2.sqlite")))
             {
-                conn.CreateTable<xx>();
-                var t = conn.Table<xx>();
+                conn.CreateTable<TestClass>();
+                var t = conn.Table<TestClass>();
                 try
                 {
-                    conn.DeleteAll<xx>();
+                    conn.DeleteAll<TestClass>();
                 }
                 catch (Exception ex)
                 {
@@ -77,9 +104,9 @@ namespace UtilityDAL.Test
 
                 conn.InsertAll(ticks);
 
-                var xx = ticks.GroupBy(a => a.Ticks.Hour);
+                var xx = ticks.GroupBy(a => a.Date.Hour);
 
-                var result = conn.WhereHourCompare<xx>(11, "=");
+                var result = conn.WhereHourCompare<TestClass>(11, "=");
 
                 Assert.True(result.Count() ==xx.Single(a=>a.Key==11).Count());
             }
@@ -92,10 +119,10 @@ namespace UtilityDAL.Test
             var directory = System.IO.Directory.CreateDirectory("../../../Data");
             using (var conn = new SQLiteConnection(System.IO.Path.Combine(directory.FullName, "Test2.sqlite")))
             {
-                conn.CreateTable<xx>();
-                conn.DeleteAll<xx>();
-                conn.InsertAll(Factory.SelectByTicks(100));
-                var result = conn.Take<xx>(100);
+                conn.CreateTable<TestClass>();
+                conn.DeleteAll<TestClass>();
+                conn.InsertAll(Factory.SelectByDate(100));
+                var result = conn.Take<TestClass>(100);
 
                 Assert.True(result.Count() == 100);
             }
@@ -107,31 +134,31 @@ namespace UtilityDAL.Test
             var directory = System.IO.Directory.CreateDirectory("../../../Data");
             using (var conn = new SQLiteConnection(System.IO.Path.Combine(directory.FullName, "Test2.sqlite")))
             {
-                conn.CreateTable<xx>();
-                conn.DeleteAll<xx>();
-                conn.InsertAll(Factory.SelectByTicks(100));
-                conn.InsertAll(Factory.SelectByTicks(100));
-                var result = conn.Take<xx>(200);
+                conn.CreateTable<TestClass>();
+                conn.DeleteAll<TestClass>();
+                conn.InsertAll(Factory.SelectByDate(100));
+                conn.InsertAll(Factory.SelectByDate(100));
+                var result = conn.Take<TestClass>(200);
                 Assert.True(result.Count() == 200);
-                conn.RemoveDuplicates<xx>();
-                Assert.True(conn.Table<xx>().Count() == 100);
+                conn.RemoveDuplicates<TestClass>();
+                Assert.True(conn.Table<TestClass>().Count() == 100);
             }
         }
 
-        private class xx : IEquatable<xx>
+        private class TestClass : IEquatable<TestClass>
         {
             public int Id { get; set; }
 
-            public DateTime Ticks { get; set; }
+            public DateTime Date { get; set; }
 
-            public bool Equals(xx other)
+            public bool Equals(TestClass other)
             {
-                return this.Id == other.Id && this.Ticks == other.Ticks;
+                return this.Id == other.Id && this.Date == other.Date;
             }
 
             public override bool Equals(object obj)
             {
-                return base.Equals(obj as xx);
+                return base.Equals(obj as TestClass);
             }
 
             public override int GetHashCode()
@@ -142,9 +169,9 @@ namespace UtilityDAL.Test
 
         private class Factory
         {
-            public static IEnumerable<xx> SelectByTicks(int number) => Enumerable.Range(0, number).Select((_, i) => new xx { Ticks = default(DateTime).AddDays(i * 100) });
+            public static IEnumerable<TestClass> SelectByDate(int number) => Enumerable.Range(0, number).Select((_, i) => new TestClass { Date = default(DateTime).AddDays(i * 100) });
 
-            public static IEnumerable<xx> SelectByHours(int number)
+            public static IEnumerable<TestClass> SelectByHours(int number)
             {
                 var fac = RandomizerFactory.GetRandomizer(new RandomDataGenerator.FieldOptions.FieldOptionsDateTime());
                 Dictionary<int, List<DateTime>> dictionary = Enumerable.Range(0, 24).ToDictionary(r => r, r => new List<DateTime>());
@@ -156,7 +183,7 @@ namespace UtilityDAL.Test
 
                     dictionary[date.Value.Hour].Add(date.Value);
 
-                    yield return new xx { Id = ++i, Ticks = date.Value };
+                    yield return new TestClass { Id = ++i, Date = date.Value };
                 }
             }
         }

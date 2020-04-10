@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿#nullable enable
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,7 +42,7 @@ namespace UtilityDAL.Sqlite
     public class KeyValueLite
     {
         private string directory;
-
+        private const string Name = "/KeyValueStore.sqlite";
         public KeyValueLite(string directory)
         {
             this.directory = directory;
@@ -52,10 +53,10 @@ namespace UtilityDAL.Sqlite
         {
         }
 
-        public int Insert(KeyValuePair<string, long>[] kvps)
+        public int Insert(params KeyValuePair<string, long>[] kvps)
         {
             int i = 0;
-            using (var x = new SQLite.SQLiteConnection(directory + "/KeyValueStore.sqlite"))
+            using (var x = new SQLite.SQLiteConnection(directory + Name))
             {
                 x.CreateTable<KeyValueNumeric>();
                 foreach (var y in kvps.Select(_ => new KeyValueNumeric { Key = _.Key, Value = _.Value }))
@@ -64,10 +65,10 @@ namespace UtilityDAL.Sqlite
             return i;
         }
 
-        public int Insert(KeyValuePair<string, string>[] kvps)
+        public int Insert(params KeyValuePair<string, string>[] kvps)
         {
             int i = 0;
-            using (var x = new SQLite.SQLiteConnection(directory + "/KeyValueStore.sqlite"))
+            using (SQLiteConnection x = new SQLite.SQLiteConnection(directory + Name))
             {
                 x.CreateTable<KeyValueString>();
                 foreach (var y in kvps.Select(_ => new KeyValueString { Key = _.Key, Value = _.Value }))
@@ -75,25 +76,40 @@ namespace UtilityDAL.Sqlite
             }
             return i;
         }
-
-        public string FindString(string key)
+        public int Insert(params KeyValuePair<string, DateTime>[] kvps)
         {
-            using (var x = new SQLite.SQLiteConnection(directory + "/KeyValueStore.sqlite"))
-            {
-                x.CreateTable<KeyValueString>();
-                var xx = x.Find<KeyValueString>(key); ;
-                return xx?.Value;
-            }
-        }
-
-        public long FindNumeric(string key)
-        {
-            using (var x = new SQLite.SQLiteConnection(directory + "/KeyValueStore.sqlite"))
+            int i = 0;
+            using (SQLiteConnection x = new SQLiteConnection(directory + Name))
             {
                 x.CreateTable<KeyValueNumeric>();
-                var xx = x.Find<KeyValueNumeric>(key); ;
-                return xx?.Value ?? 0;
+                foreach (var y in kvps.Select(_ => new KeyValueNumeric { Key = _.Key, Value = _.Value.Ticks }))
+                    i += x.InsertOrReplace(y);
             }
+            return i;
+        }
+
+        public string? FindString(string key)
+        {
+            using var x = new SQLite.SQLiteConnection(directory + Name);
+            x.CreateTable<KeyValueString>();
+            var xx = x.Find<KeyValueString>(key); ;
+            return xx?.Value ?? null;
+        }
+
+        public long? FindNumeric(string key)
+        {
+            using var x = new SQLite.SQLiteConnection(directory + Name);
+            x.CreateTable<KeyValueNumeric>();
+            var xx = x.Find<KeyValueNumeric>(key); ;
+            return xx?.Value ?? null;
+        }
+
+        public DateTime? FindDate(string key)
+        {
+            using var x = new SQLite.SQLiteConnection(directory + Name);
+            x.CreateTable<KeyValueNumeric>();
+            var xx = x.Find<KeyValueNumeric>(key);
+            return xx == null ? null : (DateTime?)new DateTime(xx.Value);
         }
     }
 }

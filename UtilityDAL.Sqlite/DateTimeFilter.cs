@@ -6,9 +6,20 @@ using UtilityStruct;
 
 namespace UtilityDAL.Sqlite
 {
+
+    public static class ComparisonType
+    {
+        public static readonly string Equality = "=";
+        public static readonly string InEquality = "<>";
+        public static readonly string GreaterThan = ">";
+        public static readonly string LessThan = "<";
+
+    }
+
+
     public static class DateTimeFilter
     {
-
+        public const string DateFormat = "yyyy-MM-dd hh:mm:ss.FFF";
 
         public static List<T> WhereEqual<T>(this SQLite.SQLiteConnection conn, Day day) where T : new() => WhereEqual<T>(conn, day, GetDateProperty<T>());
 
@@ -28,11 +39,8 @@ namespace UtilityDAL.Sqlite
         public static List<T> WhereUnitCompare<T>(this SQLite.SQLiteConnection conn, int unit, string comparison, string format) where T : new()
                => WhereUnitCompare<T>(conn, unit, comparison, format, GetDateProperty<T>());
 
-
-
         public static List<T> WhereYearCompare<T>(this SQLite.SQLiteConnection conn, int year, string comparison) where T : new()
             => WhereUnitCompare<T>(conn, year, comparison, "Y", GetDateProperty<T>());
-
 
         public static List<T> WhereMonthCompare<T>(this SQLite.SQLiteConnection conn, int month, string comparison) where T : new()
                   => WhereUnitCompare<T>(conn, month, comparison, "M", GetDateProperty<T>());
@@ -50,58 +58,38 @@ namespace UtilityDAL.Sqlite
 
 
         public static List<T> WhereBetween<T>(this SQLite.SQLiteConnection conn, DateTime dateStart, DateTime dateEnd) where T : new()
-            => conn.Query<T>($"select *  from {typeof(T).GetName()} " +
+            => conn.Query<T>(GetSelectStatement<T>() +
                 $"where ({FormatByProperty(GetDateProperty<T>())}) Between ? AND ?;",
-                             (dateStart).ToString("yyyy-MM-dd"), (dateEnd).ToString("yyyy-MM-dd"));
+                         (dateStart).ToString(DateFormat) , (dateEnd).ToString(DateFormat));
 
         public static List<T> Where<T>(this SQLite.SQLiteConnection conn, DayOfWeek day, string comparison) where T : new()
-=> conn.Query<T>($"select *  from {typeof(T).GetName()} " +
-               $"where strftime('%w', {FormatByProperty(GetDateProperty<T>())}) {comparison} ? ;",
+=> conn.Query<T>(GetSelectStatement<T>() +
+               $"where {FormatByProperty(GetDateProperty<T>())} {comparison} ? ;",
                                ((byte)day).ToString());
 
-        public static List<T> WhereEqual<T>(this SQLite.SQLiteConnection conn, DayOfWeek day) where T : new() => Where<T>(conn, day, "=", GetDateProperty<T>());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        public static List<T> WhereEqual<T>(this SQLite.SQLiteConnection conn, DayOfWeek day) where T : new() => Where<T>(conn, day, ComparisonType.Equality, GetDateProperty<T>());
 
         public static List<T> Take<T>(this SQLite.SQLiteConnection conn, int number) where T : new() => conn.Query<T>($"select * from {typeof(T).GetName()} limit {number}");
 
-        public static List<T> WhereEqual<T>(this SQLite.SQLiteConnection conn, Day day, PropertyInfo property) where T : new() => WhereCompare<T>(conn, (DateTime)day, "=", property);
+        public static List<T> WhereEqual<T>(this SQLite.SQLiteConnection conn, Day day, PropertyInfo property) where T : new() => WhereCompare<T>(conn, (DateTime)day, ComparisonType.Equality, property);
 
-        public static List<T> WhereGreater<T>(this SQLite.SQLiteConnection conn, Day day, PropertyInfo property) where T : new() => WhereCompare<T>(conn, (DateTime)day, ">", property);
+        public static List<T> WhereGreater<T>(this SQLite.SQLiteConnection conn, Day day, PropertyInfo property) where T : new() => WhereCompare<T>(conn, (DateTime)day, ComparisonType.GreaterThan, property);
 
-        public static List<T> WhereLess<T>(this SQLite.SQLiteConnection conn, Day day, PropertyInfo property) where T : new() => WhereCompare<T>(conn, (DateTime)day, "<", property);
+        public static List<T> WhereLess<T>(this SQLite.SQLiteConnection conn, Day day, PropertyInfo property) where T : new() => WhereCompare<T>(conn, (DateTime)day, ComparisonType.LessThan, property);
 
-        public static List<T> WhereEqual<T>(this SQLite.SQLiteConnection conn, DateTime date, PropertyInfo property) where T : new() => WhereCompare<T>(conn, (DateTime)date, "=", property);
+        public static List<T> WhereEqual<T>(this SQLite.SQLiteConnection conn, DateTime date, PropertyInfo property) where T : new() => WhereCompare<T>(conn, (DateTime)date, ComparisonType.Equality, property);
 
-        public static List<T> WhereGreater<T>(this SQLite.SQLiteConnection conn, DateTime date, PropertyInfo property) where T : new() => WhereCompare<T>(conn, (DateTime)date, ">", property);
+        public static List<T> WhereGreater<T>(this SQLite.SQLiteConnection conn, DateTime date, PropertyInfo property) where T : new() => WhereCompare<T>(conn, (DateTime)date, ComparisonType.GreaterThan, property);
 
-        public static List<T> WhereLess<T>(this SQLite.SQLiteConnection conn, DateTime date, PropertyInfo property) where T : new() => WhereCompare<T>(conn, (DateTime)date, "<", property);
-
-
-
-
+        public static List<T> WhereLess<T>(this SQLite.SQLiteConnection conn, DateTime date, PropertyInfo property) where T : new() => WhereCompare<T>(conn, (DateTime)date, ComparisonType.LessThan, property);
 
         public static List<T> WhereCompare<T>(this SQLite.SQLiteConnection conn, DateTime date, string comparison, PropertyInfo property) where T : new()
-            => conn.Query<T>($"select *  from {typeof(T).GetName()} " +
-                $"where  strftime('%Y-%m-%d',{FormatByProperty(property) }) {comparison} ? ;",
-                (date).ToString("yyyy-MM-dd"));
+            => conn.Query<T>(GetSelectStatement<T>() +
+                $"where {FormatByProperty(property)} {comparison} ? ;",
+                date.ToString(DateFormat));
 
         public static List<T> WhereUnitCompare<T>(this SQLite.SQLiteConnection conn, int unit, string comparison, string format, PropertyInfo property) where T : new()
-=> conn.Query<T>($"select *  from {typeof(T).GetName()} " +
+=> conn.Query<T>(GetSelectStatement<T>() +
 $"where  strftime('%{format}', {FormatByProperty(property) }) {comparison} '{unit}';");
 
         public static List<T> WhereYearCompare<T>(this SQLite.SQLiteConnection conn, int year, string comparison, PropertyInfo property) where T : new()
@@ -124,13 +112,13 @@ $"where  strftime('%{format}', {FormatByProperty(property) }) {comparison} '{uni
 
 
         public static List<T> WhereBetween<T>(this SQLite.SQLiteConnection conn, DateTime dateStart, DateTime dateEnd, PropertyInfo property) where T : new()
-            => conn.Query<T>($"select *  from {typeof(T).GetName()} " +
-                $"where  strftime('%Y-%m-%d',{FormatByProperty(property)}) Between ? AND ?;",
-                             (dateStart).ToString("yyyy-MM-dd"), (dateEnd).ToString("yyyy-MM-dd"));
+            => conn.Query<T>(GetSelectStatement<T>() +
+                $"where  {FormatByProperty(property)} Between ? AND ?;",
+                              dateStart.ToString(DateFormat) ,  dateEnd.ToString(DateFormat) );
 
         public static List<T> Where<T>(this SQLite.SQLiteConnection conn, DayOfWeek day, string comparison, PropertyInfo property) where T : new()
-=> conn.Query<T>($"select *  from {typeof(T).GetName()} " +
-               $"where strftime('%w', {FormatByProperty(property)}) {comparison} ? ;",
+=> conn.Query<T>(GetSelectStatement<T>() +
+               $"where {FormatByProperty(property)} {comparison} ? ;",
                                ((byte)day).ToString());
 
         public static List<T> WhereEqual<T>(this SQLite.SQLiteConnection conn, DayOfWeek day, PropertyInfo property) where T : new() => Where<T>(conn, day, "=", property);
@@ -139,20 +127,24 @@ $"where  strftime('%{format}', {FormatByProperty(property) }) {comparison} '{uni
 
 
         public static List<T> By<T>(this SQLite.SQLiteConnection conn, string match, string property, params Func<string, string>[] convertProperty) where T : new()
-=> conn.Query<T>($"select *  from {typeof(T).GetName()} " +
-               $"where {string.Join(" Or ", convertProperty.Select(_ => $"{_(property)} = ?"))};",
-                               (match).ToString());
+=> conn.Query<T>(GetSelectStatement<T>() +
+               $"where {string.Join(" Or ", convertProperty.Select(a => $"{a(property)} = ?"))};",
+                               match.ToString());
 
         // public static IEnumerable<T> ByDayOfWeek<T>(this SQLite.SQLiteConnection conn, Day day, string property = "Ticks") where T : new() =>
-        //By<T>(conn,((DateTime)day).ToString("yyyy-MM-dd"),property,_ => $" strftime('%Y-%m-%d', {property}/ 10000000 - 62135596800,  'unixepoch')");
+        //By<T>(conn,((DateTime)day).ToString(DateFormat),property,_ => $" strftime('%Y-%m-%d', {property}/ 10000000 - 62135596800,  'unixepoch')");
         // public static IEnumerable<T> ByDayOfWeek<T>(this SQLite.SQLiteConnection conn, DayOfWeek day, string property = "Ticks") where T : new() => By<T>(conn,((byte)day).ToString(),property,_ => $"strftime('%w', {_})");
 
 
         private static string FormatByProperty(PropertyInfo propertyInfo)
         {
-            if (propertyInfo.PropertyType == typeof(DateTime) || (propertyInfo.PropertyType == typeof(long) && propertyInfo.Name.Contains("Tick")))
+            if (propertyInfo.PropertyType == typeof(DateTime))
             {
-                return $"datetime({propertyInfo.Name}/ 10000000 - 62135596800,  'unixepoch')";
+               return GetDateTimeString(propertyInfo.Name);
+            }
+            if(propertyInfo.PropertyType == typeof(long) && propertyInfo.Name.Contains("Tick"))
+            {
+                return GetDateTimeString(propertyInfo.Name);
             }
             //else if (propertyInfo.PropertyType == typeof(DateTime))
             //{
@@ -178,5 +170,9 @@ $"where  strftime('%{format}', {FormatByProperty(property) }) {comparison} '{uni
                      
            throw new Exception($"Type {typeof(T).Name} must contain a  DateTime property or long property with a name that contains 'Tick'.");
         }
+
+        private static string GetDateTimeString(string field) => $"datetime({field}/ 10000000 - 62135596800,  'unixepoch')";
+
+        private static string GetSelectStatement<T>() => $"select * from {typeof(T).GetName()} ";
     }
 }
