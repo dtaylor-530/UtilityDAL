@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Optional;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,12 +38,12 @@ namespace UtilityDAL.Teatime
 
         public IList<T> From(string id)   //, IComparable
         {
-            return TeatimeHelper.FromDb<T>(id, dbName);
+            return TeatimeHelper.FromDb<T>(id, dbName).ValueOr(() => null);
         }
 
         public bool Clear(string name)
         {
-            return UtilityDAL.Teatime.TeatimeHelper.Clear(name, dbName);
+            return TeatimeHelper.Clear(name, dbName);
         }
     }
 
@@ -69,23 +70,19 @@ namespace UtilityDAL.Teatime
 
         public ICollection From(string name)
         {
-            var x = (TeatimeHelper.FromDb<T>(dbName));
-            if (x.ContainsKey(name))
-                return x[name];
-            else
-                return null;
+            return TeatimeHelper.FromDb<T>(dbName, name).ValueOr(() => null);
         }
 
         public bool To(ICollection lst, string name)
         {
             IList<T> op = lst.Cast<T>().ToList();
-            UtilityDAL.Teatime.TeatimeHelper.ToDb(op, name, dbName);
+            TeatimeHelper.ToDb(op, name, dbName);
             return true;
         }
 
         public bool Clear(string name)
         {
-            return UtilityDAL.Teatime.TeatimeHelper.Clear(name, dbName);
+            return TeatimeHelper.Clear(name, dbName);
         }
     }
 }

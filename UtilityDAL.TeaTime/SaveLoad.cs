@@ -39,7 +39,7 @@ namespace UtilityDAL.Teatime
 
         public IList<T> Load()
         {
-            return TeatimeHelper.FromDb<T>(typeof(T).Name, dbName);
+            return TeatimeHelper.FromDb<T>(typeof(T).Name, dbName).ValueOr(() => null); 
         }
     }
 }
