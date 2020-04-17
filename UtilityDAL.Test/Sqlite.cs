@@ -8,11 +8,12 @@ using Xunit;
 
 namespace UtilityDAL.Test
 {
-    public class UnitTest1
+    public class SqliteTests
     {
-        public UnitTest1()
+        public SqliteTests()
         {
             System.IO.Directory.CreateDirectory("../../../Data");
+            SQLitePCL.Batteries.Init();
         }
 
         [Fact]
@@ -78,7 +79,7 @@ namespace UtilityDAL.Test
 
                 var xx = ticks.Where(td => td.Date > default(DateTime).AddDays(10 * 100)).ToArray();
 
-                var result = conn.WhereCompare<TestClass>(default(DateTime).AddDays(10 * 100),">").ToArray();
+                var result = conn.WhereCompare<TestClass>(default(DateTime).AddDays(10 * 100), ">").ToArray();
 
                 Assert.True(result.Length == xx.Length);
             }
@@ -108,7 +109,7 @@ namespace UtilityDAL.Test
 
                 var result = conn.WhereHourCompare<TestClass>(11, "=");
 
-                Assert.True(result.Count() ==xx.Single(a=>a.Key==11).Count());
+                Assert.True(result.Count() == xx.Single(a => a.Key == 11).Count());
             }
 
         }
@@ -125,6 +126,22 @@ namespace UtilityDAL.Test
                 var result = conn.Take<TestClass>(100);
 
                 Assert.True(result.Count() == 100);
+            }
+        }
+
+
+        [Fact]
+        public void Test_ToDataSet()
+        {
+            var directory = System.IO.Directory.CreateDirectory("../../../Data");
+            using (var conn = new SQLiteConnection(System.IO.Path.Combine(directory.FullName, "Test2.sqlite")))
+            {
+                conn.CreateTable<TestClass>();
+                conn.DeleteAll<TestClass>();
+                var testdata = Factory.SelectByDate(100).ToArray();
+                conn.InsertAll(testdata);
+                var result = conn.ToDataSet("Select * from TestClass", true).Skip(1).Select(TestClass.Parse).ToArray();
+                Assert.True(result.SequenceEqual(testdata));
             }
         }
 
@@ -147,6 +164,16 @@ namespace UtilityDAL.Test
 
         private class TestClass : IEquatable<TestClass>
         {
+
+            public TestClass(int v1, long v2)
+            {
+                this.Id = v1;
+                this.Date =new DateTime(v2);
+            }
+            public TestClass()
+            {
+            }
+
             public int Id { get; set; }
 
             public DateTime Date { get; set; }
@@ -165,11 +192,17 @@ namespace UtilityDAL.Test
             {
                 return Id;
             }
+
+            public static TestClass Parse(object?[] data)
+            {
+                return new TestClass((int)data[0],(long) data[1]);
+            }
         }
 
         private class Factory
         {
-            public static IEnumerable<TestClass> SelectByDate(int number) => Enumerable.Range(0, number).Select((_, i) => new TestClass { Date = default(DateTime).AddDays(i * 100) });
+            public static IEnumerable<TestClass> SelectByDate(int number) => Enumerable.Range(0, number)
+                .Select((_, i) => new TestClass { Id = i, Date = default(DateTime).AddDays(i * 100) });
 
             public static IEnumerable<TestClass> SelectByHours(int number)
             {
@@ -179,7 +212,6 @@ namespace UtilityDAL.Test
                 while (dictionary.Values.Any(a => a.Count < number))
                 {
                     var date = fac.Generate();
-                    
 
                     dictionary[date.Value.Hour].Add(date.Value);
 

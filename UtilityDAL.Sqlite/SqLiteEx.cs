@@ -1,4 +1,6 @@
-﻿using SQLite;
+﻿#nullable enable
+
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,67 @@ namespace UtilityDAL
 
         public static SQLite.SQLiteConnection MakeConnection() => new SQLite.SQLiteConnection(_dbName);
 
+        public static object?[][]? ToDataSet(this SQLiteConnection sqlConnection, string query , bool includeColumnNamesAsFirstRow = true)
+        {
+            var stQuery = SQLite3.Prepare2(sqlConnection.Handle, query );
+            var colLength = SQLite3.ColumnCount(stQuery);
+            try
+            {
+                return SelectRows().ToArray();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            finally
+            {
+                if (stQuery != null)
+                {
+                    SQLite3.Finalize(stQuery);
+                }
+            }
+
+            IEnumerable<object?[]> SelectRows()
+            {
+                if (includeColumnNamesAsFirstRow)
+                {
+                    yield return SelectColumnNames(stQuery, colLength).ToArray();
+                }
+
+                while (SQLite3.Step(stQuery) == SQLite3.Result.Row)
+                {
+                    yield return SelectColumns(stQuery, colLength).ToArray();
+                }
+
+                static IEnumerable<object> SelectColumnNames(SQLitePCL.sqlite3_stmt stQuery, int colLength)
+                {
+                    for (int i = 0; i < colLength; i++)
+                    {
+                        yield return SQLite3.ColumnName(stQuery, i);
+                    }
+                }
+
+                static IEnumerable<object?> SelectColumns(SQLitePCL.sqlite3_stmt stQuery, int colLength)
+                {
+                    for (int i = 0; i < colLength; i++)
+                    {
+                        var x = SQLitePCL.raw.sqlite3_column_decltype(stQuery, i);
+                        yield return x switch
+                        {
+                            "text" => SQLite3.ColumnString(stQuery, i),
+                            "integer" => SQLite3.ColumnInt(stQuery, i),
+                            "bigint" => SQLite3.ColumnInt64(stQuery, i),
+                            "real" => SQLite3.ColumnDouble(stQuery, i),
+                            "blob" => SQLite3.ColumnBlob(stQuery, i),
+                            "null" => null,
+                            _ => throw new Exception($"Unexpected type encountered in for query {stQuery}")
+                        };
+                    }
+                }
+            }
+        }
+
+
 
         public static bool RemoveDuplicates<T>(this SQLiteConnection connection, bool createBackup = true)
             where T : IEquatable<T>,
@@ -30,7 +93,7 @@ namespace UtilityDAL
         {
             var dir = System.IO.Directory.GetParent(connection.DatabasePath);
 
-            connection.Backup(dir.FullName+"\\Backup");
+            connection.Backup(dir.FullName + "\\Backup");
             var table = connection.Table<T>().ToList().Distinct();
 
             connection.DropTable<T>();
