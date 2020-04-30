@@ -62,7 +62,7 @@ namespace UtilityDAL.Sqlite
             }
 
             var inn = insertItems.Except(ty);
-            var xx = UtilityDAL.SqliteEx.ToDB(inn, ref ty, _conn, check);
+            var xx = CustomSqlite.ToDB(inn, ref ty, _conn, check);
 
             Debug.Assert(ty.All(_ => _.Id != 0));
 
@@ -126,7 +126,7 @@ namespace UtilityDAL.Sqlite
                 }
             }
 
-            var xx = UtilityDAL.SqliteEx.ToDB(inn, ref ty, _conn, check);
+            var xx = CustomSqlite.ToDB(inn, ref ty, _conn, check);
 
             Debug.Assert(ty.All(_ => _.Id != 0));
 
@@ -161,7 +161,7 @@ namespace UtilityDAL.Sqlite
 
             var inn = insertItems.Except(ty).ToArray();
 
-            var xx = UtilityDAL.SqliteEx.ToDB(inn, ref ty, _conn, check);
+            var xx = CustomSqlite.ToDB(inn, ref ty, _conn, check);
 
             Debug.Assert(ty.All(_ => _.Id != 0));
 
@@ -179,7 +179,7 @@ namespace UtilityDAL.Sqlite
         {
             _conn.CreateTable<T>();
             var xx = TryGetAdd<T>().GetList();
-            return UtilityDAL.SqliteEx.ToDB(items.GroupBy(_ => _).Select(_ => _.Key).ToList(), ref xx, _conn, check);
+            return CustomSqlite.ToDB(items.GroupBy(_ => _).Select(_ => _.Key).ToList(), ref xx, _conn, check);
         }
 
         //public bool TransferToDB2<T, R>(IEnumerable<T> items, Func<T, IEnumerable<R>> children, Action<IEnumerable<R>, T> setchildren) where T : DbRow, IEquatable<T>, new() where R : UtilityInterface.Database.IChildRow<DbRow>
