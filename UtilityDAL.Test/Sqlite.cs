@@ -162,13 +162,42 @@ namespace UtilityDAL.Test
             }
         }
 
+
+        [Fact]
+        public void Test_KeyValueLite()
+        {
+            var directory = System.IO.Directory.CreateDirectory("../../../Data");
+            var keyvalue = new KeyValueLite(System.IO.Path.Combine(directory.FullName));
+            var ty = keyvalue.FindString("sdfd");
+            keyvalue.Insert(new KeyValuePair<string, long>("sdfd", 132423423));
+            Assert.True(keyvalue.FindNumeric("sdfd") != null);
+
+
+        }
+
+        [Fact]
+        public void Test_MaxId()
+        {
+            var directory = System.IO.Directory.CreateDirectory("../../../Data");
+            using (var conn = new SQLiteConnection(System.IO.Path.Combine(directory.FullName, "Test2.sqlite")))
+            {
+                conn.CreateTable<TestClass>();
+                conn.DeleteAll<TestClass>();
+                conn.InsertAll(Factory.SelectByDate(100));
+                var result = conn.GetMaxId<TestClass>(a => a.Id);
+             
+                Assert.True(result == 99);
+            }
+        }
+
+
         private class TestClass : IEquatable<TestClass>
         {
 
             public TestClass(int v1, long v2)
             {
                 this.Id = v1;
-                this.Date =new DateTime(v2);
+                this.Date = new DateTime(v2);
             }
             public TestClass()
             {
@@ -195,7 +224,7 @@ namespace UtilityDAL.Test
 
             public static TestClass Parse(object?[] data)
             {
-                return new TestClass((int)data[0],(long) data[1]);
+                return new TestClass((int)data[0], (long)data[1]);
             }
         }
 
