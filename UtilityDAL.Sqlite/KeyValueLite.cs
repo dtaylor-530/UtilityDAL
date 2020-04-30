@@ -92,7 +92,7 @@ namespace UtilityDAL.Sqlite
         {
             using var x = new SQLite.SQLiteConnection(directory + Name);
             x.CreateTable<KeyValueString>();
-            var xx = x.Find<KeyValueString>(key); ;
+            var xx = x.Find<KeyValueString>(key); 
             return xx?.Value ?? null;
         }
 
@@ -100,7 +100,7 @@ namespace UtilityDAL.Sqlite
         {
             using var x = new SQLite.SQLiteConnection(directory + Name);
             x.CreateTable<KeyValueNumeric>();
-            var xx = x.Find<KeyValueNumeric>(key); ;
+            var xx = x.Find<KeyValueNumeric>(key); 
             return xx?.Value ?? null;
         }
 
