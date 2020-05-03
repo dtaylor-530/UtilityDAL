@@ -1,4 +1,4 @@
-﻿#nullable enable
+﻿using Optional;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -88,28 +88,34 @@ namespace UtilityDAL.Sqlite
             return i;
         }
 
-        public string? FindString(string key)
+        public Optional.Option<string> FindString(string key)
         {
-            using var x = new SQLite.SQLiteConnection(directory + Name);
-            x.CreateTable<KeyValueString>();
-            var xx = x.Find<KeyValueString>(key); 
-            return xx?.Value ?? null;
+            using (var x = new SQLite.SQLiteConnection(directory + Name))
+            {
+                x.CreateTable<KeyValueString>();
+                var xx = x.Find<KeyValueString>(key);
+                return xx.SomeNotNull().Map(a => a.Value);
+            }
         }
 
-        public long? FindNumeric(string key)
+        public Optional.Option<long> FindNumeric(string key)
         {
-            using var x = new SQLite.SQLiteConnection(directory + Name);
-            x.CreateTable<KeyValueNumeric>();
-            var xx = x.Find<KeyValueNumeric>(key); 
-            return xx?.Value ?? null;
+            using (var x = new SQLiteConnection(directory + Name))
+            {
+                x.CreateTable<KeyValueNumeric>();
+                var xx = x.Find<KeyValueNumeric>(key);
+                return xx.SomeNotNull().Map(a => a.Value);
+            }
         }
 
-        public DateTime? FindDate(string key)
+        public Optional.Option<DateTime> FindDate(string key)
         {
-            using var x = new SQLite.SQLiteConnection(directory + Name);
-            x.CreateTable<KeyValueNumeric>();
-            var xx = x.Find<KeyValueNumeric>(key);
-            return xx == null ? null : (DateTime?)new DateTime(xx.Value);
+            using (var x = new SQLiteConnection(directory + Name))
+            {
+                x.CreateTable<KeyValueNumeric>();
+                var xx = x.Find<KeyValueNumeric>(key);
+                return xx.SomeNotNull().Map(a => new DateTime(a.Value));
+            }
         }
     }
 }
