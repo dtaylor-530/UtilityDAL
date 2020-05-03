@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Declan Taylor</Authors>
-    <Version>1.1.1</Version>
+    <Version>1.3.3</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -20,6 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Optional" Version="5.0.0-alpha" />
     <PackageReference Include="UtilityHelper" Version="2.1.1-alpha" />
     <PackageReference Include="UtilityStruct" Version="1.0.4" />
   </ItemGroup>
@@ -34,8 +35,8 @@
         <FileName>"$(ProjectDir)\bin\debug\$(ProjectName)*nupkg"</FileName>
 <DestinationFolder>C:\Users\rytal\Documents\Visual Studio 2019\NugetPackages</DestinationFolder>
 <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-<AssemblyVersion>1.1.1.0</AssemblyVersion>
-<FileVersion>1.1.1.0</FileVersion>
+<AssemblyVersion>1.3.3.0</AssemblyVersion>
+<FileVersion>1.3.3.0</FileVersion>
     </PropertyGroup>
     <Target Name="CopyFiles1" BeforeTargets="Build"> 
          <Message Text="@(MySourceFiles)" Importance="high" /> 

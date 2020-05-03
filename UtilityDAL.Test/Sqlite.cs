@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UtilityDAL.Sqlite;
 using Xunit;
+using Optional.Linq;
+using Optional.Collections;
 
 namespace UtilityDAL.Test
 {
@@ -140,13 +142,17 @@ namespace UtilityDAL.Test
                 conn.DeleteAll<TestClass>();
                 var testdata = Factory.SelectByDate(100).ToArray();
                 conn.InsertAll(testdata);
-                var result = conn.ToDataSet("Select * from TestClass", true).Skip(1).Select(TestClass.Parse).ToArray();
-                Assert.True(result.SequenceEqual(testdata));
+                var result = conn.ToDataSet("Select * from TestClass", true);
+                Assert.True(result.HasValue);
+
+                var arr = result.ValueOr(()=>null).Skip(1).Select(a=> TestClass.Parse(a.Values().ToArray())).ToArray();
+
+                Assert.True(arr.SequenceEqual(testdata));
             }
         }
 
         [Fact]
-        public void TestRemoveDuplicates()
+        public void Test_RemoveDuplicates()
         {
             var directory = System.IO.Directory.CreateDirectory("../../../Data");
             using (var conn = new SQLiteConnection(System.IO.Path.Combine(directory.FullName, "Test2.sqlite")))
@@ -222,7 +228,7 @@ namespace UtilityDAL.Test
                 return Id;
             }
 
-            public static TestClass Parse(object?[] data)
+            public static TestClass Parse(object[] data)
             {
                 return new TestClass((int)data[0], (long)data[1]);
             }
