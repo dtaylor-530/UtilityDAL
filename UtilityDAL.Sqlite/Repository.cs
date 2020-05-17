@@ -42,7 +42,7 @@ namespace UtilityDAL.Sqlite
 
         public int InsertBulk(IList<T> items)
         {
-            return connection.Insert(items);
+            return connection.InsertAll(items);
         }
 
         public bool Update(T item)
