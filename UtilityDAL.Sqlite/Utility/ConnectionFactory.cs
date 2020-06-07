@@ -10,7 +10,7 @@ namespace UtilityDAL.Sqlite
     {
         public static SQLiteConnection Create<T>(string path = null, Func<Type, bool> func = null)
         {
-            return Create(string.IsNullOrEmpty(path) ? $"../../../Data/{typeof(T).Name}.{Constants.Extension}" : path);
+            return Create(string.IsNullOrEmpty(path) ? $"{Constants.DefaultDbDirectory}{typeof(T).Name}.{Constants.SqliteDbExtension}" : path, GetTypes());
 
             Type[] GetTypes() =>
                 UtilityHelper.TypeHelper
@@ -21,12 +21,12 @@ namespace UtilityDAL.Sqlite
 
 
 
-        public static SQLiteConnection Create(string path, Type[] types, Func<Type, bool> func = null)
+        public static SQLiteConnection Create(string path = null, Type[] types = null, Func<Type, bool> func = null)
         {
-            return Create(path, GetTypes());
+            return Create(path, GetTypes() ?? new Type[] { });
 
             Type[] GetTypes() =>
-                types.SelectMany(type =>
+                types?.SelectMany(type =>
                 UtilityHelper.TypeHelper
                     .GetTypesByAssembly(type)
                     .Where(func ?? new Func<Type, bool>(t => t.GetMethods().Any() == false)))
@@ -35,7 +35,7 @@ namespace UtilityDAL.Sqlite
 
         public static SQLiteConnection CreateTemp(params Type[] types)
         {
-            return Create(System.IO.Path.ChangeExtension(System.IO.Path.GetTempFileName(), "sqlite"), types);
+            return Create(System.IO.Path.ChangeExtension(System.IO.Path.GetTempFileName(), Constants.SqliteDbExtension), types);
         }
 
         public static SQLiteConnection Create(string path, params Type[] types)

@@ -7,14 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\Json\DALViewer.DemoApp\**" />
-    <Compile Remove="Data\Json\UtilityDAL.DemoApp\**" />
-    <EmbeddedResource Remove="Data\Json\DALViewer.DemoApp\**" />
-    <EmbeddedResource Remove="Data\Json\UtilityDAL.DemoApp\**" />
-    <None Remove="Data\Json\DALViewer.DemoApp\**" />
-    <None Remove="Data\Json\UtilityDAL.DemoApp\**" />
-    <Page Remove="Data\Json\DALViewer.DemoApp\**" />
-    <Page Remove="Data\Json\UtilityDAL.DemoApp\**" />
+    <Compile Remove="Infrastructure\Data\Json\DALViewer.DemoApp\**" />
+    <Compile Remove="Infrastructure\Data\Json\UtilityDAL.DemoApp\**" />
+    <EmbeddedResource Remove="Infrastructure\Data\Json\DALViewer.DemoApp\**" />
+    <EmbeddedResource Remove="Infrastructure\Data\Json\UtilityDAL.DemoApp\**" />
+    <None Remove="Infrastructure\Data\Json\DALViewer.DemoApp\**" />
+    <None Remove="Infrastructure\Data\Json\UtilityDAL.DemoApp\**" />
+    <Page Remove="Infrastructure\Data\Json\DALViewer.DemoApp\**" />
+    <Page Remove="Infrastructure\Data\Json\UtilityDAL.DemoApp\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Data\Json\DALViewer.Terminal\Filex.json" />
+    <None Include="Infrastructure\Data\Json\DALViewer.Terminal\Filex.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +30,7 @@
     <PackageReference Include="Extended.Wpf.Toolkit" Version="3.7.0" />
     <PackageReference Include="QuickConverter" Version="1.2.5" />
     <PackageReference Include="Unity" Version="5.11.2" />
+    <PackageReference Include="Zio" Version="0.8.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -93,10 +94,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Update="ModelView\DummyLiteDbObjectDataTemplate.xaml">
+    <Page Update="Infrastructure\ModelView\DummyLiteDbObjectDataTemplate.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="ModelView\PriceDataTemplate.xaml">
+    <Page Update="Infrastructure\ModelView\PriceDataTemplate.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Page\BiggyPage.xaml">

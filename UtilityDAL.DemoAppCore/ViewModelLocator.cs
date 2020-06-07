@@ -13,7 +13,7 @@ namespace UtilityDAL.DemoApp
 
             //if (UtilityWpf.DesignModeHelper.IsInDesignModeStatic)
             //if in design mode, use design data service
-            //Container.RegisterType<IService<DataFile>, DummyTeaDataService>();
+            //Container.RegisterType<IObservableService<DataFile>, DummyTeaDataService>();
 
             //else
             //    Container.RegisterType<IDataService<Thing>, ThingService>();
@@ -21,7 +21,7 @@ namespace UtilityDAL.DemoApp
 
             InjectionConstructor injectionConstructor = new InjectionConstructor(Application.Current.Dispatcher);
 
-            Container.RegisterType<UtilityWpf.IDispatcherService, UtilityWpf.DispatcherService>(injectionConstructor);
+            //Container.RegisterType<UtilityWpf.IDispatcherService, UtilityWpf.DispatcherService>(injectionConstructor);
 
             //Container.RegisterType<IRepoChangeService<DummyDbObject>, RepoChangeService >();
 

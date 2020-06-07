@@ -15,7 +15,7 @@ namespace UtilityDAL.View
 
     public class LiteDbControl : DocumentStoreControl //where T : new()
     {
-        public LiteDbControl(Func<object, IConvertible> getKey, string directory = null, string key = null) : base(new UtilityDAL.LiteDbRepo<SHDOObject, IConvertible>(getKey, DbEx.GetDirectory(directory, UtilityDAL.Constants.LiteDbExtension, typeof(IContain<object>))), getKey)
+        public LiteDbControl(Func<object, IConvertible> getKey, string directory = null, string key = null) : base(new UtilityDAL.LiteDbRepo<SHDOObject, IConvertible>(getKey, DbEx.GetDirectory(directory, UtilityDAL.Constants.LiteDbExtension, typeof(IObject<object>))), getKey)
         {
             try
             {

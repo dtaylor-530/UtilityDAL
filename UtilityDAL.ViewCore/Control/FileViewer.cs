@@ -157,8 +157,8 @@ namespace UtilityDAL.View
                         .Subscribe(controlMapAndItems => this.Dispatcher.InvokeAsync(() =>
                         {
                             Items = controlMapAndItems.items;
-                            if((controlMapAndItems.master.DetailView is PageView )==false)
-                            controlMapAndItems.master.DetailView = new PageView();
+                            if((controlMapAndItems.master.Content is PageView )==false)
+                            controlMapAndItems.master.Content = new PageView();
                             controlMapAndItems.master.DataConverter = new CollectionConverter(controlMapAndItems.map);
                         }, System.Windows.Threading.DispatcherPriority.Render));
 

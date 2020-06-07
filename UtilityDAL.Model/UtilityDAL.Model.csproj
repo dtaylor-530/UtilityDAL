@@ -24,7 +24,7 @@
 
   <ItemGroup>
     <PackageReference Include="sqlite-net-base" Version="1.6.292" />
-    <PackageReference Include="UtilityInterface" Version="2.0.1-alpha" />
+    <PackageReference Include="UtilityInterface" Version="3.0.0-alpha" />
   </ItemGroup>
  <ItemGroup>
         <MySourceFiles Include="$(ProjectDir)\bin\debug\$(ProjectName)*nupkg" />

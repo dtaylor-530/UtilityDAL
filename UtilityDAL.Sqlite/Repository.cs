@@ -21,10 +21,11 @@ namespace UtilityDAL.Sqlite
 
         public Repository(Func<T, R> getId, string dbname = null)
         {
-            System.IO.Directory.CreateDirectory("../../Data");
+            System.IO.Directory.CreateDirectory(Constants.DefaultDbDirectory);
             dbname = dbname ?? DbEx.GetConnectionString(providerName, false);
             this.getId = getId;
-            this.connection = new SQLite.SQLiteConnection(string.IsNullOrEmpty(dbname) || string.IsNullOrWhiteSpace(dbname) ? "../../Data/" + typeof(T).Name + "." + Constants.SqliteDbExtension : dbname);
+            this.connection = new SQLite.SQLiteConnection(string.IsNullOrEmpty(dbname) 
+                || string.IsNullOrWhiteSpace(dbname) ? Constants.DefaultDbDirectory + typeof(T).Name + "." + Constants.SqliteDbExtension : dbname);
             connection.CreateTable<T>();
         }
 

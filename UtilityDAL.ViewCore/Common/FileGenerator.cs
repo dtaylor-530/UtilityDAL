@@ -11,9 +11,9 @@ namespace UtilityDAL.View
 {
     public static class FileGenerator
     {
-        internal static IObservable<DataFile> GenerateDataFilesDefault<T>(IFileDatabase<T> service, IService<IEnumerable<T>> gs, string extension)
+        internal static IObservable<DataFile> GenerateDataFilesDefault<T>(IFileDatabase<T> service, IObservableService<IEnumerable<T>> gs, string extension)
         {
-            return gs.Resource.Take(5).Select((_, i) =>
+            return gs.Service.Take(5).Select((_, i) =>
             {
                 string name = i.ToString();
                 var items = service.From(name);

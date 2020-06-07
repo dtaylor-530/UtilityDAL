@@ -7,7 +7,7 @@
 //    }
 //}
 
-//public class DummyTeaDataService : IService<DataFile>
+//public class DummyTeaDataService : IObservableService<DataFile>
 //{
 //    public IObservable<DataFile> Resource { get; }
 //    public DummyTeaDataService()

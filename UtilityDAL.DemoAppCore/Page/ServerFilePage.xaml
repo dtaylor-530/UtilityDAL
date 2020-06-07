@@ -8,5 +8,5 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Server File Page">
 
-    <view:ServerFilesControl  x:Name="serverFilesControl"></view:ServerFilesControl>
+    <!--<view:ServerFilesControl  x:Name="serverFilesControl"></view:ServerFilesControl>-->
 </Page>

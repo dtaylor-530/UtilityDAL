@@ -9,17 +9,17 @@ using UtilityInterface.NonGeneric.Database;
 
 namespace UtilityDAL.View
 {
-    public class Monitor<T> : IService<IChangeSet<T, int>> where T : IBSONRow, IEquatable<T>
+    public class Monitor<T> : IObservableService<IChangeSet<T, int>> where T : IBSONRow, IEquatable<T>
     {
         //public IObservable<T> Adds { get; }
         //public IObservable<T> Removes { get; }
-        public IObservable<IChangeSet<T, int>> Resource { get; }
+        public IObservable<IChangeSet<T, int>> Service { get; }
 
         public Monitor(IFileDatabase<T> repo, IScheduler scheduler)
         {
-            Resource = Init(repo, scheduler);
+            Service = Init(repo, scheduler);
 
-            Resource.Subscribe(_ =>
+            Service.Subscribe(_ =>
             {
             });
         }
@@ -48,13 +48,13 @@ namespace UtilityDAL.View
         }
     }
 
-    public class Monitor2<T> : IService<IChangeSet<T, long>> where T : IChildRow, IEquatable<T>
+    public class Monitor2<T> : IObservableService<IChangeSet<T, long>> where T : IChildRow, IEquatable<T>
     {
-        public IObservable<IChangeSet<T, long>> Resource { get; }
+        public IObservable<IChangeSet<T, long>> Service { get; }
 
         public Monitor2(IFileDatabase<T> repo, IScheduler scheduler)
         {
-            Resource = Init(repo, scheduler);
+            Service = Init(repo, scheduler);
         }
 
         public static IObservable<IChangeSet<T, long>> Init(IFileDatabase<T> repo, IScheduler scheduler)

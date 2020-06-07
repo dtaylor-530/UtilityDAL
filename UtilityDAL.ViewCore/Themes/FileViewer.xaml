@@ -48,9 +48,9 @@
                             <utility:MasterDetailView.PropertyGroupDescription>
                                 <PropertyGroupDescription PropertyName="Directory"></PropertyGroupDescription>
                             </utility:MasterDetailView.PropertyGroupDescription>
-                            <utility:MasterDetailView.DetailView>
+                            <utility:MasterDetailView.Content>
                                 <local:PageView></local:PageView>
-                            </utility:MasterDetailView.DetailView>
+                            </utility:MasterDetailView.Content>
                         </utility:MasterDetailView>
                     </DockPanel>
                 </ControlTemplate>

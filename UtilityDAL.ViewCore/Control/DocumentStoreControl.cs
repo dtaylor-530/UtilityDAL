@@ -51,7 +51,7 @@ namespace UtilityDAL.View
             //});
 
             base.Changes.WithLatestFrom(IsStoreSubject.StartWith(isStore).DistinctUntilChanged(), (a, b) => b ? a : default)
-                //.Where(_ => !_.Equals(default(KeyValuePair<IContainer<object>, ChangeReason>)))
+                //.Where(_ => !_.Equals(default(KeyValuePair<IObjecter<object>, ChangeReason>)))
                 .Subscribe(_ =>
                 {
                     if (_.Equals(null))
@@ -138,8 +138,8 @@ namespace UtilityDAL.View
             var all = _docstore.SelectAll();
             this.ItemsSource = all;
             var isStore = (bool)this.GetValue(IsStoreProperty);
-            base.Changes.WithLatestFrom(IsStoreSubject.StartWith(isStore), (a, b) => b ? a : default(KeyValuePair<UtilityInterface.Generic.IContain<object>, ChangeReason>))
-                .Where(_ => !_.Equals(default(KeyValuePair<UtilityInterface.Generic.IContain<object>, ChangeReason>)))
+            base.Changes.WithLatestFrom(IsStoreSubject.StartWith(isStore), (a, b) => b ? a : default)
+                .Where(_ => !_.Equals(default(KeyValuePair<UtilityInterface.Generic.IObject<object>, ChangeReason>)))
                 .Subscribe(_ =>
                 {
                     var key = (SHDObject<object>)_.Key;
@@ -172,8 +172,8 @@ namespace UtilityDAL.View
             var all = _docstore.SelectAll();
             this.ItemsSource = all;
             var isStore = (bool)this.GetValue(IsStoreProperty);
-            base.Changes.WithLatestFrom(IsStoreSubject.StartWith(isStore), (a, b) => b ? a : default(KeyValuePair<IContain<object>, ChangeReason>))
-                .Where(_ => !_.Equals(default(KeyValuePair<IContain<object>, ChangeReason>)))
+            base.Changes.WithLatestFrom(IsStoreSubject.StartWith(isStore), (a, b) => b ? a : default)
+                .Where(_ => !_.Equals(default(KeyValuePair<IObject<object>, ChangeReason>)))
                 .Subscribe(_ =>
                 {
                     var key = (SHDObject<object>)_.Key;

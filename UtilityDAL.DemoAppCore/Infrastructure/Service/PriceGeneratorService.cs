@@ -1,6 +1,6 @@
 ﻿namespace UtilityDAL.DemoApp
 {
-    //public class PriceGeneratorService : IService<IEnumerable<Price>>
+    //public class PriceGeneratorService : IObservableService<IEnumerable<Price>>
     //{
     //    public IObservable<IEnumerable<Price>> Resource => Resource;
     //    IObservable<IEnumerable<Price>> resource;

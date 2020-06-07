@@ -37,7 +37,7 @@ namespace UtilityDAL.View
             //});
 
             ////var c = new DirectoriesViewModel(, new UtilityWpf.DispatcherService(Application.Current.Dispatcher), "csv", _ => UtilityDAL.CsvHelper.Parse(_));
-            ////IService<Model.DataFile> instance = new CsvDataService(x.Output, 4) as IService<Model.DataFile>;
+            ////IObservableService<Model.DataFile> instance = new CsvDataService(x.Output, 4) as IObservableService<Model.DataFile>;
             ////dockpanel.DataContext = new ViewModel.ProviderViewModel(instance.Resource.ToReactiveCollection());
 
             //maincontent.DataContext = c;

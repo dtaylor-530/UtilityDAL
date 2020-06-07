@@ -10,7 +10,7 @@
     //    }
     //}
 
-    //public class CsvDummyDataService : IService<DataFile>
+    //public class CsvDummyDataService : IObservableService<DataFile>
     //{
     //    public IObservable<DataFile> Resource { get; }
 

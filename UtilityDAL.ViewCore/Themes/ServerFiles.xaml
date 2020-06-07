@@ -4,7 +4,7 @@
                     xmlns:view="clr-namespace:UtilityWpf.View;assembly=UtilityWpf.ViewCore"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
-    <Style TargetType="{x:Type  local:ServerFilesControl}">
+   <!-- <Style TargetType="{x:Type  local:ServerFilesControl}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ServerFilesControl }">
@@ -12,11 +12,11 @@
                         <ToolBar DockPanel.Dock="Top">
                             <Button Content="Update" x:Name="Update" IsEnabled="{Binding ElementName=listboxCriteria, Path=IsCriteriaMet}"></Button>
                             <ComboBox x:Name="ComboBox" Width="200">
-                                <!--<ComboBox.ItemsPanel>
+                                --><!--<ComboBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel></WrapPanel>
                                     </ItemsPanelTemplate>
-                                </ComboBox.ItemsPanel>-->
+                                </ComboBox.ItemsPanel>--><!--
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Link}"></TextBlock>
@@ -63,5 +63,5 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 </ResourceDictionary>

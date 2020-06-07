@@ -42,7 +42,7 @@ xmlns:utility="clr-namespace:UtilityWpf.View;assembly=UtilityWpf.ViewCore"
                 </Grid.DataContext>
                 <!--<view:LiteDbControl NewItem="{Binding NewItem.Value,TargetNullValue={x:Static system:String.Empty}}" Key="Id" Mapper="{Binding Mapper,Mode=OneWay}" ></view:LiteDbControl>-->
                 <!--<utility:ListBoxEx  utility:NewItemAttached.NewItem="{Binding NewItem.Value}" Key="Id" ></utility:ListBoxEx>-->
-                <utility:ListBoxEx utility:ItemsControlEx.NewItem="{Binding NewItem.Value,Mode=OneWay}"   utility:Ex.SecurityId="1"></utility:ListBoxEx>
+                <!--<utility:ListBoxEx utility:ItemsControlEx.NewItem="{Binding NewItem.Value,Mode=OneWay}"   utility:Ex.SecurityId="1"></utility:ListBoxEx>-->
                 <!--mvvm:ListBoxExDocumentStore.Store="{Binding DocumentStore,Mode=OneTime}"-->
             </Grid>
         </TabItem>

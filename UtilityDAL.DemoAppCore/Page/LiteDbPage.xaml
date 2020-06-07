@@ -23,7 +23,7 @@
                     <Binding Mode="OneWay" Path="LiteDbVM" Source="{StaticResource MainViewModelLocatorDataSource}" />
                 </Grid.DataContext>
                 <!--<view:LiteDbControl NewItem="{Binding NewItem.Value,TargetNullValue={x:Static system:String.Empty}}" Key="Id" Mapper="{Binding Mapper,Mode=OneWay}" ></view:LiteDbControl>-->
-                <mvvm1:LiteDbControl utility:ItemsControlEx.NewItem="{Binding NewItem,Mode=OneWay}"  ></mvvm1:LiteDbControl>
+                <!--<mvvm1:LiteDbControl utility:ItemsControlEx.NewItem="{Binding NewItem,Mode=OneWay}"  ></mvvm1:LiteDbControl>-->
             </Grid>
         </TabItem>
         <TabItem Header="Custom">
@@ -32,7 +32,7 @@
                     <Binding Mode="OneWay" Path="LiteDbVM" Source="{StaticResource MainViewModelLocatorDataSource}" />
                 </Grid.DataContext>
                 <!--<view:LiteDbControl NewItem="{Binding NewItem.Value,TargetNullValue={x:Static system:String.Empty}}" Key="Id" Mapper="{Binding Mapper,Mode=OneWay}" ></view:LiteDbControl>-->
-                <mvvm1:LiteDbControl utility:ItemsControlEx.NewItem="{Binding NewItem,Mode=OneWay}"  ></mvvm1:LiteDbControl>
+                <!--<mvvm1:LiteDbControl utility:ItemsControlEx.NewItem="{Binding NewItem,Mode=OneWay}"  ></mvvm1:LiteDbControl>-->
             </Grid>
         </TabItem>
         <TabItem Header="Attached property Control">

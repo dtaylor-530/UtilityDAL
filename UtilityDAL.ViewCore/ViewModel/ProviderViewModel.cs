@@ -64,7 +64,7 @@ namespace UtilityDAL.ViewModel
 
     //public class ProviderViewModel<T> : ProviderViewModel where T : IComparable
     //{
-    //    public ProviderViewModel(IService<DataFile> service, Func<DataFile, T> sort, bool byDescending = true)
+    //    public ProviderViewModel(IObservableService<DataFile> service, Func<DataFile, T> sort, bool byDescending = true)
     //        : base(/*new ServiceViewModel<DataFile, T>(service, sort, byDescending).Items*/null)
     //    {
     //    }

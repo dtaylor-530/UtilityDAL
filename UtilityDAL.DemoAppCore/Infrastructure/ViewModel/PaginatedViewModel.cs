@@ -10,7 +10,7 @@ namespace UtilityDAL.DemoApp
 
         public IEnumerable<dynamic> Items { get; }
 
-        public PaginatedViewModel(UtilityWpf.IDispatcherService ds)
+        public PaginatedViewModel()
         {
             Items = new UtilityDAL.CSV.CSV().From(File).Cast<dynamic>();
         }

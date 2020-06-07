@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 using UtilityDAL.Model;
 
 namespace UtilityDAL.DemoApp
@@ -12,7 +13,7 @@ namespace UtilityDAL.DemoApp
         {
             InitializeComponent();
 
-            var xx = new Bogus.Faker<Model.Log>().
+            var xx = new Bogus.Faker<Log>().
                 RuleFor(o => o.Date, f => f.Date.Recent())
                 .RuleFor(o => o.Issue, f => f.PickRandom<Issue>())
                 .RuleFor(o => o.Key, f => f.Random.String(10))
@@ -21,5 +22,30 @@ namespace UtilityDAL.DemoApp
 
             CollectionUserControl.Items = xx;
         }
+
+        //using System;
+
+
+        public class Log
+        {
+            public string Key { get; set; }
+
+            public string Source { get; set; }
+
+            public DateTime Date { get; set; }
+
+            public Issue Issue { get; set; }
+
+            public string Message { get; set; }
+        }
+
+        public enum Issue
+        {
+            Success,
+            Information,
+            Warning,
+            Error
+        }
     }
+
 }

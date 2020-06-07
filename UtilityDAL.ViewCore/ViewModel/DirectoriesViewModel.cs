@@ -34,17 +34,17 @@ namespace UtilityDAL.ViewModel
         //public ReactiveProperty<System.Collections.IEnumerable> SelectedItems { get; } = new ReactiveProperty<System.Collections.IEnumerable>();
         public object SelectedItem { get; } 
 
-        public DirectoriesViewModel(string directories, UtilityWpf.IDispatcherService ds, string extension, Func<string, System.Collections.IEnumerable> outputfunc, Func<string, string> filemap = null)
+        public DirectoriesViewModel(string directories, string extension, Func<string, System.Collections.IEnumerable> outputfunc, Func<string, string> filemap = null)
         {
-            Init(Observable.Start(() => directories), ds, extension, outputfunc, filemap);
+            Init(Observable.Start(() => directories), extension, outputfunc, filemap);
         }
 
-        public DirectoriesViewModel(IObservable<string> directories, UtilityWpf.IDispatcherService ds, string extension, Func<string, System.Collections.IEnumerable> outputfunc, Func<string, string> filemap = null)
+        public DirectoriesViewModel(IObservable<string> directories,  string extension, Func<string, System.Collections.IEnumerable> outputfunc, Func<string, string> filemap = null)
         {
-            Init(directories, ds, extension, outputfunc, filemap);
+            Init(directories, extension, outputfunc, filemap);
         }
 
-        private void Init(IObservable<string> directories, UtilityWpf.IDispatcherService ds, string extension, Func<string, System.Collections.IEnumerable> outputfunc, Func<string, string> filemap = null)
+        private void Init(IObservable<string> directories, string extension, Func<string, System.Collections.IEnumerable> outputfunc, Func<string, string> filemap = null)
         {
             rootDirectories = directories.Where(_ => _ != "").Select(_ =>
             {

@@ -41,7 +41,7 @@ namespace UtilityDAL.CSV
                 throw new System.IO.DirectoryNotFoundException(path + " does not exist");
         }
 
-        public List<String> SelectIds()
+        public List<string> SelectIds()
         {
             return System.IO.Directory.GetFiles(dbName).Select(_ => System.IO.Path.GetFileNameWithoutExtension(_)).ToList();
         }

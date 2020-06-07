@@ -12,9 +12,9 @@ namespace UtilityDAL.View
 {
     public static class csvHelper
     {
-        public static IObservable<DataFile> GenerateDataFilesDefault<T>(IFileDatabase<T> service, IService<IEnumerable<T>> gs, string extension)
+        public static IObservable<DataFile> GenerateDataFilesDefault<T>(IFileDatabase<T> service, IObservableService<IEnumerable<T>> gs, string extension)
         {
-            return gs.Resource.Select((_, i) =>
+            return gs.Service.Select((_, i) =>
             {
                 string name = i.ToString();
                 List<T> items = null;

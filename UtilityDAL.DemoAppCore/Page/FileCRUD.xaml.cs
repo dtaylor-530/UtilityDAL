@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using UtilityDAL.Contract.NonGeneric;
 using UtilityDAL.Model;
+using Zio.FileSystems;
 
 namespace UtilityDAL.DemoApp
 {
@@ -26,23 +27,26 @@ namespace UtilityDAL.DemoApp
         private class FilexViewModel
         {
             private static readonly System.IO.DirectoryInfo directory = System.IO.Directory.CreateDirectory(directoryPath);
-            private ReadOnlyObservableCollection<Model.Filex> items;
+            private ReadOnlyObservableCollection<Zio.FileEntry> items;
             private const string directoryPath = "/FilextData";
 
             public FilexViewModel()
             {
+                var xx = new MemoryFileSystem();
+                xx.CreateDirectory("/Mem");
+
                 Observable.Interval(TimeSpan.FromSeconds(3))
         .StartWith(0)
         .ObserveOnDispatcher()
-        .Select(_ => UtilityDAL.Factory.Filex.Create(System.IO.Path.Combine(directory.FullName, UtilityHelper.RandomHelper.NextWord())))
+        .Select(_ =>new Zio.FileEntry(xx,System.IO.Path.Combine("/Mem", UtilityHelper.RandomHelper.NextWord())))
    .ToObservableChangeSet()
         .Bind(out items)
         .Subscribe();
             }
 
-            public IFileDbService DbService3 { get; } = new UtilityDAL.CSV.CSV(@"../../../Data");
+            public IFileDbService DbService3 { get; } = new UtilityDAL.CSV.CSV(Constants.DefaultDbDirectory);
 
-            public ReadOnlyObservableCollection<Model.Filex> Items => items;
+            public ReadOnlyObservableCollection<Zio.FileEntry> Items => items;
 
             private void FileCRUDControl_SeriesRetrieved(object sender, RoutedEventArgs e)
             {

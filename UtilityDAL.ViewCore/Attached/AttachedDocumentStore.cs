@@ -81,7 +81,7 @@ namespace UtilityDAL.View
             }
 
             (itemscontrol.ItemsSource as System.Collections.ObjectModel.ObservableCollection<object>)?
-              .GetCollectionChanges()
+              .SelectChanges()
                .Subscribe(_ =>
                {
                    var reason = _.Action;
