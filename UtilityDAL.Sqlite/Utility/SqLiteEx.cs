@@ -19,7 +19,6 @@ namespace UtilityDAL
             return db.Table<T>().Max(expression);
         }
 
-
         public static bool TableExists<T>(this SQLiteConnection connection) => TableExists(connection, GetName(typeof(T)));
 
         public static bool TableExists(this SQLiteConnection connection, string tableName) => connection.Query<NameTable>($"SELECT name FROM sqlite_master WHERE name='{tableName}'").Count > 0;
@@ -59,35 +58,6 @@ namespace UtilityDAL
             }
         }
 
-        public static void Create<T>(string path)
-        {
-            using (SQLiteConnection db = new SQLiteConnection(path))
-            {
-                var types = UtilityHelper.TypeHelper.GetTypesByAssembly<T>();
-
-                foreach (var type in types)
-                {
-                    db.CreateTable(type, CreateFlags.AutoIncPK);
-                }
-            }
-        }
-
-        public static void Create(string path, params Type[] types)
-        {
-            System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
-            using (SQLiteConnection db = new SQLiteConnection(path))
-            {
-                foreach (var type in types)
-                {
-                    var types2 = UtilityHelper.TypeHelper.GetTypesByAssembly(type);
-
-                    foreach (var type2 in types2)
-                    {
-                        db.CreateTable(type2, CreateFlags.AutoIncPK);
-                    }
-                }
-            }
-        }
 
 
         public static Option<Option<object, Exception>[][], Exception> ToDataSet(this SQLiteConnection sqlConnection, string query, bool includeColumnNamesAsFirstRow = true)
