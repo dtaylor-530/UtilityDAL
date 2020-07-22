@@ -7,15 +7,17 @@ namespace UtilityDAL.Sqlite
     public class EmbeddedDatabase
     {
 
-        public static IDisposable Get(Stream resourceStream, out SQLiteConnection conn)
+        public static IDisposable Get(Stream resourceStream, out SQLiteConnection conn, bool disposeResourceStream = true)
         {
-            string path = Path.Combine(Path.GetTempPath(), "EmbeddedDatabase.sqlite");
+            var dir = Directory.CreateDirectory(Path.GetTempPath() + "/EmbeddedDatabase").FullName;
+            string path = Path.GetFileNameWithoutExtension(dir) + ".sqlite";
 
             using (var fileStream = File.OpenWrite(path))
             {
                 CopyStream(resourceStream, fileStream);
             }
-
+            if (disposeResourceStream)
+                resourceStream.Dispose();
 
             conn = new SQLiteConnection(path);
 

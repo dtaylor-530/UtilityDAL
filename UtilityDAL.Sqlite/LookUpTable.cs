@@ -4,6 +4,7 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UtilityHelper;
 
 namespace UtilityDAL.Sqlite
 {
@@ -31,21 +32,15 @@ namespace UtilityDAL.Sqlite
             {
                 try
                 {
-                    var ss = dictionary.GetValueOrNone((dataSource, rowHeader, alternateDataSource))
-                        .FlatMap(a =>
-                         conn
-                         .Query<Output>(GetQuery())
+                    return dictionary.GetValueOrNew((dataSource, rowHeader, alternateDataSource), conn
+                         .Query<Output>(QueryStatement())
                          .SingleOrNone()
                          .Map(va => va.Name)
-                         .WithException(new Exception("No match for query " + GetQuery())))
-                        .WithException(new Exception("No match in dictionary"));
-
-                    dictionary[(dataSource, rowHeader, alternateDataSource)] = ss;
-                    return ss;
+                         .WithException(new Exception("No match for query " + QueryStatement())));
                 }
                 catch (Exception ex)
                 {
-                    return Option.Some(string.Empty).WithException(ex);
+                    return Option.None<string>().WithException(ex);
                 }
             }
             else if (fields.Contains(dataSource) == false)
@@ -59,7 +54,7 @@ namespace UtilityDAL.Sqlite
 
             return Option.None<string, Exception>(new Exception("Unknown"));
 
-            string GetQuery() => $"Select {Escape(alternateDataSource)} as {nameof(Output.Name)} from {table} where {Escape(dataSource)} = '{Escape(rowHeader)}'";
+            string QueryStatement() => $"Select {Escape(alternateDataSource)} as {nameof(Output.Name)} from {table} where {Escape(dataSource)} = '{Escape(rowHeader)}'";
         }
 
 
@@ -88,21 +83,16 @@ namespace UtilityDAL.Sqlite
             {
                 try
                 {
-                    var ss = dictionaryId.GetValueOrNone((dataSource, rowHeader))
-                     .FlatMap(a =>
-                     conn
-                    .Query<Output>(GetQuery())
-                    .Select(va => va.Id)
-                    .SingleOrNone()
-                    .WithException(new Exception("No match for query, " + GetQuery())))
-                       .WithException(new Exception("No match in dictionary"));
+                    return dictionaryId.GetValueOrNew((dataSource, rowHeader), conn
+                     .Query<Output>(QueryStatement())
+                     .SingleOrNone()
+                     .Map(va => va.Id)
+                     .WithException(new Exception("No match for query " + QueryStatement())));
 
-                    dictionaryId[(dataSource, rowHeader)] = ss;
-                    return ss;
                 }
                 catch (Exception ex)
                 {
-                    return Option.Some(default(int)).WithException(ex);
+                    return Option.None<int>().WithException(ex);
                 }
             }
             else
@@ -110,7 +100,7 @@ namespace UtilityDAL.Sqlite
                 return Option.None<int, Exception>(new Exception("DataSource does not contain field " + dataSource));
             }
 
-            string GetQuery() => $"Select Id from {table} where {Escape(dataSource)} = '{Escape(rowHeader)}'";
+            string QueryStatement() => $"Select Id from {table} where {Escape(dataSource)} = '{Escape(rowHeader)}'";
         }
 
         static string Escape(string sql)
