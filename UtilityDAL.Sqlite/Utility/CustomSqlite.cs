@@ -64,7 +64,7 @@ namespace UtilityDAL.Sqlite
             //return null;
         }
 
-        public static long? FindId<T, R>(this T hash, List<T> t) where T : IEquatable<T>, IChildRow<DbRow>, new() where R : IId
+        public static long? FindId<T, R>(this T hash, List<T> t) where T : IEquatable<T>, IChildRow<DatabaseRow>, new() where R : IId
         {
             var seasons = from s in t
                           where ((IChildRow<R>)s).Equals(hash)
@@ -147,11 +147,11 @@ namespace UtilityDAL.Sqlite
         public static async Task<bool> ToDB<T, R>(T match, SQLiteAsyncConnection db) where T : IEquatable<T>, IChildRow, new() where R : IId
             => (match == null) ? false : await ToDB(await FindId<T, R>(match, db), match, db);
 
-        public static bool ToDB<T, R>(T match, List<T> xx, SQLiteConnection db) where T : IEquatable<T>, IChildRow<DbRow>, new() where R : IId
+        public static bool ToDB<T, R>(T match, List<T> xx, SQLiteConnection db) where T : IEquatable<T>, IChildRow<DatabaseRow>, new() where R : IId
 
             => (match == null) ? false : ToDB(FindId<T, R>(match, xx), match, db, xx);
 
-        public static async Task<bool> ToDB<T, R>(T match, List<T> xx, SQLiteAsyncConnection db) where T : IEquatable<T>, IChildRow<DbRow>, new() where R : IId
+        public static async Task<bool> ToDB<T, R>(T match, List<T> xx, SQLiteAsyncConnection db) where T : IEquatable<T>, IChildRow<DatabaseRow>, new() where R : IId
 
             => (match == null) ? false : await ToDB(FindId<T, R>(match, xx), match, db);
 

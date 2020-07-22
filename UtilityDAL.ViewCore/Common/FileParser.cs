@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.ComponentModel;
-using UtilityDAL.Contract;
+using UtilityDAL.Abstract;
 
 namespace UtilityDAL.View
 {

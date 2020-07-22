@@ -8,12 +8,12 @@ using System.Reactive.Subjects;
 using System.Windows;
 using System.Windows.Controls;
 using UtilityWpf.ViewModel;
-using UtilityDAL.Contract;
 using System.Windows.Data;
 using System.Windows.Threading;
 using System.Windows.Input;
 using UtilityWpf.View;
 using System.Globalization;
+using UtilityDAL.Abstract;
 
 namespace UtilityDAL.View
 {

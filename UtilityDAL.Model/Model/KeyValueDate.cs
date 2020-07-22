@@ -1,4 +1,6 @@
-﻿namespace UtilityDAL.Model
+﻿using System;
+
+namespace UtilityDAL.Model
 {
     public class KeyValueDate
     {
@@ -10,6 +12,7 @@
         public string Key { get; set; }
 
         public string Value { get; set; }
-        public long Date { get; set; }
+
+        public DateTime Date { get; set; }
     }
 }

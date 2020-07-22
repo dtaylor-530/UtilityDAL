@@ -29,6 +29,9 @@
  <ItemGroup>
         <MySourceFiles Include="$(ProjectDir)\bin\debug\$(ProjectName)*nupkg" />
     </ItemGroup>
+ <ItemGroup>
+   <Folder Include="Interface\" />
+ </ItemGroup>
     <PropertyGroup>
         <FileName>"$(ProjectDir)\bin\debug\$(ProjectName)*nupkg"</FileName>
 <DestinationFolder>C:\Users\rytal\Documents\Visual Studio 2019\NugetPackages</DestinationFolder>

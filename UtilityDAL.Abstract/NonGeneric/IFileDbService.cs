@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace UtilityDAL.Contract.NonGeneric
+namespace UtilityDAL.Abstract.NonGeneric
 {
     // For mulit file based storage like CSV TeaTime
 

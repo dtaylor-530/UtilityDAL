@@ -6,9 +6,9 @@ namespace UtilityDAL.View
 {
     using Model;
 
-    public class TeaDataDummyService<T> : IObservableService<DataFile> where T : struct
+    public class TeaDataDummyService<T> : IObservableService<KeyCollection> where T : struct
     {
-        public IObservable<DataFile> Service { get; }
+        public IObservable<KeyCollection> Service { get; }
 
         public TeaDataDummyService(string path = null)
         {
@@ -20,7 +20,7 @@ namespace UtilityDAL.View
             paths.Subscribe(_ =>
             {
             });
-            Service = Observable.Create<IObservable<DataFile>>(observer =>
+            Service = Observable.Create<IObservable<KeyCollection>>(observer =>
               paths.Subscribe(path =>
               {
                   observer.OnNext(FileGenerator.GenerateDataFilesDefault(new Teatime.Repository<T>(path), "tea"));

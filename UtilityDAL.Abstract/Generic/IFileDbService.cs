@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace UtilityDAL.Contract.Generic
+namespace UtilityDAL.Abstract.Generic
 {
     // For mulit file based storage like CSV TeaTime
 

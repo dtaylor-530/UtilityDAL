@@ -1,4 +1,4 @@
-﻿namespace UtilityDAL.Contract
+﻿namespace UtilityDAL.Abstract
 {
     public interface IFileParser
     {

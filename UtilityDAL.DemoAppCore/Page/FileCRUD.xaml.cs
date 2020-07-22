@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using UtilityDAL.Contract.NonGeneric;
+using UtilityDAL.Abstract.NonGeneric;
 using UtilityDAL.Model;
 using Zio.FileSystems;
 

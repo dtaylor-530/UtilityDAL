@@ -6,9 +6,9 @@ namespace UtilityDAL.View
     using Model;
     using System.Reactive.Linq;
 
-    public class CsvDummyDataService<T> : IObservableService<DataFile>
+    public class CsvDummyDataService<T> : IObservableService<KeyCollection>
     {
-        public IObservable<DataFile> Service { get; }
+        public IObservable<KeyCollection> Service { get; }
 
         public CsvDummyDataService(string path = null)
         {
@@ -17,7 +17,7 @@ namespace UtilityDAL.View
 
         public CsvDummyDataService(IObservable<string> paths)
         {
-            Service = Observable.Create<IObservable<DataFile>>(observer =>
+            Service = Observable.Create<IObservable<KeyCollection>>(observer =>
             paths.Subscribe(path =>
             {
                 observer.OnNext(csvHelper.GenerateDataFilesDefault(new UtilityDAL.CSV.CSV<T>(path), "csv"));
@@ -25,9 +25,9 @@ namespace UtilityDAL.View
         }
     }
 
-    public class CsvDataService : IObservableService<DataFile>
+    public class CsvDataService : IObservableService<KeyCollection>
     {
-        public IObservable<DataFile> Service { get; }
+        public IObservable<KeyCollection> Service { get; }
 
         public CsvDataService(string path = null, int? i = null)
         {
@@ -41,7 +41,7 @@ namespace UtilityDAL.View
 
         public CsvDataService(IObservable<string> paths, int? i = null)
         {
-            Service = Observable.Create<IObservable<DataFile>>(observer =>
+            Service = Observable.Create<IObservable<KeyCollection>>(observer =>
             paths.Subscribe(path =>
             {
                 observer.OnNext(csvHelper.GenerateDataFilesDefault(new UtilityDAL.CSV.CSV(path), "csv", i));

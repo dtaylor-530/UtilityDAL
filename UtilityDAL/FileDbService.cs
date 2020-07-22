@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using UtilityDAL.Abstract.Generic;
 using UtilityDAL.Common;
-using UtilityDAL.Contract.Generic;
 
 namespace UtilityDAL
 {

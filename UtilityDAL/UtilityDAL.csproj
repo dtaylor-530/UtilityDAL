@@ -36,6 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\UtilityDAL.Abstract\UtilityDAL.Abstract.csproj" />
     <ProjectReference Include="..\UtilityDAL.Model\UtilityDAL.Model.csproj" />
   </ItemGroup>
  <ItemGroup>

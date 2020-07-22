@@ -4,17 +4,17 @@ using UtilityInterface.NonGeneric.Database;
 
 namespace UtilityDAL.Model
 {
-    public class DbRow : IId
+    public class DatabaseRow : IId
     {
         private long id;
         //long parentId;
 
-        public DbRow(Int64 id)
+        public DatabaseRow(Int64 id)
         {
             Id = id;
         }
 
-        public DbRow()
+        public DatabaseRow()
         {
         }
 

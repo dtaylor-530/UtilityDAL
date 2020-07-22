@@ -5,8 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using UtilityDAL.Contract.Generic;
-using UtilityDAL.Contract.NonGeneric;
+using UtilityDAL.Abstract.Generic;
+using UtilityDAL.Abstract.NonGeneric;
 
 namespace UtilityDAL.View
 {

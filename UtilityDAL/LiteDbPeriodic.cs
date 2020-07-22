@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using UtilityDAL.Contract;
+using UtilityDAL.Abstract;
 using UtilityInterface.NonGeneric;
 
 namespace UtilityDAL.Service

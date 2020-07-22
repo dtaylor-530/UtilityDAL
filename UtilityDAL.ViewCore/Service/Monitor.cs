@@ -2,8 +2,8 @@
 using DynamicData.Kernel;
 using System;
 using System.Reactive.Concurrency;
-using UtilityDAL.Contract;
-using UtilityDAL.Contract.Generic;
+using UtilityDAL.Abstract;
+using UtilityDAL.Abstract.Generic;
 using UtilityInterface.Generic;
 using UtilityInterface.NonGeneric.Database;
 
