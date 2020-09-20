@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Declan Taylor</Authors>
     <Company />
-    <Version>2.1.1</Version>
+    <Version>2.1.2</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <AssemblyVersion>2.1.1.0</AssemblyVersion>
     <FileVersion>2.1.1.0</FileVersion>
@@ -24,14 +24,11 @@
 
   <ItemGroup>
     <PackageReference Include="sqlite-net-base" Version="1.6.292" />
-    <PackageReference Include="UtilityInterface" Version="3.0.0-alpha" />
+    <PackageReference Include="UtilityInterface" Version="4.0.2-alpha" />
   </ItemGroup>
  <ItemGroup>
         <MySourceFiles Include="$(ProjectDir)\bin\debug\$(ProjectName)*nupkg" />
     </ItemGroup>
- <ItemGroup>
-   <Folder Include="Interface\" />
- </ItemGroup>
     <PropertyGroup>
         <FileName>"$(ProjectDir)\bin\debug\$(ProjectName)*nupkg"</FileName>
 <DestinationFolder>C:\Users\rytal\Documents\Visual Studio 2019\NugetPackages</DestinationFolder>

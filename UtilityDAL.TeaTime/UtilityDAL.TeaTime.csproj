@@ -20,12 +20,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Optional" Version="4.0.0" />
+    <PackageReference Include="Optional" Version="5.0.0-alpha" />
     <PackageReference Include="TeaFiles.Net" Version="1.0.0.35" />
-    <PackageReference Include="UtilityHelper" Version="2.1.1-alpha" />
+    <PackageReference Include="UtilityHelper" Version="2.1.6-alpha-01" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\UtilityDAL.Abstract\UtilityDAL.Abstract.csproj" />
     <ProjectReference Include="..\UtilityDAL.Model\UtilityDAL.Model.csproj" />
   </ItemGroup>
 

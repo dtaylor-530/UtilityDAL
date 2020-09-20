@@ -11,17 +11,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Data\Embedded.sqlite" />
     <None Remove="Data\Test.sqlite" />
     <None Remove="Data\Test2.sqlite" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bogus" Version="28.3.2" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
-    <PackageReference Include="RandomDataGenerator.Net" Version="1.0.11-preview-01" />
+    <EmbeddedResource Include="Data\Embedded.sqlite" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="31.0.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0-preview-20200812-03" />
+    <PackageReference Include="RandomDataGenerator.Net" Version="1.0.12" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -34,7 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
+    <Resource Include="Data\Embedded.sqlite" />
   </ItemGroup>
 
 </Project>
