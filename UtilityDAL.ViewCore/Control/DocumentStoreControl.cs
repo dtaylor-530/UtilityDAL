@@ -15,7 +15,7 @@ namespace UtilityDAL.View
     public class DocumentStoreControl<T> : ListBoxEx//where T : new()
     {
         //private Func<object, object> _getKey;
-        private IDbService<SHDOObject, IConvertible> _docstore;
+        private IDatabaseService<SHDOObject, IConvertible> _docstore;
 
         public static string GetIsStore(DependencyObject obj)
         {
@@ -37,7 +37,7 @@ namespace UtilityDAL.View
 
         private ISubject<bool> IsStoreSubject = new Subject<bool>();
 
-        public DocumentStoreControl(IDbService<SHDOObject, IConvertible> docstore, Func<object, object> getKey = null) : base(getKey)
+        public DocumentStoreControl(IDatabaseService<SHDOObject, IConvertible> docstore, Func<object, object> getKey = null) : base(getKey)
         {
             //_getKey = getKey ?? base.GetKey;
             _docstore = docstore;
@@ -109,7 +109,7 @@ namespace UtilityDAL.View
     public class DocumentStoreControl : ListBoxEx//where T : new()
     {
         //private Func<object, object> _getKey;
-        private IDbService<SHDOObject, IConvertible> _docstore;
+        private IDatabaseService<SHDOObject, IConvertible> _docstore;
 
         public static string GetIsStore(DependencyObject obj)
         {
@@ -130,7 +130,7 @@ namespace UtilityDAL.View
 
         private ISubject<bool> IsStoreSubject = new Subject<bool>();
 
-        public DocumentStoreControl(IDbService<SHDOObject, IConvertible> docstore, Func<object, object> getKey) : base(getKey)
+        public DocumentStoreControl(IDatabaseService<SHDOObject, IConvertible> docstore, Func<object, object> getKey) : base(getKey)
         {
             _docstore = docstore;
             //Init((bool)this.GetValue(IsStoreProperty));
@@ -160,7 +160,7 @@ namespace UtilityDAL.View
                 });
         }
 
-        public DocumentStoreControl(IDbService<SHDOObject, IConvertible> docstore) : base()
+        public DocumentStoreControl(IDatabaseService<SHDOObject, IConvertible> docstore) : base()
         {
             //_getKey = getKey ?? base.GetKey;
             _docstore = docstore;

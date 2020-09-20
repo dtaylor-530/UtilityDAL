@@ -29,7 +29,7 @@ namespace UtilityDAL
 
     }
 
-    public class LiteDbRepo<T, R> : IDbService<T, R>, IDisposable
+    public class LiteDbRepo<T, R> : IDatabaseService<T, R>, IDisposable
     {
         private readonly Func<T, R> _getkey = null;
         private readonly string _key = null;
@@ -149,7 +149,7 @@ namespace UtilityDAL
 
 
 
-    public class LiteDbRepo : IDbService, IDisposable
+    public class LiteDbRepo : IDatabaseService, IDisposable
     {
         private readonly string _key = null;
 

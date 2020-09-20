@@ -20,6 +20,6 @@ namespace UtilityDAL.View
             obj.SetValue(StoreProperty, value);
         }
 
-        public static readonly DependencyProperty StoreProperty = DependencyProperty.RegisterAttached("Store", typeof(IDbService<SHDOObject, object>), typeof(TreeViewDocumentStore), new PropertyMetadata(null, null, AttachedDocumentStore.StoreCoerce2));
+        public static readonly DependencyProperty StoreProperty = DependencyProperty.RegisterAttached("Store", typeof(IDatabaseService<SHDOObject, object>), typeof(TreeViewDocumentStore), new PropertyMetadata(null, null, AttachedDocumentStore.StoreCoerce2));
     }
 }

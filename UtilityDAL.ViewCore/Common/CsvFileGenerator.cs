@@ -14,7 +14,7 @@ namespace UtilityDAL.View
     {
         public static IObservable<KeyCollection> GenerateDataFilesDefault<T>(IFileDatabase<T> service, IObservableService<IEnumerable<T>> gs, string extension)
         {
-            return gs.Service.Select((_, i) =>
+            return gs.Observable.Select((_, i) =>
             {
                 string name = i.ToString();
                 List<T> items = null;

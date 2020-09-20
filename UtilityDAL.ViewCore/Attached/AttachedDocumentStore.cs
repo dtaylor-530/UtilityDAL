@@ -17,25 +17,25 @@ namespace UtilityDAL.View
     {
         public static void SHDStoreChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var _docstore = (IDbService<SHDOObject, object>)e.NewValue;
+            var _docstore = (IDatabaseService<SHDOObject, object>)e.NewValue;
             ReflectChanges(d as ListBoxEx, _docstore);
         }
 
         internal static object StoreCoerce(DependencyObject d, object baseValue)
         {
-            var _docstore = (IDbService<SHDOObject, object>)baseValue;
+            var _docstore = (IDatabaseService<SHDOObject, object>)baseValue;
             ReflectChanges(d as ListBoxEx, _docstore);
             return baseValue;
         }
 
         internal static object StoreCoerce2(DependencyObject d, object baseValue)
         {
-            var _docstore = (IDbService)baseValue;
+            var _docstore = (IDatabaseService)baseValue;
             ReflectChanges(d as ItemsControl, _docstore);
             return baseValue;
         }
 
-        public static void ReflectChanges(ListBoxEx lbx, IDbService<SHDOObject, object> _docstore)
+        public static void ReflectChanges(ListBoxEx lbx, IDatabaseService<SHDOObject, object> _docstore)
         {
             var lst = lbx.ItemsSource?.Cast<SHDOObject>()?.ToList();
             IDisposable disposable = null;
@@ -68,7 +68,7 @@ namespace UtilityDAL.View
                  });
         }
 
-        public static void ReflectChanges(ItemsControl itemscontrol, IDbService _docstore)
+        public static void ReflectChanges(ItemsControl itemscontrol, IDatabaseService _docstore)
         {
             var key = (string)itemscontrol.GetValue(Ex.KeyProperty);
             var lst = itemscontrol.ItemsSource?.Cast<object>()?.ToList();
@@ -116,6 +116,6 @@ namespace UtilityDAL.View
         {
         }
 
-        //public ISubject<IDbService<SHDOObject,object>> StoreSubject = new Subject<IDbService<SHDOObject,object>>();
+        //public ISubject<IDatabaseService<SHDOObject,object>> StoreSubject = new Subject<IDatabaseService<SHDOObject,object>>();
     }
 }

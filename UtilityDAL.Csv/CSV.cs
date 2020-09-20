@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using UtilityDAL.Common;
 using UtilityDAL.Abstract.Generic;
 using UtilityDAL.Abstract.NonGeneric;
+using CsvHelper.Configuration;
+using System.Globalization;
 
 namespace UtilityDAL.CSV
 {
@@ -64,7 +66,7 @@ namespace UtilityDAL.CSV
         {
             using (TextWriter writer = new StreamWriter(Path.Combine(dbName, name + ".csv")))
             {
-                var csv = new CsvWriter(writer);
+                var csv = new CsvWriter(writer, new CsvConfiguration(cultureInfo: CultureInfo.InvariantCulture));
                 //csv.Configuration.Encoding = Encoding.UTF8;
                 csv.WriteRecords(lst); // where values implements IEnumerable
             }
@@ -221,7 +223,7 @@ namespace UtilityDAL.CSV
         }
     }
 
-    //public class CSV //:IDbService
+    //public class CSV //:IDatabaseService
     //{
     //    static readonly string dbName;
 

@@ -15,7 +15,7 @@ namespace UtilityDAL
         }
     }
 
-    public class DynamicDbService<T, R> : IDbService<T, R>
+    public class DynamicDbService<T, R> : IDatabaseService<T, R>
     {
         private ISubject<T> Adds = new Subject<T>();
         private ISubject<T> Removes = new Subject<T>();

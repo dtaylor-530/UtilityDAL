@@ -1,6 +1,7 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
 using System;
+using System.Globalization;
 using System.IO;
 
 namespace UtilityDAL.CSV
@@ -16,7 +17,7 @@ namespace UtilityDAL.CSV
         {
             var reader = new StringReader(text);
 
-            var csv = new CsvReader(reader);
+            var csv = new CsvReader(reader, new CsvConfiguration(cultureInfo:CultureInfo.InvariantCulture));
 
             Build(csv.Configuration);
             return csv;
@@ -25,7 +26,7 @@ namespace UtilityDAL.CSV
         public static CsvReader Build(string path)
         {
             var text = System.IO.File.OpenText(path);
-            var csv = new CsvReader(text);
+            var csv = new CsvReader(text, new CsvConfiguration(cultureInfo: CultureInfo.InvariantCulture));
 
             Build(csv.Configuration);
             return csv;

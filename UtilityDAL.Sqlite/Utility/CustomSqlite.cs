@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UtilityDAL.Model;
+using UtilityDAL.Model.Abstract;
 using UtilityInterface.Generic.Database;
 using UtilityInterface.NonGeneric.Database;
 
@@ -112,7 +113,7 @@ namespace UtilityDAL.Sqlite
             return maxid;
         }
 
-        public static DateTime GetLastDate<T>(string path = null) where T : ITimeValue, new() => new DateTime(MakeConnection().Table<T>().Max(x => x.Time));
+        public static DateTime GetLastDate<T, R>(string path = null) where T : ITimeValue<R>, new() => MakeConnection().Table<T>().Max(x => x.Time);
 
         public static long? FindId<T>(this T hash, List<T> ts, SQLiteAsyncConnection db) where T : IEquatable<T>, IId, new()
         {
@@ -128,7 +129,7 @@ namespace UtilityDAL.Sqlite
                 throw new Exception("duplicate values");
         }
 
-        public static bool ToDB<T>(T match, List<T> lst, SQLiteConnection db) where T : IEquatable<T>, IId, new()
+        public static bool ToDB<T>(T match, List<T> lst, SQLiteConnection db) where T : IEquatable<T>, IId, ISetId, new()
 
                   => (match == null) ? false : ToDB(FindId(match, lst), match, db, lst);
 
@@ -147,7 +148,7 @@ namespace UtilityDAL.Sqlite
         public static async Task<bool> ToDB<T, R>(T match, SQLiteAsyncConnection db) where T : IEquatable<T>, IChildRow, new() where R : IId
             => (match == null) ? false : await ToDB(await FindId<T, R>(match, db), match, db);
 
-        public static bool ToDB<T, R>(T match, List<T> xx, SQLiteConnection db) where T : IEquatable<T>, IChildRow<DatabaseRow>, new() where R : IId
+        public static bool ToDB<T, R>(T match, List<T> xx, SQLiteConnection db) where T : IEquatable<T>, IChildRow<DatabaseRow>, ISetId, new() where R : IId
 
             => (match == null) ? false : ToDB(FindId<T, R>(match, xx), match, db, xx);
 
@@ -155,7 +156,7 @@ namespace UtilityDAL.Sqlite
 
             => (match == null) ? false : await ToDB(FindId<T, R>(match, xx), match, db);
 
-        public static bool ToDB<T>(long? id, T match, SQLiteConnection db, List<T> xx) where T : IEquatable<T>, IId
+        public static bool ToDB<T>(long? id, T match, SQLiteConnection db, List<T> xx) where T : IEquatable<T>, IId, ISetId
         {
             if (id == null)
             {
@@ -164,7 +165,7 @@ namespace UtilityDAL.Sqlite
             }
             else
             {
-                match.Id = (long)id;
+                (match as ISetId).Id = (long)id;
                 db.Update(match);
             }
 
@@ -198,7 +199,7 @@ namespace UtilityDAL.Sqlite
             using (var dv = a.Union(b).GetEnumerator())
             {
                 while (dg.MoveNext() && dv.MoveNext())
-                    dv.Current.Id = dg.Current.Id;
+                    (dv.Current as ISetId) .Id = dg.Current.Id;
             }
         }
 
@@ -208,7 +209,7 @@ namespace UtilityDAL.Sqlite
                 await db.InsertAsync(match);
             else
             {
-                match.Id = (long)id;
+                (match as ISetId).Id  = (long)id;
                 await db.UpdateAsync(match);
             }
             return true;
@@ -220,7 +221,7 @@ namespace UtilityDAL.Sqlite
                 db.Insert(match);
             else
             {
-                match.Id = (long)id;
+                (match as ISetId).Id = (long)id;
                 db.Update(match);
             }
             return true;

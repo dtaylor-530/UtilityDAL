@@ -33,7 +33,7 @@
 
 //    public Filex()
 //    {
-//        UtilityDAL.IDbService<UtilityDAL.Entity.KeyValueDate,string> sqlite = new UtilityDAL.Sqlite<UtilityDAL.Entity.KeyValueDate,string>(_ => _.Key);
+//        UtilityDAL.IDatabaseService<UtilityDAL.Entity.KeyValueDate,string> sqlite = new UtilityDAL.Sqlite<UtilityDAL.Entity.KeyValueDate,string>(_ => _.Key);
 
 //        Filexs = Observable.Interval(TimeSpan.FromSeconds(3))
 //            .StartWith(0)

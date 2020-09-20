@@ -96,7 +96,7 @@
 
 //    }
 
-//    //public class XML<T> : IDbService<T>
+//    //public class XML<T> : IDatabaseService<T>
 //    //{
 //    //    public List<T> FromDb()
 //    //    {

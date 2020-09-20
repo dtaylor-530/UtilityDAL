@@ -1,12 +1,12 @@
 ﻿namespace UtilityDAL.Contract
 {
-    //public interface IDbService<T,R>:IDbService<T>
+    //public interface IDatabaseService<T,R>:IDatabaseService<T>
     //{
     //     T FindById(R item);
 
     //}
 
-    //public interface IDbService<T> : IDisposable
+    //public interface IDatabaseService<T> : IDisposable
     //{
     //    //object GetCollection(out IDisposable disposable);
 
@@ -23,7 +23,7 @@
     //    bool Delete(T item);
 
     //}
-    //public interface IDbService:IDisposable
+    //public interface IDatabaseService:IDisposable
     //{
     //    //object GetCollection(out IDisposable disposable);
 

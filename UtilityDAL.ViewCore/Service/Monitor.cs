@@ -13,13 +13,13 @@ namespace UtilityDAL.View
     {
         //public IObservable<T> Adds { get; }
         //public IObservable<T> Removes { get; }
-        public IObservable<IChangeSet<T, int>> Service { get; }
+        public IObservable<IChangeSet<T, int>> Observable { get; }
 
         public Monitor(IFileDatabase<T> repo, IScheduler scheduler)
         {
-            Service = Init(repo, scheduler);
+            Observable = Init(repo, scheduler);
 
-            Service.Subscribe(_ =>
+            Observable.Subscribe(_ =>
             {
             });
         }
@@ -50,11 +50,11 @@ namespace UtilityDAL.View
 
     public class Monitor2<T> : IObservableService<IChangeSet<T, long>> where T : IChildRow, IEquatable<T>
     {
-        public IObservable<IChangeSet<T, long>> Service { get; }
+        public IObservable<IChangeSet<T, long>> Observable { get; }
 
         public Monitor2(IFileDatabase<T> repo, IScheduler scheduler)
         {
-            Service = Init(repo, scheduler);
+            Observable = Init(repo, scheduler);
         }
 
         public static IObservable<IChangeSet<T, long>> Init(IFileDatabase<T> repo, IScheduler scheduler)

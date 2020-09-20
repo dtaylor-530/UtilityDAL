@@ -12,7 +12,7 @@
 
 //namespace UtilityDAL
 //{
-//    public class BiggyRepo<T,R> : UtilityModel.Disposable, IDbService<T, R> where T : new()
+//    public class BiggyRepo<T,R> : UtilityModel.Disposable, IDatabaseService<T, R> where T : new()
 //    {
 //        private readonly string _key;
 //        private readonly Func<T, R> _getkey;

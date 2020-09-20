@@ -7,7 +7,7 @@
 
 //namespace UtilityDAL
 //{
-//    public class BiggySqlite : IDbService
+//    public class BiggySqlite : IDatabaseService
 //    {
 //        public bool Delete(object item)
 //        {

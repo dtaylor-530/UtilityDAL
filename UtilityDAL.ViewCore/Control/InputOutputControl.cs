@@ -20,7 +20,7 @@ namespace UtilityDAL.View
 
         private XmlSaveLoadService<DbStoreKeyValuePair> ldbr;
 
-        public static readonly DependencyProperty StoreProperty = DependencyProperty.Register("Store", typeof(IDbService), typeof(InputOutputControlRepo<R>));
+        public static readonly DependencyProperty StoreProperty = DependencyProperty.Register("Store", typeof(IDatabaseService), typeof(InputOutputControlRepo<R>));
 
         protected override void Init(IFunction<IConvertible, R> service)
         {
@@ -50,7 +50,7 @@ namespace UtilityDAL.View
         private class DbStoreKeyValuePair
         {
             public IConvertible Key { get; set; }
-            public IDbService Db { get; set; }
+            public IDatabaseService Db { get; set; }
         }
     }
 }

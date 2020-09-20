@@ -8,7 +8,7 @@ namespace UtilityDAL
 {
     public class DocumentSaveLoadService<T> : IPermanent<IList<T>>
     {
-        protected IDbService<T, IConvertible> Service; /*{ get; }*/
+        protected IDatabaseService<T, IConvertible> Service; /*{ get; }*/
 
         public bool Save(IList<T> documents)
         {
@@ -39,7 +39,7 @@ namespace UtilityDAL
 
     public class DocumentSaveLoadService<T, R> : IPermanent<IList<T>>
     {
-        protected IDbService<T, R> Service; /*{ get; }*/
+        protected IDatabaseService<T, R> Service; /*{ get; }*/
 
         public bool Save(IList<T> documents)
         {

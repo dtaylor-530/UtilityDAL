@@ -13,7 +13,7 @@ namespace UtilityDAL.Sqlite
         }
     }
 
-    public class Repository<T, R> : IDbService<T, R> where T : new()
+    public class Repository<T, R> : IDatabaseService<T, R> where T : new()
     {
         private SQLite.SQLiteConnection connection;
         private Func<T, R> getId;

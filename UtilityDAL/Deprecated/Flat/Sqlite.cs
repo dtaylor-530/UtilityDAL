@@ -16,7 +16,7 @@
 //        }
 //    }
 
-//    public class Sqlite<T, R> : IDbService<T, R> where T : new()
+//    public class Sqlite<T, R> : IDatabaseService<T, R> where T : new()
 //    {
 //        //static readonly string _dbName;
 //        private static SQLite.SQLiteConnection _connection;
@@ -133,7 +133,7 @@
 
 //    }
 
-//    //public class Sqlite2<T> : UtilityInterface.Generic.Database.IDbService<T> where T : new()
+//    //public class Sqlite2<T> : UtilityInterface.Generic.Database.IDatabaseService<T> where T : new()
 //    //{
 //    //    //static readonly string _dbName;
 //    //    private static SQLite.SQLiteConnection _connection;

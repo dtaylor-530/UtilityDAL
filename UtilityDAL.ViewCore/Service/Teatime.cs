@@ -8,11 +8,11 @@ namespace UtilityDAL.View
 
     public class TeaDataDummyService<T> : IObservableService<KeyCollection> where T : struct
     {
-        public IObservable<KeyCollection> Service { get; }
+        public IObservable<KeyCollection> Observable { get; }
 
         public TeaDataDummyService(string path = null)
         {
-            Service = FileGenerator.GenerateDataFilesDefault(new Teatime.Repository<T>(path), "tea");
+            Observable = FileGenerator.GenerateDataFilesDefault(new Teatime.Repository<T>(path), "tea");
         }
 
         public TeaDataDummyService(IObservable<string> paths)
@@ -20,7 +20,7 @@ namespace UtilityDAL.View
             paths.Subscribe(_ =>
             {
             });
-            Service = Observable.Create<IObservable<KeyCollection>>(observer =>
+            Observable = System.Reactive.Linq.Observable.Create<IObservable<KeyCollection>>(observer =>
               paths.Subscribe(path =>
               {
                   observer.OnNext(FileGenerator.GenerateDataFilesDefault(new Teatime.Repository<T>(path), "tea"));

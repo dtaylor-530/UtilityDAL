@@ -5,7 +5,7 @@ using UtilityDAL.Common;
 
 namespace UtilityDAL
 {
-    public class HtmlDocument<T> //: IDbService<T>
+    public class HtmlDocument<T> //: IDatabaseService<T>
     {
         private readonly string dbName;
 

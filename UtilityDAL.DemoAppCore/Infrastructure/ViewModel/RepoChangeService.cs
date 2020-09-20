@@ -3,7 +3,7 @@
 {
     //public class RepoChangeService : IRepoChangeService<DummyDbObject>
     //{
-    //    private IDbService<DummyDbObject,int> _repo;
+    //    private IDatabaseService<DummyDbObject,int> _repo;
 
     //    public IObservable<IChangeSet<DummyDbObject, int>> Resource { get; set; }
 

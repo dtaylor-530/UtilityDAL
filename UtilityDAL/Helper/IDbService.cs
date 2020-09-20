@@ -4,9 +4,9 @@ using UtilityInterface.Generic.Database;
 
 namespace UtilityDAL
 {
-    public static class IDbServiceHelper
+    public static class IDatabaseServiceHelper
     {
-        public static bool Upsert<T, R>(this IDbService<T, R> store, T _b)
+        public static bool Upsert<T, R>(this IDatabaseService<T, R> store, T _b)
         {
             //var collection = store.GetCollection(out IDisposable disposable);
 
@@ -43,7 +43,7 @@ namespace UtilityDAL
             return true;
         }
 
-        public static bool Upsert(this UtilityInterface.NonGeneric.Database.IDbService store, object _b, string key)
+        public static bool Upsert(this UtilityInterface.NonGeneric.Database.IDatabaseService store, object _b, string key)
         {
             //var collection = store.GetCollection(out IDisposable disposable);
 

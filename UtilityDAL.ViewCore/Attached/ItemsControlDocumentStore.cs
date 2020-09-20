@@ -16,6 +16,6 @@ namespace UtilityDAL.View
             obj.SetValue(StoreProperty, value);
         }
 
-        public static readonly DependencyProperty StoreProperty = DependencyProperty.RegisterAttached("Store", typeof(IDbService), typeof(ItemsControlDocumentStore), new PropertyMetadata(null, null, AttachedDocumentStore.StoreCoerce2));
+        public static readonly DependencyProperty StoreProperty = DependencyProperty.RegisterAttached("Store", typeof(IDatabaseService), typeof(ItemsControlDocumentStore), new PropertyMetadata(null, null, AttachedDocumentStore.StoreCoerce2));
     }
 }
