@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using UtilityDAL.Sqlite.Utility;
 using UtilityStruct;
 
 namespace UtilityDAL.Sqlite
@@ -69,7 +70,7 @@ namespace UtilityDAL.Sqlite
 
         public static List<T> WhereEqual<T>(this SQLite.SQLiteConnection conn, DayOfWeek day) where T : new() => Where<T>(conn, day, ComparisonType.Equality, GetDateProperty<T>());
 
-        public static List<T> Take<T>(this SQLite.SQLiteConnection conn, int number) where T : new() => conn.Query<T>($"select * from {typeof(T).GetName()} limit {number}");
+        public static List<T> Take<T>(this SQLite.SQLiteConnection conn, int number) where T : new() => conn.Query<T>($"select * from {typeof(T).GetSqliteName()} limit {number}");
 
         public static List<T> WhereEqual<T>(this SQLite.SQLiteConnection conn, Day day, PropertyInfo property) where T : new() => WhereCompare<T>(conn, (DateTime)day, ComparisonType.Equality, property);
 
@@ -173,6 +174,6 @@ $"where  strftime('%{format}', {FormatByProperty(property) }) {comparison} '{uni
 
         private static string GetDateTimeString(string field) => $"datetime({field}/ 10000000 - 62135596800,  'unixepoch')";
 
-        private static string GetSelectStatement<T>() => $"select * from {typeof(T).GetName()} ";
+        private static string GetSelectStatement<T>() => $"select * from {typeof(T).GetSqliteName()} ";
     }
 }

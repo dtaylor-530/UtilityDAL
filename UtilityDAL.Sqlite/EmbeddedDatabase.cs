@@ -1,6 +1,8 @@
 ﻿using SQLite;
 using System;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 
 namespace UtilityDAL.Sqlite
 {
@@ -32,6 +34,14 @@ namespace UtilityDAL.Sqlite
             }
 
             return new Disposable(conn, path);
+        }
+
+        public static Stream FindEmbeddedResourceStream(string fileName, Assembly assembly = null)
+        {
+            assembly = assembly ?? Assembly.GetExecutingAssembly();
+            string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith(fileName));
+            var stream = assembly.GetManifestResourceStream(resourceName);
+            return stream;
         }
 
         class Disposable : IDisposable

@@ -4,22 +4,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace UtilityDAL
+namespace UtilityDAL.Sqlite.Utility
 {
     public static class SqliteEx
     {
 
-        public static string GetName(this Type type) => ((SQLite.TableAttribute[])type.GetCustomAttributes(typeof(SQLite.TableAttribute), false)).FirstOrDefault()?.Name ?? type.Name;
+        public static string GetNameBySqlitePCLAttribute(this Type type) => ((TableAttribute[])type.GetCustomAttributes(typeof(TableAttribute), false)).FirstOrDefault()?.Name;
+
+        public static string GetNameBySqliteDapper(this Type type) => ((Dapper.Contrib.Extensions.TableAttribute[])type.GetCustomAttributes(typeof(Dapper.Contrib.Extensions.TableAttribute), false)).FirstOrDefault()?.Name;
+
+        public static string GetSqliteName(this Type type) => GetNameBySqlitePCLAttribute(type) ?? GetNameBySqliteDapper(type) ?? type.Name;
 
 
-        public static long GetNextId<T>(this SQLiteConnection db, Func<T, long> expression) where T : new()=> db.GetMaxId(expression) + 1;
+
+        public static long GetNextId<T>(this SQLiteConnection db, Func<T, long> expression) where T : new() => db.GetMaxId(expression) + 1;
 
         public static long GetMaxId<T>(this SQLiteConnection db, Func<T, long> expression) where T : new()
         {
             return db.Table<T>().Max(expression);
         }
 
-        public static bool TableExists<T>(this SQLiteConnection connection) => TableExists(connection, GetName(typeof(T)));
+        public static bool TableExists<T>(this SQLiteConnection connection) => connection.TableExists(typeof(T).GetSqliteName());
 
         public static bool TableExists(this SQLiteConnection connection, string tableName) => connection.Query<NameTable>($"SELECT name FROM sqlite_master WHERE name='{tableName}'").Count > 0;
 
@@ -30,12 +35,12 @@ namespace UtilityDAL
 
         public static bool RemoveDuplicates<T>(this SQLiteConnection connection) where T : IEquatable<T>, new()
         {
-            return RemoveDuplicates<T>(connection, ()=>connection.Table<T>().ToList().Distinct());
+            return connection.RemoveDuplicates(() => connection.Table<T>().ToList().Distinct());
         }
 
-        public static bool RemoveDuplicates<T>(this SQLiteConnection connection, IEqualityComparer<T> equalityComparer ) where T : new()
+        public static bool RemoveDuplicates<T>(this SQLiteConnection connection, IEqualityComparer<T> equalityComparer) where T : new()
         {
-            return RemoveDuplicates<T>(connection,()=> connection.Table<T>().ToList().Distinct(equalityComparer));
+            return connection.RemoveDuplicates(() => connection.Table<T>().ToList().Distinct(equalityComparer));
         }
 
         static bool RemoveDuplicates<T>(this SQLiteConnection connection, Func<IEnumerable<T>> funcEnumerable) where T : new()
@@ -43,7 +48,7 @@ namespace UtilityDAL
             var dir = System.IO.Directory.GetParent(connection.DatabasePath);
 
             connection.Backup(dir.FullName + "\\Backup");
-            var table = funcEnumerable().ToArray(); 
+            var table = funcEnumerable().ToArray();
 
             connection.DropTable<T>();
 
@@ -57,8 +62,6 @@ namespace UtilityDAL
                 return false;
             }
         }
-
-
 
         public static Option<Option<object, Exception>[][], Exception> ToDataSet(this SQLiteConnection sqlConnection, string query, bool includeColumnNamesAsFirstRow = true)
         {
@@ -96,20 +99,20 @@ namespace UtilityDAL
                 {
                     for (int i = 0; i < colLength; i++)
                     {
-                        yield return SQLite3.ColumnName(stQuery, i).Some<object>().WithException(new Exception()); 
+                        yield return SQLite3.ColumnName(stQuery, i).Some<object>().WithException(new Exception());
                     }
                 }
 
-                IEnumerable<Option<object,Exception>> SelectColumns()
+                IEnumerable<Option<object, Exception>> SelectColumns()
                 {
                     for (int i = 0; i < colLength; i++)
                     {
                         switch (SQLitePCL.raw.sqlite3_column_decltype(stQuery, i))
                         {
-                           case "text": yield return SQLite3.ColumnString(stQuery, i).Some<object>().WithException(new Exception()); break;
-                           case "integer" : yield return SQLite3.ColumnInt(stQuery, i).Some<object>().WithException(new Exception()); break;
-                            case "bigint" : yield return SQLite3.ColumnInt64(stQuery, i).Some<object>().WithException(new Exception()); break;
-                            case "real" : yield return SQLite3.ColumnDouble(stQuery, i).Some<object>().WithException(new Exception()); break;
+                            case "text": yield return SQLite3.ColumnString(stQuery, i).Some<object>().WithException(new Exception()); break;
+                            case "integer": yield return SQLite3.ColumnInt(stQuery, i).Some<object>().WithException(new Exception()); break;
+                            case "bigint": yield return SQLite3.ColumnInt64(stQuery, i).Some<object>().WithException(new Exception()); break;
+                            case "real": yield return SQLite3.ColumnDouble(stQuery, i).Some<object>().WithException(new Exception()); break;
                             case "blob": yield return SQLite3.ColumnBlob(stQuery, i).Some<object>().WithException(new Exception()); break;
                             case "null": yield return Option.None<object>().WithException(new Exception("Case is null")); break;
                             default: Option.None<object>().WithException(new Exception($"Unexpected type encountered in for query {stQuery}")); break;
@@ -117,6 +120,6 @@ namespace UtilityDAL
                     }
                 }
             }
-        }      
+        }
     }
 }
