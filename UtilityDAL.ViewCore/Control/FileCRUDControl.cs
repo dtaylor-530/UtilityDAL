@@ -82,7 +82,7 @@ namespace UtilityDAL.View
             try
             {
                 string databaseName = DatabaseName == string.Empty ? "one" : DatabaseName;
-                if (Service is IFileDbService dbservice)
+                if (Service is IFileDatabase dbservice)
                 {
                     await this.Dispatcher.InvokeAsync(async () => Execution.Text = await TimedAction(() => dbservice.Clear(databaseName)));
                 }
@@ -104,7 +104,7 @@ namespace UtilityDAL.View
             {
                 var data = Data.Cast<object>().ToList();
                 string databaseName = DatabaseName == string.Empty ? "one" : DatabaseName;
-                if (Service is IFileDbService dbservice)
+                if (Service is IFileDatabase dbservice)
                 {
                     await this.Dispatcher.InvokeAsync(async () => Execution.Text = await TimedAction(() => dbservice.To(data, databaseName)));
                 }
@@ -127,7 +127,7 @@ namespace UtilityDAL.View
                 var data = Data.Cast<object>().ToList();
                 object service = Service;
 
-                if (service is IFileDbService dbservice)
+                if (service is IFileDatabase dbservice)
                 {
                     string databaseName = DatabaseName == string.Empty ? "one" : DatabaseName;
                     await this.Dispatcher.InvokeAsync(async () => Execution.Text = await TimedAction(async () => await this.Dispatcher.InvokeAsync(() => Data = dbservice.From(databaseName))));

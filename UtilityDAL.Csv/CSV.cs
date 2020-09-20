@@ -7,8 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using UtilityDAL.Common;
-using UtilityDAL.Contract.Generic;
-using UtilityDAL.Contract.NonGeneric;
+using UtilityDAL.Abstract.Generic;
+using UtilityDAL.Abstract.NonGeneric;
 
 namespace UtilityDAL.CSV
 {
@@ -84,7 +84,7 @@ namespace UtilityDAL.CSV
         }
     }
 
-    public class CSV : IFileDbService
+    public class CSV : IFileDatabase
     {
         //static TextReader text;
 

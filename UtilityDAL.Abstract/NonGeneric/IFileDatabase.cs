@@ -4,7 +4,7 @@ namespace UtilityDAL.Abstract.NonGeneric
 {
     // For mulit file based storage like CSV TeaTime
 
-    public interface IFileDbService
+    public interface IFileDatabase
     {
         System.Collections.ICollection From(string name);
 

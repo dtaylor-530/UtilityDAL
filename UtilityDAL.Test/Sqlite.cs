@@ -7,6 +7,9 @@ using UtilityDAL.Sqlite;
 using Xunit;
 using Optional.Linq;
 using Optional.Collections;
+using UtilityDAL.Sqlite.Utility;
+using System.Reflection;
+using System.IO;
 
 namespace UtilityDAL.Test
 {
@@ -19,7 +22,7 @@ namespace UtilityDAL.Test
         }
 
         [Fact]
-        public void Test1()
+        public void Test_Where_DayOfWeek()
         {
             var directory = System.IO.Directory.CreateDirectory("../../../Data");
             using (var conn = new SQLiteConnection(System.IO.Path.Combine(directory.FullName, "Test2.sqlite")))
@@ -192,6 +195,23 @@ namespace UtilityDAL.Test
                 conn.InsertAll(Factory.SelectByDate(100));
                 var result = conn.GetMaxId<TestClass>(a => a.Id);
              
+                Assert.True(result == 99);
+            }
+        }
+
+        [Fact]
+        public void Test_Embedded()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("sqlite"));
+
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                EmbeddedDatabase.Get(stream, out var conn, true);
+                conn.CreateTable<TestClass>();
+                conn.DeleteAll<TestClass>();
+                conn.InsertAll(Factory.SelectByDate(100));
+                var result = conn.GetMaxId<TestClass>(a => a.Id);
                 Assert.True(result == 99);
             }
         }

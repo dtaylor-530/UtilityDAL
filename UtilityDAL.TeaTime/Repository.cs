@@ -4,8 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UtilityDAL.Common;
-using UtilityDAL.Contract.Generic;
-using UtilityDAL.Contract.NonGeneric;
+using UtilityDAL.Abstract.Generic;
+using UtilityDAL.Abstract.NonGeneric;
 
 namespace UtilityDAL.Teatime
 {
@@ -47,7 +47,7 @@ namespace UtilityDAL.Teatime
         }
     }
 
-    public class TeatimeFileService<T> : IFileDbService where T : struct
+    public class TeatimeFileService<T> : IFileDatabase where T : struct
     {
         private static readonly string providerName = "TeaTime";
 

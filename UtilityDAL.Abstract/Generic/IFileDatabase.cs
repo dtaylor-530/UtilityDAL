@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace UtilityDAL.Abstract.Generic
 {
@@ -14,12 +13,5 @@ namespace UtilityDAL.Abstract.Generic
         bool Clear(string name);
 
         List<string> SelectIds();
-    }
-
-    public interface IFileDbAsyncService<T>
-    {
-        IObservable<T> From(string name);
-
-        bool To(List<T> lst, string name);
     }
 }

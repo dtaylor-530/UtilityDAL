@@ -44,7 +44,7 @@ namespace UtilityDAL.DemoApp
         .Subscribe();
             }
 
-            public IFileDbService DbService3 { get; } = new UtilityDAL.CSV.CSV(Constants.DefaultDbDirectory);
+            public IFileDatabase DbService3 { get; } = new UtilityDAL.CSV.CSV(Constants.DefaultDbDirectory);
 
             public ReadOnlyObservableCollection<Zio.FileEntry> Items => items;
 

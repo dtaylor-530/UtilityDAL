@@ -58,7 +58,7 @@ namespace UtilityDAL.View
             });
         }
 
-        public static IObservable<KeyCollection> GenerateDataFilesDefault(IFileDbService service, string extension, int? count = null)
+        public static IObservable<KeyCollection> GenerateDataFilesDefault(IFileDatabase service, string extension, int? count = null)
         {
             //var tt = new UtilityDAL.Teatime(path);
             return System.Reactive.Linq.Observable.Create<KeyCollection>(observer =>
@@ -80,7 +80,7 @@ namespace UtilityDAL.View
             });
         }
 
-        public static IObservable<KeyCollection> GenerateDataFilesDefault(IFileDbService service, TimeSpan ts, string extension)
+        public static IObservable<KeyCollection> GenerateDataFilesDefault(IFileDatabase service, TimeSpan ts, string extension)
         {
             //var tt = new UtilityDAL.Teatime(path);
 
