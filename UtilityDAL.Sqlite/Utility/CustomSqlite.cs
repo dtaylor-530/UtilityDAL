@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UtilityDAL.Model;
-using UtilityDAL.Model.Abstract;
 using UtilityInterface.Generic.Database;
 using UtilityInterface.NonGeneric.Database;
 
@@ -12,17 +11,16 @@ namespace UtilityDAL.Sqlite
 {
     public static class CustomSqlite
     {
-        private static string _dbName;
+        private static readonly string databaseName;
 
-        public static SQLite.SQLiteConnection MakeConnection() => new SQLite.SQLiteConnection(_dbName);
+        public static SQLiteConnection MakeConnection() => new SQLiteConnection(databaseName);
 
         static CustomSqlite()
         {
-            string dbName = "";
-            _dbName = dbName;
+            databaseName = "Data" + "." + Constants.SqliteDbExtension;
         }
-        public static IList<T> FromDB<T>() where T : IEquatable<T>, IChildRow, new() => MakeConnection().Table<T>().ToList();
 
+        public static IList<T> FromDB<T>() where T : IEquatable<T>, IChildRow, new() => MakeConnection().Table<T>().ToList();
 
         public static List<T> FromDb<T>(this SQLiteConnection db, long? id = null) where T : IChildRow, new() =>
             id == null ?
@@ -76,8 +74,6 @@ namespace UtilityDAL.Sqlite
                 return null;
             else
                 throw new Exception("duplicate values");
-            //}
-            //return null;
         }
 
         public static async Task<long?> FindId<T, R>(this T hash, SQLiteAsyncConnection db) where T : IEquatable<T>, IChildRow, new() where R : IId
@@ -183,8 +179,6 @@ namespace UtilityDAL.Sqlite
                 success = db.UpdateAll(xxxx, true) > 0;
             }
 
-            //var insert = matches.Except(xx);
-
             success = success && db.InsertAll(matches, true) > 0;
 
             xx.AddRange(matches);
@@ -199,7 +193,7 @@ namespace UtilityDAL.Sqlite
             using (var dv = a.Union(b).GetEnumerator())
             {
                 while (dg.MoveNext() && dv.MoveNext())
-                    (dv.Current as ISetId) .Id = dg.Current.Id;
+                    (dv.Current as ISetId).Id = dg.Current.Id;
             }
         }
 
@@ -209,7 +203,7 @@ namespace UtilityDAL.Sqlite
                 await db.InsertAsync(match);
             else
             {
-                (match as ISetId).Id  = (long)id;
+                (match as ISetId).Id = (long)id;
                 await db.UpdateAsync(match);
             }
             return true;
