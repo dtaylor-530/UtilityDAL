@@ -23,7 +23,7 @@ namespace UtilityDAL.Sqlite
         public int Insert(params KeyValuePair<string, long>[] kvps)
         {
             int i = 0;
-            using (var x = new SQLite.SQLiteConnection(directory + Name))
+            using (var x = new SQLiteConnection(directory + Name))
             {
                 x.CreateTable<KeyValueNumeric>();
                 foreach (var y in kvps.Select(_ => new KeyValueNumeric { Key = _.Key, Value = _.Value }))
@@ -35,7 +35,7 @@ namespace UtilityDAL.Sqlite
         public int Insert(params KeyValuePair<string, string>[] kvps)
         {
             int i = 0;
-            using (SQLiteConnection x = new SQLite.SQLiteConnection(directory + Name))
+            using (SQLiteConnection x = new SQLiteConnection(directory + Name))
             {
                 x.CreateTable<KeyValueString>();
                 foreach (var y in kvps.Select(_ => new KeyValueString { Key = _.Key, Value = _.Value }))
