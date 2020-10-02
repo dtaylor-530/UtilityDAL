@@ -1,114 +1,186 @@
-﻿using System;
+﻿using MoreLinq;
+using phirSOFT.LazyDictionary;
+using SQLite;
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using UtilityDAL.Common;
-using UtilityInterface.Generic.Database;
+using UtilityDAL.Sqlite.Utility;
+using UtilityHelper;
+using UtilityInterface.NonGeneric.Database;
 
 namespace UtilityDAL.Sqlite
 {
-    public class Repository<T> : Repository<T, IConvertible> where T : new()
+    public abstract class Repository<T> where T : IDbEntity, new()
     {
-        public Repository(Func<T, IConvertible> getkey, string dbname = null) : base(getkey, dbname)
+        public const string SqliteExtension = "sqlite";
+
+        protected const string Data = "Data";
+
+        protected readonly Dictionary<Type, Lazy<List<long>>> idDictionary;
+        protected readonly Lazy<DbEntityRepository> objectIdRepository;
+        protected readonly Lazy<SQLiteConnection> connection;
+
+        public Repository(string name)
         {
+            this.Name = name;
+            objectIdRepository = LazyEx.Create(()=> new DbEntityRepository(this.connection.Value));
+            connection = new Lazy<SQLiteConnection>(() => new SQLiteConnection(ConnectionPath));
+        }
+
+        public string Name { get; }
+
+        public abstract string ConnectionPath { get; }
+
+        public SQLiteConnection Connection => connection.Value;
+
+        public virtual int Insert(IEnumerable<T> items) 
+        {
+            if (items.Any() == false)
+                return 0;
+
+            var arr = items.ToArray();
+            var type = items.First().GetType();
+
+            connection.Value.CreateTable(type);
+
+            var tableName = SqliteEx.GetSqliteName(items.First().GetType());
+
+            var guids = DatabaseConnection.Query<MyRef<Guid>>($"select Guid as {nameof(MyRef<Guid>.Ref)} from {tableName}").ToList();
+
+            var firstNotInSecond = LinqExtension.SelectFromFirstNotInSecond(arr, guids.Select(a => a.Ref), a => (a as IGuid).Guid, a => a).DistinctBy(a => (a as IGuid).Guid).ToArray();
+
+            var count_ = firstNotInSecond.GroupBy(a => (a as IGuid).Guid).Where(a => a.Count() > 1).ToArray();
+
+            if (count_.Length > 0)
+            {
+                throw new Exception("items in set share same Id");
+            }
+
+            int insert = 0;
+
+            if (firstNotInSecond.Any())
+            {
+                DateTime dateTime = DateTime.Now;
+                foreach (var (entity, id) in firstNotInSecond.Zip(objectIdRepository.Value.FindIds(firstNotInSecond, firstNotInSecond.First().GetType()), (a, b) => (a, b)))
+                {
+                    (entity as ISetId).Id = id;
+                    entity.AddedTime = dateTime;
+                }
+
+                var count = firstNotInSecond.GroupBy(a => (a as IId).Id).Where(a => a.Count() > 1).ToArray();
+                if (count.Length > 0)
+                {
+                    throw new Exception("items in set share same Id");
+                }
+
+                insert = DatabaseConnection.InsertAll(firstNotInSecond);
+            }
+            return insert;
+        }
+
+        public virtual SQLiteConnection DatabaseConnection => connection.Value;
+
+        public long SpareId()
+        {
+            var list = idDictionary[typeof(T)].Value;
+            var last = list.Last() + 1;
+            list.Add(last);
+            return last;
+        }
+
+
+        public class DbEntityRepository : ObjectIdRepository
+        {
+            protected readonly SQLiteConnection connection;
+
+            public DbEntityRepository(SQLiteConnection connection) : base(new EqualityComparer())
+            {
+                this.connection = connection;
+            }
+
+            class EqualityComparer : IEqualityComparer<T>
+            {
+                public bool Equals(T x, T y)
+                {
+                    if ((x as IGuid).Guid == (y as IGuid).Guid)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+
+                public int GetHashCode(T obj)
+                {
+                    return (obj as IGuid).Guid.GetHashCode();
+                }
+            }
+
+            protected override long GetLastId(Type type)
+            {
+                var maxId3 = connection.Query<Ref>($"select Max({nameof(IId.Id)}) as {nameof(Ref.Value)} from {type.GetSqliteName()}");
+                return maxId3.SingleOrDefault()?.Value ?? 0;
+            }
+
+            class Ref
+            {
+                public long Value { get; set; }
+            }
+        }
+
+        public class ObjectIdRepository
+        {
+            protected readonly LazyDictionary<Type, MyRef<long>> lazyDict3;
+            protected readonly LazyDictionary<T, long> lazyDict2;
+            protected readonly IEqualityComparer<T> comparer;
+
+            public ObjectIdRepository(IEqualityComparer<T> comparer)
+            {
+
+                lazyDict3 = new LazyDictionary<Type, MyRef<long>>(t =>
+                {
+                    return new MyRef<long> { Ref = GetLastId(t) };
+                });
+
+                lazyDict2 = new LazyDictionary<T, long>(dbe =>
+                {
+                    return ++lazyDict3[dbe.GetType()].Ref;
+                }, comparer);
+                this.comparer = comparer;
+            }
+
+
+            public long FindId(T obj)
+            {
+                lock (lazyDict2)
+                    return lazyDict2[obj];
+            }
+
+            public virtual IEnumerable<long> FindIds(IEnumerable<T> objs, Type type)
+            {
+                var lazyDict4 = new LazyDictionary<T, long>(dbe =>
+                {
+                    return ++lazyDict3[type].Ref;
+                }, comparer);
+
+                //var type = Helper.GetParentTypes(typeof(T)).FirstOrDefault() ;
+                var enumerator = objs.GetEnumerator();
+
+                lock (lazyDict4)
+                    lock (lazyDict3)
+                        while (enumerator.MoveNext())
+                            yield return lazyDict4[enumerator.Current];
+            }
+
+            protected virtual long GetLastId(Type type)
+            {
+                return 0;
+            }
+
+        }
+
+        public class MyRef<TR>
+        {
+            public TR Ref { get; set; }
         }
     }
-
-    public class Repository<T, R> : IDatabaseService<T, R> where T : new()
-    {
-        private SQLite.SQLiteConnection connection;
-        private Func<T, R> getId;
-        private static readonly string providerName = "SQLite";
-
-        public Repository(Func<T, R> getId, string dbname = null)
-        {
-            var directory = Directory.CreateDirectory(Constants.DefaultDbDirectory);
-            dbname = dbname ?? DbEx.GetConnectionString(providerName, false);
-            this.getId = getId;
-            this.connection = new SQLite.SQLiteConnection(string.IsNullOrEmpty(dbname) || string.IsNullOrWhiteSpace(dbname) ?
-                Path.Combine(directory.FullName, typeof(T).Name + "." + Constants.SqliteDbExtension) :
-                dbname);
-            connection.CreateTable<T>();
-        }
-
-        public bool Delete(T item)
-        {
-            connection.Delete(item);
-            return true;
-        }
-
-        public bool Insert(T item)
-        {
-            connection.Insert(item);
-            return true;
-        }
-
-        public int InsertBulk(IList<T> items)
-        {
-            return connection.InsertAll(items);
-        }
-
-        public bool Update(T item)
-        {
-            connection.Update(item);
-            return true;
-        }
-
-        public void Dispose()
-        {
-            connection.Dispose();
-        }
-
-        public IEnumerable<T> SelectAll()
-        {
-            return connection.Table<T>().ToList();
-        }
-
-        public T Select(T item)
-        {
-            return connection.Table<T>().SingleOrDefault(_ => _.Equals(item));
-        }
-
-        public T SelectById(R id)
-        {
-            return connection.Table<T>().SingleOrDefault(_ => getId(_).Equals(id));
-        }
-
-        public int InsertBulk(IEnumerable<T> item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int UpdateBulk(IEnumerable<T> item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int DeleteBulk(IEnumerable<T> item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool DeleteById(R id)
-        {
-            return connection.Delete(connection.Table<T>().SingleOrDefault(_ => getId(_).Equals(id))) > 0;
-        }
-
-        //public ICollection<T> FromDb<T>(string name) where T: IChildRow, new()
-        //{
-        //    return UtilityDAL.SqliteEx.FromDb<T>();
-
-        //}
-
-        //public bool ToDb<T>(ICollection<T> lst, string name) where T : IChildRow, new()
-        //{
-        //    return UtilityDAL.SqliteEx.ToDb<T>(lst);
-        //}
-
-        //public List<string> SelectIds()
-        //{
-        //    return System.IO.Directory.GetFiles(dbName).Select(_ => System.IO.Path.GetFileNameWithoutExtension(_)).ToList();
-        //}
-    }
-
 }
