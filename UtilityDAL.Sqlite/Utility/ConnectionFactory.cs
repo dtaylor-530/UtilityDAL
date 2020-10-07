@@ -2,9 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace UtilityDAL.Sqlite
+namespace UtilityDAL.Sqlite.Utility
 {
     public class ConnectionFactory
     {

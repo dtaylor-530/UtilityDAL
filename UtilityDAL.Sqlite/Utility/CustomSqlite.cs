@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UtilityDAL.Model;
+using UtilityDAL.Sqlite.Utility;
 using UtilityInterface.Generic.Database;
 using UtilityInterface.NonGeneric.Database;
 
-namespace UtilityDAL.Sqlite
+namespace UtilityDAL.Sqlite.Utility
 {
     public static class CustomSqlite
     {
@@ -44,7 +45,7 @@ namespace UtilityDAL.Sqlite
 
         public static long? FindId<T>(this T hash, SQLiteConnection db) where T : IEquatable<T>, IId, new()
         {
-            return FindId(hash, db.Table<T>().ToList());
+            return hash.FindId(db.Table<T>().ToList());
         }
 
         public static async Task<long?> FindId<T>(this T hash, SQLiteAsyncConnection db) where T : IEquatable<T>, IId, new()
@@ -78,7 +79,7 @@ namespace UtilityDAL.Sqlite
 
         public static async Task<long?> FindId<T, R>(this T hash, SQLiteAsyncConnection db) where T : IEquatable<T>, IChildRow, new() where R : IId
         {
-            return FindId(hash, await db.Table<T>().ToListAsync());
+            return hash.FindId(await db.Table<T>().ToListAsync());
         }
 
         public static long? FindId<T, R>(this T hash, SQLiteConnection db) where T : IEquatable<T>, IChildRow, new() where R : IId
@@ -127,7 +128,7 @@ namespace UtilityDAL.Sqlite
 
         public static bool ToDB<T>(T match, List<T> lst, SQLiteConnection db) where T : IEquatable<T>, IId, ISetId, new()
 
-                  => (match == null) ? false : ToDB(FindId(match, lst), match, db, lst);
+                  => match == null ? false : ToDB(match.FindId(lst), match, db, lst);
 
         //public static bool ToDB<T>(IEnumerable<T> matches, List<T> lst, SQLiteConnection db) where T : IEquatable<T>, UtilityInterface.Database.IId, new()
 
@@ -135,22 +136,22 @@ namespace UtilityDAL.Sqlite
 
         public static async Task<bool> ToDB<T>(T match, List<T> lst, SQLiteAsyncConnection db) where T : IEquatable<T>, IId, new()
 
-               => (match == null) ? false : await ToDB(FindId(match, lst), match, db);
+               => match == null ? false : await ToDB(match.FindId(lst), match, db);
 
         public static bool ToDB<T, R>(T match, SQLiteConnection db) where T : IEquatable<T>, IChildRow, new() where R : IId
 
-            => (match == null) ? false : ToDB(FindId<T, R>(match, db), match, db);
+            => match == null ? false : ToDB(match.FindId<T, R>(db), match, db);
 
         public static async Task<bool> ToDB<T, R>(T match, SQLiteAsyncConnection db) where T : IEquatable<T>, IChildRow, new() where R : IId
-            => (match == null) ? false : await ToDB(await FindId<T, R>(match, db), match, db);
+            => match == null ? false : await ToDB(await match.FindId<T, R>(db), match, db);
 
         public static bool ToDB<T, R>(T match, List<T> xx, SQLiteConnection db) where T : IEquatable<T>, IChildRow<DatabaseRow>, ISetId, new() where R : IId
 
-            => (match == null) ? false : ToDB(FindId<T, R>(match, xx), match, db, xx);
+            => match == null ? false : ToDB(match.FindId<T, R>(xx), match, db, xx);
 
         public static async Task<bool> ToDB<T, R>(T match, List<T> xx, SQLiteAsyncConnection db) where T : IEquatable<T>, IChildRow<DatabaseRow>, new() where R : IId
 
-            => (match == null) ? false : await ToDB(FindId<T, R>(match, xx), match, db);
+            => match == null ? false : await ToDB(match.FindId<T, R>(xx), match, db);
 
         public static bool ToDB<T>(long? id, T match, SQLiteConnection db, List<T> xx) where T : IEquatable<T>, IId, ISetId
         {
@@ -172,7 +173,7 @@ namespace UtilityDAL.Sqlite
         {
             bool success = true;
             IEnumerable<T> xxxx = null;
-            UpdateIds<T>(ref xxxx, matches, xx);
+            UpdateIds(ref xxxx, matches, xx);
 
             if (check)
             {
