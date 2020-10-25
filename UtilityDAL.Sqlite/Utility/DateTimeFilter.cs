@@ -171,8 +171,8 @@ $"where  strftime('%{format}', {FormatByProperty(property) }) {comparison} '{uni
             throw new Exception($"Type {typeof(T).Name} must contain a  DateTime property or long property with a name that contains 'Tick'.");
         }
 
-        private static string GetDateTimeString(string field) => $"datetime({field}/ 10000000 - 62135596800,  'unixepoch')";
+        public static string GetDateTimeString(string field) => $"datetime({field}/ 10000000 - 62135596800,  'unixepoch')";
 
-        private static string GetSelectStatement<T>() => $"select * from {typeof(T).GetSqliteName()} ";
+        public static string GetSelectStatement<T>() => $"select * from {typeof(T).GetSqliteName()} ";
     }
 }

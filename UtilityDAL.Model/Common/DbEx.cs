@@ -8,17 +8,17 @@ namespace UtilityDAL.Common
         public static string GetDirectory(string directory = null, string extension = null, Type type = null)
         {
             if (directory == null)
-                directory = Constants.DefaultDbDirectory;
+                directory = Constants.DefaultDirectory;
 
             if (!System.IO.Directory.Exists(directory))
                 System.IO.Directory.CreateDirectory(directory);
 
-            string name = type?.Name ?? Constants.DefaultDbName;
+            string name = type?.Name ?? Constants.DefaultName;
             //int i=0;
             //while (System.IO.File.Exists("../../Data/" + name + i + "." + extension))
             //    i++;
 
-            return System.IO.Path.Combine(directory, name + "." + extension ?? Constants.DefaultDbExtension);
+            return System.IO.Path.Combine(directory, name + "." + extension ?? Constants.DefaultExtension);
         }
 
         public static string GetDirectory<T>(string directory = null, string extension = null) => GetDirectory(directory, extension, typeof(T));

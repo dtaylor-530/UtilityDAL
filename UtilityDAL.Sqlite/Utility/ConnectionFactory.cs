@@ -9,7 +9,7 @@ namespace UtilityDAL.Sqlite.Utility
     {
         public static SQLiteConnection Create<T>(string path = null, Func<Type, bool> func = null)
         {
-            return Create(string.IsNullOrEmpty(path) ? $"{Constants.DefaultDbDirectory}{typeof(T).Name}.{Constants.SqliteDbExtension}" : path, GetTypes());
+            return Create(string.IsNullOrEmpty(path) ? $"{Constants.DefaultDirectory}{typeof(T).Name}.{Constants.SqliteExtension}" : path, GetTypes());
 
             Type[] GetTypes() =>
                 UtilityHelper.TypeHelper
@@ -34,7 +34,7 @@ namespace UtilityDAL.Sqlite.Utility
 
         public static SQLiteConnection CreateTemp(params Type[] types)
         {
-            return Create(System.IO.Path.ChangeExtension(System.IO.Path.GetTempFileName(), Constants.SqliteDbExtension), types);
+            return Create(System.IO.Path.ChangeExtension(System.IO.Path.GetTempFileName(), Constants.SqliteExtension), types);
         }
 
         public static SQLiteConnection Create(string path, params Type[] types)

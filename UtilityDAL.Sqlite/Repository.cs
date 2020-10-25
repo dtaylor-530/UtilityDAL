@@ -12,9 +12,9 @@ namespace UtilityDAL.Sqlite
 {
     public abstract class Repository<T> where T : IDbEntity, new()
     {
-        public const string SqliteExtension = "sqlite";
+        //public const string SqliteExtension = "sqlite";
 
-        protected const string Data = "Data";
+       // protected const string Data = "Data";
 
         protected readonly Dictionary<Type, Lazy<List<long>>> idDictionary;
         protected readonly Lazy<DbEntityRepository> objectIdRepository;

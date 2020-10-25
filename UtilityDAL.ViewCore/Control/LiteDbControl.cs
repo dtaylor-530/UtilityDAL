@@ -15,7 +15,7 @@ namespace UtilityDAL.View
 
     public class LiteDbControl : DocumentStoreControl //where T : new()
     {
-        public LiteDbControl(Func<object, IConvertible> getKey, string directory = null, string key = null) : base(new UtilityDAL.LiteDbRepo<SHDOObject, IConvertible>(getKey, DbEx.GetDirectory(directory, UtilityDAL.Constants.LiteDbExtension, typeof(IObject<object>))), getKey)
+        public LiteDbControl(Func<object, IConvertible> getKey, string directory = null, string key = null) : base(new UtilityDAL.LiteDbRepo<SHDOObject, IConvertible>(getKey, DbEx.GetDirectory(directory, UtilityDAL.Constants.LiteDBExtension, typeof(IObject<object>))), getKey)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace UtilityDAL.View
         }
 
         private static string GetDirectory =>
-            UtilityDAL.Common.DbEx.GetDirectory("../../data", UtilityDAL.Constants.LiteDbExtension, typeof(SHDOObject));
+            UtilityDAL.Common.DbEx.GetDirectory("../../data", UtilityDAL.Constants.LiteDBExtension, typeof(SHDOObject));
     }
 
     public class LiteDbControl<T> : DocumentStoreControl where T : new()
@@ -80,6 +80,6 @@ namespace UtilityDAL.View
         //    => new LiteDbRepo<SHDObject<T>, IConvertible>(_ => (IConvertible)getKey(_), UtilityDAL.DbEx.GetDirectory<T>(directory, UtilityDAL.Constants.LiteDbExtension));
 
         private static LiteDbRepo<SHDOObject, IConvertible> GetRepo(Func<object, object> getKey, string directory)
-        => new LiteDbRepo<SHDOObject, IConvertible>(_ => (IConvertible)getKey(_), UtilityDAL.Common.DbEx.GetDirectory<T>(directory, UtilityDAL.Constants.LiteDbExtension));
+        => new LiteDbRepo<SHDOObject, IConvertible>(_ => (IConvertible)getKey(_), UtilityDAL.Common.DbEx.GetDirectory<T>(directory, UtilityDAL.Constants.LiteDBExtension));
     }
 }

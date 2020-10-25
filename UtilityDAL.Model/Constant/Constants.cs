@@ -2,11 +2,11 @@
 {
     public static class Constants
     {
-        public const string LiteDbExtension = "litedb";
-        public const string SqliteDbExtension = "sqlite";
-        public const string DefaultDbName = "Db";
-        public const string DefaultDbExtension = "db";
-        public const string DefaultDbDirectory = "../../../Data";
+        public const string LiteDBExtension = "litedb";
+        public const string SqliteExtension = "sqlite";
+        public const string DefaultExtension = "db";
+        public const string DefaultDirectory = "../../../Data";
+        public const string DefaultName = "Data";
         public const string DateFormat = "yyyy-MM-dd";
     }
 }

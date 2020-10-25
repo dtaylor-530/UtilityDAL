@@ -7,7 +7,7 @@ namespace UtilityDAL
     {
         public LiteDbSaveLoadService(Func<T, R> key, string directory = null)
         {
-            Service = new LiteDbRepo<T, R>(key, DbEx.GetDirectory(directory, Constants.LiteDbExtension, typeof(T)));
+            Service = new LiteDbRepo<T, R>(key, DbEx.GetDirectory(directory, Constants.LiteDBExtension, typeof(T)));
         }
     }
 }

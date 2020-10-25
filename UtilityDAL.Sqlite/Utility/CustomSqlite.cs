@@ -18,7 +18,7 @@ namespace UtilityDAL.Sqlite.Utility
 
         static CustomSqlite()
         {
-            databaseName = "Data" + "." + Constants.SqliteDbExtension;
+            databaseName = Constants.DefaultName + "." + Constants.SqliteExtension;
         }
 
         public static IList<T> FromDB<T>() where T : IEquatable<T>, IChildRow, new() => MakeConnection().Table<T>().ToList();

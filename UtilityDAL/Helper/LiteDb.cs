@@ -8,7 +8,7 @@ namespace UtilityDAL
     {
         public static ILiteCollection<T> GetCollection<T>(string directory, string name, out IDisposable disposable, string collectionName = null)
         {
-            disposable = new LiteDatabase(Path.Combine(directory, name+ "."+ Constants.LiteDbExtension));
+            disposable = new LiteDatabase(Path.Combine(directory, name+ "."+ Constants.LiteDBExtension));
             return ((LiteDatabase)disposable).GetCollection<T>(collectionName);
         }
 

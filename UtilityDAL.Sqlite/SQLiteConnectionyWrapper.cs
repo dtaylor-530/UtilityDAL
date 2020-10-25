@@ -7,29 +7,38 @@ using UtilityInterface.Generic.Database;
 
 namespace UtilityDAL.Sqlite
 {
-    public class Repository_Legacy<T> : RepositoryWrapper<T, IConvertible> where T : new()
+    public class Repository_Legacy<T> : SQLiteConnectionyWrapper<T, IConvertible> where T : new()
     {
         public Repository_Legacy(Func<T, IConvertible> getkey, string dbname = null) : base(getkey, dbname)
         {
         }
     }
 
-    public class RepositoryWrapper<T, R> : IDatabaseService<T, R> where T : new()
+    public class SqliteConnectionWrapperIId<T, R> : SQLiteConnectionyWrapper<T, R> where T : IId<R>, new()
     {
-        private SQLite.SQLiteConnection connection;
-        private Func<T, R> getId;
-        private static readonly string providerName = "SQLite";
-
-        public RepositoryWrapper(Func<T, R> getId, string dbname = null)
+        public SqliteConnectionWrapperIId(string dbname = null, string dbDirectory = null) : base(getId: t => t.Id, dbname, dbDirectory)
         {
-            var directory = Directory.CreateDirectory(Constants.DefaultDbDirectory);
-            dbname = dbname ?? DbEx.GetConnectionString(providerName, false);
+        }
+    }
+
+    public class SQLiteConnectionyWrapper<T, R> : IDatabaseService<T, R> where T : new()
+    {
+        private readonly SQLite.SQLiteConnection connection;
+        private static readonly string providerName = "SQLite";
+        private readonly Func<T, R> getId;
+
+
+        public SQLiteConnectionyWrapper(Func<T, R> getId, string dbName = null, string dbDirectory = null)
+        {
             this.getId = getId;
-            this.connection = new SQLite.SQLiteConnection(string.IsNullOrEmpty(dbname) || string.IsNullOrWhiteSpace(dbname) ?
-                Path.Combine(directory.FullName, typeof(T).Name + "." + Constants.SqliteDbExtension) :
-                dbname);
+            dbDirectory = dbDirectory ?? Directory.CreateDirectory(Constants.DefaultDirectory).FullName;
+            dbName = dbName ?? DbEx.GetConnectionString(providerName, false) ?? typeof(T).Name;
+            this.connection = new SQLite.SQLiteConnection(string.IsNullOrEmpty(dbName) || string.IsNullOrWhiteSpace(dbName) ?
+                Path.Combine(dbDirectory, typeof(T).Name + "." + Constants.SqliteExtension) :
+                dbName);
             connection.CreateTable<T>();
         }
+
 
         public bool Delete(T item)
         {
